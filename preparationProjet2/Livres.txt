@@ -1,0 +1,10 @@
+Liv1,Introduction aux expressions régulières,12-12-2008,Desgraupes Bernard
+Liv2,Principes d'architecture des programmes Java,01-01-2005,Frémaux Valéry-Guilhem 
+Liv3,Le Langage C : norme ANSI,02-04-2004,Brian W. Kernighan et Ritchie  Dennis M.
+Liv4,La france: aménager les territoires, 12-03-2008, Jean Yves  et  Vanier Martin 
+Liv5,Maths en bulles, 12-06-2009,Thalès
+Liv6,Femmes et math, 21-01-2009,Lafortune Louise
+Liv7,Conceptions croyances et représentations en maths, 20-12-2003, Lafortune Louise
+Liv8,Enigmes mathématiques, 12-12-2007, Warren Atkins
+Liv9,Le Démon des maths:le livre de chevet de tous ceux qui ont peur des mathématiques,12-12-1998, Hans-Magnus Henzesberger
+Liv10, Le Parlement du Québec : de 1867 à aujourd'hui, 12-11-1953, Massicotte Louis   
