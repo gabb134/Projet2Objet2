@@ -26,7 +26,7 @@ public final class Catalogue implements Serializable {
 
 		// Pour le fichier livre
 		BufferedReader brFichierLivre = null;
-
+		String test;
 		String strLigne1;
 		StringTokenizer st;
 		String noDoc = "";
