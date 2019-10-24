@@ -184,9 +184,13 @@ public final class Catalogue implements Serializable {
 		for(DVD d:lstDvd)
 			System.out.println(d);
 	}
-
+	public static Catalogue getInstance(String fichierLivre,String fichierPeriodique,String fichierDvd) {
+		if (instance == null) 
+			  instance = new Catalogue(fichierLivre,fichierPeriodique,fichierDvd);
+			  return instance; 
+		  }
 	public static void main(String[] args) {
-		Catalogue c = new Catalogue("Livres.txt", "Periodiques.txt", "DVD.txt");
+		Catalogue c = Catalogue.getInstance("Livres.txt", "Periodiques.txt", "DVD.txt");
 		//c.afficherLivre();
 		//c.afficherPeriodique();
 		c.afficherDvd();
