@@ -11,8 +11,8 @@ import java.util.StringTokenizer;
 
 public final class Catalogue implements Serializable {
 
-	// Complétez pour programmer la classe comme singleton
-	// Le constructeur permet de remplir les listes suivantes à partir des fichiers
+	// Complï¿½tez pour programmer la classe comme singleton
+	// Le constructeur permet de remplir les listes suivantes ï¿½ partir des fichiers
 	// textes Livres.txt et periodiques.txt et DVD.txt
 
 	private static final long serialVersionUID = 1L;
