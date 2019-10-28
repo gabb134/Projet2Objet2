@@ -1,8 +1,5 @@
 package application;
 	
-
-
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -40,6 +37,7 @@ public class Main extends Application {
 			 
 			 root.setCenter(tabPane);
 			 tabPane.getTabs().add(tab1);
+			 
 			 
 			 // deuxième onglet
 			 Tab tab2 = new Tab();

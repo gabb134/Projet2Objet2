@@ -172,6 +172,22 @@ public final class Catalogue implements Serializable {
 		}
 	}
 	
+	public ArrayList<Document> getLstDocuments() {
+		return lstDocuments;
+	}
+
+	public ArrayList<Livre> getLstLivres() {
+		return lstLivres;
+	}
+
+	public ArrayList<Periodique> getLstPeriodiques() {
+		return lstPeriodiques;
+	}
+
+	public ArrayList<DVD> getLstDvd() {
+		return lstDvd;
+	}
+
 	public void afficherLivre() {
 		for(Livre l:lstLivres)
 			System.out.println(l);
@@ -183,6 +199,8 @@ public final class Catalogue implements Serializable {
 	public void afficherDvd() {
 		for(DVD d:lstDvd)
 			System.out.println(d);
+		
+		
 	}
 	public static Catalogue getInstance(String fichierLivre,String fichierPeriodique,String fichierDvd) {
 		if (instance == null) 
@@ -191,6 +209,12 @@ public final class Catalogue implements Serializable {
 		  }
 	public static void main(String[] args) {
 		Catalogue c = Catalogue.getInstance("Livres.txt", "Periodiques.txt", "DVD.txt");
+		
+		
+		LocalDate d1 = LocalDate.now();
+		DVD d = new DVD("DVD11", "test", d1, "oui", 3, "Gabriel");
+		
+		c.lstDvd.add(0, d );
 		//c.afficherLivre();
 		//c.afficherPeriodique();
 		c.afficherDvd();
