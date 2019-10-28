@@ -63,8 +63,9 @@ public final class Catalogue implements Serializable {
 					//System.out.println(noDoc);
 
 					Livre livre = new Livre(noDoc, titre, dateParution, "Oui", null, auteur);
+					Document docLivre = new Document(noDoc, titre, dateParution, "oui");
 					lstLivres.add(livre);
-				
+					lstDocuments.add(docLivre);
 					
 				} catch (NoSuchElementException e) {
 
@@ -114,8 +115,9 @@ public final class Catalogue implements Serializable {
 					noPeriodique = Integer.parseInt(st2.nextToken().trim());
 					
 					Periodique periodique = new Periodique(noDocP, titreP, dateParutionP, "oui", noVolume, noPeriodique);
-					
+					Document docPeriodique = new Document(noDocP, titreP, dateParutionP, "oui");
 					lstPeriodiques.add(periodique);
+					lstDocuments.add(docPeriodique);
 					
 				}catch(NoSuchElementException e) {
 					
@@ -162,14 +164,19 @@ public final class Catalogue implements Serializable {
 				nbDisques = Integer.parseInt(st3.nextToken().trim());
 				strRealisateur = st3.nextToken().trim();
 				DVD dvd = new DVD(noDocD, titreD, dateParutionD, "oui", nbDisques, strRealisateur);
-				
+				Document docDVD = new Document(noDocD, titreD, dateParutionD, "oui");
 				lstDvd.add(dvd);
+				lstDocuments.add(docDVD);
 			}
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println(e.toString());
 		}
+		
+		//Remplir lstDocument
+	
+
 	}
 	
 	public ArrayList<Document> getLstDocuments() {
@@ -202,6 +209,10 @@ public final class Catalogue implements Serializable {
 		
 		
 	}
+	public void afficherDocument() {
+		for(Document d:lstDocuments)
+			System.out.println(d);
+	}
 	public static Catalogue getInstance(String fichierLivre,String fichierPeriodique,String fichierDvd) {
 		if (instance == null) 
 			  instance = new Catalogue(fichierLivre,fichierPeriodique,fichierDvd);
@@ -217,7 +228,8 @@ public final class Catalogue implements Serializable {
 		c.lstDvd.add(0, d );
 		//c.afficherLivre();
 		//c.afficherPeriodique();
-		c.afficherDvd();
+		//c.afficherDvd();
+		c.afficherDocument();
 	}
 
 }

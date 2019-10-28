@@ -24,7 +24,7 @@ import javafx.util.Callback;
 
 public class Mediatheque extends Application {
 	private final TableView<Catalogue> table = new TableView<Catalogue>();
-	private final ObservableList<Catalogue> donnees = null;
+	private ObservableList<Document> donnees = null;
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -60,45 +60,43 @@ public class Mediatheque extends Application {
 			tabPeriodique.setGraphic(new ImageView(new Image("icon-periodique.png")));
 
 			// Dans l'oglet Catalogue
-			
-			//Node qui va avoir les tablesColumn
+
+			// Node qui va avoir les tablesColumn
 			Group grCatalogue = new Group();
 
-			//Pour aller cherche l'objet catalogue serializer
+			// Pour aller cherche l'objet catalogue serializer
 			SerializationCatalogue();
 			Catalogue catalogue = DeserialisationCatalogue();
 			
-			//donnees = FXCollections.observableArrayList(); ***Demander au prof
-			
-			
-			//Creation des colonnes dans l'onglet catalogue
-			TableColumn<Catalogue, String> colonneNumDocCatalogue = new TableColumn<Catalogue, String>("Numéro Document");
+			//donnees = FXCollections.observableArrayList(catalogue.afficherDocument()); // ***Demander au prof
+
+			// Creation des colonnes dans l'onglet catalogue
+			TableColumn<Catalogue, String> colonneNumDocCatalogue = new TableColumn<Catalogue, String>(
+					"Numéro Document");
 			TableColumn<Catalogue, String> colonneTitreCatalogue = new TableColumn<Catalogue, String>("Titre");
 			TableColumn<Catalogue, LocalDate> colonneDatePubCatalogue = new TableColumn<Catalogue, LocalDate>(
 					"Date de publication");
 			TableColumn<Catalogue, String> colonneDispoCatalogue = new TableColumn<Catalogue, String>("Disponible");
-			
-			
-			
+
 			colonneNumDocCatalogue.setPrefWidth(120);
 			colonneTitreCatalogue.setPrefWidth(120);
 			colonneDatePubCatalogue.setPrefWidth(120);
 			colonneDispoCatalogue.setPrefWidth(120);
-			
+
 			colonneNumDocCatalogue.setMaxWidth(Double.MAX_VALUE);
 			colonneTitreCatalogue.setMaxWidth(Double.MAX_VALUE);
 			colonneDatePubCatalogue.setMaxWidth(Double.MAX_VALUE);
 			colonneDispoCatalogue.setMaxWidth(Double.MAX_VALUE);
-			
-			
+
 			colonneNumDocCatalogue.setCellValueFactory(new PropertyValueFactory<>("Numéro Document"));
 			colonneTitreCatalogue.setCellValueFactory(new PropertyValueFactory<>("Titre"));
 			colonneDatePubCatalogue.setCellValueFactory(new PropertyValueFactory<>("Date de publication"));
 			colonneDispoCatalogue.setCellValueFactory(new PropertyValueFactory<>("Disponible"));
-			
-			
-			//Ajout des colonnes dans l'onglet
-			table.getColumns().addAll(colonneNumDocCatalogue,colonneTitreCatalogue,colonneDatePubCatalogue,colonneDispoCatalogue);
+
+			// Ajout des colonnes dans l'onglet
+			//table.setItems(donnees);
+			table.getColumns().addAll(colonneNumDocCatalogue, colonneTitreCatalogue, colonneDatePubCatalogue,
+					colonneDispoCatalogue);
 
 			root.setCenter(tabPane);
 			tabPane.getTabs().addAll(tabCatalogue, tabLivres, tabDVD, tabPeriodique);
@@ -117,7 +115,10 @@ public class Mediatheque extends Application {
 
 	public void SerializationCatalogue() { // Methode qui permet d'aller chercher l'objet Catalogue pour le serializer
 		Catalogue catalogueSerialisation = Catalogue.getInstance("Livres.txt", "Periodiques.txt", "DVD.txt");
-		String fichierSerial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
+
+		String fichierSerial = "";
+		//fichierSerial= "";
+		fichierSerial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
 		try {
 			FileOutputStream fichier = new FileOutputStream(fichierSerial);
 			ObjectOutputStream sortie = new ObjectOutputStream(fichier);
@@ -141,7 +142,7 @@ public class Mediatheque extends Application {
 		Catalogue catalogueDeserializer = null;
 
 		try {
-			FileInputStream fichier = new FileInputStream("C:/Users/GabrielMarrero/Downloads/test/fichier.ser");
+			FileInputStream fichier = new FileInputStream("C:/Users/cg.marrero/Downloads/test/fichier.ser");
 
 			ObjectInputStream entree = new ObjectInputStream(fichier);
 
