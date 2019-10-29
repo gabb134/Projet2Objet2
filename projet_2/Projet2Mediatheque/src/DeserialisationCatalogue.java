@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import modele.Catalogue;
+
 public class DeserialisationCatalogue {
 
 	public static void main(String[] args) {

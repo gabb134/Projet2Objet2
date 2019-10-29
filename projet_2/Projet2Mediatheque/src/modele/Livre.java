@@ -1,3 +1,4 @@
+package modele;
 
 
 import java.io.Serializable;
@@ -14,6 +15,14 @@ private String auteur;
 		
 		super(noDoc, titre, dateParution, disponible);
 		this.auteur =auteur;
+	}
+
+	public String getAuteur() {
+		return auteur;
+	}
+
+	public void setAuteur(String auteur) {
+		this.auteur = auteur;
 	}
 
 	@Override

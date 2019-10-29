@@ -1,3 +1,4 @@
+package modele;
 
 
 import java.io.Serializable;
@@ -16,6 +17,22 @@ public class Periodique extends Document {
 		super(noDoc, titre, dateParution, disponible);
 	this.noVolume= noVolume;
 	this.noPeriodique= noPeriodique;
+	}
+
+	public int getNoVolume() {
+		return noVolume;
+	}
+
+	public void setNoVolume(int noVolume) {
+		this.noVolume = noVolume;
+	}
+
+	public int getNoPeriodique() {
+		return noPeriodique;
+	}
+
+	public void setNoPeriodique(int noPeriodique) {
+		this.noPeriodique = noPeriodique;
 	}
 
 	@Override
