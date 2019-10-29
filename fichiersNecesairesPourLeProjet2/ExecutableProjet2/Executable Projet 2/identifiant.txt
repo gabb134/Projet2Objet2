@@ -1,3 +1,15 @@
 Administrateur
 Identifiant : Admin
-Mot de passe : 38764632
+Mot de passe : 38764632¸
+
+Préposé
+numéro d'employé: P19001
+Mot de passe: Password1
+
+Adhérent
+Nom: ader1
+Prénom: ader1
+adresse: adrader1
+numéro d'adhérent: A19001
+Mot de passe: Password1
+numéro de téléphone: 111-111-1111
