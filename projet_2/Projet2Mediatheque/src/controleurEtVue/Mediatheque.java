@@ -238,7 +238,8 @@ public class Mediatheque extends Application {
 		Catalogue catalogueSerialisation = Catalogue.getInstance("Livres.txt", "Periodiques.txt", "DVD.txt");
 
 		String fichierSerial = "";
-		fichierSerial= "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
+		fichierSerial ="C:/Users/rn.merzius/Downloads/test/fichier.ser";
+		//fichierSerial= "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
 		//fichierSerial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
 		try {
 			FileOutputStream fichier = new FileOutputStream(fichierSerial);
@@ -265,7 +266,8 @@ public class Mediatheque extends Application {
 		try {
 			
 			String FichierDeserial ="";
-			FichierDeserial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
+			FichierDeserial = "C:/Users/rn.merzius/Downloads/test/fichier.ser";
+			//FichierDeserial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
 			//FichierDeserial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
 			FileInputStream fichier = new FileInputStream(FichierDeserial);
 
