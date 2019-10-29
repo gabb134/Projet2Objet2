@@ -10,6 +10,8 @@ import java.time.LocalDate;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -47,9 +49,47 @@ public class Mediatheque extends Application {
 
 		try {
 			BorderPane root = new BorderPane();
-			Scene scene = new Scene(root);
+			BorderPane BPConnexion=new BorderPane();
+			Scene sceneCatalogue = new Scene(root);
+			Scene sceneConnexion=new Scene(BPConnexion,400,300);
+			Stage stageCatalogue=new Stage();
+			stageCatalogue.setTitle("Médiathèque");
+			stageCatalogue.getIcons().add(new Image("iconMediatheque.PNG"));
 			TabPane tabPane = new TabPane();
+			Button btnConnecter = new Button("Connexion");
+			BPConnexion.setBottom(btnConnecter);
+			
+			stageCatalogue.setScene(sceneCatalogue);
+	
+			
+			btnConnecter.setOnAction(new EventHandler<ActionEvent>() {
+				
+				@Override
+				public void handle(ActionEvent event) {
+					// TODO Auto-generated method stub
+					stageCatalogue.show();
+					primaryStage.close();
 
+				}
+			});
+			TabPane TabPaneConnexion= new TabPane();
+			//Premier onglet (Adherent)
+			Tab tabConnexionAdherent = new Tab();
+			tabConnexionAdherent.setClosable(false);
+			tabConnexionAdherent.setText("Adherent");
+			
+			//Deuxieme onglet (Employe)
+			Tab tabConnexionEmploye = new Tab();
+			tabConnexionEmploye.setClosable(false);
+			tabConnexionEmploye.setText("Employe");
+			
+			//troisieme onglet (Administrateur)
+			Tab tabConnexionAdmin = new Tab();
+			tabConnexionAdmin.setClosable(false);
+			tabConnexionAdmin.setText("Admin");
+			// Ajout des onglets de connexion
+			TabPaneConnexion.getTabs().addAll(tabConnexionAdherent,tabConnexionEmploye,tabConnexionAdmin);
+			BPConnexion.setCenter(TabPaneConnexion);
 			// premier onglet (Catalogue)
 			Tab tabCatalogue = new Tab();
 			tabCatalogue.setClosable(false);
@@ -224,10 +264,10 @@ public class Mediatheque extends Application {
 			
 			
 			primaryStage.getIcons().add(new Image("iconMediatheque.PNG"));
-			primaryStage.setTitle("Médiathèque");
+			primaryStage.setTitle("Connexion");
 			primaryStage.sizeToScene();
 			primaryStage.setResizable(false);
-			primaryStage.setScene(scene);
+			primaryStage.setScene(sceneConnexion);
 			primaryStage.show();
 		} catch (Exception e) {
 			e.printStackTrace();
