@@ -1,0 +1,8 @@
+Per1,Alternatives internationales,12-12-2008, 1,4
+Per2,Électronique et loisirs magazine,12-02-2008,2,5
+Per3,Revue québécoise de psychologie,21-03-2009,1,5 
+Per4,Santé mentale au Québec: vers une nouvelle pratique,02-09-1976,2,3 
+Per5,Parents: le magazine de 3 millions de jeunes couples, 12-09-2001,1,5
+Per6,Science et vie micro,12-12-2005,2,3
+Per7,Revue de la Banque du Canada,21-02-2009,1,3
+Per8,Nuit blanche: le magazine du livre,12-12-1999,2,3 
