@@ -5,8 +5,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+
 import java.time.LocalDate;
 
+import javafx.animation.ScaleTransition;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,18 +20,26 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.TilePane;
@@ -41,6 +51,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.Duration;
 import modele.Catalogue;
 import modele.DVD;
 import modele.Document;
@@ -57,74 +68,146 @@ public class Mediatheque extends Application {
 	private ObservableList<Livre> donneesLivre;
 	private ObservableList<DVD> donneesDVD;
 	private ObservableList<Periodique> donneesPeriodique;
-	private Font fontText;
 
+
+	private BorderPane root ;
+	private BorderPane bPaneConnexion;
+	private BorderPane bPaneEsthetique;
+	private TabPane tabPane; 
+	
+	private Stage stageCatalogue;
+	private Scene sceneCatalogue ;
+	private Scene sceneConnexion ;
+	
+	private Button btnConnecterAdherent ;
+	private Button btnConnecterAdmin;
+	private Button btnConnecterEmploye;
+	private Button btnConsulterCatalogue ;
+	
+	private GridPane gPaneAdherent;
+	private GridPane gPaneEmploye;
+	private GridPane gPaneAdmin;
+	
+	private TextField txtFNom;
+	private TextField txtFPrenom;
+	private TextField txtFTelephone;
+	private TextField txtFNoPrepose;
+	private TextField txtFMotDePassePrepose;
+	private TextField txtFNoAdmin;
+	private TextField txtFMotDePasseAdmin;
+	
+	
+	private Text txtNom;
+	private Text txtPrenom;
+	private Text txtTelephoneAdherent;
+	private Text txtNoPrepose ;
+	private Text txtMotDePassePrepose;
+	private Text txtNoAdmin;
+	private Text txtMotDePasseAdmin;
+	
+	private TabPane tabPaneConnexion;
+	private Tab tabConnexionAdherent ;
+	private Tab tabConnexionEmploye ;
+	private Tab tabConnexionAdmin;
+	
+	private RadioButton rbPrenomEtNom;
+	private RadioButton rbTelephone;
+	
+	
+	
 	@Override
 	public void start(Stage primaryStage) {
 		// TODO Auto-generated method stub
 
 		try {
-			BorderPane root = new BorderPane();
-			BorderPane bPaneConnexion = new BorderPane();
-			BorderPane bPaneEsthetique = new BorderPane();
+			 root = new BorderPane();
+			 bPaneConnexion = new BorderPane();
+			 bPaneEsthetique = new BorderPane();
 			
-			TabPane tabPane = new TabPane();
+			 tabPane = new TabPane();
 
-			// Pour la connexion
+			// Pour la connexion(Partie à droite)
 			
-			Stage stageCatalogue = new Stage();
+			stageCatalogue = new Stage();
 			stageCatalogue.setTitle("Médiathèque");
-			stageCatalogue.getIcons().add(new Image("iconMediatheque.PNG"));
-			Scene sceneCatalogue = new Scene(root);
-			Scene sceneConnexion = new Scene(bPaneConnexion, 600, 300);
+			stageCatalogue.getIcons().add(new Image("booklibrary.png"));
+			 sceneCatalogue = new Scene(root);
+			 sceneConnexion = new Scene(bPaneConnexion, 600, 300);
 			stageCatalogue.setScene(sceneCatalogue);
 			stageCatalogue.setResizable(false);
-			Button btnConnecterAdherent = new Button("Connexion");
-			Button btnConnecterAdmin = new Button("Connexion");
-			Button btnConnecterEmploye= new Button("Connexion");
+			 btnConnecterAdherent = new Button("Consulter mon dossier");
+			 btnConnecterAdmin = new Button("Connexion");
+			 btnConnecterEmploye= new Button("Connexion");
 	
-			Button btnConsulterCatalogue = new Button("Consulter le catalogue");
-		
-			TilePane   tilePaneAdherent = new TilePane(Orientation.VERTICAL); 
-			TilePane   tilePaneEmploye = new TilePane(Orientation.VERTICAL); 
-			TilePane   tilePaneAdmin = new TilePane(Orientation.VERTICAL); 
-			
-			HBox hBoxAdherent1 = new HBox(20);
-			HBox hBoxAdherent2 = new HBox(20);
-			HBox hBoxPrepose1 = new HBox(20);
-			HBox hBoxPrepose2 = new HBox(20);
-			HBox hBoxAdmin1 = new HBox(20);
-			HBox hBoxAdmin2 = new HBox(20);
-			
-			TextField txtFNom = new TextField();
-			TextField txtFPrenom = new TextField();
-			TextField txtFTelephone = new TextField();
-			
-			TextField txtFNoPrepose = new TextField();
-			TextField txtFMotDePassePrepose= new TextField();
-			
-			
-			
-			TextField txtFNoAdmin = new TextField();
-			TextField txtFMotDePasseAdmin= new TextField();
-			
-			Text txtNom = new Text("Nom:    ");
-			Text txtPrenom = new Text("Prénom:");
-			Text txtTelephone = new Text("Téléphone:");
-			
-			Text txtNoPrepose = new Text("Numéro de l'employé:");
-			Text txtMotDePassePrepose= new Text("           Mot de passe:");
-			
-			
-			
-			Text txtNoAdmin = new Text("Numéro de l'admin:");
-			Text txtMotDePasseAdmin= new Text("   Mot de passe:");
-			
-			
-			
+			 btnConsulterCatalogue = new Button("Consulter le catalogue");
 		
 			
+			 gPaneAdherent = new GridPane();
+			 gPaneEmploye = new GridPane();
+			 gPaneAdmin = new GridPane();
 			
+			
+			Font fontText1 = Font.font("Arial", FontWeight.BOLD, FontPosture.REGULAR, 15);
+		
+			 txtFNom = new TextField();
+			 txtFPrenom = new TextField();
+			 txtFTelephone = new TextField();	
+			 txtFTelephone.setPromptText("(###) ###-####");
+			 txtFNoPrepose = new TextField();
+			 txtFMotDePassePrepose= new TextField();
+			 txtFNoAdmin = new TextField();
+			 txtFMotDePasseAdmin= new TextField();
+			 txtNom = new Text("Nom adhérent:");
+			txtNom.setFill(Color.ANTIQUEWHITE);
+			txtNom.setFont(fontText1);
+			 txtPrenom = new Text("Prénom adhérent:");
+			txtPrenom.setFill(Color.ANTIQUEWHITE);
+			txtPrenom.setFont(fontText1);
+			txtTelephoneAdherent = new Text("Téléphone:");
+			txtTelephoneAdherent.setFill(Color.ANTIQUEWHITE);
+			txtTelephoneAdherent.setFont(fontText1);
+			 txtNoPrepose = new Text("Numéro de l'employé:");
+			txtNoPrepose.setFill(Color.ANTIQUEWHITE);
+			txtNoPrepose.setFont(fontText1);
+			txtMotDePassePrepose= new Text("Mot de passe:");
+			txtMotDePassePrepose.setFill(Color.ANTIQUEWHITE);
+			txtMotDePassePrepose.setFont(fontText1);
+			 txtNoAdmin = new Text("Numéro de l'admin:");
+			txtNoAdmin.setFill(Color.ANTIQUEWHITE);
+			txtNoAdmin.setFont(fontText1);
+			 txtMotDePasseAdmin= new Text("Mot de passe:");
+			txtMotDePasseAdmin.setFill(Color.ANTIQUEWHITE);
+			txtMotDePasseAdmin.setFont(fontText1);
+			
+			btnConnecterAdherent.setFont(fontText1);
+			btnConnecterEmploye.setFont(fontText1);
+			btnConnecterAdmin.setFont(fontText1);
+			btnConsulterCatalogue.setFont(fontText1);
+		
+			Font fontRb = Font.font("Arial", FontWeight.BOLD, 10);
+			Font fontText2 = Font.font("Arial", FontWeight.BOLD, 15);
+			ToggleGroup tgroup = new ToggleGroup();
+			Text txtChoixconnexion = new Text("S'identifier avec:");
+			Text txtNomEtPrenom = new Text("Nom et prénom");
+			Text txtTelephone = new Text("Téléphone");
+			//HBox hboxChoix = new HBox(2);
+			//HBox hboxPrenom = new HBox(5);
+			txtChoixconnexion.setFont(fontText1);
+			txtChoixconnexion.setFill(Color.ANTIQUEWHITE);
+			txtNomEtPrenom.setFill(Color.ANTIQUEWHITE);
+			txtTelephone.setFill(Color.ANTIQUEWHITE);
+			txtNomEtPrenom.setFont(fontText2);
+			txtTelephone.setFont(fontText2);
+			rbPrenomEtNom = new RadioButton();
+			rbTelephone = new RadioButton();
+			rbPrenomEtNom.setToggleGroup(tgroup);
+			rbTelephone.setToggleGroup(tgroup);
+			rbPrenomEtNom.setFont(fontRb);
+			rbTelephone.setFont(fontRb);
+			rbPrenomEtNom.setSelected(true);
+			
+			//hboxChoix.getChildren().addAll(txtChoixconnexion,rbPrenomEtNom,txtNomEtPrenom,rbTelephone,txtTelephone);
+			//hboxPrenom.getChildren().addAll(txtPrenom,txtFPrenom);
 
 			btnConsulterCatalogue.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -139,69 +222,134 @@ public class Mediatheque extends Application {
 		
 			
 			
-			TabPane tabPaneConnexion = new TabPane();
+			 tabPaneConnexion = new TabPane();
 			
 			// Premier onglet (Adherent)
-			Tab tabConnexionAdherent = new Tab();
+			tabConnexionAdherent = new Tab();
 			tabConnexionAdherent.setClosable(false);
 			tabConnexionAdherent.setText("Adhérent");
-			tabConnexionAdherent.setContent(tilePaneAdherent);
-			
-			tilePaneAdherent.setPadding(new Insets(60));
-			tilePaneAdherent.setVgap(10);
-			hBoxAdherent1.getChildren().addAll(txtPrenom,txtFPrenom);
-			hBoxAdherent2.getChildren().addAll(txtNom,txtFNom);
-			tilePaneAdherent.getChildren().addAll(hBoxAdherent1,hBoxAdherent2,btnConnecterAdherent,btnConsulterCatalogue);
-			
+			tabConnexionAdherent.setGraphic(new ImageView(new Image("Adherent.jpg")));
+			tabConnexionAdherent.setContent(gPaneAdherent);
+			//gPaneAdherent.setAlignment(Pos.TOP_CENTER);
+			gPaneAdherent.setVgap(10);
+			gPaneAdherent.setHgap(2);
+			gPaneAdherent.setPadding(new Insets(40));
+		
+		
+			gPaneAdherent.add(txtChoixconnexion, 0, 0);
+			gPaneAdherent.add(rbPrenomEtNom, 1, 0);
+			gPaneAdherent.add(txtNomEtPrenom, 2, 0);
+			gPaneAdherent.add(rbTelephone, 1, 1);
+			gPaneAdherent.add(txtTelephone, 2, 1);
+			gPaneAdherent.add(txtNom, 0, 3,2,1);
+			gPaneAdherent.add(txtFNom, 2, 3,2,1);
+			gPaneAdherent.add(txtPrenom, 0, 4,2,1);
+			gPaneAdherent.add(txtFPrenom, 2, 4,2,1);
+			gPaneAdherent.add(btnConnecterAdherent, 2, 5,2,1);
+			gPaneAdherent.add(btnConsulterCatalogue, 2, 6,2,1);
+		
 
 			// Deuxieme onglet (Prepose)
-			Tab tabConnexionEmploye = new Tab();
+			 tabConnexionEmploye = new Tab();
 			tabConnexionEmploye.setClosable(false);
 			tabConnexionEmploye.setText("Employé");
-			tabConnexionEmploye.setContent(tilePaneEmploye);
+			tabConnexionEmploye.setGraphic(new ImageView(new Image("Employe.jpg")));
+			tabConnexionEmploye.setContent(gPaneEmploye);
+			gPaneEmploye.setVgap(10);
+			gPaneEmploye.setPadding(new Insets(80));
 			
-			tilePaneEmploye.setPadding(new Insets(60));
-			tilePaneEmploye.setVgap(10);
-			hBoxPrepose1.getChildren().addAll(txtNoPrepose,txtFNoPrepose);
-			hBoxPrepose2.getChildren().addAll(txtMotDePassePrepose,txtFMotDePassePrepose);
-			tilePaneEmploye.getChildren().addAll(hBoxPrepose1,hBoxPrepose2,btnConnecterEmploye);
+			gPaneEmploye.add(txtNoPrepose, 0, 0);
+			gPaneEmploye.add(txtFNoPrepose, 1, 0);
+			gPaneEmploye.add(txtMotDePassePrepose, 0, 1);
+			gPaneEmploye.add(txtFMotDePassePrepose, 1, 1);
+			gPaneEmploye.add(btnConnecterEmploye, 1, 2,2,1);
+			
 
 			// troisieme onglet (Administrateur)
-			Tab tabConnexionAdmin = new Tab();
+			 tabConnexionAdmin = new Tab();
 			tabConnexionAdmin.setClosable(false);
 			tabConnexionAdmin.setText("Administrateur");
-			tabConnexionAdmin.setContent(tilePaneAdmin);
+			tabConnexionAdmin.setGraphic(new ImageView(new Image("Admin.jpg")));
+			tabConnexionAdmin.setContent(gPaneAdmin);
+			gPaneAdmin.setVgap(10);
+			gPaneAdmin.setPadding(new Insets(80));
 			
-			tilePaneAdmin.setPadding(new Insets(60));
-			tilePaneAdmin.setVgap(10);
-			hBoxAdmin1.getChildren().addAll(txtNoAdmin,txtFNoAdmin);
-			hBoxAdmin2.getChildren().addAll(txtMotDePasseAdmin,txtFMotDePasseAdmin);
-			tilePaneAdmin.getChildren().addAll(hBoxAdmin1,hBoxAdmin2,btnConnecterAdmin);
-			
+			gPaneAdmin.add(txtNoAdmin, 0, 0);
+			gPaneAdmin.add(txtFNoAdmin, 1, 0);
+			gPaneAdmin.add(txtMotDePasseAdmin, 0, 1);
+			gPaneAdmin.add(txtFMotDePasseAdmin, 1, 1);
+			gPaneAdmin.add(btnConnecterAdmin, 1, 2,2,1);
+	
+			GestionAdherent gA = new GestionAdherent();
+			rbPrenomEtNom.setOnAction(gA);
+			rbTelephone.setOnAction(gA);
 			
 			// Ajout des onglets de connexion
 			tabPaneConnexion.getTabs().addAll(tabConnexionAdherent, tabConnexionEmploye, tabConnexionAdmin);
 			
-			bPaneConnexion.setRight(tabPaneConnexion);
-			bPaneConnexion.setLeft(bPaneEsthetique);
 			
 			
-			//Partie esthetique de la connexion
-			Font fontText1 = Font.font("Verdana", FontWeight.BOLD, FontPosture.REGULAR, 10);
-			Font fontText2 = Font.font("Verdana", FontWeight.BOLD, FontPosture.REGULAR, 15);
+			
+			// connexion(Partie à gauche)
+		
+			//Font fontText2 = Font.font("Verdana", FontWeight.BOLD, FontPosture.REGULAR, 15);
 			Text txtExplication = new Text("Veuillez choisir un des trois onglet pour accéder à notre médiathèque.");
-			txtExplication.setFont(fontText1);
-			bPaneConnexion.setTop(txtExplication);
-			bPaneConnexion.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(10), new Insets(0))));
-			Text TtxtBienvenue =new Text("      BIENVENUE \nÀ LA MÉDIATHÈQUE");
-			ImageView image = new ImageView("iconMediatheque.PNG");
-			image.setFitHeight(70);
-			image.setFitWidth(70);
+			HBox hBoxText = new HBox();
+			hBoxText.getChildren().add(txtExplication);
+			//txtExplication.setFont(fontText1);
+			hBoxText.setAlignment(Pos.CENTER);
+			//bPaneConnexion.setTop(hBoxText);
+			Color color = Color.web("#541E1E");
+			bPaneConnexion.setBackground(new Background(new BackgroundFill(color, new CornerRadii(10), new Insets(0))));
+			Text txtBienvenue =new Text("      BIENVENUE \nÀ LA MÉDIATHÈQUE");
 			
-			TtxtBienvenue.setFont(fontText2);
-			bPaneEsthetique.setTop(TtxtBienvenue);
-			bPaneEsthetique.setAlignment(TtxtBienvenue, Pos.CENTER);
-			bPaneEsthetique.setMargin(TtxtBienvenue, new Insets(15,5,5,15));
+			DropShadow ds = new DropShadow();
+			ds.setOffsetY(3.0f);
+			ds.setColor(Color.color(0.4f, 0.4f, 0.4f));
+			 
+		
+			txtBienvenue.setEffect(ds);
+			txtBienvenue.setCache(true);
+			txtBienvenue.setX(10.0f);
+			txtBienvenue.setY(270.0f);
+			txtBienvenue.setFill(Color.ANTIQUEWHITE);
+		
+			txtBienvenue.setFont(Font.font(null, FontWeight.BOLD, 15));
+			
+			
+			//txtBienvenue.setFill(Color.ANTIQUEWHITE);
+			ImageView image = new ImageView("booklibrary.png");
+			image.setFitHeight(130);
+			image.setFitWidth(130);
+			
+			 /* //Creating scale Transition 
+		      ScaleTransition scaleTransition = new ScaleTransition(); 
+		      
+		      //Setting the duration for the transition 
+		      scaleTransition.setDuration(Duration.millis(10000)); 
+		      
+		      //Setting the node for the transition 
+		      scaleTransition.setNode(image); 
+		      
+		      //Setting the dimensions for scaling 
+		      scaleTransition.setByY(0.5); 
+		      scaleTransition.setByX(0.5); 
+		      
+		      //Setting the cycle count for the translation 
+		      scaleTransition.setCycleCount(50); 
+		      
+		      //Setting auto reverse value to true 
+		      scaleTransition.setAutoReverse(false); 
+		      
+		      //Playing the animation 
+		      scaleTransition.play(); */
+			
+			
+			
+			//txtBienvenue.setFont(fontText2);
+			bPaneEsthetique.setTop(txtBienvenue);
+			bPaneEsthetique.setAlignment(txtBienvenue, Pos.CENTER);
+			bPaneEsthetique.setMargin(txtBienvenue, new Insets(15,5,5,15));
 			bPaneEsthetique.setCenter(image);
 			
 			// premier onglet (Catalogue)
@@ -374,7 +522,14 @@ public class Mediatheque extends Application {
 					colonneDatePubPeriodique, colonneDispoPeriodique, colonneNoVolumePeriodique,
 					colonneNoPeriodiquePeriodique);
 
-			root.setCenter(tabPane);
+			root.setTop(tabPane);
+			
+			//tabPaneConnexion.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(10), new Insets(0))));
+			bPaneConnexion.setRight(tabPaneConnexion);
+			bPaneConnexion.setLeft(bPaneEsthetique);
+			
+			tabPaneConnexion.setBackground(new Background(new BackgroundImage(new Image("library2.jpg"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(500,600, false, false, false, false))));
+			
 			tabCatalogue.setContent(tableCatalogue);
 			tabLivres.setContent(tableLivre);
 			tabDVD.setContent(tableDVD);
@@ -383,8 +538,8 @@ public class Mediatheque extends Application {
 			// grCatalogue.getChildren().add(table);
 			// grCatalogue.getChildren().add(b);
 
-			primaryStage.getIcons().add(new Image("iconMediatheque.PNG"));
-			primaryStage.setTitle("Connexion");
+			primaryStage.getIcons().add(new Image("booklibrary.png"));
+			primaryStage.setTitle("Connexion à la médiathèque");
 			primaryStage.sizeToScene();
 			primaryStage.setResizable(false);
 			primaryStage.setScene(sceneConnexion);
@@ -393,14 +548,50 @@ public class Mediatheque extends Application {
 			e.printStackTrace();
 		}
 	}
+	private class GestionAdherent implements EventHandler<ActionEvent> {
+
+		@Override
+		public void handle(ActionEvent e) {
+			// TODO Auto-generated method stub
+			if(e.getSource()== rbPrenomEtNom) {
+				System.out.println("prenomEtNom");
+				//gPaneAdherent.getChildren().clear();
+				gPaneAdherent.getChildren().removeAll(txtTelephoneAdherent);
+				gPaneAdherent.getChildren().removeAll(txtFTelephone);
+				
+				
+				gPaneAdherent.add(txtNom, 0, 3,2,1);
+				gPaneAdherent.add(txtFNom, 2, 3,2,1);
+				gPaneAdherent.add(txtPrenom, 0, 4,2,1);
+				gPaneAdherent.add(txtFPrenom, 2, 4,2,1);
+				
+				
+			}
+			else if(e.getSource()==rbTelephone) {
+				
+				gPaneAdherent.getChildren().removeAll(txtNom);
+				gPaneAdherent.getChildren().removeAll(txtFNom);
+				gPaneAdherent.getChildren().removeAll(txtPrenom);
+				gPaneAdherent.getChildren().removeAll(txtFPrenom);
+				//gPaneAdherent.add(txtTelephoneAdherent, columnIndex, rowIndex);
+				//gPaneAdherent.add(txtFTelephone, columnIndex, rowIndex);
+				//gPaneAdherent.getChildren().clear();
+				gPaneAdherent.add(txtTelephoneAdherent, 0, 3,2,1);
+				gPaneAdherent.add(txtFTelephone, 1, 3,2,1);
+				
+				System.out.println("Telephone");
+			}
+		}
+		
+	}
 
 	public void SerializationCatalogue() { // Methode qui permet d'aller chercher l'objet Catalogue pour le serializer
 		Catalogue catalogueSerialisation = Catalogue.getInstance("Livres.txt", "Periodiques.txt", "DVD.txt");
 
 		String fichierSerial = "";
 		// fichierSerial ="C:/Users/rn.merzius/Downloads/test/fichier.ser";
-		fichierSerial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
-		// fichierSerial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
+		//fichierSerial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
+		 fichierSerial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
 		try {
 			FileOutputStream fichier = new FileOutputStream(fichierSerial);
 			ObjectOutputStream sortie = new ObjectOutputStream(fichier);
@@ -427,8 +618,8 @@ public class Mediatheque extends Application {
 
 			String FichierDeserial = "";
 			// FichierDeserial = "C:/Users/rn.merzius/Downloads/test/fichier.ser";
-			FichierDeserial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
-			// FichierDeserial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
+			//FichierDeserial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
+			 FichierDeserial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
 			FileInputStream fichier = new FileInputStream(FichierDeserial);
 
 			ObjectInputStream entree = new ObjectInputStream(fichier);
