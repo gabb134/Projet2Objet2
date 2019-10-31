@@ -19,6 +19,8 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
@@ -31,6 +33,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BackgroundImage;
@@ -125,7 +128,7 @@ public class Mediatheque extends Application {
 			 bPaneEsthetique = new BorderPane();
 			
 			 tabPane = new TabPane();
-
+			// tabPane.setPrefHeight(1050);
 			// Pour la connexion(Partie à droite)
 			
 			stageCatalogue = new Stage();
@@ -136,9 +139,96 @@ public class Mediatheque extends Application {
 			stageCatalogue.setScene(sceneCatalogue);
 			stageCatalogue.setResizable(false);
 			 btnConnecterAdherent = new Button("Consulter mon dossier");
+
+				btnConnecterAdherent.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+					@Override
+					public void handle(MouseEvent event) {
+						// TODO Auto-generated method stub
+						if(rbPrenomEtNom.isSelected()&&txtFNom.getText().compareTo("")==0)
+						{
+						Alert Erreur = new Alert(AlertType.ERROR);
+						Erreur.setTitle("Erreur");
+						Erreur.setHeaderText(null); 
+						Erreur.setContentText("Vous n'avez pas tapé votre Nom");
+						Erreur.showAndWait();
+						txtFNom.requestFocus();
+						}
+						else if(rbPrenomEtNom.isSelected()&&txtFPrenom.getText().compareTo("")==0)
+						{
+						Alert Erreur = new Alert(AlertType.ERROR);
+						Erreur.setTitle("Erreur");
+						Erreur.setHeaderText(null); 
+						Erreur.setContentText("Vous n'avez pas tapé votre prénom");
+						Erreur.showAndWait();
+						txtFPrenom.requestFocus();
+						}
+						else if(rbTelephone.isSelected()&&txtFTelephone.getText().compareTo("")==0)
+						{
+						Alert Erreur = new Alert(AlertType.ERROR);
+						Erreur.setTitle("Erreur");
+						Erreur.setHeaderText(null); 
+						Erreur.setContentText("Vous n'avez pas tapé votre téléphone");
+						Erreur.showAndWait();
+						txtFTelephone.requestFocus();
+						}
+
+					}
+				});
 			 btnConnecterAdmin = new Button("Connexion");
+			 btnConnecterAdmin.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+					@Override
+					public void handle(MouseEvent event) {
+						// TODO Auto-generated method stub
+						if(txtFNoAdmin.getText().compareTo("")==0)
+						{
+						Alert Erreur = new Alert(AlertType.ERROR);
+						Erreur.setTitle("Erreur");
+						Erreur.setHeaderText(null); 
+						Erreur.setContentText("Vous n'avez pas tapé votre numéro d'administrateur");
+						Erreur.showAndWait();
+						txtFNoAdmin.requestFocus();
+						}
+						else if(txtFMotDePasseAdmin.getText().compareTo("")==0)
+						{
+						Alert Erreur = new Alert(AlertType.ERROR);
+						Erreur.setTitle("Erreur");
+						Erreur.setHeaderText(null); 
+						Erreur.setContentText("Vous n'avez pas tapé votre mot de passe");
+						Erreur.showAndWait();
+						txtFMotDePasseAdmin.requestFocus();
+						}
+
+					}
+				});
 			 btnConnecterEmploye= new Button("Connexion");
-	
+			 btnConnecterEmploye.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+					@Override
+					public void handle(MouseEvent event) {
+						// TODO Auto-generated method stub
+						if(txtFNoPrepose.getText().compareTo("")==0)
+						{
+						Alert Erreur = new Alert(AlertType.ERROR);
+						Erreur.setTitle("Erreur");
+						Erreur.setHeaderText(null); 
+						Erreur.setContentText("Vous n'avez pas tapé votre numéro d'employé");
+						Erreur.showAndWait();
+						txtFNoPrepose.requestFocus();
+						}
+						else if(txtFMotDePassePrepose.getText().compareTo("")==0)
+						{
+						Alert Erreur = new Alert(AlertType.ERROR);
+						Erreur.setTitle("Erreur");
+						Erreur.setHeaderText(null); 
+						Erreur.setContentText("Vous n'avez pas tapé votre mot de passe");
+						Erreur.showAndWait();
+						txtFMotDePassePrepose.requestFocus();
+						}
+
+					}
+				});
 			 btnConsulterCatalogue = new Button("Consulter le catalogue");
 		
 			
@@ -223,7 +313,9 @@ public class Mediatheque extends Application {
 			
 			
 			 tabPaneConnexion = new TabPane();
-			
+			 
+		
+			 
 			// Premier onglet (Adherent)
 			tabConnexionAdherent = new Tab();
 			tabConnexionAdherent.setClosable(false);
@@ -589,9 +681,9 @@ public class Mediatheque extends Application {
 		Catalogue catalogueSerialisation = Catalogue.getInstance("Livres.txt", "Periodiques.txt", "DVD.txt");
 
 		String fichierSerial = "";
-		// fichierSerial ="C:/Users/rn.merzius/Downloads/test/fichier.ser";
+		 fichierSerial ="C:/Users/rn.merzius/Downloads/test/fichier.ser";
 		//fichierSerial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
-		 fichierSerial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
+		 //fichierSerial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
 		try {
 			FileOutputStream fichier = new FileOutputStream(fichierSerial);
 			ObjectOutputStream sortie = new ObjectOutputStream(fichier);
@@ -617,9 +709,9 @@ public class Mediatheque extends Application {
 		try {
 
 			String FichierDeserial = "";
-			// FichierDeserial = "C:/Users/rn.merzius/Downloads/test/fichier.ser";
+			 FichierDeserial = "C:/Users/rn.merzius/Downloads/test/fichier.ser";
 			//FichierDeserial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
-			 FichierDeserial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
+			// FichierDeserial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
 			FileInputStream fichier = new FileInputStream(FichierDeserial);
 
 			ObjectInputStream entree = new ObjectInputStream(fichier);
