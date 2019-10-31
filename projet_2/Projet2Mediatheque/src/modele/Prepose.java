@@ -22,14 +22,14 @@ public class Prepose implements Serializable{
 	}
 	
 	
-	public void afficherAdherents() {
+	public void afficherAdherents(Adherent adherent) {
 		
 	}
 	
-	public void ajouterAdherent() {
+	public void ajouterAdherent(Adherent adherent) {
 		
 	}
-	public void supprimerAdherent() {
+	public void supprimerAdherent(Adherent adherent) {
 		
 	}
 	
