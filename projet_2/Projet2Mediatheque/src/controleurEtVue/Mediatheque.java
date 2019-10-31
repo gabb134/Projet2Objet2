@@ -717,7 +717,6 @@ public class Mediatheque extends Application {
 			ObjectInputStream entree = new ObjectInputStream(fichier);
 
 			catalogueDeserializer = (Catalogue) entree.readObject();
-
 			fichier.close();
 			entree.close();
 

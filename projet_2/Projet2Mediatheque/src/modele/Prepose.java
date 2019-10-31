@@ -4,16 +4,16 @@ import java.io.Serializable;
 
 public class Prepose implements Serializable{
 
-	private int intNumEmploye;
+	private String strNumEmploye;
 	private String strMotDePasse;
 	private String strAdresse;
 	private String strNom;
 	private String strPrenom;
 	private String strTelephone;
-	public Prepose(int intNumEmploye, String strMotDePasse, String strAdresse, String strNom, String strPrenom,
+	public Prepose(String strNumEmploye, String strMotDePasse, String strAdresse, String strNom, String strPrenom,
 			String strTelephone) {
 		super();
-		this.intNumEmploye = intNumEmploye;
+		this.strNumEmploye = strNumEmploye;
 		this.strMotDePasse = strMotDePasse;
 		this.strAdresse = strAdresse;
 		this.strNom = strNom;
@@ -32,7 +32,13 @@ public class Prepose implements Serializable{
 	public void supprimerAdherent(Adherent adherent) {
 		
 	}
-	
-	
+	public String getNoEmploye()
+	{
+		return strNumEmploye;
+	}
+	public String getPrenom()
+	{
+		return strPrenom;
+	}
 	
 }
