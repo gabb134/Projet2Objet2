@@ -141,9 +141,19 @@ public class Mediatheque extends Application {
 	private Text txtChoixconnexionDroite;
 	private Text txtNomEtPrenomDroite;
 	private Text txtTelephoneDroite;
-	
-	BorderPane bPaneDroite;
-	GridPane gpaneConnexionADroite;
+
+	private BorderPane bPaneDroite;
+	private GridPane gpaneConnexionADroite;
+
+	HBox hboxEnBas;
+	ToggleGroup tGroupEnHaut;
+	Text txtRechercherPar;
+	RadioButton rbAuteurRealisateur;
+	RadioButton rbMotsCles;
+	TextField txtFRechercherPar;
+	Button btnEffacer;
+
+	private Button btnQuitter;
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -153,12 +163,12 @@ public class Mediatheque extends Application {
 			// Fichiers serializables
 
 			// fichierSerial ="C:/Users/rn.merzius/Downloads/test/fichier.ser";
-			 fichierSerial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
-			//fichierSerial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
+			fichierSerial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
+			// fichierSerial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
 
 			// FichierDeserial = "C:/Users/rn.merzius/Downloads/test/fichier.ser";
-			 FichierDeserial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
-			//FichierDeserial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
+			FichierDeserial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
+			// FichierDeserial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
 
 			root = new BorderPane();
 			bPaneConnexion = new BorderPane();
@@ -264,6 +274,7 @@ public class Mediatheque extends Application {
 			Font fontText1 = Font.font("Arial", FontWeight.BOLD, FontPosture.REGULAR, 15);
 
 			txtFNom = new TextField();
+		
 			txtFPrenom = new TextField();
 			txtFTelephone = new TextField();
 			txtFTelephone.setPromptText("(###) ###-####");
@@ -293,6 +304,8 @@ public class Mediatheque extends Application {
 			txtMotDePasseAdmin.setFill(Color.ANTIQUEWHITE);
 			txtMotDePasseAdmin.setFont(fontText1);
 
+			
+			
 			btnConnecterAdherent.setFont(fontText1);
 			btnConnecterEmploye.setFont(fontText1);
 			btnConnecterAdmin.setFont(fontText1);
@@ -319,7 +332,7 @@ public class Mediatheque extends Application {
 			rbPrenomEtNom.setFont(fontRb);
 			rbTelephone.setFont(fontRb);
 			rbPrenomEtNom.setSelected(true);
-			//rbTelephone.setSelected(true);
+			// rbTelephone.setSelected(true);
 			// hboxChoix.getChildren().addAll(txtChoixconnexion,rbPrenomEtNom,txtNomEtPrenom,rbTelephone,txtTelephone);
 			// hboxPrenom.getChildren().addAll(txtPrenom,txtFPrenom);
 
@@ -624,15 +637,13 @@ public class Mediatheque extends Application {
 					colonneDatePubPeriodique, colonneDispoPeriodique, colonneNoVolumePeriodique,
 					colonneNoPeriodiquePeriodique);
 
-		
 			root.setCenter(tabPane);
-			
-			
+
 			// pour la partie de droite du root(borderpane)
-			 bPaneDroite = new BorderPane();
-			 bPaneDroite.setPadding(new Insets(5));
-			
-			 gpaneConnexionADroite = new GridPane(); // Pour la partie de droite en bas
+			bPaneDroite = new BorderPane();
+			bPaneDroite.setPadding(new Insets(5));
+
+			gpaneConnexionADroite = new GridPane(); // Pour la partie de droite en bas
 			bPaneDroite.setTop(gpaneConnexionADroite);
 
 			BorderStroke bordureNoir = new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5),
@@ -642,7 +653,7 @@ public class Mediatheque extends Application {
 			gpaneConnexionADroite.setVgap(10);
 			gpaneConnexionADroite.setHgap(2);
 			gpaneConnexionADroite.setPadding(new Insets(15));
-			
+
 			btnConnecterAdherentDroite = new Button("Consulter mon dossier");
 			txtChoixconnexionDroite = new Text("S'identifier avec : ");
 			txtNomEtPrenomDroite = new Text("Nom et prénom");
@@ -652,23 +663,23 @@ public class Mediatheque extends Application {
 			txtFTelephoneDroite = new TextField();
 			txtFTelephoneDroite.setPromptText("(###) ###-####");
 			txtNomDroite = new Text("Nom adhérent:");
-			
+
 			txtNomDroite.setFont(fontText1);
 			txtPrenomDroite = new Text("Prénom adhérent:");
-		
+
 			txtPrenomDroite.setFont(fontText1);
 			txtTelephoneAdherentDroite = new Text("Téléphone:");
-		
+
 			txtTelephoneAdherentDroite.setFont(fontText1);
-			ToggleGroup tgroup1  = new ToggleGroup();
-			rbPrenomEtNomDroite =  new RadioButton();
+			ToggleGroup tgroup1 = new ToggleGroup();
+			rbPrenomEtNomDroite = new RadioButton();
 			rbTelephoneDroite = new RadioButton();
 			rbPrenomEtNomDroite.setToggleGroup(tgroup1);
 			rbTelephoneDroite.setToggleGroup(tgroup1);
 			rbPrenomEtNomDroite.setFont(fontRb);
 			rbTelephoneDroite.setFont(fontRb);
 			rbPrenomEtNomDroite.setSelected(true);
-			
+
 			gpaneConnexionADroite.add(txtChoixconnexionDroite, 0, 0);
 			gpaneConnexionADroite.add(rbPrenomEtNomDroite, 1, 0);
 			gpaneConnexionADroite.add(txtNomEtPrenomDroite, 2, 0);
@@ -679,39 +690,56 @@ public class Mediatheque extends Application {
 			gpaneConnexionADroite.add(txtPrenomDroite, 0, 4, 2, 1);
 			gpaneConnexionADroite.add(txtFPrenomDroite, 2, 4, 2, 1);
 			gpaneConnexionADroite.add(btnConnecterAdherentDroite, 2, 5, 2, 1);
-			
+
 			rbPrenomEtNomDroite.setOnAction(gConexxcion2);
 			rbTelephoneDroite.setOnAction(gConexxcion2);
 
 			root.setRight(bPaneDroite);
-			
-			//Partie d'en haut
-			HBox hboxEnBas = new HBox(10);
+
+			// Partie d'en haut
+			hboxEnBas = new HBox(10);
 			hboxEnBas.setPadding(new Insets(10));
 			ToggleGroup tGroupEnHaut = new ToggleGroup();
-			Text txtRechercherPar = new Text("Rechercher par: ");
-			RadioButton rbAuteurRealisateur = new RadioButton("auteur/réalisateur");
-			RadioButton rbMotsCles = new RadioButton("Mos clés");
-			TextField txtFRechercherPar = new TextField();
-			Button btnEffacer = new Button("Effacer");
+			txtRechercherPar = new Text("Rechercher par: ");
+			rbAuteurRealisateur = new RadioButton("auteur/réalisateur");
+			rbMotsCles = new RadioButton("Mos clés");
+			txtFRechercherPar = new TextField();
+			btnEffacer = new Button("Effacer");
 			btnEffacer.setPrefWidth(170);
 			rbAuteurRealisateur.setToggleGroup(tGroupEnHaut);
 			rbMotsCles.setToggleGroup(tGroupEnHaut);
-			//tPaneEnBas.setAlignment(Pos.le);
-			hboxEnBas.getChildren().addAll(txtRechercherPar,rbAuteurRealisateur,rbMotsCles,txtFRechercherPar,btnEffacer);			
+			rbAuteurRealisateur.setSelected(true);
+			// tPaneEnBas.setAlignment(Pos.le);
+			GestionConsulterCatalogue gCCatalogue = new GestionConsulterCatalogue();
+			rbAuteurRealisateur.setOnAction(gCCatalogue);
+			rbMotsCles.setOnAction(gCCatalogue);
+			btnEffacer.setOnAction(gCCatalogue);
+			
+			hboxEnBas.getChildren().addAll(txtRechercherPar, rbAuteurRealisateur, rbMotsCles, txtFRechercherPar,
+					btnEffacer);
 			root.setBottom(hboxEnBas); // faire la partie pour la recherche(mot clés )
-			
-			
-			// partie d'en bas 
+
+			// partie d'en bas
 			HBox hboxButton = new HBox();
-			Button btnQuitter = new Button("Quitter");
+			btnQuitter = new Button("Quitter");
 			btnQuitter.setPrefWidth(150);
 			hboxButton.getChildren().add(btnQuitter);
 			hboxButton.setAlignment(Pos.CENTER);
 			bPaneDroite.setBottom(hboxButton);
 
+			btnQuitter.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					// TODO Auto-generated method stub
+					stageCatalogue.close();
+					primaryStage.show();
+				}
+
+			});
+
 			// tabPaneConnexion.setBackground(new Background(new
 			// BackgroundFill(Color.LIGHTGRAY, new CornerRadii(10), new Insets(0))));
+
 			bPaneConnexion.setRight(tabPaneConnexion);
 			bPaneConnexion.setLeft(bPaneEsthetique);
 
@@ -737,18 +765,27 @@ public class Mediatheque extends Application {
 			e.printStackTrace();
 		}
 	}
-	private class GestionButton implements EventHandler<ActionEvent> {
+
+	private class GestionConsulterCatalogue implements EventHandler<ActionEvent> {
 
 		@Override
-		public void handle(ActionEvent arg0) {
+		public void handle(ActionEvent e) {
 			// TODO Auto-generated method stub
-			
+			if (e.getSource()==rbAuteurRealisateur) {
+				txtFRechercherPar.requestFocus();
+			}
+			else if(e.getSource() == rbMotsCles) {
+				txtFRechercherPar.requestFocus();
+			}
+			if(e.getSource()==btnEffacer) {
+				txtFRechercherPar.clear();
+			}
+
 		}
-		
+
 	}
+
 	private class GestionAdherentConnexion1 implements EventHandler<ActionEvent> {
-		
-		
 
 		@Override
 		public void handle(ActionEvent e) {
@@ -756,19 +793,19 @@ public class Mediatheque extends Application {
 			if (e.getSource() == rbPrenomEtNom) {
 				System.out.println("prenomEtNom");
 				// gPaneAdherent.getChildren().clear();
+				
 				gPaneAdherent.getChildren().removeAll(txtTelephoneAdherent);
 				gPaneAdherent.getChildren().removeAll(txtFTelephone);
-				
 
 				gPaneAdherent.add(txtNom, 0, 3, 2, 1);
 				gPaneAdherent.add(txtFNom, 2, 3, 2, 1);
 				gPaneAdherent.add(txtPrenom, 0, 4, 2, 1);
 				gPaneAdherent.add(txtFPrenom, 2, 4, 2, 1);
-				
-				
-		
+				txtFNom.requestFocus();
 
 			} else if (e.getSource() == rbTelephone) {
+				
+				
 
 				gPaneAdherent.getChildren().removeAll(txtNom);
 				gPaneAdherent.getChildren().removeAll(txtFNom);
@@ -779,20 +816,22 @@ public class Mediatheque extends Application {
 				// gPaneAdherent.getChildren().clear();
 				gPaneAdherent.add(txtTelephoneAdherent, 0, 3, 2, 1);
 				gPaneAdherent.add(txtFTelephone, 1, 3, 2, 1);
-
+				txtFTelephone.requestFocus();
 				System.out.println("Telephone");
 			}
 		}
 	}
+
 	private class GestionAdherentConnexion2 implements EventHandler<ActionEvent> {
 
 		@Override
 		public void handle(ActionEvent e) {
 			// TODO Auto-generated method stub
-			
+
 			if (e.getSource() == rbPrenomEtNomDroite) {
 				System.out.println("prenomEtNom");
 				// gPaneAdherent.getChildren().clear();
+				
 				gpaneConnexionADroite.getChildren().removeAll(txtTelephoneAdherentDroite);
 				gpaneConnexionADroite.getChildren().removeAll(txtFTelephoneDroite);
 
@@ -800,9 +839,11 @@ public class Mediatheque extends Application {
 				gpaneConnexionADroite.add(txtFNomDroite, 2, 3, 2, 1);
 				gpaneConnexionADroite.add(txtPrenomDroite, 0, 4, 2, 1);
 				gpaneConnexionADroite.add(txtFPrenomDroite, 2, 4, 2, 1);
+				txtFNomDroite.requestFocus();
 
 			} else if (e.getSource() == rbTelephoneDroite) {
 
+				
 				gpaneConnexionADroite.getChildren().removeAll(txtNomDroite);
 				gpaneConnexionADroite.getChildren().removeAll(txtFNomDroite);
 				gpaneConnexionADroite.getChildren().removeAll(txtPrenomDroite);
@@ -812,10 +853,10 @@ public class Mediatheque extends Application {
 				// gPaneAdherent.getChildren().clear();
 				gpaneConnexionADroite.add(txtTelephoneAdherentDroite, 0, 3, 2, 1);
 				gpaneConnexionADroite.add(txtFTelephoneDroite, 2, 3, 2, 1);
-
+				txtFTelephoneDroite.requestFocus();
 				System.out.println("Telephone");
 			}
-			
+
 		}
 
 	}
