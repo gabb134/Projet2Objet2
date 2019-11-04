@@ -2,7 +2,6 @@ package modele;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -18,8 +17,7 @@ public class Prepose implements Serializable{
 	private String strNom;
 	private String strPrenom;
 	private String strTelephone;
-	
-	private ArrayList<Adherent> arrAdherent = new ArrayList<Adherent>();
+	ArrayList<Adherent> lstAdherents=new ArrayList<Adherent>();
 	public Prepose(String strNumEmploye, String strMotDePasse, String strAdresse, String strNom, String strPrenom,
 			String strTelephone) {
 		super();
@@ -30,100 +28,82 @@ public class Prepose implements Serializable{
 		this.strPrenom = strPrenom;
 		this.strTelephone = strTelephone;
 	}
-	public Prepose() {
-	}
 	
-	//Gestion adhérents
-
 	
-	@SuppressWarnings("unchecked")
-	public void ajouterAdherent(Adherent adherent) {
-		File fichierAdherents= new File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
-		//File fichierPreposes= new File("C:/Users/cg.marrero/Downloads/test/fichierPreposes.ser");
-		//File fichierPreposes= new File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
-		
-		if(!fichierAdherents.exists()) {//Ajout de l'adherent
-			arrAdherent.add(adherent);
-			
-			//Serialization
-			try {
-				FileOutputStream fichier = new FileOutputStream(fichierAdherents);
-				ObjectOutputStream sortie = new ObjectOutputStream(fichier);
-				sortie.writeObject(arrAdherent);
-				sortie.close();
-				fichier.close();
-
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		}
-		else { //Verification pour voir si l'adherent a ete enregistrer
-			
-			//Deserialization
-
-			try {
-				FileInputStream fichier = new FileInputStream(fichierAdherents);
-				ObjectInputStream entree = new ObjectInputStream(fichier);
-
-				arrAdherent = (ArrayList<Adherent>) entree.readObject();
-				fichier.close();
-				entree.close();
-				
-				for(Adherent a:arrAdherent)
-					System.out.println(a);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-			
-			
-	
-			
-			
-			
-		}
-		
-	}
-	public void supprimerAdherent(Adherent adherent) {
-		
-	}
 	public void afficherAdherents(Adherent adherent) {
 		
 	}
-	//Gestion catalogue
-	public void ajouterDocument(Document document) {
-		
-	}
-	public void supprimerDocument(Document document) {
-		
-	}
-	//Gestion des prêts 
-	public void inscrireUnPret() {
-		
-	}
-	public void inscrireUnRetour() {
-		
-	}
 	
-	
+	/*public void ajouterAdherent(Adherent adherent) {
+		int intNumeroPrepose=1900;
+		
+		File fichierAdherents= new File("/Users/r.merzius/Desktop/fichierAdherents.ser");
+		//File fichierPreposes= new File("C:/Users/rn.merzius/Downloads/test/fichierAdherents.ser");
+		//File fichierPreposes= new File("C:/Users/GabrielMarrero/Downloads/test/fichierAdherents.ser");
+		//File fichierPreposes= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
+		int intNumeroAdherent=0; 
+		int intNumAjout=19000;
+		if(fichierAdherents.exists())
+		{
+			try {
+
+				// dï¿½sï¿½rialisation des prï¿½posï¿½s
+				FileInputStream fichier = new FileInputStream(fichierAdherents);
+
+				ObjectInputStream entree = new ObjectInputStream(fichier);
+
+				lstAdherents = (ArrayList<Adherent>) entree.readObject();
+				fichier.close();
+				entree.close();
+				intNumeroAdherent=Integer.parseInt(lstAdherents.get(lstAdherents.size()-1).getNoEmploye().substring(1));
+				intNumeroAdherent++;
+				lstAdherents.add(new Prepose("P"+intNumeroAdherent, strMotDePasse, strAdresse, strNom, strPrenom, strTelephone));
+				
+				
+				
+
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		else
+		{
+			lstPreposes.add(new Prepose("P"+Integer.toString(intNumAjout), strMotDePasse, strAdresse, strNom, strPrenom, strTelephone));
+		}
+		// Sï¿½rialisation des prï¿½posï¿½s
+		try {
+			FileOutputStream fichier = new FileOutputStream(fichierPreposes);
+			ObjectOutputStream sortie = new ObjectOutputStream(fichier);
+			sortie.writeObject(lstPreposes);
+			sortie.close();
+			fichier.close();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}*/
+	public void supprimerAdherent(Adherent adherent) {
+		
+	}
 	public String getNoEmploye()
 	{
 		return strNumEmploye;
+	}
+	public String getMotDePasse()
+	{
+		return strMotDePasse;
 	}
 	public String getPrenom()
 	{
 		return strPrenom;
 	}
 	
-	public static void main(String[] args) {
-		Prepose p = new Prepose();
-		p.ajouterAdherent(new Adherent("Marrero", "Gabriel", "(514) 972-1014"));
-		
-	}
 	
 }

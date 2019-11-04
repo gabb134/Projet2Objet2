@@ -15,16 +15,17 @@ public void AjouterPrepose(String strNom, String strPrenom, String strAdresse, S
 {
 	int intNumeroPrepose=1900;
 	
-	
+	//File fichierPreposes= new File("/Users/r.merzius/Desktop/fichierPreposes.ser");
 	File fichierPreposes= new File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
 	//File fichierPreposes= new File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
 	//File fichierPreposes= new File("C:/Users/cg.marrero/Downloads/test/fichierPreposes.ser");
-	String strNumeroEmploye="P"+intNumeroPrepose;
+	int intNumeroEmploye=0; 
+	int intNumAjout=19000;
 	if(fichierPreposes.exists())
 	{
 		try {
 
-			// désérialisation des préposés
+			// dï¿½sï¿½rialisation des prï¿½posï¿½s
 			FileInputStream fichier = new FileInputStream(fichierPreposes);
 
 			ObjectInputStream entree = new ObjectInputStream(fichier);
@@ -32,22 +33,11 @@ public void AjouterPrepose(String strNom, String strPrenom, String strAdresse, S
 			lstPreposes = (ArrayList<Prepose>) entree.readObject();
 			fichier.close();
 			entree.close();
-			// Fin désérialization des préposés
-			for(int i=0;i<lstPreposes.size();i++)
-			{
-				if(i==10)
-					intNumeroPrepose=190;
-				strNumeroEmploye="P"+intNumeroPrepose+i;
-				if(lstPreposes.get(i).getNoEmploye().compareTo(strNumeroEmploye)!=0)
-				{
-					lstPreposes.add(new Prepose(strNumeroEmploye, strMotDePasse, strAdresse, strNom, strPrenom, strTelephone));
-					i=lstPreposes.size();
-				}
-				else if(i+1==lstPreposes.size())
-				{
-					lstPreposes.add(new Prepose("P19001", strMotDePasse, strAdresse, strNom, strPrenom, strTelephone));
-				}
-			}
+			intNumeroEmploye=Integer.parseInt(lstPreposes.get(lstPreposes.size()-1).getNoEmploye().substring(1));
+			intNumeroEmploye++;
+			lstPreposes.add(new Prepose("P"+intNumeroEmploye, strMotDePasse, strAdresse, strNom, strPrenom, strTelephone));
+			
+			
 			
 
 		} catch (IOException e) {
@@ -61,9 +51,9 @@ public void AjouterPrepose(String strNom, String strPrenom, String strAdresse, S
 	
 	else
 	{
-		lstPreposes.add(new Prepose(strNumeroEmploye+0, strMotDePasse, strAdresse, strNom, strPrenom, strTelephone));
+		lstPreposes.add(new Prepose("P"+Integer.toString(intNumAjout), strMotDePasse, strAdresse, strNom, strPrenom, strTelephone));
 	}
-	// Sérialisation des préposés
+	// Sï¿½rialisation des prï¿½posï¿½s
 	try {
 		FileOutputStream fichier = new FileOutputStream(fichierPreposes);
 		ObjectOutputStream sortie = new ObjectOutputStream(fichier);
@@ -76,12 +66,18 @@ public void AjouterPrepose(String strNom, String strPrenom, String strAdresse, S
 		e.printStackTrace();
 	}
 }
+
+public void connexion() 
+{
+	
+	
+}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Administrateur admin=new Administrateur();
 		admin.AjouterPrepose("merzius", "paul", "inconnue", "(111) 111-1111", "Password1");
-		System.out.println(admin.lstPreposes.get(4).getNoEmploye());
-		System.out.println(admin.lstPreposes.get(4).getPrenom());
+		System.out.println(admin.lstPreposes.get(0).getNoEmploye());
+		
 
 
 	}

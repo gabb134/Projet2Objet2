@@ -4,7 +4,7 @@ public class Adherent {
 private String strNom;
 private String strPrenom;
 private String strNumeroTelephone;
-
+private String strNumeroAdhrent;
 public Adherent (String strNom,String strPrenom,String strNumeroTelephone){
 	this.strNom=strNom;
 	this.strPrenom=strPrenom;
@@ -40,6 +40,9 @@ public void setStrNumeroTelephone(String strNumeroTelephone) {
 	this.strNumeroTelephone = strNumeroTelephone;
 }
 
+public String getStrNumeroAdherent() {
+	return null;
+}
 
 
 
