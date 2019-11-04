@@ -34,7 +34,7 @@ public class Prepose implements Serializable{
 		
 	}
 	
-	/*public void ajouterAdherent(Adherent adherent) {
+	public void ajouterAdherent(String strNom,String strPrenom,String strNumeroTelephone) {
 		int intNumeroPrepose=1900;
 		
 		File fichierAdherents= new File("/Users/r.merzius/Desktop/fichierAdherents.ser");
@@ -55,9 +55,9 @@ public class Prepose implements Serializable{
 				lstAdherents = (ArrayList<Adherent>) entree.readObject();
 				fichier.close();
 				entree.close();
-				intNumeroAdherent=Integer.parseInt(lstAdherents.get(lstAdherents.size()-1).getNoEmploye().substring(1));
+				intNumeroAdherent=Integer.parseInt(lstAdherents.get(lstAdherents.size()-1).getStrNumeroAdherent().substring(1));
 				intNumeroAdherent++;
-				lstAdherents.add(new Prepose("P"+intNumeroAdherent, strMotDePasse, strAdresse, strNom, strPrenom, strTelephone));
+				lstAdherents.add(new Adherent("A"+intNumeroAdherent,strNom,strPrenom, strNumeroTelephone));
 				
 				
 				
@@ -73,13 +73,12 @@ public class Prepose implements Serializable{
 		
 		else
 		{
-			lstPreposes.add(new Prepose("P"+Integer.toString(intNumAjout), strMotDePasse, strAdresse, strNom, strPrenom, strTelephone));
-		}
+			lstAdherents.add(new Adherent("A"+Integer.toString(intNumAjout),strNom,strPrenom, strNumeroTelephone));		}
 		// S�rialisation des pr�pos�s
 		try {
-			FileOutputStream fichier = new FileOutputStream(fichierPreposes);
+			FileOutputStream fichier = new FileOutputStream(fichierAdherents);
 			ObjectOutputStream sortie = new ObjectOutputStream(fichier);
-			sortie.writeObject(lstPreposes);
+			sortie.writeObject(lstAdherents);
 			sortie.close();
 			fichier.close();
 
@@ -88,7 +87,7 @@ public class Prepose implements Serializable{
 			e.printStackTrace();
 		}
 		
-	}*/
+	}
 	public void supprimerAdherent(Adherent adherent) {
 		
 	}
@@ -105,5 +104,13 @@ public class Prepose implements Serializable{
 		return strPrenom;
 	}
 	
-	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Prepose prepose=Administrateur.getlstPreposes().get(0);
+		prepose.ajouterAdherent("merzius", "paul", "(111) 111-1111");
+		System.out.println(prepose.lstAdherents.get(0).getStrNumeroAdherent());
+		
+
+
+	}
 }

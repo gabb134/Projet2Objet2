@@ -9,7 +9,8 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class Administrateur {
-	ArrayList<Prepose> lstPreposes=new ArrayList<Prepose>();
+	
+	static ArrayList<Prepose> lstPreposes=new ArrayList<Prepose>();
 @SuppressWarnings("unchecked")
 public void AjouterPrepose(String strNom, String strPrenom, String strAdresse, String strTelephone, String strMotDePasse )
 {
@@ -72,11 +73,16 @@ public void connexion()
 	
 	
 }
+public static ArrayList<Prepose> getlstPreposes()
+{
+	return lstPreposes;
+	
+}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Administrateur admin=new Administrateur();
 		admin.AjouterPrepose("merzius", "paul", "inconnue", "(111) 111-1111", "Password1");
-		System.out.println(admin.lstPreposes.get(0).getNoEmploye());
+		System.out.println(Administrateur.lstPreposes.get(0).getNoEmploye());
 		
 
 
