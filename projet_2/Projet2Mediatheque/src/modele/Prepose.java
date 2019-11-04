@@ -106,7 +106,9 @@ public class Prepose implements Serializable{
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Prepose prepose=Administrateur.getlstPreposes().get(0);
+		Administrateur admin=new Administrateur();
+		admin.AjouterPrepose("merzius", "paul", "inconnue", "(111) 111-1111", "Password1");
+		Prepose prepose=admin.getlstPreposes().get(0);
 		prepose.ajouterAdherent("merzius", "paul", "(111) 111-1111");
 		System.out.println(prepose.lstAdherents.get(0).getStrNumeroAdherent());
 		
