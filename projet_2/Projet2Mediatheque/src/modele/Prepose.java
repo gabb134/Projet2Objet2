@@ -34,7 +34,7 @@ public class Prepose implements Serializable{
 		
 	}
 	
-	public void ajouterAdherent(Adherent adherent) {
+	/*public void ajouterAdherent(Adherent adherent) {
 		int intNumeroPrepose=1900;
 		
 		File fichierAdherents= new File("/Users/r.merzius/Desktop/fichierAdherents.ser");
@@ -57,7 +57,7 @@ public class Prepose implements Serializable{
 				entree.close();
 				intNumeroAdherent=Integer.parseInt(lstAdherents.get(lstAdherents.size()-1).getNoEmploye().substring(1));
 				intNumeroAdherent++;
-				lstAdherents.add(new Adherent("P"+intNumeroAdherent, strMotDePasse, strAdresse, strNom, strPrenom, strTelephone));
+				lstAdherents.add(new Prepose("P"+intNumeroAdherent, strMotDePasse, strAdresse, strNom, strPrenom, strTelephone));
 				
 				
 				
@@ -88,7 +88,7 @@ public class Prepose implements Serializable{
 			e.printStackTrace();
 		}
 		
-	}
+	}*/
 	public void supprimerAdherent(Adherent adherent) {
 		
 	}
