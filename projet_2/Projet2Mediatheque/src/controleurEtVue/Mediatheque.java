@@ -11,7 +11,14 @@ import java.util.ArrayList;
 
 import javax.swing.text.TabableView;
 
+import javafx.animation.Animation;
+import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.ParallelTransition;
+import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -543,7 +550,7 @@ public class Mediatheque extends Application {
 			// premier onglet (Catalogue)
 			Tab tabCatalogue = new Tab();
 			tabCatalogue.setClosable(false);
-			tabCatalogue.setText("Catalogue");
+			tabCatalogue.setText("Tous les documents");
 			tabCatalogue.setGraphic(new ImageView(new Image("icon-collection.png")));
 
 			// deuxieme onglet (Livres)
@@ -555,7 +562,7 @@ public class Mediatheque extends Application {
 			// troisieme onglet (DVD)
 			Tab tabDVD = new Tab();
 			tabDVD.setClosable(false);
-			tabDVD.setText("DVD");
+			tabDVD.setText("DVDs");
 			tabDVD.setGraphic(new ImageView(new Image("icon-dvd.png")));
 
 			// Quatrieme onglet (Periodique)
@@ -663,7 +670,7 @@ public class Mediatheque extends Application {
 			donneesPeriodique = FXCollections.observableArrayList(catalogue.getLstPeriodiques());
 
 			TableColumn<Periodique, String> colonneNumDocPeriodique = new TableColumn<Periodique, String>(
-					"Numï¿½ro Document");
+					"Numéro Document");
 			TableColumn<Periodique, String> colonneTitrePeriodique = new TableColumn<Periodique, String>("Titre");
 			TableColumn<Periodique, LocalDate> colonneDatePubPeriodique = new TableColumn<Periodique, LocalDate>(
 					"Date de publication");
@@ -725,6 +732,14 @@ public class Mediatheque extends Application {
 			 bPaneDroite.setPadding(new Insets(5));
 			 
 			bPaneDroite.setTop(gpaneConnexionADroite);
+			
+			ImageView image1 = new ImageView(new Image("catalogue2.png"));
+			image1.setFitHeight(200);
+			image1.setFitWidth(170);
+			bPaneDroite.setCenter(image1);
+			
+			//animation image
+			
 			
 			BorderStroke bordureNoir = new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5),
 					new BorderWidths(2), new Insets(0));
