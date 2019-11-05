@@ -184,13 +184,13 @@ public class Mediatheque extends Application {
 		try {
 			// Fichiers serializables
 
-			// fichierSerial ="C:/Users/rn.merzius/Downloads/test/fichier.ser";
-			 fichierSerial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
+			 fichierSerial ="C:/Users/rn.merzius/Downloads/test/fichier.ser";
+			// fichierSerial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
 			//fichierSerial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
 			//fichierSerial= "/Users/r.merzius/Desktop/fichier.ser";
 			//FichierDeserial="/Users/r.merzius/Desktop/fichier.ser";
-		    //FichierDeserial = "C:/Users/rn.merzius/Downloads/test/fichier.ser";
-			 FichierDeserial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
+		    FichierDeserial = "C:/Users/rn.merzius/Downloads/test/fichier.ser";
+			// FichierDeserial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
 			//FichierDeserial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
 
 			root = new BorderPane();
@@ -209,136 +209,14 @@ public class Mediatheque extends Application {
 			stageCatalogue.setScene(sceneCatalogue);
 			stageCatalogue.setResizable(false);
 			btnConnecterAdherent = new Button("Consulter mon dossier");
-
-			btnConnecterAdherent.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-				@Override
-				public void handle(MouseEvent event) {
-					// TODO Auto-generated method stub
-					if (rbPrenomEtNom.isSelected() && txtFNom.getText().compareTo("") == 0) {
-						Alert Erreur = new Alert(AlertType.ERROR);
-						Erreur.setTitle("Erreur");
-						Erreur.setHeaderText(null);
-						Erreur.setContentText("Vous n'avez pas tapez votre Nom");
-						Erreur.showAndWait();
-						txtFNom.requestFocus();
-					} else if (rbPrenomEtNom.isSelected() && txtFPrenom.getText().compareTo("") == 0) {
-						Alert Erreur = new Alert(AlertType.ERROR);
-						Erreur.setTitle("Erreur");
-						Erreur.setHeaderText(null);
-						Erreur.setContentText("Vous n'avez pas tapez votre prénom");
-						Erreur.showAndWait();
-						txtFPrenom.requestFocus();
-					} else if (rbTelephone.isSelected() && txtFTelephone.getText().compareTo("") == 0) {
-						Alert Erreur = new Alert(AlertType.ERROR);
-						Erreur.setTitle("Erreur");
-						Erreur.setHeaderText(null);
-						Erreur.setContentText("Vous n'avez pas tapez votre téléphone");
-						Erreur.showAndWait();
-						txtFTelephone.requestFocus();
-					}
-
-				}
-			});
+			ValidationAdherent validationadherent=new ValidationAdherent();
+			btnConnecterAdherent.setOnMouseClicked(validationadherent);
 			btnConnecterAdmin = new Button("Connexion");
-			btnConnecterAdmin.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-				@Override
-				public void handle(MouseEvent event) {
-					// TODO Auto-generated method stub
-					if (txtFNoAdmin.getText().compareTo("") == 0) {
-						Alert Erreur = new Alert(AlertType.ERROR);
-						Erreur.setTitle("Erreur");
-						Erreur.setHeaderText(null);
-						Erreur.setContentText("Vous n'avez pas tapez votre numéro d'administrateur");
-						Erreur.showAndWait();
-						txtFNoAdmin.requestFocus();
-					} else if (txtFMotDePasseAdmin.getText().compareTo("") == 0) {
-						Alert Erreur = new Alert(AlertType.ERROR);
-						Erreur.setTitle("Erreur");
-						Erreur.setHeaderText(null);
-						Erreur.setContentText("Vous n'avez pas tapez votre mot de passe");
-						Erreur.showAndWait();
-						txtFMotDePasseAdmin.requestFocus();
-					}
-
-				}
-			});
+			ValidationAdmin validationadmin= new ValidationAdmin();
+			btnConnecterAdmin.setOnMouseClicked(validationadmin);
 			btnConnecterEmploye = new Button("Connexion");
-			btnConnecterEmploye.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-				@SuppressWarnings("unchecked")
-				@Override
-				public void handle(MouseEvent event) {
-					// TODO Auto-generated method stub
-					if (txtFNoPrepose.getText().compareTo("") == 0) {
-						Alert Erreur = new Alert(AlertType.ERROR);
-						Erreur.setTitle("Erreur");
-						Erreur.setHeaderText(null);
-						Erreur.setContentText("Vous n'avez pas tapez votre numéro d'employé");
-						Erreur.showAndWait();
-						txtFNoPrepose.requestFocus();
-					} else if (txtFMotDePassePrepose.getText().compareTo("") == 0) {
-						Alert Erreur = new Alert(AlertType.ERROR);
-						Erreur.setTitle("Erreur");
-						Erreur.setHeaderText(null);
-						Erreur.setContentText("Vous n'avez pas tapez votre mot de passe");
-						Erreur.showAndWait();
-						txtFMotDePassePrepose.requestFocus();
-					}
-					else 
-						
-					{
-						boolean booValide=false;
-						
-						
-						try {
-
-							// dï¿½sï¿½rialisation des prï¿½posï¿½s
-							//File fichierPreposes= new File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
-							 File fichierPreposes =  new File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
-							//File fichierPreposes = "C:/Users/cg.marrero/Downloads/test/fichierPreposes.ser";
-							//File fichierPreposes= new File("/Users/r.merzius/Desktop/fichierPreposes.ser");
-							FileInputStream fichier1 = new FileInputStream(fichierPreposes);
-
-							ObjectInputStream entree1 = new ObjectInputStream(fichier1);
-							
-							ArrayList<Prepose> lstPreposes = (ArrayList) entree1.readObject();
-							fichier1.close();
-							entree1.close();
-							for(int i=0;i<lstPreposes.size();i++)
-							{
-								if(lstPreposes.get(i).getNoEmploye().equals(txtFNoPrepose.getText())&&lstPreposes.get(i).getMotDePasse().equals(txtFMotDePassePrepose.getText()))
-								{
-									booValide=true;
-									Alert Validation = new Alert(AlertType.INFORMATION);
-									Validation.setTitle("Confirmation");
-									Validation.setHeaderText(null);
-									Validation.setContentText("Valide !");
-									Validation.showAndWait();
-									
-								}
-								
-							}
-							if(booValide==false)
-							{
-								Alert Validation = new Alert(AlertType.INFORMATION);
-								Validation.setTitle("Confirmation");
-								Validation.setHeaderText(null);
-								Validation.setContentText("Nom d'utilisateur ou Mot de passe invalide");
-								Validation.showAndWait();
-							}
-							
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (ClassNotFoundException e) {
-							e.printStackTrace();
-						}
-					}
-
-				}
-			});
+			ValidationEmploye validationemploye=new ValidationEmploye();
+			btnConnecterEmploye.setOnMouseClicked(validationemploye);
 			btnConsulterCatalogue = new Button("Consulter le catalogue");
 
 			gPaneAdherent = new GridPane();
@@ -1039,7 +917,155 @@ public class Mediatheque extends Application {
 		return catalogueDeserializer;
 
 	}
+	private class ValidationEmploye implements EventHandler<MouseEvent>
+	{
 
+		public void handle(MouseEvent event) {
+			// TODO Auto-generated method stub
+			if (txtFNoPrepose.getText().compareTo("") == 0) {
+				Alert Erreur = new Alert(AlertType.ERROR);
+				Erreur.setTitle("Erreur");
+				Erreur.setHeaderText(null);
+				Erreur.setContentText("Vous n'avez pas tapé votre numéro d'employé");
+				Erreur.showAndWait();
+				txtFNoPrepose.requestFocus();
+			} else if (txtFMotDePassePrepose.getText().compareTo("") == 0) {
+				Alert Erreur = new Alert(AlertType.ERROR);
+				Erreur.setTitle("Erreur");
+				Erreur.setHeaderText(null);
+				Erreur.setContentText("Vous n'avez pas tapé votre mot de passe");
+				Erreur.showAndWait();
+				txtFMotDePassePrepose.requestFocus();
+			}
+			else 
+				
+			{
+				boolean booValide=false;
+				
+				
+				try {
+
+					// dï¿½sï¿½rialisation des prï¿½posï¿½s
+					File fichierPreposes= new File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
+					 //File fichierPreposes =  new File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
+					//File fichierPreposes = "C:/Users/cg.marrero/Downloads/test/fichierPreposes.ser";
+					//File fichierPreposes= new File("/Users/r.merzius/Desktop/fichierPreposes.ser");
+					FileInputStream fichier1 = new FileInputStream(fichierPreposes);
+
+					ObjectInputStream entree1 = new ObjectInputStream(fichier1);
+					
+					ArrayList<Prepose> lstPreposes = (ArrayList) entree1.readObject();
+					fichier1.close();
+					entree1.close();
+					for(int i=0;i<lstPreposes.size();i++)
+					{
+						if(lstPreposes.get(i).getNoEmploye().equals(txtFNoPrepose.getText())&&lstPreposes.get(i).getMotDePasse().equals(txtFMotDePassePrepose.getText()))
+						{
+							booValide=true;
+							Alert Validation = new Alert(AlertType.INFORMATION);
+							Validation.setTitle("Confirmation");
+							Validation.setHeaderText(null);
+							Validation.setContentText("Valide !");
+							Validation.showAndWait();
+							
+						}
+						
+					}
+					if(booValide==false)
+					{
+						Alert Validation = new Alert(AlertType.INFORMATION);
+						Validation.setTitle("Confirmation");
+						Validation.setHeaderText(null);
+						Validation.setContentText("Nom d'utilisateur ou Mot de passe invalide");
+						Validation.showAndWait();
+					}
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				}
+			}
+
+		}
+
+		
+
+	}
+	private class ValidationAdmin implements EventHandler<MouseEvent>
+	{
+
+		@Override
+		public void handle(MouseEvent event) {
+			// TODO Auto-generated method stub
+			if (txtFNoAdmin.getText().compareTo("") == 0) {
+				Alert Erreur = new Alert(AlertType.ERROR);
+				Erreur.setTitle("Erreur");
+				Erreur.setHeaderText(null);
+				Erreur.setContentText("Vous n'avez pas tapé votre numéro d'administrateur");
+				Erreur.showAndWait();
+				txtFNoAdmin.requestFocus();
+			} else if (txtFMotDePasseAdmin.getText().compareTo("") == 0) {
+				Alert Erreur = new Alert(AlertType.ERROR);
+				Erreur.setTitle("Erreur");
+				Erreur.setHeaderText(null);
+				Erreur.setContentText("Vous n'avez pas tapé votre mot de passe");
+				Erreur.showAndWait();
+				txtFMotDePasseAdmin.requestFocus();
+			}
+
+		}
+	}
+	private class ValidationAdherent implements EventHandler<MouseEvent>
+	{
+
+		@Override
+		public void handle(MouseEvent event) {
+			// TODO Auto-generated method stub
+			if (rbPrenomEtNom.isSelected() && txtFNom.getText().compareTo("") == 0) {
+				Alert Erreur = new Alert(AlertType.ERROR);
+				Erreur.setTitle("Erreur");
+				Erreur.setHeaderText(null);
+				Erreur.setContentText("Vous n'avez pas tapé votre Nom");
+				Erreur.showAndWait();
+				txtFNom.requestFocus();
+			} else if (rbPrenomEtNom.isSelected() && txtFPrenom.getText().compareTo("") == 0) {
+				Alert Erreur = new Alert(AlertType.ERROR);
+				Erreur.setTitle("Erreur");
+				Erreur.setHeaderText(null);
+				Erreur.setContentText("Vous n'avez pas tapé votre prénom");
+				Erreur.showAndWait();
+				txtFPrenom.requestFocus();
+			} else if (rbTelephone.isSelected() && txtFTelephone.getText().compareTo("") == 0) {
+				Alert Erreur = new Alert(AlertType.ERROR);
+				Erreur.setTitle("Erreur");
+				Erreur.setHeaderText(null);
+				Erreur.setContentText("Vous n'avez pas tapé votre téléphone");
+				Erreur.showAndWait();
+				txtFTelephone.requestFocus();
+				
+			}
+			else if(!txtFTelephone.getText().matches("^[\\(][0-9]{3}[\\)][\\s][0-9]{3}[\\-][0-9]{4}$")) 
+			{
+				Alert Erreur = new Alert(AlertType.ERROR);
+				Erreur.setTitle("Erreur");
+				Erreur.setHeaderText(null);
+				Erreur.setContentText("erreur klk");
+				Erreur.showAndWait();
+				txtFTelephone.requestFocus();
+			}
+			else 
+			{
+				Alert Valide = new Alert(AlertType.CONFIRMATION);
+				Valide.setTitle("Confirmation");
+				Valide.setHeaderText(null);
+				Valide.setContentText("Confirmation");
+				Valide.showAndWait();
+			}
+		}
+		
+	}
 	public static void main(String[] args) {
 		launch(args);
 	}
