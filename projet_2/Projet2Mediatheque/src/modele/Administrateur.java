@@ -17,8 +17,8 @@ public void AjouterPrepose(String strNom, String strPrenom, String strAdresse, S
 	//int intNumeroPrepose=1900;
 	
 	//File fichierPreposes= new File("/Users/r.merzius/Desktop/fichierPreposes.ser");
-	File fichierPreposes= new File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
-	//File fichierPreposes= new File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
+	//File fichierPreposes= new File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
+	File fichierPreposes= new File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
 	//File fichierPreposes= new File("C:/Users/cg.marrero/Downloads/test/fichierPreposes.ser");
 	int intNumeroEmploye=0; 
 	int intNumAjout=19000;

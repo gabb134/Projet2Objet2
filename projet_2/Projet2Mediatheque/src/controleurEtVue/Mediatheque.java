@@ -87,6 +87,7 @@ public class Mediatheque extends Application {
 	private ObservableList<Livre> donneesLivre;
 	private ObservableList<DVD> donneesDVD;
 	private ObservableList<Periodique> donneesPeriodique;
+	
 
 	private BorderPane root;
 	private BorderPane bPaneConnexion;
@@ -184,13 +185,13 @@ public class Mediatheque extends Application {
 		try {
 			// Fichiers serializables
 
-			 fichierSerial ="C:/Users/rn.merzius/Downloads/test/fichier.ser";
-			// fichierSerial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
+			 //fichierSerial ="C:/Users/rn.merzius/Downloads/test/fichier.ser";
+			 fichierSerial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
 			//fichierSerial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
 			//fichierSerial= "/Users/r.merzius/Desktop/fichier.ser";
 			//FichierDeserial="/Users/r.merzius/Desktop/fichier.ser";
-		    FichierDeserial = "C:/Users/rn.merzius/Downloads/test/fichier.ser";
-			// FichierDeserial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
+		   // FichierDeserial = "C:/Users/rn.merzius/Downloads/test/fichier.ser";
+			 FichierDeserial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
 			//FichierDeserial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
 
 			root = new BorderPane();
@@ -946,8 +947,8 @@ public class Mediatheque extends Application {
 				try {
 
 					// d�s�rialisation des pr�pos�s
-					File fichierPreposes= new File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
-					 //File fichierPreposes =  new File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
+					//File fichierPreposes= new File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
+					 File fichierPreposes =  new File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
 					//File fichierPreposes = "C:/Users/cg.marrero/Downloads/test/fichierPreposes.ser";
 					//File fichierPreposes= new File("/Users/r.merzius/Desktop/fichierPreposes.ser");
 					FileInputStream fichier1 = new FileInputStream(fichierPreposes);
@@ -1066,6 +1067,8 @@ public class Mediatheque extends Application {
 		}
 		
 	}
+	
+
 	public static void main(String[] args) {
 		launch(args);
 	}
