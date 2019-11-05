@@ -38,16 +38,16 @@ public class Prepose implements Serializable{
 		int intNumeroPrepose=1900;
 		
 		//File fichierAdherents= new File("/Users/r.merzius/Desktop/fichierAdherents.ser");
-		//File fichierPreposes= new File("C:/Users/rn.merzius/Downloads/test/fichierAdherents.ser");
-		File fichierAdherents= new File("C:/Users/GabrielMarrero/Downloads/test/fichierAdherents.ser");
-		//File fichierPreposes= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
+		File fichierAdherents= new File("C:/Users/rn.merzius/Downloads/test/fichierAdherents.ser");
+		//File fichierAdherents= new File("C:/Users/GabrielMarrero/Downloads/test/fichierAdherents.ser");
+		//File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
 		int intNumeroAdherent=0; 
 		int intNumAjout=19000;
 		if(fichierAdherents.exists())
 		{
 			try {
 
-				// dï¿½sï¿½rialisation des prï¿½posï¿½s
+				// désérialisation des préposés
 				FileInputStream fichier = new FileInputStream(fichierAdherents);
 
 				ObjectInputStream entree = new ObjectInputStream(fichier);
@@ -74,7 +74,7 @@ public class Prepose implements Serializable{
 		else
 		{
 			lstAdherents.add(new Adherent("A"+Integer.toString(intNumAjout),strNom,strPrenom, strNumeroTelephone));		}
-		// Sï¿½rialisation des prï¿½posï¿½s
+		// Sérialisation des préposés
 		try {
 			FileOutputStream fichier = new FileOutputStream(fichierAdherents);
 			ObjectOutputStream sortie = new ObjectOutputStream(fichier);

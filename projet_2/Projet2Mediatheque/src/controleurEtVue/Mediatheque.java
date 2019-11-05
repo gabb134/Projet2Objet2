@@ -1051,7 +1051,7 @@ public class Mediatheque extends Application {
 				Alert Erreur = new Alert(AlertType.ERROR);
 				Erreur.setTitle("Erreur");
 				Erreur.setHeaderText(null);
-				Erreur.setContentText("erreur klk");
+				Erreur.setContentText("Voici le format que vous devez mettre : (###) ###-####");
 				Erreur.showAndWait();
 				txtFTelephone.requestFocus();
 			}
