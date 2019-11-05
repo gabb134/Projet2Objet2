@@ -9,6 +9,8 @@ import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import javax.swing.text.TabableView;
+
 import javafx.animation.ScaleTransition;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -159,6 +161,14 @@ public class Mediatheque extends Application {
 	private Button btnQuitter;
 	
 	
+	private Button btnIdentifiantAdherent;
+	private Button btnIdentifiantAdmin;
+	private Button btnIdentifiantPrepose;
+	
+	private VBox vBoxButtonConnexion;
+	
+	private Button btnSidentifer;
+	
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -209,7 +219,7 @@ public class Mediatheque extends Application {
 						Alert Erreur = new Alert(AlertType.ERROR);
 						Erreur.setTitle("Erreur");
 						Erreur.setHeaderText(null);
-						Erreur.setContentText("Vous n'avez pas tapez votre prï¿½nom");
+						Erreur.setContentText("Vous n'avez pas tapez votre prénom");
 						Erreur.showAndWait();
 						txtFPrenom.requestFocus();
 					} else if (rbTelephone.isSelected() && txtFTelephone.getText().compareTo("") == 0) {
@@ -435,8 +445,9 @@ public class Mediatheque extends Application {
 			tabConnexionEmploye.setGraphic(new ImageView(new Image("Employe.jpg")));
 			tabConnexionEmploye.setContent(gPaneEmploye);
 			gPaneEmploye.setVgap(10);
-			gPaneEmploye.setPadding(new Insets(80));
-
+			gPaneEmploye.setHgap(2);
+			gPaneEmploye.setPadding(new Insets(40));
+			gPaneEmploye.setAlignment(Pos.CENTER);
 			gPaneEmploye.add(txtNoPrepose, 0, 0);
 			gPaneEmploye.add(txtFNoPrepose, 1, 0);
 			gPaneEmploye.add(txtMotDePassePrepose, 0, 1);
@@ -450,7 +461,8 @@ public class Mediatheque extends Application {
 			tabConnexionAdmin.setGraphic(new ImageView(new Image("Admin.jpg")));
 			tabConnexionAdmin.setContent(gPaneAdmin);
 			gPaneAdmin.setVgap(10);
-			gPaneAdmin.setPadding(new Insets(80));
+			gPaneAdmin.setPadding(new Insets(40));
+			gPaneAdmin.setAlignment(Pos.CENTER);
 
 			gPaneAdmin.add(txtNoAdmin, 0, 0);
 			gPaneAdmin.add(txtFNoAdmin, 1, 0);
@@ -469,19 +481,7 @@ public class Mediatheque extends Application {
 			// Ajout des onglets de connexion
 			tabPaneConnexion.getTabs().addAll(tabConnexionAdherent, tabConnexionEmploye, tabConnexionAdmin);
 			
-			tabConnexionAdmin.setOnSelectionChanged(new EventHandler<Event>() {
-
-				@Override
-				public void handle(Event e) {
-					// TODO Auto-generated method stub
-					if(tabConnexionAdmin.isSelected()) {
-						txtFNoAdmin.requestFocus();
-					}
-						
-					
-					
-				}
-			});
+		
 
 			// connexion(Partie ï¿½ gauche)
 
@@ -495,7 +495,7 @@ public class Mediatheque extends Application {
 			// bPaneConnexion.setTop(hBoxText);
 			Color color = Color.web("#541E1E");
 			bPaneConnexion.setBackground(new Background(new BackgroundFill(color, new CornerRadii(10), new Insets(0))));
-			Text txtBienvenue = new Text("          BIENVENUE \nÀ NOTRE MÉDIATHÈQUE");
+			Text txtBienvenue = new Text("          BIENVENUE \nÀ NOTRE MÉDIATHÈQUE  ");
 
 			DropShadow ds = new DropShadow();
 			ds.setOffsetY(3.0f);
@@ -715,9 +715,17 @@ public class Mediatheque extends Application {
 			
 			
 			// pour la partie de droite du root(borderpane)
+			GestionConsulterCatalogue gCatalogue = new GestionConsulterCatalogue();
+	
 			 bPaneDroite = new BorderPane();
-			 gpaneConnexionADroite = new GridPane(); // Pour la partie de droite en bas
+				
+			
+			 bPaneDroite.setPadding(new Insets(10));
+			 gpaneConnexionADroite = new GridPane();
+			 bPaneDroite.setPadding(new Insets(5));
+			 
 			bPaneDroite.setTop(gpaneConnexionADroite);
+			
 			BorderStroke bordureNoir = new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5),
 					new BorderWidths(2), new Insets(0));
 			Border borduregGpane = new Border(bordureNoir);
@@ -725,7 +733,7 @@ public class Mediatheque extends Application {
 			gpaneConnexionADroite.setBorder(borduregGpane);
 			gpaneConnexionADroite.setVgap(10);
 			gpaneConnexionADroite.setHgap(2);
-			gpaneConnexionADroite.setPadding(new Insets(15));
+			gpaneConnexionADroite.setPadding(new Insets(10));
 			
 			btnConnecterAdherentDroite = new Button("Consulter mon dossier");
 			txtChoixconnexionDroite = new Text("S'identifier avec : ");
@@ -764,6 +772,38 @@ public class Mediatheque extends Application {
 			gpaneConnexionADroite.add(txtFPrenomDroite, 2, 4, 2, 1);
 			gpaneConnexionADroite.add(btnConnecterAdherentDroite, 2, 5, 2, 1);
 			
+			
+			btnConnecterAdherentDroite.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+				@Override
+				public void handle(MouseEvent event) {
+					// TODO Auto-generated method stub
+					if (rbPrenomEtNomDroite.isSelected() && txtFNomDroite.getText().compareTo("") == 0) {
+						Alert Erreur = new Alert(AlertType.ERROR);
+						Erreur.setTitle("Erreur");
+						Erreur.setHeaderText(null);
+						Erreur.setContentText("Vous n'avez pas tapez votre Nom");
+						Erreur.showAndWait();
+						txtFNom.requestFocus();
+					} else if (rbPrenomEtNomDroite.isSelected() && txtFPrenomDroite.getText().compareTo("") == 0) {
+						Alert Erreur = new Alert(AlertType.ERROR);
+						Erreur.setTitle("Erreur");
+						Erreur.setHeaderText(null);
+						Erreur.setContentText("Vous n'avez pas tapez votre prénom");
+						Erreur.showAndWait();
+						txtFPrenomDroite.requestFocus();
+					} else if (rbTelephoneDroite.isSelected() && txtFTelephoneDroite.getText().compareTo("") == 0) {
+						Alert Erreur = new Alert(AlertType.ERROR);
+						Erreur.setTitle("Erreur");
+						Erreur.setHeaderText(null);
+						Erreur.setContentText("Vous n'avez pas tapez votre téléphone");
+						Erreur.showAndWait();
+						txtFTelephoneDroite.requestFocus();
+					}
+
+				}
+			});
+			
 			rbPrenomEtNomDroite.setOnAction(gConexxcion2);
 			rbTelephoneDroite.setOnAction(gConexxcion2);
 
@@ -771,7 +811,7 @@ public class Mediatheque extends Application {
 			
 			//Partie d'en haut
 			 hboxEnBas = new HBox(10);
-			hboxEnBas.setPadding(new Insets(5));
+			hboxEnBas.setPadding(new Insets(10));
 			 tGroupEnHaut = new ToggleGroup();
 			 txtRechercherPar = new Text("Rechercher par: ");
 			 rbAuteurRealisateur = new RadioButton("auteur/réalisateur");
@@ -783,7 +823,7 @@ public class Mediatheque extends Application {
 			rbMotsCles.setToggleGroup(tGroupEnHaut);
 			rbAuteurRealisateur.setSelected(true);
 			//tPaneEnBas.setAlignment(Pos.le);
-			GestionConsulterCatalogue gCatalogue = new GestionConsulterCatalogue();
+			
 			rbAuteurRealisateur.setOnAction(gCatalogue);
 			rbMotsCles.setOnAction(gCatalogue);
 			btnEffacer.setOnAction(gCatalogue);
@@ -838,6 +878,7 @@ public class Mediatheque extends Application {
 			e.printStackTrace();
 		}
 	}
+
 	private class GestionConsulterCatalogue implements EventHandler<ActionEvent> {
 
 		@Override
@@ -853,6 +894,8 @@ public class Mediatheque extends Application {
 				txtFRechercherPar.clear();
 			}
 
+		
+			
 		}
 
 	}
@@ -923,7 +966,7 @@ public class Mediatheque extends Application {
 				// gPaneAdherent.add(txtFTelephone, columnIndex, rowIndex);
 				// gPaneAdherent.getChildren().clear();
 				gpaneConnexionADroite.add(txtTelephoneAdherentDroite, 0, 3, 2, 1);
-				gpaneConnexionADroite.add(txtFTelephoneDroite, 2, 3, 2, 1);
+				gpaneConnexionADroite.add(txtFTelephoneDroite, 1, 3, 2, 1);
 				txtFTelephoneDroite.requestFocus();
 				System.out.println("Telephone");
 			}
