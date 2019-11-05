@@ -5,6 +5,8 @@ private String strNom;
 private String strPrenom;
 private String strNumeroTelephone;
 private String strNumeroAdherent;
+
+
 public Adherent (String strNumeroAdherent,String strNom,String strPrenom,String strNumeroTelephone){
 	this.strNumeroAdherent=strNumeroAdherent;
 	this.strNom=strNom;

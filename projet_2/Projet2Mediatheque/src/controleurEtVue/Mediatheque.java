@@ -186,13 +186,13 @@ public class Mediatheque extends Application {
 			// Fichiers serializables
 
 			 //fichierSerial ="C:/Users/rn.merzius/Downloads/test/fichier.ser";
-			 fichierSerial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
-			//fichierSerial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
+			 //fichierSerial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
+			fichierSerial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
 			//fichierSerial= "/Users/r.merzius/Desktop/fichier.ser";
 			//FichierDeserial="/Users/r.merzius/Desktop/fichier.ser";
 		   // FichierDeserial = "C:/Users/rn.merzius/Downloads/test/fichier.ser";
-			 FichierDeserial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
-			//FichierDeserial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
+			 //FichierDeserial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
+			FichierDeserial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
 
 			root = new BorderPane();
 			bPaneConnexion = new BorderPane();
@@ -948,8 +948,8 @@ public class Mediatheque extends Application {
 
 					// d�s�rialisation des pr�pos�s
 					//File fichierPreposes= new File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
-					 File fichierPreposes =  new File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
-					//File fichierPreposes = "C:/Users/cg.marrero/Downloads/test/fichierPreposes.ser";
+					 //File fichierPreposes =  new File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
+					File fichierPreposes = new File("C:/Users/cg.marrero/Downloads/test/fichierPreposes.ser");
 					//File fichierPreposes= new File("/Users/r.merzius/Desktop/fichierPreposes.ser");
 					FileInputStream fichier1 = new FileInputStream(fichierPreposes);
 
@@ -1063,6 +1063,9 @@ public class Mediatheque extends Application {
 				Valide.setHeaderText(null);
 				Valide.setContentText("Confirmation");
 				Valide.showAndWait();
+				InterfaceAdherent  i = new InterfaceAdherent();
+				i.start(new Stage());
+				
 			}
 		}
 		
