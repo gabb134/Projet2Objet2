@@ -101,6 +101,7 @@ public class InterfacePrepose extends Application{
 			
 			/******************************************** CATALOGUE PRÉPOSÉ*************************************************/
 			
+			/******************************************** DANS CHAQUE ONGLET DU CATALOGUE **********************************/
 			
 			// Pour aller cherche l'objet catalogue serializer
 			SerializationCatalogue();
@@ -120,7 +121,7 @@ public class InterfacePrepose extends Application{
 			TableColumn<Document, String> colonneDispoCatalogue = new TableColumn<Document, String>("Disponible");
 
 			colonneNumDocCatalogue.setPrefWidth(120);
-			colonneTitreCatalogue.setPrefWidth(120);
+			colonneTitreCatalogue.setPrefWidth(250);
 			colonneDatePubCatalogue.setPrefWidth(120);
 			colonneDispoCatalogue.setPrefWidth(270);
 
@@ -142,7 +143,7 @@ public class InterfacePrepose extends Application{
 			TableColumn<Livre, String> colonneAuteurLivre = new TableColumn<Livre, String>("auteur");
 
 			colonneNumDocLivre.setPrefWidth(120);
-			colonneTitreLivre.setPrefWidth(120);
+			colonneTitreLivre.setPrefWidth(250);
 			colonneDatePubLivre.setPrefWidth(120);
 			colonneDispoLivre.setPrefWidth(120);
 			colonneAuteurLivre.setPrefWidth(150);
@@ -170,7 +171,7 @@ public class InterfacePrepose extends Application{
 			TableColumn<DVD, String> colonneRealisateurDVD = new TableColumn<DVD, String>("Réalisateur");
 
 			colonneNumDocDVD.setPrefWidth(120);
-			colonneTitreDVD.setPrefWidth(120);
+			colonneTitreDVD.setPrefWidth(250);
 			colonneDatePubDVD.setPrefWidth(120);
 			colonneDispoDVD.setPrefWidth(50);
 			colonneNbDisquesDVD.setPrefWidth(50);
@@ -206,7 +207,7 @@ public class InterfacePrepose extends Application{
 					"Numéro périodique");
 
 			colonneNumDocPeriodique.setPrefWidth(120);
-			colonneTitrePeriodique.setPrefWidth(120);
+			colonneTitrePeriodique.setPrefWidth(250);
 			colonneDatePubPeriodique.setPrefWidth(120);
 			colonneDispoPeriodique.setPrefWidth(50);
 			colonneNoVolumePeriodique.setPrefWidth(50);
@@ -241,6 +242,26 @@ public class InterfacePrepose extends Application{
 			tablePeriodique.getColumns().addAll(colonneNumDocPeriodique, colonneTitrePeriodique, colonneDatePubPeriodique,
 					colonneDispoPeriodique, colonneNoVolumePeriodique, colonneNoPeriodiquePeriodique);
 			
+			
+			/***************************** PARTIE D'EN BAS DU CATALOGUE***********************/
+			hboxEnBas = new HBox(10);
+			hboxEnBas.setPadding(new Insets(10));
+			tGroupEnHaut = new ToggleGroup();
+			txtRechercherPar = new Text("Rechercher par: ");
+			rbAuteurRealisateur = new RadioButton("auteur/réalisateur");
+			rbMotsCles = new RadioButton("Mos clés");
+			txtFRechercherPar = new TextField();
+			btnEffacer = new Button("Effacer");
+			btnEffacer.setPrefWidth(170);
+			rbAuteurRealisateur.setToggleGroup(tGroupEnHaut);
+			rbMotsCles.setToggleGroup(tGroupEnHaut);
+			rbAuteurRealisateur.setSelected(true);
+
+			hboxEnBas.getChildren().addAll(txtRechercherPar, rbAuteurRealisateur, rbMotsCles, txtFRechercherPar,
+					btnEffacer);
+			root.setBottom(hboxEnBas);
+			
+			/********************************************* DANS LE CATALOGUE(GERE TOUT CE QUI EST DANS L'INTERFACE DEU CATALOGUE DU PRÉPOSÉ)********************************************************/
 			// premier onglet (Catalogue)
 			tabCatalogue = new Tab();
 			tabCatalogue.setClosable(false);

@@ -516,7 +516,7 @@ public class Mediatheque extends Application {
 
 			root.setRight(bPaneDroite);
 
-			// Partie d'en haut
+			//***************************** PARTIE D'EN BAS DU CATALOGUE***********************/
 			hboxEnBas = new HBox(10);
 			hboxEnBas.setPadding(new Insets(10));
 			tGroupEnHaut = new ToggleGroup();
@@ -584,7 +584,7 @@ public class Mediatheque extends Application {
 			TableColumn<Document, String> colonneDispoCatalogue = new TableColumn<Document, String>("Disponible");
 
 			colonneNumDocCatalogue.setPrefWidth(120);
-			colonneTitreCatalogue.setPrefWidth(120);
+			colonneTitreCatalogue.setPrefWidth(250);
 			colonneDatePubCatalogue.setPrefWidth(120);
 			colonneDispoCatalogue.setPrefWidth(270);
 
@@ -606,7 +606,7 @@ public class Mediatheque extends Application {
 			TableColumn<Livre, String> colonneAuteurLivre = new TableColumn<Livre, String>("auteur");
 
 			colonneNumDocLivre.setPrefWidth(120);
-			colonneTitreLivre.setPrefWidth(120);
+			colonneTitreLivre.setPrefWidth(250);
 			colonneDatePubLivre.setPrefWidth(120);
 			colonneDispoLivre.setPrefWidth(120);
 			colonneAuteurLivre.setPrefWidth(150);
@@ -634,7 +634,7 @@ public class Mediatheque extends Application {
 			TableColumn<DVD, String> colonneRealisateurDVD = new TableColumn<DVD, String>("Réalisateur");
 
 			colonneNumDocDVD.setPrefWidth(120);
-			colonneTitreDVD.setPrefWidth(120);
+			colonneTitreDVD.setPrefWidth(250);
 			colonneDatePubDVD.setPrefWidth(120);
 			colonneDispoDVD.setPrefWidth(50);
 			colonneNbDisquesDVD.setPrefWidth(50);
@@ -670,7 +670,7 @@ public class Mediatheque extends Application {
 					"Numéro périodique");
 
 			colonneNumDocPeriodique.setPrefWidth(120);
-			colonneTitrePeriodique.setPrefWidth(120);
+			colonneTitrePeriodique.setPrefWidth(250);
 			colonneDatePubPeriodique.setPrefWidth(120);
 			colonneDispoPeriodique.setPrefWidth(50);
 			colonneNoVolumePeriodique.setPrefWidth(50);
