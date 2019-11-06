@@ -194,7 +194,7 @@ public class Mediatheque extends Application {
 		// TODO Auto-generated method stub
 
 		try {
-			// FICHIERS SERIALIZABLES
+			/********************************************* FICHIERS SERIALIZABLES********************************************************/
 
 			// fichierSerial ="C:/Users/rn.merzius/Downloads/test/fichier.ser";
 			// fichierSerial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
@@ -210,8 +210,7 @@ public class Mediatheque extends Application {
 			bPaneEsthetique = new BorderPane();
 			tabPane = new TabPane();
 
-			// DANS LA CONNEXION
-
+			/********************************************* DANS LA CONNEXION ********************************************************/
 			gestionConnexionADroite(); // methode qui gere la partie a droite de la connexion (adhérent,préposé et
 										// administrateur...)
 
@@ -229,7 +228,7 @@ public class Mediatheque extends Application {
 
 			gestionConnexionAgauche();// methode qui gere la partie a gauche de la connexion (le titre et le logo)
 
-			// DANS LE CATALOGUE
+			/********************************************* DANS LE CATALOGUE********************************************************/
 			gestionCatalogue(); // methode qui gere tout ce qui est dans l'interface du catalogue
 
 			btnQuitter.setOnAction(new EventHandler<ActionEvent>() {
@@ -242,7 +241,7 @@ public class Mediatheque extends Application {
 
 			});
 
-			// AFFICHAGE
+			/********************************************* AFFICHAGE********************************************************/
 			bPaneConnexion.setRight(tabPaneConnexion);
 			bPaneConnexion.setLeft(bPaneEsthetique);
 
@@ -398,38 +397,10 @@ public class Mediatheque extends Application {
 		gpaneConnexionADroite.add(txtPrenomDroite, 0, 4, 2, 1);
 		gpaneConnexionADroite.add(txtFPrenomDroite, 2, 4, 2, 1);
 		gpaneConnexionADroite.add(btnConnecterAdherentDroite, 2, 5, 2, 1);
+		
+		ValidationAdherentDroite validationAdherentDroite = new ValidationAdherentDroite();
 
-		btnConnecterAdherentDroite.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event) {
-				// TODO Auto-generated method stub
-				if (rbPrenomEtNomDroite.isSelected() && txtFNomDroite.getText().compareTo("") == 0) {
-					Alert Erreur = new Alert(AlertType.ERROR);
-					Erreur.setTitle("Erreur");
-					Erreur.setHeaderText(null);
-					Erreur.setContentText("Vous n'avez pas tapez votre Nom");
-					Erreur.showAndWait();
-					txtFNom.requestFocus();
-				} else if (rbPrenomEtNomDroite.isSelected() && txtFPrenomDroite.getText().compareTo("") == 0) {
-					Alert Erreur = new Alert(AlertType.ERROR);
-					Erreur.setTitle("Erreur");
-					Erreur.setHeaderText(null);
-					Erreur.setContentText("Vous n'avez pas tapez votre prénom");
-					Erreur.showAndWait();
-					txtFPrenomDroite.requestFocus();
-				} else if (rbTelephoneDroite.isSelected() && txtFTelephoneDroite.getText().compareTo("") == 0) {
-					Alert Erreur = new Alert(AlertType.ERROR);
-					Erreur.setTitle("Erreur");
-					Erreur.setHeaderText(null);
-					Erreur.setContentText("Vous n'avez pas tapez votre téléphone");
-					Erreur.showAndWait();
-					txtFTelephoneDroite.requestFocus();
-				}
-
-			}
-		});
-
+		btnConnecterAdherentDroite.setOnMouseClicked(validationAdherentDroite);
 		rbPrenomEtNomDroite.setOnAction(gConexxcion2);
 		rbTelephoneDroite.setOnAction(gConexxcion2);
 
@@ -1050,9 +1021,59 @@ public class Mediatheque extends Application {
 				i.start(new Stage());
 
 			}
+			
+		
 		}
 
 	}
+	private class ValidationAdherentDroite implements EventHandler<MouseEvent> {
+
+		@Override
+		public void handle(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+			if (rbPrenomEtNomDroite.isSelected() && txtFNomDroite.getText().compareTo("") == 0) {
+				Alert Erreur = new Alert(AlertType.ERROR);
+				Erreur.setTitle("Erreur");
+				Erreur.setHeaderText(null);
+				Erreur.setContentText("Vous n'avez pas tapez votre Nom");
+				Erreur.showAndWait();
+				txtFNom.requestFocus();
+			} else if (rbPrenomEtNomDroite.isSelected() && txtFPrenomDroite.getText().compareTo("") == 0) {
+				Alert Erreur = new Alert(AlertType.ERROR);
+				Erreur.setTitle("Erreur");
+				Erreur.setHeaderText(null);
+				Erreur.setContentText("Vous n'avez pas tapez votre prénom");
+				Erreur.showAndWait();
+				txtFPrenomDroite.requestFocus();
+			} else if (rbTelephoneDroite.isSelected() && txtFTelephoneDroite.getText().compareTo("") == 0) {
+				Alert Erreur = new Alert(AlertType.ERROR);
+				Erreur.setTitle("Erreur");
+				Erreur.setHeaderText(null);
+				Erreur.setContentText("Vous n'avez pas tapez votre téléphone");
+				Erreur.showAndWait();
+				txtFTelephoneDroite.requestFocus();
+			}else if (!txtFTelephoneDroite.getText().matches("^[\\(][0-9]{3}[\\)][\\s][0-9]{3}[\\-][0-9]{4}$")) {
+				Alert Erreur = new Alert(AlertType.ERROR);
+				Erreur.setTitle("Erreur");
+				Erreur.setHeaderText(null);
+				Erreur.setContentText("Voici le format que vous devez mettre : (###) ###-####");
+				Erreur.showAndWait();
+				txtFTelephoneDroite.requestFocus();
+			} else {
+				Alert Valide = new Alert(AlertType.CONFIRMATION);
+				Valide.setTitle("Confirmation");
+				Valide.setHeaderText(null);
+				Valide.setContentText("Confirmation");
+				Valide.showAndWait();
+				InterfaceAdherent i = new InterfaceAdherent();
+				i.start(new Stage());
+
+			}
+		}
+		
+	}
+	
 
 	public static void main(String[] args) {
 		launch(args);
