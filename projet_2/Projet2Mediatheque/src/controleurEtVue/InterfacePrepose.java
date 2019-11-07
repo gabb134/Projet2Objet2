@@ -14,13 +14,16 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -33,6 +36,7 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -78,6 +82,9 @@ public class InterfacePrepose extends Application{
 	private BorderPane root ;
 	private Scene scene ;
 	private TabPane tabPane ;
+	
+	
+	private BorderPane bPaneDroite;
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -95,9 +102,10 @@ public class InterfacePrepose extends Application{
 			// FichierDeserial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
 			FichierDeserial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
 			
-			BorderPane root = new BorderPane();
-			Scene scene = new Scene(root);
-			TabPane tabPane = new TabPane();
+			 root = new BorderPane();
+			 scene = new Scene(root);
+			 tabPane = new TabPane();
+			 bPaneDroite = new BorderPane();
 			
 			/******************************************** CATALOGUE PRÉPOSÉ*************************************************/
 			
@@ -283,18 +291,94 @@ public class InterfacePrepose extends Application{
 			// Quatrieme onglet (Periodique)
 			tabPeriodique = new Tab();
 			tabPeriodique.setClosable(false);
-			tabPeriodique.setText("Péiodiques");
+			tabPeriodique.setText("Périodiques");
 			tabPeriodique.setGraphic(new ImageView(new Image("icon-periodique.png")));
 			
 			tabCatalogue.setContent(tableCatalogue);
 			tabLivres.setContent(tableLivre);
 			tabDVD.setContent(tableDVD);
 			tabPeriodique.setContent(tablePeriodique);
+			
+			
+			
 		
+			/****************************************DANS LE CATALOGUE PARTIE À DROITE(GESTION DES ADHERENT, CATALOGUE ET PRETS)  ******************************************************/
+			
+			//bPaneDroite.setPadding(new Insets(10));
+			
+			VBox vboxPartieADroite = new VBox(5);
+			Accordion accordion = new Accordion();
+			VBox vboxCatalogue = new VBox(15);
+			VBox vBoxAhderents = new VBox(15);
+			VBox vboxPrets = new VBox(15);
+			
+			Button btnAjouterDocumentCatalogue = new Button("Ajouter un document");
+			Button btnSupprimerDocumentCatalogue = new Button("Supprimer un document");
 			
 			
+			Button btnajouterAherent = new Button("Ajouter un adhérent");
+			Button btnModifierAdherent = new Button("Modifier un adhérent");
+			Button btnSupprimerAdherent = new Button("Supprimer un adhérent");
+			Button btnPayerSoldeAdhernent = new Button("Payer solde adhérent");
 			
+			Button btnInscrireUnPret = new Button("Inscrire un prêt");
+			Button btnIscrireUnRetour = new Button("Inscrire un retour");
 			
+			HBox hboxButtonDeconnexion = new HBox();
+			
+			Button btnDeconnexion = new Button("Deconnexion");
+			hboxButtonDeconnexion.getChildren().add(btnDeconnexion);
+			hboxButtonDeconnexion.setAlignment(Pos.CENTER);
+			
+			btnAjouterDocumentCatalogue.setPrefWidth(180);
+			btnSupprimerDocumentCatalogue.setPrefWidth(180);
+			
+			btnajouterAherent.setPrefWidth(180);
+			btnModifierAdherent.setPrefWidth(180);
+			btnSupprimerAdherent.setPrefWidth(180);
+			btnPayerSoldeAdhernent.setPrefWidth(180);
+			
+			btnInscrireUnPret.setPrefWidth(180);
+			btnIscrireUnRetour.setPrefWidth(180);
+			
+			btnDeconnexion.setPrefWidth(150);
+			
+			vboxCatalogue.getChildren().addAll(btnAjouterDocumentCatalogue,btnSupprimerDocumentCatalogue);
+			vBoxAhderents.getChildren().addAll(btnajouterAherent,btnModifierAdherent,btnSupprimerAdherent,btnPayerSoldeAdhernent);
+			vboxPrets.getChildren().addAll(btnInscrireUnPret,btnIscrireUnRetour);
+			
+			vboxCatalogue.setAlignment(Pos.CENTER);
+			vBoxAhderents.setAlignment(Pos.CENTER);
+			vboxPrets.setAlignment(Pos.CENTER);
+			
+
+	        TitledPane paneGestionCatalogue = new TitledPane("Gestion du catalogue" , new Label("Show all boats available"));
+	        TitledPane paneGestionAdherents = new TitledPane("Gestion des adhérents"  , new Label("Show all cars available"));
+	        TitledPane paneGestionPrets = new TitledPane("Gestion des prêts", new Label("Show all planes available"));
+
+	        accordion.getPanes().add(paneGestionCatalogue);
+	        accordion.getPanes().add(paneGestionAdherents);
+	        accordion.getPanes().add(paneGestionPrets);
+	        
+	        ImageView imageCatalogue = new ImageView(new Image("icon-collection.png"));
+	        ImageView imageAdherent = new ImageView(new Image("Adherentss.png"));
+	        ImageView imagePrets = new ImageView(new Image("LibraryCatalogue.png"));
+	        
+	        paneGestionCatalogue.setGraphic(imageCatalogue);
+	        paneGestionAdherents.setGraphic(imageAdherent);
+	        paneGestionPrets.setGraphic(imagePrets);
+	        
+	        paneGestionCatalogue.setContent(vboxCatalogue);
+	        paneGestionAdherents.setContent(vBoxAhderents);
+	        paneGestionPrets.setContent(vboxPrets);
+	        
+	        accordion.setPrefWidth(180);
+
+	        bPaneDroite.setTop(accordion);
+	       
+			
+	        vboxPartieADroite.getChildren().addAll(bPaneDroite,hboxButtonDeconnexion);
+			root.setRight(vboxPartieADroite);
 			
 			/********************************************* AFFICHAGE********************************************************/
 			
@@ -302,7 +386,7 @@ public class InterfacePrepose extends Application{
 			root.setCenter(tabPane);
 			
 			primaryStage.getIcons().add(new Image("booklibrary.png"));
-			primaryStage.setTitle("Médiathèque");
+			primaryStage.setTitle("Médiathèque(Préposé)");
 			primaryStage.sizeToScene();
 			primaryStage.setResizable(false);
 			primaryStage.setScene(scene);
