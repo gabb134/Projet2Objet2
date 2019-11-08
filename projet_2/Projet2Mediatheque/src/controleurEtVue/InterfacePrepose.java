@@ -681,6 +681,9 @@ public class InterfacePrepose extends Application{
 				
 				
 			}
+			else if(e.getSource() == btnSupprimerDocumentCatalogue) {
+				//vérifier si il a selectionner un doc sur le catalogue, si non mettre un mesage d'erreur
+			}
 			
 		}
 		
