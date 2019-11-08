@@ -43,6 +43,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modele.Catalogue;
 import modele.DVD;
@@ -369,6 +370,20 @@ public class InterfacePrepose extends Application{
 			
 			btnDeconnexion.setPrefWidth(150);
 			
+			btnDeconnexion.setOnAction(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent e) {
+					// TODO Auto-generated method stub
+					primaryStage.close();
+					Stage stageConnexionMediatheque = new Stage();
+					stageConnexionMediatheque.initModality(Modality.APPLICATION_MODAL);
+					Mediatheque meditheque = new Mediatheque();
+					meditheque.start(stageConnexionMediatheque);
+					
+				}
+			});
+			
 			vboxCatalogue.getChildren().addAll(btnAjouterDocumentCatalogue,btnSupprimerDocumentCatalogue);
 			vBoxAhderents.getChildren().addAll(btnajouterAherent,btnModifierAdherent,btnSupprimerAdherent,btnPayerSoldeAdhernent);
 			vboxPrets.getChildren().addAll(btnInscrireUnPret,btnIscrireUnRetour);
@@ -683,6 +698,8 @@ public class InterfacePrepose extends Application{
 			}
 			else if(e.getSource() == btnSupprimerDocumentCatalogue) {
 				//vérifier si il a selectionner un doc sur le catalogue, si non mettre un mesage d'erreur
+				
+				
 			}
 			
 		}

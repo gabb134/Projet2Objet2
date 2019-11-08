@@ -68,6 +68,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.Duration;
@@ -188,6 +189,8 @@ public class Mediatheque extends Application {
 	private Tab tabDVD;
 
 	private Tab tabPeriodique;
+
+
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -726,6 +729,8 @@ public class Mediatheque extends Application {
 			primaryStage.setResizable(false);
 			primaryStage.setScene(sceneConnexion);
 			primaryStage.show();
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -927,11 +932,21 @@ public class Mediatheque extends Application {
 
 					}
 					if (booValide == false) {
-						Alert Validation = new Alert(AlertType.INFORMATION);
+					/*	Alert Validation = new Alert(AlertType.INFORMATION);
 						Validation.setTitle("Confirmation");
 						Validation.setHeaderText(null);
 						Validation.setContentText("Nom d'utilisateur ou Mot de passe invalide");
-						Validation.showAndWait();
+						Validation.showAndWait();*/
+						System.out.println("confirmé!");
+						//pour demarrer l'interface du préposé
+						Stage stagePrepose = new Stage();
+						stagePrepose.initModality(Modality.APPLICATION_MODAL);
+						InterfacePrepose interfacePrepose = new InterfacePrepose();
+						interfacePrepose.start(stagePrepose);
+						
+						//il faut trouvé une façon pour fermer le primary stage à partir d'ici
+						
+						
 					}
 
 				} catch (IOException e) {
@@ -1010,9 +1025,13 @@ public class Mediatheque extends Application {
 				Valide.setHeaderText(null);
 				Valide.setContentText("Confirmation");
 				Valide.showAndWait();
-				InterfaceAdherent i = new InterfaceAdherent();
-				i.start(new Stage());
-
+				
+				//pour demarrer l'interface de l'adhérent
+				Stage stageAdherent = new Stage();
+				stageAdherent.initModality(Modality.APPLICATION_MODAL);
+				InterfaceAdherent interfaceAdherent = new InterfaceAdherent();
+				interfaceAdherent.start(stageAdherent);
+				
 			}
 			
 		
@@ -1059,8 +1078,11 @@ public class Mediatheque extends Application {
 				Valide.setHeaderText(null);
 				Valide.setContentText("Confirmation");
 				Valide.showAndWait();
-				InterfaceAdherent i = new InterfaceAdherent();
-				i.start(new Stage());
+				//pour demarrer l'interface de l'adhérent
+				Stage stageAdherent = new Stage();
+				stageAdherent.initModality(Modality.APPLICATION_MODAL);
+				InterfaceAdherent interfaceAdherent = new InterfaceAdherent();
+				interfaceAdherent.start(stageAdherent);
 
 			}
 		}
