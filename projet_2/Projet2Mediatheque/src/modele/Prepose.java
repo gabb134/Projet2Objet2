@@ -39,8 +39,8 @@ public class Prepose {
 		
 		//File fichierAdherents= new File("/Users/r.merzius/Desktop/fichierAdherents.ser");
 		//File fichierAdherents= new File("C:/Users/rn.merzius/Downloads/test/fichierAdherents.ser");
-		//File fichierAdherents= new File("C:/Users/GabrielMarrero/Downloads/test/fichierAdherents.ser");
-		File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
+		File fichierAdherents= new File("C:/Users/GabrielMarrero/Downloads/test/fichierAdherents.ser");
+		//File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
 		int intNumeroAdherent=0; 
 		int intNumAjout=19000;
 		if(fichierAdherents.exists())

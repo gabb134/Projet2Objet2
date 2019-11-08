@@ -11,10 +11,12 @@ import controleurEtVue.Mediatheque.ValidationAdherentDroite;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -28,6 +30,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.BorderStroke;
@@ -85,6 +88,28 @@ public class InterfacePrepose extends Application{
 	
 	
 	private BorderPane bPaneDroite;
+	
+	private VBox vboxPartieADroite ;
+	private Accordion accordion ;
+	private VBox vboxCatalogue ;
+	private VBox vBoxAhderents ;
+	private VBox vboxPrets;
+	
+	private Button btnAjouterDocumentCatalogue ;
+	private Button btnSupprimerDocumentCatalogue ;
+	
+	
+	private Button btnajouterAherent ;
+	private Button btnModifierAdherent ;
+	private Button btnSupprimerAdherent ;
+	private Button btnPayerSoldeAdhernent ;
+	
+	private Button btnInscrireUnPret ;
+	private Button btnIscrireUnRetour;
+	
+	private HBox hboxButtonDeconnexion;
+	
+	private Button btnDeconnexion ;
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -94,13 +119,13 @@ public class InterfacePrepose extends Application{
 			/********************************************* FICHIERS SERIALIZABLES********************************************************/
 
 			// fichierSerial ="C:/Users/rn.merzius/Downloads/test/fichier.ser";
-			// fichierSerial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
-			fichierSerial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
+			 fichierSerial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
+			//fichierSerial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
 			// fichierSerial= "/Users/r.merzius/Desktop/fichier.ser";
 			// FichierDeserial="/Users/r.merzius/Desktop/fichier.ser";
 			// FichierDeserial = "C:/Users/rn.merzius/Downloads/test/fichier.ser";
-			// FichierDeserial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
-			FichierDeserial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
+			 FichierDeserial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
+			//FichierDeserial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
 			
 			 root = new BorderPane();
 			 scene = new Scene(root);
@@ -306,27 +331,27 @@ public class InterfacePrepose extends Application{
 			
 			//bPaneDroite.setPadding(new Insets(10));
 			
-			VBox vboxPartieADroite = new VBox(5);
-			Accordion accordion = new Accordion();
-			VBox vboxCatalogue = new VBox(15);
-			VBox vBoxAhderents = new VBox(15);
-			VBox vboxPrets = new VBox(15);
+			 vboxPartieADroite = new VBox(5);
+			 accordion = new Accordion();
+			 vboxCatalogue = new VBox(15);
+			 vBoxAhderents = new VBox(15);
+			 vboxPrets = new VBox(15);
 			
-			Button btnAjouterDocumentCatalogue = new Button("Ajouter un document");
-			Button btnSupprimerDocumentCatalogue = new Button("Supprimer un document");
+			 btnAjouterDocumentCatalogue = new Button("Ajouter un document");
+			 btnSupprimerDocumentCatalogue = new Button("Supprimer un document");
 			
 			
-			Button btnajouterAherent = new Button("Ajouter un adhérent");
-			Button btnModifierAdherent = new Button("Modifier un adhérent");
-			Button btnSupprimerAdherent = new Button("Supprimer un adhérent");
-			Button btnPayerSoldeAdhernent = new Button("Payer solde adhérent");
+			 btnajouterAherent = new Button("Ajouter un adhérent");
+			 btnModifierAdherent = new Button("Modifier un adhérent");
+			 btnSupprimerAdherent = new Button("Supprimer un adhérent");
+			 btnPayerSoldeAdhernent = new Button("Payer solde adhérent");
 			
-			Button btnInscrireUnPret = new Button("Inscrire un prêt");
-			Button btnIscrireUnRetour = new Button("Inscrire un retour");
+			 btnInscrireUnPret = new Button("Inscrire un prêt");
+			 btnIscrireUnRetour = new Button("Inscrire un retour");
 			
-			HBox hboxButtonDeconnexion = new HBox();
+			 hboxButtonDeconnexion = new HBox();
 			
-			Button btnDeconnexion = new Button("Deconnexion");
+			 btnDeconnexion = new Button("Deconnexion");
 			hboxButtonDeconnexion.getChildren().add(btnDeconnexion);
 			hboxButtonDeconnexion.setAlignment(Pos.CENTER);
 			
@@ -379,6 +404,11 @@ public class InterfacePrepose extends Application{
 			
 	        vboxPartieADroite.getChildren().addAll(bPaneDroite,hboxButtonDeconnexion);
 			root.setRight(vboxPartieADroite);
+			
+			/********************************************* GESTION DES EVENEMENT DES BUTTON *******************************/
+			
+			GestionnaireButtonPrepose gestionnaireButton = new GestionnaireButtonPrepose();
+			btnAjouterDocumentCatalogue.setOnMouseClicked(gestionnaireButton);
 			
 			/********************************************* AFFICHAGE********************************************************/
 			
@@ -444,6 +474,64 @@ public class InterfacePrepose extends Application{
 		}
 		return catalogueDeserializer;
 
+	}
+	private class GestionnaireButtonPrepose implements EventHandler<MouseEvent> {
+
+		@Override
+		public void handle(MouseEvent e) {
+			// TODO Auto-generated method stub
+			if(e.getSource() == btnAjouterDocumentCatalogue) {
+				
+				 Stage stageAjout = new Stage();
+				 GridPane gPaneAjoutDoc = new GridPane();
+					
+				 Scene sceneAjout = new Scene(gPaneAjoutDoc,400,300);
+				 
+				 ToggleGroup tRadioAjout = new ToggleGroup();
+				 RadioButton rbLivre = new RadioButton("Livre");
+				 RadioButton rbPeriodique = new RadioButton("Périodique");
+				 RadioButton rbDvd = new RadioButton("Dvd");
+				 
+				 rbLivre.setToggleGroup(tRadioAjout);
+				 rbPeriodique.setToggleGroup(tRadioAjout);
+				 rbDvd.setToggleGroup(tRadioAjout);
+				 rbLivre.setSelected(true);
+				 
+				 Text txtTypeDoc = new Text("Type de document :");
+				 Text txtTitre = new Text("Titre :");
+				 Text txtAuteur = new Text("Auteur :");
+				 Text txtDateParution = new Text("Date de parution :");
+				 Text txtMotsCledEspaces = new Text("Mots clés (séparés par espaces)");
+				 
+				 TextField txtFtitre = new TextField();
+				 TextField txtFAuteur = new TextField();
+				 TextField txtFDateParution= new TextField();
+				 TextField txtFMotsClesEspaces = new TextField();
+				 
+				 gPaneAjoutDoc.setPadding(new Insets(10));
+				 gPaneAjoutDoc.setHgap(5);
+				 gPaneAjoutDoc.setVgap(10);
+				 
+				 gPaneAjoutDoc.add(txtTypeDoc, 0, 0);
+				 gPaneAjoutDoc.add(rbLivre, 1, 0);
+				 gPaneAjoutDoc.add(rbDvd, 2, 0);
+				 gPaneAjoutDoc.add(rbPeriodique, 3, 0);
+				 gPaneAjoutDoc.add(txtTitre, 0, 1);
+				 gPaneAjoutDoc.add(txtFtitre, 1, 1);
+				 
+				stageAjout.setTitle("Ajout d'un document");
+				stageAjout.getIcons().add(new Image("iconAjouterDocument.png"));
+				stageAjout.setScene(sceneAjout);
+				stageAjout.show();
+				
+				
+				
+				
+				
+			}
+			
+		}
+		
 	}
 	
 	
