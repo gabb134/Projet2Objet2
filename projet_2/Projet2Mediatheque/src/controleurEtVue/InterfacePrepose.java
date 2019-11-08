@@ -11,6 +11,7 @@ import controleurEtVue.Mediatheque.ValidationAdherentDroite;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -119,13 +120,13 @@ public class InterfacePrepose extends Application{
 			/********************************************* FICHIERS SERIALIZABLES********************************************************/
 
 			// fichierSerial ="C:/Users/rn.merzius/Downloads/test/fichier.ser";
-			 fichierSerial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
-			//fichierSerial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
+			// fichierSerial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
+			fichierSerial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
 			// fichierSerial= "/Users/r.merzius/Desktop/fichier.ser";
 			// FichierDeserial="/Users/r.merzius/Desktop/fichier.ser";
 			// FichierDeserial = "C:/Users/rn.merzius/Downloads/test/fichier.ser";
-			 FichierDeserial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
-			//FichierDeserial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
+			 //FichierDeserial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
+			FichierDeserial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
 			
 			 root = new BorderPane();
 			 scene = new Scene(root);
@@ -482,26 +483,51 @@ public class InterfacePrepose extends Application{
 			// TODO Auto-generated method stub
 			if(e.getSource() == btnAjouterDocumentCatalogue) {
 				
+				
 				 Stage stageAjout = new Stage();
 				 GridPane gPaneAjoutDoc = new GridPane();
 					
-				 Scene sceneAjout = new Scene(gPaneAjoutDoc,400,300);
+				 Scene sceneAjout = new Scene(gPaneAjoutDoc,380,250);
+				 //Scene sceneAjout = new Scene(gPaneAjoutDoc);
 				 
 				 ToggleGroup tRadioAjout = new ToggleGroup();
 				 RadioButton rbLivre = new RadioButton("Livre");
 				 RadioButton rbPeriodique = new RadioButton("Périodique");
 				 RadioButton rbDvd = new RadioButton("Dvd");
+				 HBox hboxRadioButton = new HBox(5);
+				 hboxRadioButton.getChildren().addAll(rbLivre,rbDvd,rbPeriodique);
 				 
 				 rbLivre.setToggleGroup(tRadioAjout);
 				 rbPeriodique.setToggleGroup(tRadioAjout);
 				 rbDvd.setToggleGroup(tRadioAjout);
 				 rbLivre.setSelected(true);
 				 
+				 
+				 
+				 //pour les livres
 				 Text txtTypeDoc = new Text("Type de document :");
 				 Text txtTitre = new Text("Titre :");
 				 Text txtAuteur = new Text("Auteur :");
 				 Text txtDateParution = new Text("Date de parution :");
-				 Text txtMotsCledEspaces = new Text("Mots clés (séparés par espaces)");
+				 Text txtMotsCledEspaces = new Text("Mots clés (séparés par espaces):");
+				 
+				 //pour les dvd
+				 Text txtNbDisques = new Text("Nombre de disques :");
+				 Text txtRealisateur = new Text("Réalisateur :");
+				 
+				 TextField txtFNbDisques = new TextField();
+				 TextField txtFRealisateur = new TextField();
+				 
+				 //pour les périodiques
+				 Text txtNoVolume = new Text("Numéro de volume :");
+				 Text txtNoPeriodique = new Text("Numéro de périodique :");
+				 
+				 TextField txtFNoVolume = new TextField();
+				 TextField txtFNoPeriodique = new TextField();
+				 
+				 
+				 
+				 
 				 
 				 TextField txtFtitre = new TextField();
 				 TextField txtFAuteur = new TextField();
@@ -513,14 +539,140 @@ public class InterfacePrepose extends Application{
 				 gPaneAjoutDoc.setVgap(10);
 				 
 				 gPaneAjoutDoc.add(txtTypeDoc, 0, 0);
-				 gPaneAjoutDoc.add(rbLivre, 1, 0);
-				 gPaneAjoutDoc.add(rbDvd, 2, 0);
-				 gPaneAjoutDoc.add(rbPeriodique, 3, 0);
-				 gPaneAjoutDoc.add(txtTitre, 0, 1);
-				 gPaneAjoutDoc.add(txtFtitre, 1, 1);
+				 gPaneAjoutDoc.add(hboxRadioButton, 1, 0);
+				 gPaneAjoutDoc.add(txtTitre, 0, 2);
+				 gPaneAjoutDoc.add(txtFtitre, 1, 2);
+				 gPaneAjoutDoc.add(txtAuteur, 0, 3);
+				 gPaneAjoutDoc.add(txtFAuteur, 1, 3);
+				 gPaneAjoutDoc.add(txtDateParution, 0, 4);
+				 gPaneAjoutDoc.add(txtFDateParution, 1, 4);
+				 gPaneAjoutDoc.add(txtMotsCledEspaces, 0, 5);
+				 gPaneAjoutDoc.add(txtFMotsClesEspaces, 1, 5);
+				 
+				 txtFtitre.requestFocus();
+				 
+				 
+				 /******************************GEstion radio button dans ajouter document *************************/
+				 rbLivre.setOnAction(new EventHandler<ActionEvent>() {
+
+					@Override
+					public void handle(ActionEvent e) {
+						// TODO Auto-generated method stub
+						
+						gPaneAjoutDoc.getChildren().removeAll(txtNoVolume);
+						gPaneAjoutDoc.getChildren().removeAll(txtFNoVolume);
+						
+						gPaneAjoutDoc.getChildren().removeAll(txtNoPeriodique);
+						gPaneAjoutDoc.getChildren().removeAll(txtFNoPeriodique);
+						
+						
+						gPaneAjoutDoc.getChildren().removeAll(txtNbDisques);
+						gPaneAjoutDoc.getChildren().removeAll(txtFNbDisques);
+						
+						gPaneAjoutDoc.getChildren().removeAll(txtRealisateur);
+						gPaneAjoutDoc.getChildren().removeAll(txtFRealisateur);
+						
+						gPaneAjoutDoc.getChildren().removeAll(txtDateParution);
+						gPaneAjoutDoc.getChildren().removeAll(txtFDateParution);
+						
+						gPaneAjoutDoc.getChildren().removeAll(txtMotsCledEspaces);
+						gPaneAjoutDoc.getChildren().removeAll(txtFMotsClesEspaces);
+						
+						
+						
+						 
+						gPaneAjoutDoc.add(txtAuteur, 0, 3);
+						gPaneAjoutDoc.add(txtFAuteur, 1, 3);
+						
+						 gPaneAjoutDoc.add(txtDateParution, 0, 4);
+						 gPaneAjoutDoc.add(txtFDateParution, 1, 4);
+						 gPaneAjoutDoc.add(txtMotsCledEspaces, 0, 5);
+						 gPaneAjoutDoc.add(txtFMotsClesEspaces, 1, 5);
+						
+						 txtFtitre.requestFocus();
+						
+					}
+				});
+				 rbDvd.setOnAction(new EventHandler<ActionEvent>() {
+
+						@Override
+						public void handle(ActionEvent e) {
+							// TODO Auto-generated method stub
+							
+							gPaneAjoutDoc.getChildren().removeAll(txtAuteur);
+							gPaneAjoutDoc.getChildren().removeAll(txtFAuteur);
+							
+							gPaneAjoutDoc.getChildren().removeAll(txtNoVolume);
+							gPaneAjoutDoc.getChildren().removeAll(txtFNoVolume);
+							
+							gPaneAjoutDoc.getChildren().removeAll(txtNoPeriodique);
+							gPaneAjoutDoc.getChildren().removeAll(txtFNoPeriodique);
+							
+							gPaneAjoutDoc.getChildren().removeAll(txtDateParution);
+							gPaneAjoutDoc.getChildren().removeAll(txtFDateParution);
+							
+							gPaneAjoutDoc.getChildren().removeAll(txtMotsCledEspaces);
+							gPaneAjoutDoc.getChildren().removeAll(txtFMotsClesEspaces);
+							
+							
+							gPaneAjoutDoc.add(txtNbDisques, 0, 3);
+							gPaneAjoutDoc.add(txtFNbDisques, 1, 3);
+							
+							gPaneAjoutDoc.add(txtRealisateur, 0, 4);
+							gPaneAjoutDoc.add(txtFRealisateur, 1, 4);
+							
+							gPaneAjoutDoc.add(txtDateParution, 0, 5);
+							gPaneAjoutDoc.add(txtFDateParution, 1, 5);
+							
+							gPaneAjoutDoc.add(txtMotsCledEspaces, 0, 6);
+							gPaneAjoutDoc.add(txtFMotsClesEspaces, 1, 6);
+							
+							txtFtitre.requestFocus();
+							
+						}
+					});
+				 rbPeriodique.setOnAction(new EventHandler<ActionEvent>() {
+
+						@Override
+						public void handle(ActionEvent e) {
+							// TODO Auto-generated method stub
+							gPaneAjoutDoc.getChildren().removeAll(txtAuteur);
+							gPaneAjoutDoc.getChildren().removeAll(txtFAuteur);
+							
+							gPaneAjoutDoc.getChildren().removeAll(txtNbDisques);
+							gPaneAjoutDoc.getChildren().removeAll(txtFNbDisques);
+							
+							gPaneAjoutDoc.getChildren().removeAll(txtRealisateur);
+							gPaneAjoutDoc.getChildren().removeAll(txtFRealisateur);
+							
+							gPaneAjoutDoc.getChildren().removeAll(txtDateParution);
+							gPaneAjoutDoc.getChildren().removeAll(txtFDateParution);
+							
+							gPaneAjoutDoc.getChildren().removeAll(txtMotsCledEspaces);
+							gPaneAjoutDoc.getChildren().removeAll(txtFMotsClesEspaces);
+							
+							
+							gPaneAjoutDoc.add(txtNoVolume, 0, 3);
+							gPaneAjoutDoc.add(txtFNoVolume, 1, 3);
+							
+							gPaneAjoutDoc.add(txtNoPeriodique, 0, 4);
+							gPaneAjoutDoc.add(txtFNoPeriodique, 1, 4);
+							
+							gPaneAjoutDoc.add(txtDateParution, 0, 5);
+							gPaneAjoutDoc.add(txtFDateParution, 1, 5);
+							
+							gPaneAjoutDoc.add(txtMotsCledEspaces, 0, 6);
+							gPaneAjoutDoc.add(txtFMotsClesEspaces, 1, 6);
+							
+							txtFtitre.requestFocus();
+						}
+					});
+				 
+				 
 				 
 				stageAjout.setTitle("Ajout d'un document");
 				stageAjout.getIcons().add(new Image("iconAjouterDocument.png"));
+				stageAjout.sizeToScene();
 				stageAjout.setScene(sceneAjout);
 				stageAjout.show();
 				
