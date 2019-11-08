@@ -9,8 +9,12 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Prepose {
+public class Prepose implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String strNumEmploye;
 	private String strMotDePasse;
 	private String strAdresse;
@@ -37,9 +41,9 @@ public class Prepose {
 	public void ajouterAdherent(String strNom,String strPrenom,String strNumeroTelephone) {
 		int intNumeroPrepose=1900;
 		
-		//File fichierAdherents= new File("/Users/r.merzius/Desktop/fichierAdherents.ser");
+		File fichierAdherents= new File("/Users/r.merzius/Desktop/fichierAdherents.ser");
 		//File fichierAdherents= new File("C:/Users/rn.merzius/Downloads/test/fichierAdherents.ser");
-		File fichierAdherents= new File("C:/Users/GabrielMarrero/Downloads/test/fichierAdherents.ser");
+		//File fichierAdherents= new File("C:/Users/GabrielMarrero/Downloads/test/fichierAdherents.ser");
 		//File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
 		int intNumeroAdherent=0; 
 		int intNumAjout=19000;
@@ -47,7 +51,7 @@ public class Prepose {
 		{
 			try {
 
-				// désérialisation des adherents
+				// dï¿½sï¿½rialisation des adherents
 				FileInputStream fichier = new FileInputStream(fichierAdherents);
 
 				ObjectInputStream entree = new ObjectInputStream(fichier);
@@ -75,7 +79,7 @@ public class Prepose {
 		{
 			lstAdherents.add(new Adherent("A"+Integer.toString(intNumAjout),strNom,strPrenom, strNumeroTelephone));		
 		}
-		// Sérialisation des adhérents
+		// SÃ©rialisation des adhÃ©rents
 		try {
 			FileOutputStream fichier = new FileOutputStream(fichierAdherents);
 			ObjectOutputStream sortie = new ObjectOutputStream(fichier);
