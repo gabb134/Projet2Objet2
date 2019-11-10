@@ -22,6 +22,7 @@ public class Prepose implements Serializable {
 	private String strPrenom;
 	private String strTelephone;
 	 static ArrayList<Adherent> lstAdherents=new ArrayList<Adherent>();
+	
 	public Prepose(String strNumEmploye, String strMotDePasse, String strAdresse, String strNom, String strPrenom,
 			String strTelephone) {
 		super();
@@ -32,19 +33,24 @@ public class Prepose implements Serializable {
 		this.strPrenom = strPrenom;
 		this.strTelephone = strTelephone;
 	}
+		public Prepose(){
+			
+		}
 	
 	
 	public void afficherAdherents(Adherent adherent) {
 		
 	}
 	
-	public static void ajouterAdherent(String strNom,String strPrenom,String strNumeroTelephone)  {
-		int intNumeroPrepose=1900;
+
+	@SuppressWarnings("unchecked")
+	public void ajouterAdherent(String strNom,String strPrenom,String strNumeroTelephone)  {
+		//int intNumeroPrepose=1900;
 		
-		File fichierAdherents= new File("/Users/r.merzius/Desktop/fichierAdherents.ser");
+		//File fichierAdherents= new File("/Users/r.merzius/Desktop/fichierAdherents.ser");
 		//File fichierAdherents= new File("C:/Users/rn.merzius/Downloads/test/fichierAdherents.ser");
 		//File fichierAdherents= new File("C:/Users/GabrielMarrero/Downloads/test/fichierAdherents.ser");
-		//File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
+		File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
 		int intNumeroAdherent=0; 
 		int intNumAjout=19000;
 		if(fichierAdherents.exists())
@@ -59,9 +65,11 @@ public class Prepose implements Serializable {
 				lstAdherents = (ArrayList<Adherent>) entree.readObject();
 				fichier.close();
 				entree.close();
- 				intNumeroAdherent=Integer.parseInt(lstAdherents.get(lstAdherents.size()-1).getStrNumeroAdherent().substring(1));
+ 				intNumeroAdherent = Integer.parseInt(lstAdherents.get(lstAdherents.size()-1).getStrNumeroAdherent().substring(1));
 				intNumeroAdherent++;
-				lstAdherents.add(new Adherent("A"+intNumeroAdherent,strNom,strPrenom, strNumeroTelephone));
+				
+				System.out.println(intNumeroAdherent);
+				lstAdherents.add(new Adherent("A"+Integer.toString(intNumeroAdherent),strNom,strPrenom, strNumeroTelephone));
 				
 				
 				
@@ -77,6 +85,7 @@ public class Prepose implements Serializable {
 		
 		else
 		{
+			//System.out.println("allo");
 			lstAdherents.add(new Adherent("A"+Integer.toString(intNumAjout),strNom,strPrenom, strNumeroTelephone));		
 		}
 		// Sérialisation des adhérents
@@ -111,10 +120,17 @@ public class Prepose implements Serializable {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		Prepose prepose = new Prepose();
+		prepose.ajouterAdherent("merzius", "paul", "(111) 111-1111");
+		prepose.ajouterAdherent("marrero", "gab", "(222) 222-2222");
+		//System.out.println(lstAdherents.get(1).getStrNumeroAdherent());
+		//System.out.println(lstAdherents.get(0).getStrNumeroAdherent());
 		
-		ajouterAdherent("merzius", "paul", "(111) 111-1111");
-		System.out.println(lstAdherents.get(1).getStrNumeroAdherent());
-		
+		for(Adherent a:lstAdherents) {
+			System.out.println(a.getStrNumeroAdherent());
+			System.out.println("prenom: "+a.getStrPrenom()+" nom: "+a.getStrNom());
+		}
+			
 
 
 	}

@@ -33,6 +33,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.BorderStroke;
@@ -46,6 +48,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import modele.Adherent;
 import modele.Catalogue;
 import modele.DVD;
 import modele.Document;
@@ -63,6 +66,10 @@ public class InterfacePrepose extends Application {
 	private ObservableList<Livre> donneesLivre;
 	private ObservableList<DVD> donneesDVD;
 	private ObservableList<Periodique> donneesPeriodique;
+	
+	private TableView<Adherent> tableAdherent = new TableView<Adherent>();
+	
+	private ObservableList<Adherent> donneesAdherents;
 
 	private HBox hboxEnBas;
 	private ToggleGroup tGroupEnHaut;
@@ -92,6 +99,11 @@ public class InterfacePrepose extends Application {
 
 	private VBox vboxPartieADroite;
 	private Accordion accordion;
+	
+	private TitledPane paneGestionCatalogue ;
+	private TitledPane paneGestionAdherents;
+	private TitledPane paneGestionPrets ;
+	
 	private VBox vboxCatalogue;
 	private VBox vBoxAhderents;
 	private VBox vboxPrets;
@@ -111,6 +123,48 @@ public class InterfacePrepose extends Application {
 
 	private Button btnDeconnexion;
 
+	private Stage stageAjout;
+	private GridPane gPaneAjoutDoc;
+
+	private Scene sceneAjout;
+	// Scene sceneAjout = new Scene(gPaneAjoutDoc);
+
+	private ToggleGroup tRadioAjout;
+	private RadioButton rbLivre;
+	private RadioButton rbPeriodique;
+	private RadioButton rbDvd;
+	private HBox hboxRadioButton;
+
+	// pour les livres
+	private Text txtTypeDoc;
+	private Text txtTitre;
+	private Text txtAuteur;
+	private Text txtDateParution;
+	private Text txtMotsCledEspaces;
+
+	// pour les dvd
+	private Text txtNbDisques;
+	private Text txtRealisateur;
+
+	private TextField txtFNbDisques;
+	private TextField txtFRealisateur;
+
+	// pour les périodiques
+	private Text txtNoVolume;
+	private Text txtNoPeriodique;
+
+	private TextField txtFNoVolume;
+	private TextField txtFNoPeriodique;
+
+	private TextField txtFtitre;
+	private TextField txtFAuteur;
+	private TextField txtFDateParution;
+	private TextField txtFMotsClesEspaces;
+
+	private Button btnConfirmer;
+	private Button btnAnnulerAjout;
+	private HBox hboxButtonAjout;
+
 	@Override
 	public void start(Stage primaryStage) {
 		// TODO Auto-generated method stub
@@ -121,13 +175,13 @@ public class InterfacePrepose extends Application {
 			 ********************************************************/
 
 			// fichierSerial ="C:/Users/rn.merzius/Downloads/test/fichier.ser";
-			fichierSerial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
-			// fichierSerial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
+			// fichierSerial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
+			fichierSerial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
 			// fichierSerial= "/Users/r.merzius/Desktop/fichier.ser";
 			// FichierDeserial="/Users/r.merzius/Desktop/fichier.ser";
 			// FichierDeserial = "C:/Users/rn.merzius/Downloads/test/fichier.ser";
-			FichierDeserial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
-			// FichierDeserial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
+			// FichierDeserial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
+			FichierDeserial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
 
 			root = new BorderPane();
 			scene = new Scene(root);
@@ -139,7 +193,7 @@ public class InterfacePrepose extends Application {
 			 *************************************************/
 
 			/********************************************
-			 * DANS CHAQUE ONGLET DU CATALOGUE
+			 * DANS CHAQUE ONGLET DU CATALOGUE TABLEVIEW CATALOGUE
 			 **********************************/
 
 			// Pour aller cherche l'objet catalogue serializer
@@ -282,6 +336,11 @@ public class InterfacePrepose extends Application {
 			tablePeriodique.getColumns().addAll(colonneNumDocPeriodique, colonneTitrePeriodique,
 					colonneDatePubPeriodique, colonneDispoPeriodique, colonneNoVolumePeriodique,
 					colonneNoPeriodiquePeriodique);
+			
+			/*****************************
+			 *TABLE VIEW POUR LES ADHERENTS 
+			 ***********************/
+			
 
 			/*****************************
 			 * PARTIE D'EN BAS DU CATALOGUE
@@ -401,11 +460,11 @@ public class InterfacePrepose extends Application {
 			vBoxAhderents.setAlignment(Pos.CENTER);
 			vboxPrets.setAlignment(Pos.CENTER);
 
-			TitledPane paneGestionCatalogue = new TitledPane("Gestion du catalogue",
+			 paneGestionCatalogue = new TitledPane("Gestion du catalogue",
 					new Label("Show all boats available"));
-			TitledPane paneGestionAdherents = new TitledPane("Gestion des adhérents",
+			 paneGestionAdherents = new TitledPane("Gestion des adhérents",
 					new Label("Show all cars available"));
-			TitledPane paneGestionPrets = new TitledPane("Gestion des prêts", new Label("Show all planes available"));
+			 paneGestionPrets = new TitledPane("Gestion des prêts", new Label("Show all planes available"));
 
 			accordion.getPanes().add(paneGestionCatalogue);
 			accordion.getPanes().add(paneGestionAdherents);
@@ -437,6 +496,13 @@ public class InterfacePrepose extends Application {
 			GestionnaireButtonPreposeCatalogue gestionnaireButtonPreposeCatalogue = new GestionnaireButtonPreposeCatalogue();
 			btnAjouterDocumentCatalogue.setOnMouseClicked(gestionnaireButtonPreposeCatalogue);
 			btnSupprimerDocumentCatalogue.setOnMouseClicked(gestionnaireButtonPreposeCatalogue);
+			
+			
+			GestionnaireChangementTables gestionnaireChangementTables = new GestionnaireChangementTables();
+			paneGestionCatalogue.setOnMouseClicked(gestionnaireChangementTables);
+			paneGestionAdherents.setOnMouseClicked(gestionnaireChangementTables);
+			paneGestionPrets.setOnMouseClicked(gestionnaireChangementTables);
+			//btnConfirmer.setOnMouseClicked(gestionnaireButtonPreposeCatalogue);
 
 			/*********************************************
 			 * AFFICHAGE
@@ -514,17 +580,17 @@ public class InterfacePrepose extends Application {
 			// TODO Auto-generated method stub
 			if (e.getSource() == btnAjouterDocumentCatalogue) {
 
-				Stage stageAjout = new Stage();
-				GridPane gPaneAjoutDoc = new GridPane();
+				stageAjout = new Stage();
+				gPaneAjoutDoc = new GridPane();
 
-				Scene sceneAjout = new Scene(gPaneAjoutDoc, 380, 250);
+				sceneAjout = new Scene(gPaneAjoutDoc, 380, 250);
 				// Scene sceneAjout = new Scene(gPaneAjoutDoc);
 
-				ToggleGroup tRadioAjout = new ToggleGroup();
-				RadioButton rbLivre = new RadioButton("Livre");
-				RadioButton rbPeriodique = new RadioButton("Périodique");
-				RadioButton rbDvd = new RadioButton("Dvd");
-				HBox hboxRadioButton = new HBox(5);
+				tRadioAjout = new ToggleGroup();
+				rbLivre = new RadioButton("Livre");
+				rbPeriodique = new RadioButton("Périodique");
+				rbDvd = new RadioButton("Dvd");
+				hboxRadioButton = new HBox(5);
 				hboxRadioButton.getChildren().addAll(rbLivre, rbDvd, rbPeriodique);
 
 				rbLivre.setToggleGroup(tRadioAjout);
@@ -533,30 +599,37 @@ public class InterfacePrepose extends Application {
 				rbLivre.setSelected(true);
 
 				// pour les livres
-				Text txtTypeDoc = new Text("Type de document :");
-				Text txtTitre = new Text("Titre :");
-				Text txtAuteur = new Text("Auteur :");
-				Text txtDateParution = new Text("Date de parution :");
-				Text txtMotsCledEspaces = new Text("Mots clés (séparés par espaces):");
+				txtTypeDoc = new Text("Type de document :");
+				txtTitre = new Text("Titre :");
+				txtAuteur = new Text("Auteur :");
+				txtDateParution = new Text("Date de parution :");
+				txtMotsCledEspaces = new Text("Mots clés (séparés par espaces):");
 
 				// pour les dvd
-				Text txtNbDisques = new Text("Nombre de disques :");
-				Text txtRealisateur = new Text("Réalisateur :");
+				txtNbDisques = new Text("Nombre de disques :");
+				txtRealisateur = new Text("Réalisateur :");
 
-				TextField txtFNbDisques = new TextField();
-				TextField txtFRealisateur = new TextField();
+				txtFNbDisques = new TextField();
+				txtFRealisateur = new TextField();
 
 				// pour les périodiques
-				Text txtNoVolume = new Text("Numéro de volume :");
-				Text txtNoPeriodique = new Text("Numéro de périodique :");
+				txtNoVolume = new Text("Numéro de volume :");
+				txtNoPeriodique = new Text("Numéro de périodique :");
 
-				TextField txtFNoVolume = new TextField();
-				TextField txtFNoPeriodique = new TextField();
+				txtFNoVolume = new TextField();
+				txtFNoPeriodique = new TextField();
 
-				TextField txtFtitre = new TextField();
-				TextField txtFAuteur = new TextField();
-				TextField txtFDateParution = new TextField();
-				TextField txtFMotsClesEspaces = new TextField();
+				txtFtitre = new TextField();
+				txtFAuteur = new TextField();
+				txtFDateParution = new TextField();
+				txtFMotsClesEspaces = new TextField();
+
+				btnConfirmer = new Button("Confimer");
+				btnAnnulerAjout = new Button("Annuler");
+				hboxButtonAjout = new HBox(2);
+				// btnConfirmer.setBackground(new Background(new
+				// BackgroundFill(Color.LIGHTSKYBLUE,new CornerRadii(2),new Insets(0))));
+				hboxButtonAjout.getChildren().addAll(btnConfirmer, btnAnnulerAjout);
 
 				gPaneAjoutDoc.setPadding(new Insets(10));
 				gPaneAjoutDoc.setHgap(5);
@@ -572,8 +645,60 @@ public class InterfacePrepose extends Application {
 				gPaneAjoutDoc.add(txtFDateParution, 1, 4);
 				gPaneAjoutDoc.add(txtMotsCledEspaces, 0, 5);
 				gPaneAjoutDoc.add(txtFMotsClesEspaces, 1, 5);
+				gPaneAjoutDoc.add(hboxButtonAjout, 1, 6);
 
 				txtFtitre.requestFocus();
+
+				btnAnnulerAjout.setOnAction(new EventHandler<ActionEvent>() {
+
+					@Override
+					public void handle(ActionEvent e) {
+						// TODO Auto-generated method stub
+						stageAjout.close();
+					}
+				});
+				btnConfirmer.setOnAction(new EventHandler<ActionEvent>() {
+
+					@Override
+					public void handle(ActionEvent e) {
+						// TODO Auto-generated method stub
+						if (rbLivre.isSelected()) {
+							if (txtFtitre.getText().compareTo("") == 0) {
+								Alert Erreur = new Alert(AlertType.ERROR);
+								Erreur.setTitle("Erreur");
+								Erreur.setHeaderText(null);
+								Erreur.setContentText("Vous n'avez pas tapé le titre");
+								Erreur.showAndWait();
+							}
+							else if (txtFAuteur.getText().compareTo("") == 0) {
+								Alert Erreur = new Alert(AlertType.ERROR);
+								Erreur.setTitle("Erreur");
+								Erreur.setHeaderText(null);
+								Erreur.setContentText("Vous n'avez pas tapé le nom de l'auteur");
+								Erreur.showAndWait();
+							}
+							else if (txtFDateParution.getText().compareTo("") == 0) {
+								Alert Erreur = new Alert(AlertType.ERROR);
+								Erreur.setTitle("Erreur");
+								Erreur.setHeaderText(null);
+								Erreur.setContentText("Vous n'avez pas tapé la date de parution");
+								Erreur.showAndWait();
+							}
+							else if (txtFMotsClesEspaces.getText().compareTo("") == 0) {
+								Alert Erreur = new Alert(AlertType.ERROR);
+								Erreur.setTitle("Erreur");
+								Erreur.setHeaderText(null);
+								Erreur.setContentText("Vous n'avez pas tapé le mot clé");
+								Erreur.showAndWait();
+							}
+							else {// ajout d'un document
+								
+							}
+							
+						}
+
+					}
+				});
 
 				/******************************
 				 * GEstion radio button dans ajouter document
@@ -602,6 +727,8 @@ public class InterfacePrepose extends Application {
 						gPaneAjoutDoc.getChildren().removeAll(txtMotsCledEspaces);
 						gPaneAjoutDoc.getChildren().removeAll(txtFMotsClesEspaces);
 
+						gPaneAjoutDoc.getChildren().removeAll(hboxButtonAjout);
+
 						gPaneAjoutDoc.add(txtAuteur, 0, 3);
 						gPaneAjoutDoc.add(txtFAuteur, 1, 3);
 
@@ -609,7 +736,11 @@ public class InterfacePrepose extends Application {
 						gPaneAjoutDoc.add(txtFDateParution, 1, 4);
 						gPaneAjoutDoc.add(txtMotsCledEspaces, 0, 5);
 						gPaneAjoutDoc.add(txtFMotsClesEspaces, 1, 5);
-
+						gPaneAjoutDoc.add(hboxButtonAjout, 1, 6);
+						txtFtitre.clear();
+						txtFAuteur.clear();
+						txtFDateParution.clear();
+						txtFMotsClesEspaces.clear();
 						txtFtitre.requestFocus();
 
 					}
@@ -635,6 +766,8 @@ public class InterfacePrepose extends Application {
 						gPaneAjoutDoc.getChildren().removeAll(txtMotsCledEspaces);
 						gPaneAjoutDoc.getChildren().removeAll(txtFMotsClesEspaces);
 
+						gPaneAjoutDoc.getChildren().removeAll(hboxButtonAjout);
+
 						gPaneAjoutDoc.add(txtNbDisques, 0, 3);
 						gPaneAjoutDoc.add(txtFNbDisques, 1, 3);
 
@@ -647,6 +780,10 @@ public class InterfacePrepose extends Application {
 						gPaneAjoutDoc.add(txtMotsCledEspaces, 0, 6);
 						gPaneAjoutDoc.add(txtFMotsClesEspaces, 1, 6);
 
+						gPaneAjoutDoc.add(hboxButtonAjout, 1, 7);
+						txtFtitre.clear();
+						txtFDateParution.clear();
+						txtFMotsClesEspaces.clear();
 						txtFtitre.requestFocus();
 
 					}
@@ -671,6 +808,8 @@ public class InterfacePrepose extends Application {
 						gPaneAjoutDoc.getChildren().removeAll(txtMotsCledEspaces);
 						gPaneAjoutDoc.getChildren().removeAll(txtFMotsClesEspaces);
 
+						gPaneAjoutDoc.getChildren().removeAll(hboxButtonAjout);
+
 						gPaneAjoutDoc.add(txtNoVolume, 0, 3);
 						gPaneAjoutDoc.add(txtFNoVolume, 1, 3);
 
@@ -683,6 +822,11 @@ public class InterfacePrepose extends Application {
 						gPaneAjoutDoc.add(txtMotsCledEspaces, 0, 6);
 						gPaneAjoutDoc.add(txtFMotsClesEspaces, 1, 6);
 
+						gPaneAjoutDoc.add(hboxButtonAjout, 1, 7);
+						
+						txtFtitre.clear();
+						txtFDateParution.clear();
+						txtFMotsClesEspaces.clear();
 						txtFtitre.requestFocus();
 					}
 				});
@@ -753,7 +897,7 @@ public class InterfacePrepose extends Application {
 						Alert Erreur = new Alert(AlertType.ERROR);
 						Erreur.setTitle("Erreur");
 						Erreur.setHeaderText(null);
-						Erreur.setContentText("Vous devez sélectionner le document à supprimer klk.");
+						Erreur.setContentText("Vous devez sélectionner le document à supprimer.");
 						Erreur.showAndWait();
 
 					} else {
@@ -765,6 +909,44 @@ public class InterfacePrepose extends Application {
 				}
 
 			}
+
+		}
+
+	}
+	private class GestionnaireChangementTables implements EventHandler<MouseEvent> {
+
+		@Override
+		public void handle(MouseEvent e) {
+			// TODO Auto-generated method stub
+			if(e.getSource() == paneGestionCatalogue) {
+				System.out.println("catalogue");
+				
+				root.setCenter(tabPane);
+				
+			}else if(e.getSource()==paneGestionAdherents) {
+				System.out.println("andherent");
+				root.getChildren().removeAll(tabPane);
+				root.getChildren().removeAll(hboxEnBas);
+				//mettre le tableview des adherents
+				
+				
+				
+			}else if(e.getSource()==paneGestionPrets) {
+				System.out.println("prets");
+				root.setCenter(tabPane);
+			}
+			
+			
+			
+		}
+		
+	}
+
+	private class GestionnaireButtonPreposeAherent implements EventHandler<MouseEvent> {
+
+		@Override
+		public void handle(MouseEvent e) {
+			// TODO Auto-generated method stub
 
 		}
 
