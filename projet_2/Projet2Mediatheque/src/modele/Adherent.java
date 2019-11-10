@@ -1,6 +1,12 @@
 package modele;
 
-public class Adherent {
+import java.io.Serializable;
+
+public class Adherent implements Serializable {
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 private String strNom;
 private String strPrenom;
 private String strNumeroTelephone;

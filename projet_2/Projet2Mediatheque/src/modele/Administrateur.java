@@ -16,10 +16,10 @@ public void AjouterPrepose(String strNom, String strPrenom, String strAdresse, S
 {
 	//int intNumeroPrepose=1900;
 	
-	//File fichierPreposes= new File("/Users/r.merzius/Desktop/fichierPreposes.ser");
+	File fichierPreposes= new File("/Users/r.merzius/Desktop/fichierPreposes.ser");
 	//File fichierPreposes= new File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
 	//File fichierPreposes= new File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
-	File fichierPreposes= new File("C:/Users/cg.marrero/Downloads/test/fichierPreposes.ser");
+	//File fichierPreposes= new File("C:/Users/cg.marrero/Downloads/test/fichierPreposes.ser");
 	int intNumeroEmploye=0; 
 	int intNumAjout=19000;
 	if(fichierPreposes.exists())
@@ -82,7 +82,7 @@ public static ArrayList<Prepose> getlstPreposes()
 		// TODO Auto-generated method stub
 		Administrateur admin=new Administrateur();
 		admin.AjouterPrepose("merzius", "paul", "inconnue", "(111) 111-1111", "Password1");
-		System.out.println(Administrateur.lstPreposes.get(0).getNoEmploye());
+		System.out.println(Administrateur.lstPreposes.get(1).getNoEmploye());
 		
 
 
