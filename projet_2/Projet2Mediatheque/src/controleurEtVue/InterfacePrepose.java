@@ -28,6 +28,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -51,8 +52,8 @@ import modele.Document;
 import modele.Livre;
 import modele.Periodique;
 
-public class InterfacePrepose extends Application{
-	
+public class InterfacePrepose extends Application {
+
 	private TableView<Document> tableCatalogue = new TableView<Document>();
 	private TableView<Livre> tableLivre = new TableView<Livre>();
 	private TableView<DVD> tableDVD = new TableView<DVD>();
@@ -62,7 +63,7 @@ public class InterfacePrepose extends Application{
 	private ObservableList<Livre> donneesLivre;
 	private ObservableList<DVD> donneesDVD;
 	private ObservableList<Periodique> donneesPeriodique;
-	
+
 	private HBox hboxEnBas;
 	private ToggleGroup tGroupEnHaut;
 	private Text txtRechercherPar;
@@ -71,7 +72,7 @@ public class InterfacePrepose extends Application{
 	private TextField txtFRechercherPar;
 	private Button btnEffacer;
 	private Button btnQuitter;
-	
+
 	private Tab tabCatalogue;
 
 	private Tab tabLivres;
@@ -79,65 +80,68 @@ public class InterfacePrepose extends Application{
 	private Tab tabDVD;
 
 	private Tab tabPeriodique;
-	
+
 	private String fichierSerial = "";
 	private String FichierDeserial = "";
 
+	private BorderPane root;
+	private Scene scene;
+	private TabPane tabPane;
 
-	private BorderPane root ;
-	private Scene scene ;
-	private TabPane tabPane ;
-	
-	
 	private BorderPane bPaneDroite;
-	
-	private VBox vboxPartieADroite ;
-	private Accordion accordion ;
-	private VBox vboxCatalogue ;
-	private VBox vBoxAhderents ;
+
+	private VBox vboxPartieADroite;
+	private Accordion accordion;
+	private VBox vboxCatalogue;
+	private VBox vBoxAhderents;
 	private VBox vboxPrets;
-	
-	private Button btnAjouterDocumentCatalogue ;
-	private Button btnSupprimerDocumentCatalogue ;
-	
-	
-	private Button btnajouterAherent ;
-	private Button btnModifierAdherent ;
-	private Button btnSupprimerAdherent ;
-	private Button btnPayerSoldeAdhernent ;
-	
-	private Button btnInscrireUnPret ;
+
+	private Button btnAjouterDocumentCatalogue;
+	private Button btnSupprimerDocumentCatalogue;
+
+	private Button btnajouterAherent;
+	private Button btnModifierAdherent;
+	private Button btnSupprimerAdherent;
+	private Button btnPayerSoldeAdhernent;
+
+	private Button btnInscrireUnPret;
 	private Button btnIscrireUnRetour;
-	
+
 	private HBox hboxButtonDeconnexion;
-	
-	private Button btnDeconnexion ;
+
+	private Button btnDeconnexion;
 
 	@Override
 	public void start(Stage primaryStage) {
 		// TODO Auto-generated method stub
-		
+
 		try {
-			/********************************************* FICHIERS SERIALIZABLES********************************************************/
+			/*********************************************
+			 * FICHIERS SERIALIZABLES
+			 ********************************************************/
 
 			// fichierSerial ="C:/Users/rn.merzius/Downloads/test/fichier.ser";
-			// fichierSerial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
-			fichierSerial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
+			fichierSerial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
+			// fichierSerial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
 			// fichierSerial= "/Users/r.merzius/Desktop/fichier.ser";
 			// FichierDeserial="/Users/r.merzius/Desktop/fichier.ser";
 			// FichierDeserial = "C:/Users/rn.merzius/Downloads/test/fichier.ser";
-			 //FichierDeserial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
-			FichierDeserial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
-			
-			 root = new BorderPane();
-			 scene = new Scene(root);
-			 tabPane = new TabPane();
-			 bPaneDroite = new BorderPane();
-			
-			/******************************************** CATALOGUE PRÉPOSÉ*************************************************/
-			
-			/******************************************** DANS CHAQUE ONGLET DU CATALOGUE **********************************/
-			
+			FichierDeserial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
+			// FichierDeserial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
+
+			root = new BorderPane();
+			scene = new Scene(root);
+			tabPane = new TabPane();
+			bPaneDroite = new BorderPane();
+
+			/********************************************
+			 * CATALOGUE PRÉPOSÉ
+			 *************************************************/
+
+			/********************************************
+			 * DANS CHAQUE ONGLET DU CATALOGUE
+			 **********************************/
+
 			// Pour aller cherche l'objet catalogue serializer
 			SerializationCatalogue();
 			Catalogue catalogue = DeserialisationCatalogue();
@@ -173,7 +177,8 @@ public class InterfacePrepose extends Application{
 			// Creation des colonnes dans l'onglet Livres
 			TableColumn<Livre, String> colonneNumDocLivre = new TableColumn<Livre, String>("Numéro Document");
 			TableColumn<Livre, String> colonneTitreLivre = new TableColumn<Livre, String>("Titre");
-			TableColumn<Livre, LocalDate> colonneDatePubLivre = new TableColumn<Livre, LocalDate>("Date de publication");
+			TableColumn<Livre, LocalDate> colonneDatePubLivre = new TableColumn<Livre, LocalDate>(
+					"Date de publication");
 			TableColumn<Livre, String> colonneDispoLivre = new TableColumn<Livre, String>("Disponible");
 			TableColumn<Livre, String> colonneAuteurLivre = new TableColumn<Livre, String>("auteur");
 
@@ -270,15 +275,17 @@ public class InterfacePrepose extends Application{
 
 			tableCatalogue.getColumns().addAll(colonneNumDocCatalogue, colonneTitreCatalogue, colonneDatePubCatalogue,
 					colonneDispoCatalogue);
-			tableLivre.getColumns().addAll(colonneNumDocLivre, colonneTitreLivre, colonneDatePubLivre, colonneDispoLivre,
-					colonneAuteurLivre);
+			tableLivre.getColumns().addAll(colonneNumDocLivre, colonneTitreLivre, colonneDatePubLivre,
+					colonneDispoLivre, colonneAuteurLivre);
 			tableDVD.getColumns().addAll(colonneNumDocDVD, colonneTitreDVD, colonneDatePubDVD, colonneDispoDVD,
 					colonneNbDisquesDVD, colonneRealisateurDVD);
-			tablePeriodique.getColumns().addAll(colonneNumDocPeriodique, colonneTitrePeriodique, colonneDatePubPeriodique,
-					colonneDispoPeriodique, colonneNoVolumePeriodique, colonneNoPeriodiquePeriodique);
-			
-			
-			/***************************** PARTIE D'EN BAS DU CATALOGUE***********************/
+			tablePeriodique.getColumns().addAll(colonneNumDocPeriodique, colonneTitrePeriodique,
+					colonneDatePubPeriodique, colonneDispoPeriodique, colonneNoVolumePeriodique,
+					colonneNoPeriodiquePeriodique);
+
+			/*****************************
+			 * PARTIE D'EN BAS DU CATALOGUE
+			 ***********************/
 			hboxEnBas = new HBox(10);
 			hboxEnBas.setPadding(new Insets(10));
 			tGroupEnHaut = new ToggleGroup();
@@ -295,8 +302,11 @@ public class InterfacePrepose extends Application{
 			hboxEnBas.getChildren().addAll(txtRechercherPar, rbAuteurRealisateur, rbMotsCles, txtFRechercherPar,
 					btnEffacer);
 			root.setBottom(hboxEnBas);
-			
-			/********************************************* DANS LE CATALOGUE(GERE TOUT CE QUI EST DANS L'INTERFACE DEU CATALOGUE DU PRÉPOSÉ)********************************************************/
+
+			/*********************************************
+			 * DANS LE CATALOGUE(GERE TOUT CE QUI EST DANS L'INTERFACE DEU CATALOGUE DU
+			 * PRÉPOSÉ)
+			 ********************************************************/
 			// premier onglet (Catalogue)
 			tabCatalogue = new Tab();
 			tabCatalogue.setClosable(false);
@@ -320,56 +330,54 @@ public class InterfacePrepose extends Application{
 			tabPeriodique.setClosable(false);
 			tabPeriodique.setText("Périodiques");
 			tabPeriodique.setGraphic(new ImageView(new Image("icon-periodique.png")));
-			
+
 			tabCatalogue.setContent(tableCatalogue);
 			tabLivres.setContent(tableLivre);
 			tabDVD.setContent(tableDVD);
 			tabPeriodique.setContent(tablePeriodique);
-			
-			
-			
-		
-			/****************************************DANS LE CATALOGUE PARTIE À DROITE(GESTION DES ADHERENT, CATALOGUE ET PRETS)  ******************************************************/
-			
-			//bPaneDroite.setPadding(new Insets(10));
-			
-			 vboxPartieADroite = new VBox(5);
-			 accordion = new Accordion();
-			 vboxCatalogue = new VBox(15);
-			 vBoxAhderents = new VBox(15);
-			 vboxPrets = new VBox(15);
-			
-			 btnAjouterDocumentCatalogue = new Button("Ajouter un document");
-			 btnSupprimerDocumentCatalogue = new Button("Supprimer un document");
-			
-			
-			 btnajouterAherent = new Button("Ajouter un adhérent");
-			 btnModifierAdherent = new Button("Modifier un adhérent");
-			 btnSupprimerAdherent = new Button("Supprimer un adhérent");
-			 btnPayerSoldeAdhernent = new Button("Payer solde adhérent");
-			
-			 btnInscrireUnPret = new Button("Inscrire un prêt");
-			 btnIscrireUnRetour = new Button("Inscrire un retour");
-			
-			 hboxButtonDeconnexion = new HBox();
-			
-			 btnDeconnexion = new Button("Deconnexion");
+
+			/****************************************
+			 * DANS LE CATALOGUE PARTIE À DROITE(GESTION DES ADHERENT, CATALOGUE ET PRETS)
+			 ******************************************************/
+
+			// bPaneDroite.setPadding(new Insets(10));
+
+			vboxPartieADroite = new VBox(5);
+			accordion = new Accordion();
+			vboxCatalogue = new VBox(15);
+			vBoxAhderents = new VBox(15);
+			vboxPrets = new VBox(15);
+
+			btnAjouterDocumentCatalogue = new Button("Ajouter un document");
+			btnSupprimerDocumentCatalogue = new Button("Supprimer un document");
+
+			btnajouterAherent = new Button("Ajouter un adhérent");
+			btnModifierAdherent = new Button("Modifier un adhérent");
+			btnSupprimerAdherent = new Button("Supprimer un adhérent");
+			btnPayerSoldeAdhernent = new Button("Payer solde adhérent");
+
+			btnInscrireUnPret = new Button("Inscrire un prêt");
+			btnIscrireUnRetour = new Button("Inscrire un retour");
+
+			hboxButtonDeconnexion = new HBox();
+
+			btnDeconnexion = new Button("Deconnexion");
 			hboxButtonDeconnexion.getChildren().add(btnDeconnexion);
 			hboxButtonDeconnexion.setAlignment(Pos.CENTER);
-			
+
 			btnAjouterDocumentCatalogue.setPrefWidth(180);
 			btnSupprimerDocumentCatalogue.setPrefWidth(180);
-			
+
 			btnajouterAherent.setPrefWidth(180);
 			btnModifierAdherent.setPrefWidth(180);
 			btnSupprimerAdherent.setPrefWidth(180);
 			btnPayerSoldeAdhernent.setPrefWidth(180);
-			
+
 			btnInscrireUnPret.setPrefWidth(180);
 			btnIscrireUnRetour.setPrefWidth(180);
-			
+
 			btnDeconnexion.setPrefWidth(150);
-			
+
 			btnDeconnexion.setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override
@@ -380,70 +388,77 @@ public class InterfacePrepose extends Application{
 					stageConnexionMediatheque.initModality(Modality.APPLICATION_MODAL);
 					Mediatheque meditheque = new Mediatheque();
 					meditheque.start(stageConnexionMediatheque);
-					
+
 				}
 			});
-			
-			vboxCatalogue.getChildren().addAll(btnAjouterDocumentCatalogue,btnSupprimerDocumentCatalogue);
-			vBoxAhderents.getChildren().addAll(btnajouterAherent,btnModifierAdherent,btnSupprimerAdherent,btnPayerSoldeAdhernent);
-			vboxPrets.getChildren().addAll(btnInscrireUnPret,btnIscrireUnRetour);
-			
+
+			vboxCatalogue.getChildren().addAll(btnAjouterDocumentCatalogue, btnSupprimerDocumentCatalogue);
+			vBoxAhderents.getChildren().addAll(btnajouterAherent, btnModifierAdherent, btnSupprimerAdherent,
+					btnPayerSoldeAdhernent);
+			vboxPrets.getChildren().addAll(btnInscrireUnPret, btnIscrireUnRetour);
+
 			vboxCatalogue.setAlignment(Pos.CENTER);
 			vBoxAhderents.setAlignment(Pos.CENTER);
 			vboxPrets.setAlignment(Pos.CENTER);
-			
 
-	        TitledPane paneGestionCatalogue = new TitledPane("Gestion du catalogue" , new Label("Show all boats available"));
-	        TitledPane paneGestionAdherents = new TitledPane("Gestion des adhérents"  , new Label("Show all cars available"));
-	        TitledPane paneGestionPrets = new TitledPane("Gestion des prêts", new Label("Show all planes available"));
+			TitledPane paneGestionCatalogue = new TitledPane("Gestion du catalogue",
+					new Label("Show all boats available"));
+			TitledPane paneGestionAdherents = new TitledPane("Gestion des adhérents",
+					new Label("Show all cars available"));
+			TitledPane paneGestionPrets = new TitledPane("Gestion des prêts", new Label("Show all planes available"));
 
-	        accordion.getPanes().add(paneGestionCatalogue);
-	        accordion.getPanes().add(paneGestionAdherents);
-	        accordion.getPanes().add(paneGestionPrets);
-	        
-	        ImageView imageCatalogue = new ImageView(new Image("icon-collection.png"));
-	        ImageView imageAdherent = new ImageView(new Image("Adherentss.png"));
-	        ImageView imagePrets = new ImageView(new Image("LibraryCatalogue.png"));
-	        
-	        paneGestionCatalogue.setGraphic(imageCatalogue);
-	        paneGestionAdherents.setGraphic(imageAdherent);
-	        paneGestionPrets.setGraphic(imagePrets);
-	        
-	        paneGestionCatalogue.setContent(vboxCatalogue);
-	        paneGestionAdherents.setContent(vBoxAhderents);
-	        paneGestionPrets.setContent(vboxPrets);
-	        
-	        accordion.setPrefWidth(180);
+			accordion.getPanes().add(paneGestionCatalogue);
+			accordion.getPanes().add(paneGestionAdherents);
+			accordion.getPanes().add(paneGestionPrets);
 
-	        bPaneDroite.setTop(accordion);
-	       
-			
-	        vboxPartieADroite.getChildren().addAll(bPaneDroite,hboxButtonDeconnexion);
+			ImageView imageCatalogue = new ImageView(new Image("icon-collection.png"));
+			ImageView imageAdherent = new ImageView(new Image("Adherentss.png"));
+			ImageView imagePrets = new ImageView(new Image("LibraryCatalogue.png"));
+
+			paneGestionCatalogue.setGraphic(imageCatalogue);
+			paneGestionAdherents.setGraphic(imageAdherent);
+			paneGestionPrets.setGraphic(imagePrets);
+
+			paneGestionCatalogue.setContent(vboxCatalogue);
+			paneGestionAdherents.setContent(vBoxAhderents);
+			paneGestionPrets.setContent(vboxPrets);
+
+			accordion.setPrefWidth(180);
+
+			bPaneDroite.setTop(accordion);
+
+			vboxPartieADroite.getChildren().addAll(bPaneDroite, hboxButtonDeconnexion);
 			root.setRight(vboxPartieADroite);
-			
-			/********************************************* GESTION DES EVENEMENT DES BUTTON *******************************/
-			
-			GestionnaireButtonPrepose gestionnaireButton = new GestionnaireButtonPrepose();
-			btnAjouterDocumentCatalogue.setOnMouseClicked(gestionnaireButton);
-			
-			/********************************************* AFFICHAGE********************************************************/
-			
+
+			/*********************************************
+			 * GESTION DES EVENEMENT DES BUTTON
+			 *******************************/
+
+			GestionnaireButtonPreposeCatalogue gestionnaireButtonPreposeCatalogue = new GestionnaireButtonPreposeCatalogue();
+			btnAjouterDocumentCatalogue.setOnMouseClicked(gestionnaireButtonPreposeCatalogue);
+			btnSupprimerDocumentCatalogue.setOnMouseClicked(gestionnaireButtonPreposeCatalogue);
+
+			/*********************************************
+			 * AFFICHAGE
+			 ********************************************************/
+
 			tabPane.getTabs().addAll(tabCatalogue, tabLivres, tabDVD, tabPeriodique);
 			root.setCenter(tabPane);
-			
+
 			primaryStage.getIcons().add(new Image("booklibrary.png"));
 			primaryStage.setTitle("Médiathèque(Préposé)");
 			primaryStage.sizeToScene();
 			primaryStage.setResizable(false);
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			
-		} catch(Exception e ) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-		public void SerializationCatalogue() { // Methode qui permet d'aller chercher l'objet Catalogue pour le serializer
+
+	public void SerializationCatalogue() { // Methode qui permet d'aller chercher l'objet Catalogue pour le serializer
 		Catalogue catalogueSerialisation = Catalogue.getInstance("Livres.txt", "Periodiques.txt", "DVD.txt");
 
 		try {
@@ -491,227 +506,273 @@ public class InterfacePrepose extends Application{
 		return catalogueDeserializer;
 
 	}
-	private class GestionnaireButtonPrepose implements EventHandler<MouseEvent> {
+
+	private class GestionnaireButtonPreposeCatalogue implements EventHandler<MouseEvent> {
 
 		@Override
 		public void handle(MouseEvent e) {
 			// TODO Auto-generated method stub
-			if(e.getSource() == btnAjouterDocumentCatalogue) {
-				
-				
-				 Stage stageAjout = new Stage();
-				 GridPane gPaneAjoutDoc = new GridPane();
-					
-				 Scene sceneAjout = new Scene(gPaneAjoutDoc,380,250);
-				 //Scene sceneAjout = new Scene(gPaneAjoutDoc);
-				 
-				 ToggleGroup tRadioAjout = new ToggleGroup();
-				 RadioButton rbLivre = new RadioButton("Livre");
-				 RadioButton rbPeriodique = new RadioButton("Périodique");
-				 RadioButton rbDvd = new RadioButton("Dvd");
-				 HBox hboxRadioButton = new HBox(5);
-				 hboxRadioButton.getChildren().addAll(rbLivre,rbDvd,rbPeriodique);
-				 
-				 rbLivre.setToggleGroup(tRadioAjout);
-				 rbPeriodique.setToggleGroup(tRadioAjout);
-				 rbDvd.setToggleGroup(tRadioAjout);
-				 rbLivre.setSelected(true);
-				 
-				 
-				 
-				 //pour les livres
-				 Text txtTypeDoc = new Text("Type de document :");
-				 Text txtTitre = new Text("Titre :");
-				 Text txtAuteur = new Text("Auteur :");
-				 Text txtDateParution = new Text("Date de parution :");
-				 Text txtMotsCledEspaces = new Text("Mots clés (séparés par espaces):");
-				 
-				 //pour les dvd
-				 Text txtNbDisques = new Text("Nombre de disques :");
-				 Text txtRealisateur = new Text("Réalisateur :");
-				 
-				 TextField txtFNbDisques = new TextField();
-				 TextField txtFRealisateur = new TextField();
-				 
-				 //pour les périodiques
-				 Text txtNoVolume = new Text("Numéro de volume :");
-				 Text txtNoPeriodique = new Text("Numéro de périodique :");
-				 
-				 TextField txtFNoVolume = new TextField();
-				 TextField txtFNoPeriodique = new TextField();
-				 
-				 
-				 
-				 
-				 
-				 TextField txtFtitre = new TextField();
-				 TextField txtFAuteur = new TextField();
-				 TextField txtFDateParution= new TextField();
-				 TextField txtFMotsClesEspaces = new TextField();
-				 
-				 gPaneAjoutDoc.setPadding(new Insets(10));
-				 gPaneAjoutDoc.setHgap(5);
-				 gPaneAjoutDoc.setVgap(10);
-				 
-				 gPaneAjoutDoc.add(txtTypeDoc, 0, 0);
-				 gPaneAjoutDoc.add(hboxRadioButton, 1, 0);
-				 gPaneAjoutDoc.add(txtTitre, 0, 2);
-				 gPaneAjoutDoc.add(txtFtitre, 1, 2);
-				 gPaneAjoutDoc.add(txtAuteur, 0, 3);
-				 gPaneAjoutDoc.add(txtFAuteur, 1, 3);
-				 gPaneAjoutDoc.add(txtDateParution, 0, 4);
-				 gPaneAjoutDoc.add(txtFDateParution, 1, 4);
-				 gPaneAjoutDoc.add(txtMotsCledEspaces, 0, 5);
-				 gPaneAjoutDoc.add(txtFMotsClesEspaces, 1, 5);
-				 
-				 txtFtitre.requestFocus();
-				 
-				 
-				 /******************************GEstion radio button dans ajouter document *************************/
-				 rbLivre.setOnAction(new EventHandler<ActionEvent>() {
+			if (e.getSource() == btnAjouterDocumentCatalogue) {
+
+				Stage stageAjout = new Stage();
+				GridPane gPaneAjoutDoc = new GridPane();
+
+				Scene sceneAjout = new Scene(gPaneAjoutDoc, 380, 250);
+				// Scene sceneAjout = new Scene(gPaneAjoutDoc);
+
+				ToggleGroup tRadioAjout = new ToggleGroup();
+				RadioButton rbLivre = new RadioButton("Livre");
+				RadioButton rbPeriodique = new RadioButton("Périodique");
+				RadioButton rbDvd = new RadioButton("Dvd");
+				HBox hboxRadioButton = new HBox(5);
+				hboxRadioButton.getChildren().addAll(rbLivre, rbDvd, rbPeriodique);
+
+				rbLivre.setToggleGroup(tRadioAjout);
+				rbPeriodique.setToggleGroup(tRadioAjout);
+				rbDvd.setToggleGroup(tRadioAjout);
+				rbLivre.setSelected(true);
+
+				// pour les livres
+				Text txtTypeDoc = new Text("Type de document :");
+				Text txtTitre = new Text("Titre :");
+				Text txtAuteur = new Text("Auteur :");
+				Text txtDateParution = new Text("Date de parution :");
+				Text txtMotsCledEspaces = new Text("Mots clés (séparés par espaces):");
+
+				// pour les dvd
+				Text txtNbDisques = new Text("Nombre de disques :");
+				Text txtRealisateur = new Text("Réalisateur :");
+
+				TextField txtFNbDisques = new TextField();
+				TextField txtFRealisateur = new TextField();
+
+				// pour les périodiques
+				Text txtNoVolume = new Text("Numéro de volume :");
+				Text txtNoPeriodique = new Text("Numéro de périodique :");
+
+				TextField txtFNoVolume = new TextField();
+				TextField txtFNoPeriodique = new TextField();
+
+				TextField txtFtitre = new TextField();
+				TextField txtFAuteur = new TextField();
+				TextField txtFDateParution = new TextField();
+				TextField txtFMotsClesEspaces = new TextField();
+
+				gPaneAjoutDoc.setPadding(new Insets(10));
+				gPaneAjoutDoc.setHgap(5);
+				gPaneAjoutDoc.setVgap(10);
+
+				gPaneAjoutDoc.add(txtTypeDoc, 0, 0);
+				gPaneAjoutDoc.add(hboxRadioButton, 1, 0);
+				gPaneAjoutDoc.add(txtTitre, 0, 2);
+				gPaneAjoutDoc.add(txtFtitre, 1, 2);
+				gPaneAjoutDoc.add(txtAuteur, 0, 3);
+				gPaneAjoutDoc.add(txtFAuteur, 1, 3);
+				gPaneAjoutDoc.add(txtDateParution, 0, 4);
+				gPaneAjoutDoc.add(txtFDateParution, 1, 4);
+				gPaneAjoutDoc.add(txtMotsCledEspaces, 0, 5);
+				gPaneAjoutDoc.add(txtFMotsClesEspaces, 1, 5);
+
+				txtFtitre.requestFocus();
+
+				/******************************
+				 * GEstion radio button dans ajouter document
+				 *************************/
+				rbLivre.setOnAction(new EventHandler<ActionEvent>() {
 
 					@Override
 					public void handle(ActionEvent e) {
 						// TODO Auto-generated method stub
-						
+
 						gPaneAjoutDoc.getChildren().removeAll(txtNoVolume);
 						gPaneAjoutDoc.getChildren().removeAll(txtFNoVolume);
-						
+
 						gPaneAjoutDoc.getChildren().removeAll(txtNoPeriodique);
 						gPaneAjoutDoc.getChildren().removeAll(txtFNoPeriodique);
-						
-						
+
 						gPaneAjoutDoc.getChildren().removeAll(txtNbDisques);
 						gPaneAjoutDoc.getChildren().removeAll(txtFNbDisques);
-						
+
 						gPaneAjoutDoc.getChildren().removeAll(txtRealisateur);
 						gPaneAjoutDoc.getChildren().removeAll(txtFRealisateur);
-						
+
 						gPaneAjoutDoc.getChildren().removeAll(txtDateParution);
 						gPaneAjoutDoc.getChildren().removeAll(txtFDateParution);
-						
+
 						gPaneAjoutDoc.getChildren().removeAll(txtMotsCledEspaces);
 						gPaneAjoutDoc.getChildren().removeAll(txtFMotsClesEspaces);
-						
-						
-						
-						 
+
 						gPaneAjoutDoc.add(txtAuteur, 0, 3);
 						gPaneAjoutDoc.add(txtFAuteur, 1, 3);
-						
-						 gPaneAjoutDoc.add(txtDateParution, 0, 4);
-						 gPaneAjoutDoc.add(txtFDateParution, 1, 4);
-						 gPaneAjoutDoc.add(txtMotsCledEspaces, 0, 5);
-						 gPaneAjoutDoc.add(txtFMotsClesEspaces, 1, 5);
-						
-						 txtFtitre.requestFocus();
-						
+
+						gPaneAjoutDoc.add(txtDateParution, 0, 4);
+						gPaneAjoutDoc.add(txtFDateParution, 1, 4);
+						gPaneAjoutDoc.add(txtMotsCledEspaces, 0, 5);
+						gPaneAjoutDoc.add(txtFMotsClesEspaces, 1, 5);
+
+						txtFtitre.requestFocus();
+
 					}
 				});
-				 rbDvd.setOnAction(new EventHandler<ActionEvent>() {
+				rbDvd.setOnAction(new EventHandler<ActionEvent>() {
 
-						@Override
-						public void handle(ActionEvent e) {
-							// TODO Auto-generated method stub
-							
-							gPaneAjoutDoc.getChildren().removeAll(txtAuteur);
-							gPaneAjoutDoc.getChildren().removeAll(txtFAuteur);
-							
-							gPaneAjoutDoc.getChildren().removeAll(txtNoVolume);
-							gPaneAjoutDoc.getChildren().removeAll(txtFNoVolume);
-							
-							gPaneAjoutDoc.getChildren().removeAll(txtNoPeriodique);
-							gPaneAjoutDoc.getChildren().removeAll(txtFNoPeriodique);
-							
-							gPaneAjoutDoc.getChildren().removeAll(txtDateParution);
-							gPaneAjoutDoc.getChildren().removeAll(txtFDateParution);
-							
-							gPaneAjoutDoc.getChildren().removeAll(txtMotsCledEspaces);
-							gPaneAjoutDoc.getChildren().removeAll(txtFMotsClesEspaces);
-							
-							
-							gPaneAjoutDoc.add(txtNbDisques, 0, 3);
-							gPaneAjoutDoc.add(txtFNbDisques, 1, 3);
-							
-							gPaneAjoutDoc.add(txtRealisateur, 0, 4);
-							gPaneAjoutDoc.add(txtFRealisateur, 1, 4);
-							
-							gPaneAjoutDoc.add(txtDateParution, 0, 5);
-							gPaneAjoutDoc.add(txtFDateParution, 1, 5);
-							
-							gPaneAjoutDoc.add(txtMotsCledEspaces, 0, 6);
-							gPaneAjoutDoc.add(txtFMotsClesEspaces, 1, 6);
-							
-							txtFtitre.requestFocus();
-							
-						}
-					});
-				 rbPeriodique.setOnAction(new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(ActionEvent e) {
+						// TODO Auto-generated method stub
 
-						@Override
-						public void handle(ActionEvent e) {
-							// TODO Auto-generated method stub
-							gPaneAjoutDoc.getChildren().removeAll(txtAuteur);
-							gPaneAjoutDoc.getChildren().removeAll(txtFAuteur);
-							
-							gPaneAjoutDoc.getChildren().removeAll(txtNbDisques);
-							gPaneAjoutDoc.getChildren().removeAll(txtFNbDisques);
-							
-							gPaneAjoutDoc.getChildren().removeAll(txtRealisateur);
-							gPaneAjoutDoc.getChildren().removeAll(txtFRealisateur);
-							
-							gPaneAjoutDoc.getChildren().removeAll(txtDateParution);
-							gPaneAjoutDoc.getChildren().removeAll(txtFDateParution);
-							
-							gPaneAjoutDoc.getChildren().removeAll(txtMotsCledEspaces);
-							gPaneAjoutDoc.getChildren().removeAll(txtFMotsClesEspaces);
-							
-							
-							gPaneAjoutDoc.add(txtNoVolume, 0, 3);
-							gPaneAjoutDoc.add(txtFNoVolume, 1, 3);
-							
-							gPaneAjoutDoc.add(txtNoPeriodique, 0, 4);
-							gPaneAjoutDoc.add(txtFNoPeriodique, 1, 4);
-							
-							gPaneAjoutDoc.add(txtDateParution, 0, 5);
-							gPaneAjoutDoc.add(txtFDateParution, 1, 5);
-							
-							gPaneAjoutDoc.add(txtMotsCledEspaces, 0, 6);
-							gPaneAjoutDoc.add(txtFMotsClesEspaces, 1, 6);
-							
-							txtFtitre.requestFocus();
-						}
-					});
-				 
-				 
-				 
+						gPaneAjoutDoc.getChildren().removeAll(txtAuteur);
+						gPaneAjoutDoc.getChildren().removeAll(txtFAuteur);
+
+						gPaneAjoutDoc.getChildren().removeAll(txtNoVolume);
+						gPaneAjoutDoc.getChildren().removeAll(txtFNoVolume);
+
+						gPaneAjoutDoc.getChildren().removeAll(txtNoPeriodique);
+						gPaneAjoutDoc.getChildren().removeAll(txtFNoPeriodique);
+
+						gPaneAjoutDoc.getChildren().removeAll(txtDateParution);
+						gPaneAjoutDoc.getChildren().removeAll(txtFDateParution);
+
+						gPaneAjoutDoc.getChildren().removeAll(txtMotsCledEspaces);
+						gPaneAjoutDoc.getChildren().removeAll(txtFMotsClesEspaces);
+
+						gPaneAjoutDoc.add(txtNbDisques, 0, 3);
+						gPaneAjoutDoc.add(txtFNbDisques, 1, 3);
+
+						gPaneAjoutDoc.add(txtRealisateur, 0, 4);
+						gPaneAjoutDoc.add(txtFRealisateur, 1, 4);
+
+						gPaneAjoutDoc.add(txtDateParution, 0, 5);
+						gPaneAjoutDoc.add(txtFDateParution, 1, 5);
+
+						gPaneAjoutDoc.add(txtMotsCledEspaces, 0, 6);
+						gPaneAjoutDoc.add(txtFMotsClesEspaces, 1, 6);
+
+						txtFtitre.requestFocus();
+
+					}
+				});
+				rbPeriodique.setOnAction(new EventHandler<ActionEvent>() {
+
+					@Override
+					public void handle(ActionEvent e) {
+						// TODO Auto-generated method stub
+						gPaneAjoutDoc.getChildren().removeAll(txtAuteur);
+						gPaneAjoutDoc.getChildren().removeAll(txtFAuteur);
+
+						gPaneAjoutDoc.getChildren().removeAll(txtNbDisques);
+						gPaneAjoutDoc.getChildren().removeAll(txtFNbDisques);
+
+						gPaneAjoutDoc.getChildren().removeAll(txtRealisateur);
+						gPaneAjoutDoc.getChildren().removeAll(txtFRealisateur);
+
+						gPaneAjoutDoc.getChildren().removeAll(txtDateParution);
+						gPaneAjoutDoc.getChildren().removeAll(txtFDateParution);
+
+						gPaneAjoutDoc.getChildren().removeAll(txtMotsCledEspaces);
+						gPaneAjoutDoc.getChildren().removeAll(txtFMotsClesEspaces);
+
+						gPaneAjoutDoc.add(txtNoVolume, 0, 3);
+						gPaneAjoutDoc.add(txtFNoVolume, 1, 3);
+
+						gPaneAjoutDoc.add(txtNoPeriodique, 0, 4);
+						gPaneAjoutDoc.add(txtFNoPeriodique, 1, 4);
+
+						gPaneAjoutDoc.add(txtDateParution, 0, 5);
+						gPaneAjoutDoc.add(txtFDateParution, 1, 5);
+
+						gPaneAjoutDoc.add(txtMotsCledEspaces, 0, 6);
+						gPaneAjoutDoc.add(txtFMotsClesEspaces, 1, 6);
+
+						txtFtitre.requestFocus();
+					}
+				});
+
 				stageAjout.setTitle("Ajout d'un document");
 				stageAjout.getIcons().add(new Image("iconAjouterDocument.png"));
 				stageAjout.sizeToScene();
 				stageAjout.setScene(sceneAjout);
 				stageAjout.show();
-				
-				
-				
-				
-				
+
+			} else if (e.getSource() == btnSupprimerDocumentCatalogue) {
+				// vérifier si il a selectionner un doc sur le catalogue, si non mettre un
+				// mesage d'erreur
+				// System.out.println("allo");
+
+				if (tabCatalogue.isSelected()) {
+					if (tableCatalogue.getSelectionModel().getSelectedItem() == null) { // non selectionnee
+						// System.out.println("selectionne");
+						// System.out.println(tableCatalogue.getSelectionModel().getSelectedItem());
+						Alert Erreur = new Alert(AlertType.ERROR);
+						Erreur.setTitle("Erreur");
+						Erreur.setHeaderText(null);
+						Erreur.setContentText("Vous devez sélectionner le document à supprimer.");
+						Erreur.showAndWait();
+
+					} else {
+
+						System.out.println("Document choisi : " + tableCatalogue.getSelectionModel().getSelectedItem());
+						// suppresion du document selectionnee
+
+						tableCatalogue.getSelectionModel().clearSelection(); // derniere instruction
+
+					}
+				} else if (tabLivres.isSelected()) {
+					if (tableLivre.getSelectionModel().getSelectedItem() == null) { // non selectionnee
+						// System.out.println("selectionne");
+						// System.out.println(tableCatalogue.getSelectionModel().getSelectedItem());
+						Alert Erreur = new Alert(AlertType.ERROR);
+						Erreur.setTitle("Erreur");
+						Erreur.setHeaderText(null);
+						Erreur.setContentText("Vous devez sélectionner le document à supprimer.");
+						Erreur.showAndWait();
+
+					} else {
+						System.out.println("Document choisi : " + tableLivre.getSelectionModel().getSelectedItem());
+
+						tableLivre.getSelectionModel().clearSelection(); // derniere instruction
+					}
+				} else if (tabDVD.isSelected()) {
+					if (tableDVD.getSelectionModel().getSelectedItem() == null) { // non selectionnee
+						// System.out.println("selectionne");
+						// System.out.println(tableCatalogue.getSelectionModel().getSelectedItem());
+						Alert Erreur = new Alert(AlertType.ERROR);
+						Erreur.setTitle("Erreur");
+						Erreur.setHeaderText(null);
+						Erreur.setContentText("Vous devez sélectionner le document à supprimer.");
+						Erreur.showAndWait();
+
+					} else {
+						System.out.println("Document choisi : " + tableDVD.getSelectionModel().getSelectedItem());
+
+						tableDVD.getSelectionModel().clearSelection(); // derniere instruction
+					}
+				} else if (tabPeriodique.isSelected()) {
+					if (tablePeriodique.getSelectionModel().getSelectedItem() == null) { // non selectionnee
+						// System.out.println("selectionne");
+						// System.out.println(tableCatalogue.getSelectionModel().getSelectedItem());
+						Alert Erreur = new Alert(AlertType.ERROR);
+						Erreur.setTitle("Erreur");
+						Erreur.setHeaderText(null);
+						Erreur.setContentText("Vous devez sélectionner le document à supprimer klk.");
+						Erreur.showAndWait();
+
+					} else {
+						System.out
+								.println("Document choisi : " + tablePeriodique.getSelectionModel().getSelectedItem());
+
+						tablePeriodique.getSelectionModel().clearSelection(); // derniere instruction
+					}
+				}
+
 			}
-			else if(e.getSource() == btnSupprimerDocumentCatalogue) {
-				//vérifier si il a selectionner un doc sur le catalogue, si non mettre un mesage d'erreur
-				
-				
-			}
-			
+
 		}
-		
+
 	}
-	
-	
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		launch(args);
 	}
-
 
 }
