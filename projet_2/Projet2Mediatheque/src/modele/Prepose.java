@@ -44,7 +44,7 @@ public class Prepose implements Serializable {
 	
 
 	@SuppressWarnings("unchecked")
-	public void ajouterAdherent(String strNom,String strPrenom,String strNumeroTelephone)  {
+	public void ajouterAdherent(String strNom,String strPrenom, String strAdresse,String strNumeroTelephone, int intNbPrets,int intSolde)  {
 		//int intNumeroPrepose=1900;
 		
 		//File fichierAdherents= new File("/Users/r.merzius/Desktop/fichierAdherents.ser");
@@ -69,7 +69,7 @@ public class Prepose implements Serializable {
 				intNumeroAdherent++;
 				
 				System.out.println(intNumeroAdherent);
-				lstAdherents.add(new Adherent("A"+Integer.toString(intNumeroAdherent),strNom,strPrenom, strNumeroTelephone));
+				lstAdherents.add(new Adherent("A"+Integer.toString(intNumeroAdherent),strNom,strPrenom, strAdresse ,strNumeroTelephone, intNbPrets,intSolde));
 				
 				
 				
@@ -85,8 +85,9 @@ public class Prepose implements Serializable {
 		
 		else
 		{
-			//System.out.println("allo");
-			lstAdherents.add(new Adherent("A"+Integer.toString(intNumAjout),strNom,strPrenom, strNumeroTelephone));		
+			
+			lstAdherents.add(new Adherent("A"+Integer.toString(intNumAjout),strNom,strPrenom, strAdresse ,strNumeroTelephone, intNbPrets,intSolde));
+					
 		}
 		// Sérialisation des adhérents
 		try {
@@ -121,8 +122,8 @@ public class Prepose implements Serializable {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Prepose prepose = new Prepose();
-		prepose.ajouterAdherent("merzius", "paul", "(111) 111-1111");
-		prepose.ajouterAdherent("marrero", "gab", "(222) 222-2222");
+		prepose.ajouterAdherent("merzius", "paul", "Aucune adresse" , "(111) 111-1111", 0,0);
+		prepose.ajouterAdherent("marrero", "gab","Aucune adresse" ,"(222) 222-2222",0,0);
 		//System.out.println(lstAdherents.get(1).getStrNumeroAdherent());
 		//System.out.println(lstAdherents.get(0).getStrNumeroAdherent());
 		
