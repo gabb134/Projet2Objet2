@@ -1065,7 +1065,7 @@ public class Mediatheque extends Application {
 							Alert Validation = new Alert(AlertType.INFORMATION);
 							Validation.setTitle("Confirmation");
 							Validation.setHeaderText(null);
-							Validation.setContentText("Valide !");
+							Validation.setContentText("Connexion réussi! Bienvenue à la médiathèque");
 							Validation.showAndWait();
 
 							// pour demarrer l'interface de l'adhérent
@@ -1145,7 +1145,7 @@ public class Mediatheque extends Application {
 							Alert Validation = new Alert(AlertType.INFORMATION);
 							Validation.setTitle("Confirmation");
 							Validation.setHeaderText(null);
-							Validation.setContentText("Valide !");
+							Validation.setContentText("Connexion réussi! Bienvenue à la médiathèque");
 							Validation.showAndWait();
 
 							// pour demarrer l'interface de l'adhérent
@@ -1225,8 +1225,8 @@ public class Mediatheque extends Application {
 						fichier1.close();
 						entree1.close();
 						for (int i = 0; i < lstAdherents.size(); i++) {
-							if (lstAdherents.get(i).getStrNom().equals(txtFNom.getText())
-									&& lstAdherents.get(i).getStrPrenom().equals(txtFPrenom.getText())) {
+							if (lstAdherents.get(i).getStrNom().equals(txtFNomDroite.getText())
+									&& lstAdherents.get(i).getStrPrenom().equals(txtFPrenomDroite.getText())) {
 								booValide = true;
 						
 							}
@@ -1237,7 +1237,7 @@ public class Mediatheque extends Application {
 							Alert Validation = new Alert(AlertType.INFORMATION);
 							Validation.setTitle("Confirmation");
 							Validation.setHeaderText(null);
-							Validation.setContentText("Valide !");
+							Validation.setContentText("Connexion réussi! Bienvenue à la médiathèque");
 							Validation.showAndWait();
 
 							// pour demarrer l'interface de l'adhérent
@@ -1317,7 +1317,7 @@ public class Mediatheque extends Application {
 							Alert Validation = new Alert(AlertType.INFORMATION);
 							Validation.setTitle("Confirmation");
 							Validation.setHeaderText(null);
-							Validation.setContentText("Valide !");
+							Validation.setContentText("Connexion réussi! Bienvenue à la médiathèque");
 							Validation.showAndWait();
 
 							// pour demarrer l'interface de l'adhérent
