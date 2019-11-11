@@ -136,8 +136,8 @@ public class Mediatheque extends Application {
 	private RadioButton rbPrenomEtNom;
 	private RadioButton rbTelephone;
 
-	private String fichierSerial = "";
-	private String FichierDeserial = "";
+	private File fichierSerial;
+	private File FichierDeserial;
 
 	private Text txtChoixconnexion;
 	private Text txtNomEtPrenom;
@@ -203,14 +203,14 @@ public class Mediatheque extends Application {
 			 * FICHIERS SERIALIZABLES
 			 ********************************************************/
 
-			 fichierSerial ="C:/Users/rn.merzius/Downloads/test/fichier.ser";
+			// fichierSerial =new File("C:/Users/rn.merzius/Downloads/test/fichier.ser");
 			// fichierSerial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
-			//fichierSerial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
+			fichierSerial = new File("C:/Users/cg.marrero/Downloads/test/fichier.ser");
 			// fichierSerial= "/Users/r.merzius/Desktop/fichier.ser";
 			// FichierDeserial="/Users/r.merzius/Desktop/fichier.ser";
-			 FichierDeserial = "C:/Users/rn.merzius/Downloads/test/fichier.ser";
+			// FichierDeserial = new File("C:/Users/rn.merzius/Downloads/test/fichier.ser");
 			// FichierDeserial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
-			//FichierDeserial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
+			FichierDeserial = new File("C:/Users/cg.marrero/Downloads/test/fichier.ser");
 
 			/*********************************************
 			 * TOUTES LES NODES(LES LAYOUTS EX; BORDERPANE, TABPANE, ETC.)
@@ -847,24 +847,32 @@ public class Mediatheque extends Application {
 
 	}
 
-	public void SerializationCatalogue() { // Methode qui permet d'aller chercher l'objet Catalogue pour le serializer
-		Catalogue catalogueSerialisation = Catalogue.getInstance("Livres.txt", "Periodiques.txt", "DVD.txt");
+	public void SerializationCatalogue() {
+		
+		if(!fichierSerial.exists()) {
+			Catalogue catalogueSerialisation = Catalogue.getInstance("Livres.txt", "Periodiques.txt", "DVD.txt");
 
-		try {
-			FileOutputStream fichier = new FileOutputStream(fichierSerial);
-			ObjectOutputStream sortie = new ObjectOutputStream(fichier);
+			try {
+				FileOutputStream fichier = new FileOutputStream(fichierSerial);
+				ObjectOutputStream sortie = new ObjectOutputStream(fichier);
 
-			sortie.writeObject(catalogueSerialisation);
+				sortie.writeObject(catalogueSerialisation);
 
-			sortie.close();
-			fichier.close();
+				sortie.close();
+				fichier.close();
 
-			// System.out.println("l'objet catalogue vient d'�tre seralizer");
+				// System.out.println("l'objet catalogue vient d'�tre seralizer");
 
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		else {
+			DeserialisationCatalogue();
+		}
+		// Methode qui permet d'aller chercher l'objet Catalogue pour le serializer
+		
 
 	}
 
@@ -924,11 +932,11 @@ public class Mediatheque extends Application {
 					// d�s�rialisation des pr�pos�s
 					// File fichierPreposes= new
 					// File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
-					File fichierPreposes= new File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
+					//File fichierPreposes= new File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
 					// File fichierPreposes = new
 					// File("/Users/r.merzius/Desktop/fichierPreposes.ser");
 
-					//File fichierPreposes = new File("C:/Users/cg.marrero/Downloads/test/fichierPreposes.ser");
+					File fichierPreposes = new File("C:/Users/cg.marrero/Downloads/test/fichierPreposes.ser");
 					// File fichierPreposes= new
 
 					FileInputStream fichier1 = new FileInputStream(fichierPreposes);
