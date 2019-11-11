@@ -174,14 +174,14 @@ public class InterfacePrepose extends Application {
 			 * FICHIERS SERIALIZABLES
 			 ********************************************************/
 
-			// fichierSerial ="C:/Users/rn.merzius/Downloads/test/fichier.ser";
+			 fichierSerial ="C:/Users/rn.merzius/Downloads/test/fichier.ser";
 			// fichierSerial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
-			fichierSerial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
+			//fichierSerial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
 			// fichierSerial= "/Users/r.merzius/Desktop/fichier.ser";
 			// FichierDeserial="/Users/r.merzius/Desktop/fichier.ser";
-			// FichierDeserial = "C:/Users/rn.merzius/Downloads/test/fichier.ser";
+			 FichierDeserial = "C:/Users/rn.merzius/Downloads/test/fichier.ser";
 			// FichierDeserial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
-			FichierDeserial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
+			//FichierDeserial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
 
 			root = new BorderPane();
 			scene = new Scene(root);

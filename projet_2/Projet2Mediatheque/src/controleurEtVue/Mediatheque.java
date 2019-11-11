@@ -45,6 +45,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -97,6 +99,7 @@ public class Mediatheque extends Application {
 	private TabPane tabPane;
 
 	private Stage stageCatalogue;
+	private static Stage PrimaryStage;
 	private Scene sceneCatalogue;
 	private Scene sceneConnexion;
 
@@ -172,7 +175,7 @@ public class Mediatheque extends Application {
 
 	private Font fontText1;
 	private ValidationAdherent validationadherent;
-
+	private ValidationAdherentEnter validationadherententer;
 	private ValidationAdmin validationadmin;
 
 	private ValidationEmploye validationemploye;
@@ -200,14 +203,14 @@ public class Mediatheque extends Application {
 			 * FICHIERS SERIALIZABLES
 			 ********************************************************/
 
-			// fichierSerial ="C:/Users/rn.merzius/Downloads/test/fichier.ser";
+			 fichierSerial ="C:/Users/rn.merzius/Downloads/test/fichier.ser";
 			// fichierSerial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
-			fichierSerial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
+			//fichierSerial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
 			// fichierSerial= "/Users/r.merzius/Desktop/fichier.ser";
 			// FichierDeserial="/Users/r.merzius/Desktop/fichier.ser";
-			// FichierDeserial = "C:/Users/rn.merzius/Downloads/test/fichier.ser";
+			 FichierDeserial = "C:/Users/rn.merzius/Downloads/test/fichier.ser";
 			// FichierDeserial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
-			FichierDeserial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
+			//FichierDeserial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
 
 			/*********************************************
 			 * TOUTES LES NODES(LES LAYOUTS EX; BORDERPANE, TABPANE, ETC.)
@@ -235,7 +238,9 @@ public class Mediatheque extends Application {
 			stageCatalogue.setResizable(false);
 			btnConnecterAdherent = new Button("Consulter mon dossier");
 			validationadherent = new ValidationAdherent();
+			validationadherententer= new ValidationAdherentEnter();
 			btnConnecterAdherent.setOnMouseClicked(validationadherent);
+			btnConnecterAdherent.setOnKeyPressed(validationadherententer);
 			btnConnecterAdmin = new Button("Connexion");
 			validationadmin = new ValidationAdmin();
 			btnConnecterAdmin.setOnMouseClicked(validationadmin);
@@ -733,12 +738,13 @@ public class Mediatheque extends Application {
 			tabPeriodique.setContent(tablePeriodique);
 			tabPane.getTabs().addAll(tabCatalogue, tabLivres, tabDVD, tabPeriodique);
 			root.setCenter(tabPane);
-
-			primaryStage.getIcons().add(new Image("booklibrary.png"));
+			PrimaryStage=primaryStage;
+		    primaryStage.getIcons().add(new Image("booklibrary.png"));
 			primaryStage.setTitle("Connexion à la médiathèque");
 			primaryStage.sizeToScene();
 			primaryStage.setResizable(false);
 			primaryStage.setScene(sceneConnexion);
+			sceneConnexion.setOnKeyPressed(validationadherententer);
 			primaryStage.show();
 
 		} catch (Exception e) {
@@ -918,11 +924,11 @@ public class Mediatheque extends Application {
 					// dï¿½sï¿½rialisation des prï¿½posï¿½s
 					// File fichierPreposes= new
 					// File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
-					// File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
+					File fichierPreposes= new File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
 					// File fichierPreposes = new
 					// File("/Users/r.merzius/Desktop/fichierPreposes.ser");
 
-					File fichierPreposes = new File("C:/Users/cg.marrero/Downloads/test/fichierPreposes.ser");
+					//File fichierPreposes = new File("C:/Users/cg.marrero/Downloads/test/fichierPreposes.ser");
 					// File fichierPreposes= new
 
 					FileInputStream fichier1 = new FileInputStream(fichierPreposes);
@@ -963,7 +969,7 @@ public class Mediatheque extends Application {
 						interfacePrepose.start(stagePrepose);
 
 						// il faut trouvé une façon pour fermer le primary stage à partir d'ici
-
+						PrimaryStage.close();
 					}
 					else {
 						Alert Erreur = new Alert(AlertType.ERROR);
@@ -1038,11 +1044,11 @@ public class Mediatheque extends Application {
 						// dï¿½sï¿½rialisation des prï¿½posï¿½s
 						// File fichierPreposes= new
 						// File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
-						// File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
+						File fichierPreposes= new File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
 						// File fichierPreposes = new
 						// File("/Users/r.merzius/Desktop/fichierPreposes.ser");
-
-						File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
+						File fichierAdherents= new File("C:/Users/rn.merzius/Downloads/test/fichierAdherents.ser");
+						//File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
 						// File fichierPreposes= new
 
 						FileInputStream fichier1 = new FileInputStream(fichierAdherents);
@@ -1069,18 +1075,20 @@ public class Mediatheque extends Application {
 							Validation.showAndWait();
 
 							// pour demarrer l'interface de l'adhérent
+							PrimaryStage.close();
 							Stage stageAdherent = new Stage();
 							stageAdherent.initModality(Modality.APPLICATION_MODAL);
 							InterfaceAdherent interfaceAdherent = new InterfaceAdherent();
 							interfaceAdherent.start(stageAdherent);
-							
-
+							txtFPrenom.clear();
+							txtFNom.clear();
+							txtFNom.requestFocus();
 						}
 						else {
 							Alert Erreur = new Alert(AlertType.ERROR);
 							Erreur.setTitle("Erreur");
 							Erreur.setHeaderText(null);
-							Erreur.setContentText("Cette adhérent n'existe pas! Veillez rentrer un adhérent qui existe.");
+							Erreur.setContentText("Cette adhérent n'existe pas! Veuillez rentrer un adhérent qui existe.");
 							Erreur.showAndWait();
 						}
 
@@ -1092,8 +1100,9 @@ public class Mediatheque extends Application {
 					}
 					
 					
-				}
+				
 			}
+		}
 			else if(rbTelephone.isSelected()) {
 				 if (txtFTelephone.getText().compareTo("") == 0) {
 					Alert Erreur = new Alert(AlertType.ERROR);
@@ -1119,11 +1128,12 @@ public class Mediatheque extends Application {
 						// dï¿½sï¿½rialisation des prï¿½posï¿½s
 						// File fichierPreposes= new
 						// File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
-						// File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
+						File fichierPreposes=new  File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
+						File fichierAdherents=new File("C:/Users/rn.merzius/Downloads/test/fichierAdherents.ser");
 						// File fichierPreposes = new
 						// File("/Users/r.merzius/Desktop/fichierPreposes.ser");
 
-						File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
+						//File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
 						// File fichierPreposes= new
 
 						FileInputStream fichier1 = new FileInputStream(fichierAdherents);
@@ -1153,7 +1163,8 @@ public class Mediatheque extends Application {
 							stageAdherent.initModality(Modality.APPLICATION_MODAL);
 							InterfaceAdherent interfaceAdherent = new InterfaceAdherent();
 							interfaceAdherent.start(stageAdherent);
-							
+							txtFTelephone.clear();
+							txtFTelephone.requestFocus();
 
 						}
 						else {
@@ -1178,7 +1189,7 @@ public class Mediatheque extends Application {
 		}
 
 	}
-
+	
 	public class ValidationAdherentDroite implements EventHandler<MouseEvent> {
 
 		@Override
@@ -1349,9 +1360,194 @@ public class Mediatheque extends Application {
 		}
 
 	}
+	
+	private class ValidationAdherentEnter implements EventHandler<KeyEvent> {
 
+		@Override
+		public void handle(KeyEvent event) {
+			System.out.println("boutton pressé !");
+			if(event.getCode()==KeyCode.ENTER&&tabConnexionAdherent.isSelected()) {
+			// TODO Auto-generated method stub
+			if (rbPrenomEtNom.isSelected()) {
+				if (txtFNom.getText().compareTo("") == 0) {
+					Alert Erreur = new Alert(AlertType.ERROR);
+					Erreur.setTitle("Erreur");
+					Erreur.setHeaderText(null);
+					Erreur.setContentText("Vous n'avez pas tapé votre Nom");
+					Erreur.showAndWait();
+					txtFNom.requestFocus();
+				} else if (txtFPrenom.getText().compareTo("") == 0) {
+					Alert Erreur = new Alert(AlertType.ERROR);
+					Erreur.setTitle("Erreur");
+					Erreur.setHeaderText(null);
+					Erreur.setContentText("Vous n'avez pas tapé votre prénom");
+					Erreur.showAndWait();
+					txtFPrenom.requestFocus();
+				}  else {
+					
+					boolean booValide = false;
+
+					try {
+
+						// dï¿½sï¿½rialisation des prï¿½posï¿½s
+						// File fichierPreposes= new
+						// File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
+						File fichierPreposes= new File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
+						// File fichierPreposes = new
+						// File("/Users/r.merzius/Desktop/fichierPreposes.ser");
+						File fichierAdherents= new File("C:/Users/rn.merzius/Downloads/test/fichierAdherents.ser");
+						//File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
+						// File fichierPreposes= new
+
+						FileInputStream fichier1 = new FileInputStream(fichierAdherents);
+
+						ObjectInputStream entree1 = new ObjectInputStream(fichier1);
+
+						ArrayList<Adherent> lstAdherents = (ArrayList) entree1.readObject();
+						fichier1.close();
+						entree1.close();
+						for (int i = 0; i < lstAdherents.size(); i++) {
+							if (lstAdherents.get(i).getStrNom().equals(txtFNom.getText())
+									&& lstAdherents.get(i).getStrPrenom().equals(txtFPrenom.getText())) {
+								booValide = true;
+						
+							}
+							
+
+						}
+						if (booValide == true) {
+							Alert Validation = new Alert(AlertType.INFORMATION);
+							Validation.setTitle("Confirmation");
+							Validation.setHeaderText(null);
+							Validation.setContentText("Connexion réussi! Bienvenue à la médiathèque");
+							Validation.showAndWait();
+
+							// pour demarrer l'interface de l'adhérent
+							PrimaryStage.close();
+							Stage stageAdherent = new Stage();
+							stageAdherent.initModality(Modality.APPLICATION_MODAL);
+							InterfaceAdherent interfaceAdherent = new InterfaceAdherent();
+							interfaceAdherent.start(stageAdherent);
+							txtFPrenom.clear();
+							txtFNom.clear();
+							txtFNom.requestFocus();
+						}
+						else {
+							Alert Erreur = new Alert(AlertType.ERROR);
+							Erreur.setTitle("Erreur");
+							Erreur.setHeaderText(null);
+							Erreur.setContentText("Cette adhérent n'existe pas! Veuillez rentrer un adhérent qui existe.");
+							Erreur.showAndWait();
+						}
+
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+					}
+					
+					
+				
+			}
+		}
+		}
+			else if(rbTelephone.isSelected()) {
+				 if (txtFTelephone.getText().compareTo("") == 0) {
+					Alert Erreur = new Alert(AlertType.ERROR);
+					Erreur.setTitle("Erreur");
+					Erreur.setHeaderText(null);
+					Erreur.setContentText("Vous n'avez pas tapé votre téléphone");
+					Erreur.showAndWait();
+					txtFTelephone.requestFocus();
+
+				} else if (!txtFTelephone.getText().matches("^[\\(][0-9]{3}[\\)][\\s][0-9]{3}[\\-][0-9]{4}$")) {
+					Alert Erreur = new Alert(AlertType.ERROR);
+					Erreur.setTitle("Erreur");
+					Erreur.setHeaderText(null);
+					Erreur.setContentText("Voici le format que vous devez mettre : (###) ###-####");
+					Erreur.showAndWait();
+					txtFTelephone.requestFocus();
+				}
+				else {
+					boolean booValide = false;
+
+					try {
+
+						// dï¿½sï¿½rialisation des prï¿½posï¿½s
+						// File fichierPreposes= new
+						// File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
+						File fichierPreposes=new  File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
+						File fichierAdherents=new File("C:/Users/rn.merzius/Downloads/test/fichierAdherents.ser");
+						// File fichierPreposes = new
+						// File("/Users/r.merzius/Desktop/fichierPreposes.ser");
+
+						//File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
+						// File fichierPreposes= new
+
+						FileInputStream fichier1 = new FileInputStream(fichierAdherents);
+
+						ObjectInputStream entree1 = new ObjectInputStream(fichier1);
+
+						ArrayList<Adherent> lstAdherents = (ArrayList) entree1.readObject();
+						fichier1.close();
+						entree1.close();
+						for (int i = 0; i < lstAdherents.size(); i++) {
+							if (lstAdherents.get(i).getStrNumeroTelephone().equals(txtFTelephone.getText())) {
+								booValide = true;
+						
+							}
+							
+
+						}
+						if (booValide == true) {
+							Alert Validation = new Alert(AlertType.INFORMATION);
+							Validation.setTitle("Confirmation");
+							Validation.setHeaderText(null);
+							Validation.setContentText("Connexion réussi! Bienvenue à la médiathèque");
+							Validation.showAndWait();
+
+							// pour demarrer l'interface de l'adhérent
+							Stage stageAdherent = new Stage();
+							stageAdherent.initModality(Modality.APPLICATION_MODAL);
+							InterfaceAdherent interfaceAdherent = new InterfaceAdherent();
+							interfaceAdherent.start(stageAdherent);
+							txtFTelephone.clear();
+							txtFTelephone.requestFocus();
+
+						}
+						else {
+							Alert Erreur = new Alert(AlertType.ERROR);
+							Erreur.setTitle("Erreur");
+							Erreur.setHeaderText(null);
+							Erreur.setContentText("Cette adhérent n'existe pas! Veillez rentrer un adhérent qui existe.");
+							Erreur.showAndWait();
+						}
+
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+					}
+					
+
+				}
+			}
+
+		}
+
+	}
+	
+	
+public static void AfficherMediatheque() 
+{
+	PrimaryStage.show();
+	
+}
 	public static void main(String[] args) {
 		launch(args);
+		
 	}
 
 }

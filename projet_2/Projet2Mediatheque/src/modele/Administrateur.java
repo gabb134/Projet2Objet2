@@ -17,9 +17,9 @@ public void AjouterPrepose(String strNom, String strPrenom, String strAdresse, S
 	//int intNumeroPrepose=1900;
 	
 	//File fichierPreposes= new File("/Users/r.merzius/Desktop/fichierPreposes.ser");
-	//File fichierPreposes= new File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
+	File fichierPreposes= new File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
 	//File fichierPreposes= new File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
-	File fichierPreposes= new File("C:/Users/cg.marrero/Downloads/test/fichierPreposes.ser");
+	//File fichierPreposes= new File("C:/Users/cg.marrero/Downloads/test/fichierPreposes.ser");
 	int intNumeroEmploye=0; 
 	int intNumAjout=19000;
 	if(fichierPreposes.exists())
@@ -34,8 +34,8 @@ public void AjouterPrepose(String strNom, String strPrenom, String strAdresse, S
 			lstPreposes = (ArrayList<Prepose>) entree.readObject();
 			fichier.close();
 			entree.close();
-			//intNumeroEmploye=Integer.parseInt(lstPreposes.get(lstPreposes.size()-1).getNoEmploye().substring(1));
-		//	intNumeroEmploye++;
+			intNumeroEmploye=Integer.parseInt(lstPreposes.get(lstPreposes.size()-1).getNoEmploye().substring(1));
+			intNumeroEmploye++;
 			System.out.println(intNumeroEmploye);
 			lstPreposes.add(new Prepose("P"+intNumeroEmploye, strMotDePasse, strAdresse, strNom, strPrenom, strTelephone));
 			

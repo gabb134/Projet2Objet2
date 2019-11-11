@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,6 +12,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -26,7 +28,7 @@ public class InterfaceAdherent extends Application{
 	
 	private TableView<Document> tableDocumentsDelAdherent = new TableView<Document>();
 	private TableView<Pret> tablePret = new TableView<Pret>();
-
+    private static Stage PrimaryStage;
 /*	private ObservableList<Document> donneesCataloguePrepose;
 	private ObservableList<Livre> donneesLivrePrepose;
 	private ObservableList<DVD> donneesDVDPrepose;
@@ -45,8 +47,9 @@ public class InterfaceAdherent extends Application{
 		VBox vboxTableView = new VBox(10);
 		bPaneDroitePrepose.setPadding(new Insets(5));
 		 Scene sceneAdherent = new Scene(root);
-		 
+		 BouttonQuitter ClickBtnQuitter=new BouttonQuitter();
 		 Button btnQuitter = new Button("Quitter");
+		 btnQuitter.setOnMouseClicked(ClickBtnQuitter);
 		btnQuitter.setPrefWidth(150);
 		
 		 //Ajout des colonnes pour les documents emprunté des préposé
@@ -111,7 +114,7 @@ public class InterfaceAdherent extends Application{
 		bPaneDroitePrepose.setTop(btnQuitter);
 		root.setLeft(bPaneGauchePrepose);
 		root.setRight(bPaneDroitePrepose);
-	
+	    PrimaryStage=primaryStage;
 		primaryStage.getIcons().add(new Image("booklibrary.png"));
 		primaryStage.setTitle("Médiathèque");
 		primaryStage.sizeToScene();
@@ -121,7 +124,15 @@ public class InterfaceAdherent extends Application{
 		
 		
 	}
-	
+	public class BouttonQuitter implements EventHandler<MouseEvent> {
+
+		@Override
+		public void handle(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			Mediatheque.AfficherMediatheque();
+			PrimaryStage.close();
+			
+		}}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		launch(args);
