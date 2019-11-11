@@ -174,11 +174,12 @@ public class Mediatheque extends Application {
 	private Button btnQuitter;
 
 	private Font fontText1;
-	private ValidationAdherent validationadherent;
-	private ValidationAdherentEnter validationadherententer;
-	private ValidationAdmin validationadmin;
+	private ClickValidationAdherent validationadherent;
+	private ValidationToucheEnter validationtoucheenter;
+	private ClickValidationAdherentDroite validationadherentdroiteenter;
+	private ClickValidationAdmin validationadmin;
 
-	private ValidationEmploye validationemploye;
+	private ClickValidationEmploye validationemploye;
 
 	private GestionAdherentConnexion1 gConexxcion1;
 	private GestionAdherentConnexion2 gConexxcion2;
@@ -203,14 +204,14 @@ public class Mediatheque extends Application {
 			 * FICHIERS SERIALIZABLES
 			 ********************************************************/
 
-			// fichierSerial =new File("C:/Users/rn.merzius/Downloads/test/fichier.ser");
-			// fichierSerial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
-			fichierSerial = new File("C:/Users/cg.marrero/Downloads/test/fichier.ser");
+			 fichierSerial =new File("C:/Users/rn.merzius/Downloads/test/fichier.ser");
+			// fichierSerial = new File ("C:/Users/GabrielMarrero/Downloads/test/fichier.ser");
+			//fichierSerial = new File("C:/Users/cg.marrero/Downloads/test/fichier.ser");
 			// fichierSerial= "/Users/r.merzius/Desktop/fichier.ser";
 			// FichierDeserial="/Users/r.merzius/Desktop/fichier.ser";
-			// FichierDeserial = new File("C:/Users/rn.merzius/Downloads/test/fichier.ser");
+			 FichierDeserial = new File("C:/Users/rn.merzius/Downloads/test/fichier.ser");
 			// FichierDeserial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
-			FichierDeserial = new File("C:/Users/cg.marrero/Downloads/test/fichier.ser");
+			//FichierDeserial = new File("C:/Users/cg.marrero/Downloads/test/fichier.ser");
 
 			/*********************************************
 			 * TOUTES LES NODES(LES LAYOUTS EX; BORDERPANE, TABPANE, ETC.)
@@ -237,15 +238,15 @@ public class Mediatheque extends Application {
 			stageCatalogue.setScene(sceneCatalogue);
 			stageCatalogue.setResizable(false);
 			btnConnecterAdherent = new Button("Consulter mon dossier");
-			validationadherent = new ValidationAdherent();
-			validationadherententer= new ValidationAdherentEnter();
+			validationadherent = new ClickValidationAdherent();
+			validationtoucheenter= new ValidationToucheEnter();
 			btnConnecterAdherent.setOnMouseClicked(validationadherent);
-			btnConnecterAdherent.setOnKeyPressed(validationadherententer);
+			btnConnecterAdherent.setOnKeyPressed(validationtoucheenter);
 			btnConnecterAdmin = new Button("Connexion");
-			validationadmin = new ValidationAdmin();
+			validationadmin = new ClickValidationAdmin();
 			btnConnecterAdmin.setOnMouseClicked(validationadmin);
 			btnConnecterEmploye = new Button("Connexion");
-			validationemploye = new ValidationEmploye();
+			validationemploye = new ClickValidationEmploye();
 			btnConnecterEmploye.setOnMouseClicked(validationemploye);
 			btnConsulterCatalogue = new Button("Consulter le catalogue");
 
@@ -522,7 +523,7 @@ public class Mediatheque extends Application {
 			gpaneConnexionADroite.add(txtFPrenomDroite, 2, 4, 2, 1);
 			gpaneConnexionADroite.add(btnConnecterAdherentDroite, 2, 5, 2, 1);
 
-			ValidationAdherentDroite validationAdherentDroite = new ValidationAdherentDroite();
+			ClickValidationAdherentDroite validationAdherentDroite = new ClickValidationAdherentDroite();
 
 			btnConnecterAdherentDroite.setOnMouseClicked(validationAdherentDroite);
 			rbPrenomEtNomDroite.setOnAction(gConexxcion2);
@@ -744,7 +745,8 @@ public class Mediatheque extends Application {
 			primaryStage.sizeToScene();
 			primaryStage.setResizable(false);
 			primaryStage.setScene(sceneConnexion);
-			sceneConnexion.setOnKeyPressed(validationadherententer);
+			sceneConnexion.setOnKeyPressed(validationtoucheenter);
+			//sceneConnexion.setOnKeyPressed(validationadherentdroiteenter);
 			primaryStage.show();
 
 		} catch (Exception e) {
@@ -756,175 +758,134 @@ public class Mediatheque extends Application {
 	 * METHODES ET EVENEMENT
 	 *******************************************************/
 
-	private class GestionConsulterCatalogue implements EventHandler<ActionEvent> {
+	public void ValidationEmploye()
+	{
+		if (txtFNoPrepose.getText().compareTo("") == 0) {
+			Alert Erreur = new Alert(AlertType.ERROR);
+			Erreur.setTitle("Erreur");
+			Erreur.setHeaderText(null);
+			Erreur.setContentText("Vous n'avez pas tapé votre numéro d'employé");
+			Erreur.showAndWait();
+			txtFNoPrepose.requestFocus();
+		} else if (txtFMotDePassePrepose.getText().compareTo("") == 0) {
+			Alert Erreur = new Alert(AlertType.ERROR);
+			Erreur.setTitle("Erreur");
+			Erreur.setHeaderText(null);
+			Erreur.setContentText("Vous n'avez pas tapé votre mot de passe");
+			Erreur.showAndWait();
+			txtFMotDePassePrepose.requestFocus();
+		} else
 
-		@Override
-		public void handle(ActionEvent e) {
-			// TODO Auto-generated method stub
-			if (e.getSource() == rbAuteurRealisateur) {
-				txtFRechercherPar.requestFocus();
-			} else if (e.getSource() == rbMotsCles) {
-				txtFRechercherPar.requestFocus();
-			}
-			if (e.getSource() == btnEffacer) {
-				txtFRechercherPar.clear();
-			}
-
-		}
-
-	}
-
-	private class GestionAdherentConnexion1 implements EventHandler<ActionEvent> {
-
-		@Override
-		public void handle(ActionEvent e) {
-			// TODO Auto-generated method stub
-			if (e.getSource() == rbPrenomEtNom) {
-				System.out.println("prenomEtNom");
-				// gPaneAdherent.getChildren().clear();
-
-				gPaneAdherent.getChildren().removeAll(txtTelephoneAdherent);
-				gPaneAdherent.getChildren().removeAll(txtFTelephone);
-
-				gPaneAdherent.add(txtNom, 0, 3, 2, 1);
-				gPaneAdherent.add(txtFNom, 2, 3, 2, 1);
-				gPaneAdherent.add(txtPrenom, 0, 4, 2, 1);
-				gPaneAdherent.add(txtFPrenom, 2, 4, 2, 1);
-				txtFNom.requestFocus();
-
-			} else if (e.getSource() == rbTelephone) {
-
-				gPaneAdherent.getChildren().removeAll(txtNom);
-				gPaneAdherent.getChildren().removeAll(txtFNom);
-				gPaneAdherent.getChildren().removeAll(txtPrenom);
-				gPaneAdherent.getChildren().removeAll(txtFPrenom);
-				// gPaneAdherent.add(txtTelephoneAdherent, columnIndex, rowIndex);
-				// gPaneAdherent.add(txtFTelephone, columnIndex, rowIndex);
-				// gPaneAdherent.getChildren().clear();
-				gPaneAdherent.add(txtTelephoneAdherent, 0, 3, 2, 1);
-				gPaneAdherent.add(txtFTelephone, 2, 3, 2, 1);
-				txtFTelephone.requestFocus();
-				System.out.println("Telephone");
-			}
-		}
-	}
-
-	private class GestionAdherentConnexion2 implements EventHandler<ActionEvent> {
-
-		@Override
-		public void handle(ActionEvent e) {
-			// TODO Auto-generated method stub
-
-			if (e.getSource() == rbPrenomEtNomDroite) {
-				System.out.println("prenomEtNom");
-				// gPaneAdherent.getChildren().clear();
-
-				gpaneConnexionADroite.getChildren().removeAll(txtTelephoneAdherentDroite);
-				gpaneConnexionADroite.getChildren().removeAll(txtFTelephoneDroite);
-
-				gpaneConnexionADroite.add(txtNomDroite, 0, 3, 2, 1);
-				gpaneConnexionADroite.add(txtFNomDroite, 2, 3, 2, 1);
-				gpaneConnexionADroite.add(txtPrenomDroite, 0, 4, 2, 1);
-				gpaneConnexionADroite.add(txtFPrenomDroite, 2, 4, 2, 1);
-				txtFNomDroite.requestFocus();
-
-			} else if (e.getSource() == rbTelephoneDroite) {
-
-				gpaneConnexionADroite.getChildren().removeAll(txtNomDroite);
-				gpaneConnexionADroite.getChildren().removeAll(txtFNomDroite);
-				gpaneConnexionADroite.getChildren().removeAll(txtPrenomDroite);
-				gpaneConnexionADroite.getChildren().removeAll(txtFPrenomDroite);
-				// gPaneAdherent.add(txtTelephoneAdherent, columnIndex, rowIndex);
-				// gPaneAdherent.add(txtFTelephone, columnIndex, rowIndex);
-				// gPaneAdherent.getChildren().clear();
-				gpaneConnexionADroite.add(txtTelephoneAdherentDroite, 0, 3, 2, 1);
-				gpaneConnexionADroite.add(txtFTelephoneDroite, 1, 3, 2, 1);
-				txtFTelephoneDroite.requestFocus();
-				System.out.println("Telephone");
-			}
-
-		}
-
-	}
-
-	public void SerializationCatalogue() {
-		
-		if(!fichierSerial.exists()) {
-			Catalogue catalogueSerialisation = Catalogue.getInstance("Livres.txt", "Periodiques.txt", "DVD.txt");
+		{
+			boolean booValide = false;
 
 			try {
-				FileOutputStream fichier = new FileOutputStream(fichierSerial);
-				ObjectOutputStream sortie = new ObjectOutputStream(fichier);
 
-				sortie.writeObject(catalogueSerialisation);
+				// dï¿½sï¿½rialisation des prï¿½posï¿½s
+				// File fichierPreposes= new
+				// File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
+				File fichierPreposes= new File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
+				// File fichierPreposes = new
+				// File("/Users/r.merzius/Desktop/fichierPreposes.ser");
 
-				sortie.close();
-				fichier.close();
+				//File fichierPreposes = new File("C:/Users/cg.marrero/Downloads/test/fichierPreposes.ser");
+				// File fichierPreposes= new
 
-				// System.out.println("l'objet catalogue vient d'ï¿½tre seralizer");
+				FileInputStream fichier1 = new FileInputStream(fichierPreposes);
+
+				ObjectInputStream entree1 = new ObjectInputStream(fichier1);
+
+				ArrayList<Prepose> lstPreposes = (ArrayList) entree1.readObject();
+				fichier1.close();
+				entree1.close();
+				for (int i = 0; i < lstPreposes.size(); i++) {
+					if (lstPreposes.get(i).getNoEmploye().equals(txtFNoPrepose.getText())
+							&& lstPreposes.get(i).getMotDePasse().equals(txtFMotDePassePrepose.getText())) {
+						booValide = true;
+				
+					}
+
+				}
+				if (booValide == true) {
+					/*
+					 * Alert Validation = new Alert(AlertType.INFORMATION);
+					 * Validation.setTitle("Confirmation"); Validation.setHeaderText(null);
+					 * Validation.setContentText("Nom d'utilisateur ou Mot de passe invalide");
+					 * Validation.showAndWait();
+					 * 
+					 */
+					
+					Alert Validation = new Alert(AlertType.INFORMATION);
+					Validation.setTitle("Confirmation");
+					Validation.setHeaderText(null);
+					Validation.setContentText("Valide !");
+					Validation.showAndWait();
+
+					System.out.println("confirmé!");
+					// pour demarrer l'interface du préposé
+					Stage stagePrepose = new Stage();
+					stagePrepose.initModality(Modality.APPLICATION_MODAL);
+					InterfacePrepose interfacePrepose = new InterfacePrepose();
+					interfacePrepose.start(stagePrepose);
+
+					// il faut trouvé une façon pour fermer le primary stage à partir d'ici
+					PrimaryStage.close();
+				}
+				else {
+					Alert Erreur = new Alert(AlertType.ERROR);
+					Erreur.setTitle("Erreur");
+					Erreur.setHeaderText(null);
+					Erreur.setContentText("Ce préposé n'existe pas! Veillez rentrer un préposé qui existe.");
+					Erreur.showAndWait();
+				}
 
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
 			}
 		}
-		else {
-			DeserialisationCatalogue();
-		}
-		// Methode qui permet d'aller chercher l'objet Catalogue pour le serializer
-		
-
 	}
-
-	public Catalogue DeserialisationCatalogue() {// Methode qui permet de deserializer l'objet Catalogue pour pouvoir
-													// l'utiliser
-		Catalogue catalogueDeserializer = null;
-
-		try {
-
-			FileInputStream fichier = new FileInputStream(FichierDeserial);
-
-			ObjectInputStream entree = new ObjectInputStream(fichier);
-
-			catalogueDeserializer = (Catalogue) entree.readObject();
-			fichier.close();
-			entree.close();
-
-			// System.out.println("l'objet catalogue vient d'ï¿½etre deserlializer");
-			//// System.out.println(catalogueDeserializer);
-			// catalogueDeserializer.afficherDvd();
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+	
+	public void ValidationAdmin()
+	{
+		if (txtFNoAdmin.getText().compareTo("") == 0) {
+			Alert Erreur = new Alert(AlertType.ERROR);
+			Erreur.setTitle("Erreur");
+			Erreur.setHeaderText(null);
+			Erreur.setContentText("Vous n'avez pas tapé votre numéro d'administrateur");
+			Erreur.showAndWait();
+			txtFNoAdmin.requestFocus();
+		} else if (txtFMotDePasseAdmin.getText().compareTo("") == 0) {
+			Alert Erreur = new Alert(AlertType.ERROR);
+			Erreur.setTitle("Erreur");
+			Erreur.setHeaderText(null);
+			Erreur.setContentText("Vous n'avez pas tapé votre mot de passe");
+			Erreur.showAndWait();
+			txtFMotDePasseAdmin.requestFocus();
 		}
-		return catalogueDeserializer;
-
 	}
-
-	private class ValidationEmploye implements EventHandler<MouseEvent> {
-
-		public void handle(MouseEvent event) {
-			// TODO Auto-generated method stub
-			if (txtFNoPrepose.getText().compareTo("") == 0) {
+	
+	public void ValidationAdherent()
+	{
+		if (rbPrenomEtNom.isSelected()) {
+			if (txtFNom.getText().compareTo("") == 0) {
 				Alert Erreur = new Alert(AlertType.ERROR);
 				Erreur.setTitle("Erreur");
 				Erreur.setHeaderText(null);
-				Erreur.setContentText("Vous n'avez pas tapé votre numéro d'employé");
+				Erreur.setContentText("Vous n'avez pas tapé votre Nom");
 				Erreur.showAndWait();
-				txtFNoPrepose.requestFocus();
-			} else if (txtFMotDePassePrepose.getText().compareTo("") == 0) {
+				txtFNom.requestFocus();
+			} else if (txtFPrenom.getText().compareTo("") == 0) {
 				Alert Erreur = new Alert(AlertType.ERROR);
 				Erreur.setTitle("Erreur");
 				Erreur.setHeaderText(null);
-				Erreur.setContentText("Vous n'avez pas tapé votre mot de passe");
+				Erreur.setContentText("Vous n'avez pas tapé votre prénom");
 				Erreur.showAndWait();
-				txtFMotDePassePrepose.requestFocus();
-			} else
-
-			{
+				txtFPrenom.requestFocus();
+			}  else {
+				
 				boolean booValide = false;
 
 				try {
@@ -932,58 +893,51 @@ public class Mediatheque extends Application {
 					// dï¿½sï¿½rialisation des prï¿½posï¿½s
 					// File fichierPreposes= new
 					// File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
-					//File fichierPreposes= new File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
+					File fichierPreposes= new File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
 					// File fichierPreposes = new
 					// File("/Users/r.merzius/Desktop/fichierPreposes.ser");
-
-					File fichierPreposes = new File("C:/Users/cg.marrero/Downloads/test/fichierPreposes.ser");
+					File fichierAdherents= new File("C:/Users/rn.merzius/Downloads/test/fichierAdherents.ser");
+					//File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
 					// File fichierPreposes= new
 
-					FileInputStream fichier1 = new FileInputStream(fichierPreposes);
+					FileInputStream fichier1 = new FileInputStream(fichierAdherents);
 
 					ObjectInputStream entree1 = new ObjectInputStream(fichier1);
 
-					ArrayList<Prepose> lstPreposes = (ArrayList) entree1.readObject();
+					ArrayList<Adherent> lstAdherents = (ArrayList) entree1.readObject();
 					fichier1.close();
 					entree1.close();
-					for (int i = 0; i < lstPreposes.size(); i++) {
-						if (lstPreposes.get(i).getNoEmploye().equals(txtFNoPrepose.getText())
-								&& lstPreposes.get(i).getMotDePasse().equals(txtFMotDePassePrepose.getText())) {
+					for (int i = 0; i < lstAdherents.size(); i++) {
+						if (lstAdherents.get(i).getStrNom().equals(txtFNom.getText())
+								&& lstAdherents.get(i).getStrPrenom().equals(txtFPrenom.getText())) {
 							booValide = true;
 					
 						}
+						
 
 					}
 					if (booValide == true) {
-						/*
-						 * Alert Validation = new Alert(AlertType.INFORMATION);
-						 * Validation.setTitle("Confirmation"); Validation.setHeaderText(null);
-						 * Validation.setContentText("Nom d'utilisateur ou Mot de passe invalide");
-						 * Validation.showAndWait();
-						 * 
-						 */
-						
 						Alert Validation = new Alert(AlertType.INFORMATION);
 						Validation.setTitle("Confirmation");
 						Validation.setHeaderText(null);
-						Validation.setContentText("Valide !");
+						Validation.setContentText("Connexion réussi! Bienvenue à la médiathèque");
 						Validation.showAndWait();
 
-						System.out.println("confirmé!");
-						// pour demarrer l'interface du préposé
-						Stage stagePrepose = new Stage();
-						stagePrepose.initModality(Modality.APPLICATION_MODAL);
-						InterfacePrepose interfacePrepose = new InterfacePrepose();
-						interfacePrepose.start(stagePrepose);
-
-						// il faut trouvé une façon pour fermer le primary stage à partir d'ici
+						// pour demarrer l'interface de l'adhérent
 						PrimaryStage.close();
+						Stage stageAdherent = new Stage();
+						stageAdherent.initModality(Modality.APPLICATION_MODAL);
+						InterfaceAdherent interfaceAdherent = new InterfaceAdherent();
+						interfaceAdherent.start(stageAdherent);
+						txtFPrenom.clear();
+						txtFNom.clear();
+						txtFNom.requestFocus();
 					}
 					else {
 						Alert Erreur = new Alert(AlertType.ERROR);
 						Erreur.setTitle("Erreur");
 						Erreur.setHeaderText(null);
-						Erreur.setContentText("Ce préposé n'existe pas! Veillez rentrer un préposé qui existe.");
+						Erreur.setContentText("Cette adhérent n'existe pas! Veuillez rentrer un adhérent qui existe.");
 						Erreur.showAndWait();
 					}
 
@@ -993,217 +947,98 @@ public class Mediatheque extends Application {
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
 				}
-			}
-
-		}
-
-	}
-
-	private class ValidationAdmin implements EventHandler<MouseEvent> {
-
-		@Override
-		public void handle(MouseEvent event) {
-			// TODO Auto-generated method stub
-			if (txtFNoAdmin.getText().compareTo("") == 0) {
-				Alert Erreur = new Alert(AlertType.ERROR);
-				Erreur.setTitle("Erreur");
-				Erreur.setHeaderText(null);
-				Erreur.setContentText("Vous n'avez pas tapé votre numéro d'administrateur");
-				Erreur.showAndWait();
-				txtFNoAdmin.requestFocus();
-			} else if (txtFMotDePasseAdmin.getText().compareTo("") == 0) {
-				Alert Erreur = new Alert(AlertType.ERROR);
-				Erreur.setTitle("Erreur");
-				Erreur.setHeaderText(null);
-				Erreur.setContentText("Vous n'avez pas tapé votre mot de passe");
-				Erreur.showAndWait();
-				txtFMotDePasseAdmin.requestFocus();
-			}
-
-		}
-	}
-
-	private class ValidationAdherent implements EventHandler<MouseEvent> { //aller voir validation employe pour pouvoir se connecter avec les fichiers serializables
-
-		@Override
-		public void handle(MouseEvent event) {
-			// TODO Auto-generated method stub
-			if (rbPrenomEtNom.isSelected()) {
-				if (txtFNom.getText().compareTo("") == 0) {
-					Alert Erreur = new Alert(AlertType.ERROR);
-					Erreur.setTitle("Erreur");
-					Erreur.setHeaderText(null);
-					Erreur.setContentText("Vous n'avez pas tapé votre Nom");
-					Erreur.showAndWait();
-					txtFNom.requestFocus();
-				} else if (txtFPrenom.getText().compareTo("") == 0) {
-					Alert Erreur = new Alert(AlertType.ERROR);
-					Erreur.setTitle("Erreur");
-					Erreur.setHeaderText(null);
-					Erreur.setContentText("Vous n'avez pas tapé votre prénom");
-					Erreur.showAndWait();
-					txtFPrenom.requestFocus();
-				}  else {
-					
-					boolean booValide = false;
-
-					try {
-
-						// dï¿½sï¿½rialisation des prï¿½posï¿½s
-						// File fichierPreposes= new
-						// File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
-						File fichierPreposes= new File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
-						// File fichierPreposes = new
-						// File("/Users/r.merzius/Desktop/fichierPreposes.ser");
-						File fichierAdherents= new File("C:/Users/rn.merzius/Downloads/test/fichierAdherents.ser");
-						//File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
-						// File fichierPreposes= new
-
-						FileInputStream fichier1 = new FileInputStream(fichierAdherents);
-
-						ObjectInputStream entree1 = new ObjectInputStream(fichier1);
-
-						ArrayList<Adherent> lstAdherents = (ArrayList) entree1.readObject();
-						fichier1.close();
-						entree1.close();
-						for (int i = 0; i < lstAdherents.size(); i++) {
-							if (lstAdherents.get(i).getStrNom().equals(txtFNom.getText())
-									&& lstAdherents.get(i).getStrPrenom().equals(txtFPrenom.getText())) {
-								booValide = true;
-						
-							}
-							
-
-						}
-						if (booValide == true) {
-							Alert Validation = new Alert(AlertType.INFORMATION);
-							Validation.setTitle("Confirmation");
-							Validation.setHeaderText(null);
-							Validation.setContentText("Connexion réussi! Bienvenue à la médiathèque");
-							Validation.showAndWait();
-
-							// pour demarrer l'interface de l'adhérent
-							PrimaryStage.close();
-							Stage stageAdherent = new Stage();
-							stageAdherent.initModality(Modality.APPLICATION_MODAL);
-							InterfaceAdherent interfaceAdherent = new InterfaceAdherent();
-							interfaceAdherent.start(stageAdherent);
-							txtFPrenom.clear();
-							txtFNom.clear();
-							txtFNom.requestFocus();
-						}
-						else {
-							Alert Erreur = new Alert(AlertType.ERROR);
-							Erreur.setTitle("Erreur");
-							Erreur.setHeaderText(null);
-							Erreur.setContentText("Cette adhérent n'existe pas! Veuillez rentrer un adhérent qui existe.");
-							Erreur.showAndWait();
-						}
-
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (ClassNotFoundException e) {
-						e.printStackTrace();
-					}
-					
-					
 				
-			}
+				
+			
 		}
-			else if(rbTelephone.isSelected()) {
-				 if (txtFTelephone.getText().compareTo("") == 0) {
-					Alert Erreur = new Alert(AlertType.ERROR);
-					Erreur.setTitle("Erreur");
-					Erreur.setHeaderText(null);
-					Erreur.setContentText("Vous n'avez pas tapé votre téléphone");
-					Erreur.showAndWait();
-					txtFTelephone.requestFocus();
+	}
+		else if(rbTelephone.isSelected()) {
+			 if (txtFTelephone.getText().compareTo("") == 0) {
+				Alert Erreur = new Alert(AlertType.ERROR);
+				Erreur.setTitle("Erreur");
+				Erreur.setHeaderText(null);
+				Erreur.setContentText("Vous n'avez pas tapé votre téléphone");
+				Erreur.showAndWait();
+				txtFTelephone.requestFocus();
 
-				} else if (!txtFTelephone.getText().matches("^[\\(][0-9]{3}[\\)][\\s][0-9]{3}[\\-][0-9]{4}$")) {
-					Alert Erreur = new Alert(AlertType.ERROR);
-					Erreur.setTitle("Erreur");
-					Erreur.setHeaderText(null);
-					Erreur.setContentText("Voici le format que vous devez mettre : (###) ###-####");
-					Erreur.showAndWait();
-					txtFTelephone.requestFocus();
-				}
-				else {
-					boolean booValide = false;
+			} else if (!txtFTelephone.getText().matches("^[\\(][0-9]{3}[\\)][\\s][0-9]{3}[\\-][0-9]{4}$")) {
+				Alert Erreur = new Alert(AlertType.ERROR);
+				Erreur.setTitle("Erreur");
+				Erreur.setHeaderText(null);
+				Erreur.setContentText("Voici le format que vous devez mettre : (###) ###-####");
+				Erreur.showAndWait();
+				txtFTelephone.requestFocus();
+			}
+			else {
+				boolean booValide = false;
 
-					try {
+				try {
 
-						// dï¿½sï¿½rialisation des prï¿½posï¿½s
-						// File fichierPreposes= new
-						// File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
-						File fichierPreposes=new  File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
-						File fichierAdherents=new File("C:/Users/rn.merzius/Downloads/test/fichierAdherents.ser");
-						// File fichierPreposes = new
-						// File("/Users/r.merzius/Desktop/fichierPreposes.ser");
+					// dï¿½sï¿½rialisation des prï¿½posï¿½s
+					// File fichierPreposes= new
+					// File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
+					File fichierPreposes=new  File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
+					File fichierAdherents=new File("C:/Users/rn.merzius/Downloads/test/fichierAdherents.ser");
+					// File fichierPreposes = new
+					// File("/Users/r.merzius/Desktop/fichierPreposes.ser");
 
-						//File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
-						// File fichierPreposes= new
+					//File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
+					// File fichierPreposes= new
 
-						FileInputStream fichier1 = new FileInputStream(fichierAdherents);
+					FileInputStream fichier1 = new FileInputStream(fichierAdherents);
 
-						ObjectInputStream entree1 = new ObjectInputStream(fichier1);
+					ObjectInputStream entree1 = new ObjectInputStream(fichier1);
 
-						ArrayList<Adherent> lstAdherents = (ArrayList) entree1.readObject();
-						fichier1.close();
-						entree1.close();
-						for (int i = 0; i < lstAdherents.size(); i++) {
-							if (lstAdherents.get(i).getStrNumeroTelephone().equals(txtFTelephone.getText())) {
-								booValide = true;
-						
-							}
-							
-
-						}
-						if (booValide == true) {
-							Alert Validation = new Alert(AlertType.INFORMATION);
-							Validation.setTitle("Confirmation");
-							Validation.setHeaderText(null);
-							Validation.setContentText("Connexion réussi! Bienvenue à la médiathèque");
-							Validation.showAndWait();
-
-							// pour demarrer l'interface de l'adhérent
-							Stage stageAdherent = new Stage();
-							stageAdherent.initModality(Modality.APPLICATION_MODAL);
-							InterfaceAdherent interfaceAdherent = new InterfaceAdherent();
-							interfaceAdherent.start(stageAdherent);
-							txtFTelephone.clear();
-							txtFTelephone.requestFocus();
-
-						}
-						else {
-							Alert Erreur = new Alert(AlertType.ERROR);
-							Erreur.setTitle("Erreur");
-							Erreur.setHeaderText(null);
-							Erreur.setContentText("Cette adhérent n'existe pas! Veillez rentrer un adhérent qui existe.");
-							Erreur.showAndWait();
-						}
-
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (ClassNotFoundException e) {
-						e.printStackTrace();
-					}
+					ArrayList<Adherent> lstAdherents = (ArrayList) entree1.readObject();
+					fichier1.close();
+					entree1.close();
+					for (int i = 0; i < lstAdherents.size(); i++) {
+						if (lstAdherents.get(i).getStrNumeroTelephone().equals(txtFTelephone.getText())) {
+							booValide = true;
 					
+						}
+						
 
+					}
+					if (booValide == true) {
+						Alert Validation = new Alert(AlertType.INFORMATION);
+						Validation.setTitle("Confirmation");
+						Validation.setHeaderText(null);
+						Validation.setContentText("Connexion réussi! Bienvenue à la médiathèque");
+						Validation.showAndWait();
+
+						// pour demarrer l'interface de l'adhérent
+						Stage stageAdherent = new Stage();
+						stageAdherent.initModality(Modality.APPLICATION_MODAL);
+						InterfaceAdherent interfaceAdherent = new InterfaceAdherent();
+						interfaceAdherent.start(stageAdherent);
+						txtFTelephone.clear();
+						txtFTelephone.requestFocus();
+
+					}
+					else {
+						Alert Erreur = new Alert(AlertType.ERROR);
+						Erreur.setTitle("Erreur");
+						Erreur.setHeaderText(null);
+						Erreur.setContentText("Cette adhérent n'existe pas! Veillez rentrer un adhérent qui existe.");
+						Erreur.showAndWait();
+					}
+
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
 				}
+				
+
 			}
-
 		}
-
 	}
 	
-	public class ValidationAdherentDroite implements EventHandler<MouseEvent> {
-
-		@Override
-		public void handle(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-
+	public void ValidationAdherentDroite()
+	{
+		
 			if (rbPrenomEtNomDroite.isSelected()) {
 
 				if (txtFNomDroite.getText().compareTo("") == 0) {
@@ -1365,184 +1200,209 @@ public class Mediatheque extends Application {
 
 				}
 			}
+		
+	}
+	private class GestionConsulterCatalogue implements EventHandler<ActionEvent> {
+
+		@Override
+		public void handle(ActionEvent e) {
+			// TODO Auto-generated method stub
+			if (e.getSource() == rbAuteurRealisateur) {
+				txtFRechercherPar.requestFocus();
+			} else if (e.getSource() == rbMotsCles) {
+				txtFRechercherPar.requestFocus();
+			}
+			if (e.getSource() == btnEffacer) {
+				txtFRechercherPar.clear();
+			}
+
+		}
+
+	}
+
+	private class GestionAdherentConnexion1 implements EventHandler<ActionEvent> {
+
+		@Override
+		public void handle(ActionEvent e) {
+			// TODO Auto-generated method stub
+			if (e.getSource() == rbPrenomEtNom) {
+				System.out.println("prenomEtNom");
+				// gPaneAdherent.getChildren().clear();
+
+				gPaneAdherent.getChildren().removeAll(txtTelephoneAdherent);
+				gPaneAdherent.getChildren().removeAll(txtFTelephone);
+
+				gPaneAdherent.add(txtNom, 0, 3, 2, 1);
+				gPaneAdherent.add(txtFNom, 2, 3, 2, 1);
+				gPaneAdherent.add(txtPrenom, 0, 4, 2, 1);
+				gPaneAdherent.add(txtFPrenom, 2, 4, 2, 1);
+				txtFNom.requestFocus();
+
+			} else if (e.getSource() == rbTelephone) {
+
+				gPaneAdherent.getChildren().removeAll(txtNom);
+				gPaneAdherent.getChildren().removeAll(txtFNom);
+				gPaneAdherent.getChildren().removeAll(txtPrenom);
+				gPaneAdherent.getChildren().removeAll(txtFPrenom);
+				// gPaneAdherent.add(txtTelephoneAdherent, columnIndex, rowIndex);
+				// gPaneAdherent.add(txtFTelephone, columnIndex, rowIndex);
+				// gPaneAdherent.getChildren().clear();
+				gPaneAdherent.add(txtTelephoneAdherent, 0, 3, 2, 1);
+				gPaneAdherent.add(txtFTelephone, 2, 3, 2, 1);
+				txtFTelephone.requestFocus();
+				System.out.println("Telephone");
+			}
+		}
+	}
+
+	private class GestionAdherentConnexion2 implements EventHandler<ActionEvent> {
+
+		@Override
+		public void handle(ActionEvent e) {
+			// TODO Auto-generated method stub
+
+			if (e.getSource() == rbPrenomEtNomDroite) {
+				System.out.println("prenomEtNom");
+				// gPaneAdherent.getChildren().clear();
+
+				gpaneConnexionADroite.getChildren().removeAll(txtTelephoneAdherentDroite);
+				gpaneConnexionADroite.getChildren().removeAll(txtFTelephoneDroite);
+
+				gpaneConnexionADroite.add(txtNomDroite, 0, 3, 2, 1);
+				gpaneConnexionADroite.add(txtFNomDroite, 2, 3, 2, 1);
+				gpaneConnexionADroite.add(txtPrenomDroite, 0, 4, 2, 1);
+				gpaneConnexionADroite.add(txtFPrenomDroite, 2, 4, 2, 1);
+				txtFNomDroite.requestFocus();
+
+			} else if (e.getSource() == rbTelephoneDroite) {
+
+				gpaneConnexionADroite.getChildren().removeAll(txtNomDroite);
+				gpaneConnexionADroite.getChildren().removeAll(txtFNomDroite);
+				gpaneConnexionADroite.getChildren().removeAll(txtPrenomDroite);
+				gpaneConnexionADroite.getChildren().removeAll(txtFPrenomDroite);
+				// gPaneAdherent.add(txtTelephoneAdherent, columnIndex, rowIndex);
+				// gPaneAdherent.add(txtFTelephone, columnIndex, rowIndex);
+				// gPaneAdherent.getChildren().clear();
+				gpaneConnexionADroite.add(txtTelephoneAdherentDroite, 0, 3, 2, 1);
+				gpaneConnexionADroite.add(txtFTelephoneDroite, 1, 3, 2, 1);
+				txtFTelephoneDroite.requestFocus();
+				System.out.println("Telephone");
+			}
+
+		}
+
+	}
+
+	public void SerializationCatalogue() {
+		
+		if(!fichierSerial.exists()) {
+			Catalogue catalogueSerialisation = Catalogue.getInstance("Livres.txt", "Periodiques.txt", "DVD.txt");
+
+			try {
+				FileOutputStream fichier = new FileOutputStream(fichierSerial);
+				ObjectOutputStream sortie = new ObjectOutputStream(fichier);
+
+				sortie.writeObject(catalogueSerialisation);
+
+				sortie.close();
+				fichier.close();
+
+				// System.out.println("l'objet catalogue vient d'ï¿½tre seralizer");
+
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else {
+			DeserialisationCatalogue();
+		}
+		// Methode qui permet d'aller chercher l'objet Catalogue pour le serializer
+		
+
+	}
+
+	public Catalogue DeserialisationCatalogue() {// Methode qui permet de deserializer l'objet Catalogue pour pouvoir
+													// l'utiliser
+		Catalogue catalogueDeserializer = null;
+
+		try {
+
+			FileInputStream fichier = new FileInputStream(FichierDeserial);
+
+			ObjectInputStream entree = new ObjectInputStream(fichier);
+
+			catalogueDeserializer = (Catalogue) entree.readObject();
+			fichier.close();
+			entree.close();
+
+			// System.out.println("l'objet catalogue vient d'ï¿½etre deserlializer");
+			//// System.out.println(catalogueDeserializer);
+			// catalogueDeserializer.afficherDvd();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return catalogueDeserializer;
+
+	}
+
+	private class ClickValidationEmploye implements EventHandler<MouseEvent> {
+
+		public void handle(MouseEvent event) {
+			// TODO Auto-generated method stub
+			ValidationEmploye();
+		}
+
+	}
+
+	private class ClickValidationAdmin implements EventHandler<MouseEvent> {
+
+		@Override
+		public void handle(MouseEvent event) {
+			// TODO Auto-generated method stub
+			ValidationAdmin();
+
+		}
+	}
+
+	private class ClickValidationAdherent implements EventHandler<MouseEvent> { //aller voir validation employe pour pouvoir se connecter avec les fichiers serializables
+
+		@Override
+		public void handle(MouseEvent event) {
+			// TODO Auto-generated method stub
+			ValidationAdherent();
+
 		}
 
 	}
 	
-	private class ValidationAdherentEnter implements EventHandler<KeyEvent> {
+	public class ClickValidationAdherentDroite implements EventHandler<MouseEvent> {
+
+		@Override
+		public void handle(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+          ValidationAdherentDroite();
+			
+		}
+
+	}
+	
+	private class ValidationToucheEnter implements EventHandler<KeyEvent> {
 
 		@Override
 		public void handle(KeyEvent event) {
-			System.out.println("boutton pressé !");
-			if(event.getCode()==KeyCode.ENTER&&tabConnexionAdherent.isSelected()) {
+			
 			// TODO Auto-generated method stub
-			if (rbPrenomEtNom.isSelected()) {
-				if (txtFNom.getText().compareTo("") == 0) {
-					Alert Erreur = new Alert(AlertType.ERROR);
-					Erreur.setTitle("Erreur");
-					Erreur.setHeaderText(null);
-					Erreur.setContentText("Vous n'avez pas tapé votre Nom");
-					Erreur.showAndWait();
-					txtFNom.requestFocus();
-				} else if (txtFPrenom.getText().compareTo("") == 0) {
-					Alert Erreur = new Alert(AlertType.ERROR);
-					Erreur.setTitle("Erreur");
-					Erreur.setHeaderText(null);
-					Erreur.setContentText("Vous n'avez pas tapé votre prénom");
-					Erreur.showAndWait();
-					txtFPrenom.requestFocus();
-				}  else {
-					
-					boolean booValide = false;
-
-					try {
-
-						// dï¿½sï¿½rialisation des prï¿½posï¿½s
-						// File fichierPreposes= new
-						// File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
-						File fichierPreposes= new File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
-						// File fichierPreposes = new
-						// File("/Users/r.merzius/Desktop/fichierPreposes.ser");
-						File fichierAdherents= new File("C:/Users/rn.merzius/Downloads/test/fichierAdherents.ser");
-						//File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
-						// File fichierPreposes= new
-
-						FileInputStream fichier1 = new FileInputStream(fichierAdherents);
-
-						ObjectInputStream entree1 = new ObjectInputStream(fichier1);
-
-						ArrayList<Adherent> lstAdherents = (ArrayList) entree1.readObject();
-						fichier1.close();
-						entree1.close();
-						for (int i = 0; i < lstAdherents.size(); i++) {
-							if (lstAdherents.get(i).getStrNom().equals(txtFNom.getText())
-									&& lstAdherents.get(i).getStrPrenom().equals(txtFPrenom.getText())) {
-								booValide = true;
-						
-							}
-							
-
-						}
-						if (booValide == true) {
-							Alert Validation = new Alert(AlertType.INFORMATION);
-							Validation.setTitle("Confirmation");
-							Validation.setHeaderText(null);
-							Validation.setContentText("Connexion réussi! Bienvenue à la médiathèque");
-							Validation.showAndWait();
-
-							// pour demarrer l'interface de l'adhérent
-							PrimaryStage.close();
-							Stage stageAdherent = new Stage();
-							stageAdherent.initModality(Modality.APPLICATION_MODAL);
-							InterfaceAdherent interfaceAdherent = new InterfaceAdherent();
-							interfaceAdherent.start(stageAdherent);
-							txtFPrenom.clear();
-							txtFNom.clear();
-							txtFNom.requestFocus();
-						}
-						else {
-							Alert Erreur = new Alert(AlertType.ERROR);
-							Erreur.setTitle("Erreur");
-							Erreur.setHeaderText(null);
-							Erreur.setContentText("Cette adhérent n'existe pas! Veuillez rentrer un adhérent qui existe.");
-							Erreur.showAndWait();
-						}
-
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (ClassNotFoundException e) {
-						e.printStackTrace();
-					}
-					
-					
-				
-			}
-		}
-		}
-			else if(rbTelephone.isSelected()) {
-				 if (txtFTelephone.getText().compareTo("") == 0) {
-					Alert Erreur = new Alert(AlertType.ERROR);
-					Erreur.setTitle("Erreur");
-					Erreur.setHeaderText(null);
-					Erreur.setContentText("Vous n'avez pas tapé votre téléphone");
-					Erreur.showAndWait();
-					txtFTelephone.requestFocus();
-
-				} else if (!txtFTelephone.getText().matches("^[\\(][0-9]{3}[\\)][\\s][0-9]{3}[\\-][0-9]{4}$")) {
-					Alert Erreur = new Alert(AlertType.ERROR);
-					Erreur.setTitle("Erreur");
-					Erreur.setHeaderText(null);
-					Erreur.setContentText("Voici le format que vous devez mettre : (###) ###-####");
-					Erreur.showAndWait();
-					txtFTelephone.requestFocus();
-				}
-				else {
-					boolean booValide = false;
-
-					try {
-
-						// dï¿½sï¿½rialisation des prï¿½posï¿½s
-						// File fichierPreposes= new
-						// File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
-						File fichierPreposes=new  File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
-						File fichierAdherents=new File("C:/Users/rn.merzius/Downloads/test/fichierAdherents.ser");
-						// File fichierPreposes = new
-						// File("/Users/r.merzius/Desktop/fichierPreposes.ser");
-
-						//File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
-						// File fichierPreposes= new
-
-						FileInputStream fichier1 = new FileInputStream(fichierAdherents);
-
-						ObjectInputStream entree1 = new ObjectInputStream(fichier1);
-
-						ArrayList<Adherent> lstAdherents = (ArrayList) entree1.readObject();
-						fichier1.close();
-						entree1.close();
-						for (int i = 0; i < lstAdherents.size(); i++) {
-							if (lstAdherents.get(i).getStrNumeroTelephone().equals(txtFTelephone.getText())) {
-								booValide = true;
-						
-							}
-							
-
-						}
-						if (booValide == true) {
-							Alert Validation = new Alert(AlertType.INFORMATION);
-							Validation.setTitle("Confirmation");
-							Validation.setHeaderText(null);
-							Validation.setContentText("Connexion réussi! Bienvenue à la médiathèque");
-							Validation.showAndWait();
-
-							// pour demarrer l'interface de l'adhérent
-							Stage stageAdherent = new Stage();
-							stageAdherent.initModality(Modality.APPLICATION_MODAL);
-							InterfaceAdherent interfaceAdherent = new InterfaceAdherent();
-							interfaceAdherent.start(stageAdherent);
-							txtFTelephone.clear();
-							txtFTelephone.requestFocus();
-
-						}
-						else {
-							Alert Erreur = new Alert(AlertType.ERROR);
-							Erreur.setTitle("Erreur");
-							Erreur.setHeaderText(null);
-							Erreur.setContentText("Cette adhérent n'existe pas! Veillez rentrer un adhérent qui existe.");
-							Erreur.showAndWait();
-						}
-
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (ClassNotFoundException e) {
-						e.printStackTrace();
-					}
-					
-
-				}
-			}
-
+			if (event.getCode()==KeyCode.ENTER&&tabConnexionAdherent.isSelected())
+			ValidationAdherent();
+			else if(event.getCode()==KeyCode.ENTER&&tabConnexionAdmin.isSelected())
+				ValidationAdmin();
+			else if(event.getCode()==KeyCode.ENTER&&tabConnexionEmploye.isSelected())
+				ValidationEmploye();
 		}
 
 	}

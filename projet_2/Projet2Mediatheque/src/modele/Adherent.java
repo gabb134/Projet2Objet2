@@ -11,13 +11,18 @@ private String strNom;
 private String strPrenom;
 private String strNumeroTelephone;
 private String strNumeroAdherent;
+private String strAdresse;
+private int intNbPrets;
+private int intSolde;
 
-
-public Adherent (String strNumeroAdherent,String strNom,String strPrenom,String strNumeroTelephone){
+public Adherent (String strNumeroAdherent,String strNom,String strPrenom, String strAdresse,String strNumeroTelephone, int intNbPrets,int intSolde){
 	this.strNumeroAdherent=strNumeroAdherent;
 	this.strNom=strNom;
 	this.strPrenom=strPrenom;
+	this.strAdresse=strAdresse;
 	this.strNumeroTelephone=strNumeroTelephone;
+	this.intNbPrets=intNbPrets;
+	this.intSolde=intSolde;
 }
 
 public String getStrNom() {
