@@ -83,7 +83,7 @@ public static ArrayList<Prepose> getlstPreposes()
 		// TODO Auto-generated method stub
 		Administrateur admin=new Administrateur();
 		admin.AjouterPrepose("merzius", "paul", "inconnue", "(111) 111-1111", "Password1");
-		System.out.println(Administrateur.lstPreposes.get(1).getNoEmploye());
+		System.out.println(Administrateur.lstPreposes.get(0).getNoEmploye());
 		
 
 

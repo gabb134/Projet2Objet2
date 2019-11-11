@@ -72,6 +72,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.Duration;
+import modele.Adherent;
 import modele.Catalogue;
 import modele.DVD;
 import modele.Document;
@@ -190,36 +191,41 @@ public class Mediatheque extends Application {
 
 	private Tab tabPeriodique;
 
-
-
 	@Override
 	public void start(Stage primaryStage) {
 		// TODO Auto-generated method stub
 
 		try {
-			/********************************************* FICHIERS SERIALIZABLES********************************************************/
+			/*********************************************
+			 * FICHIERS SERIALIZABLES
+			 ********************************************************/
 
 			// fichierSerial ="C:/Users/rn.merzius/Downloads/test/fichier.ser";
-			 //fichierSerial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
+			// fichierSerial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
 			fichierSerial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
 			// fichierSerial= "/Users/r.merzius/Desktop/fichier.ser";
 			// FichierDeserial="/Users/r.merzius/Desktop/fichier.ser";
 			// FichierDeserial = "C:/Users/rn.merzius/Downloads/test/fichier.ser";
 			// FichierDeserial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
 			FichierDeserial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
-			
-			/********************************************* TOUTES LES NODES(LES LAYOUTS EX; BORDERPANE, TABPANE, ETC.) ********************/
+
+			/*********************************************
+			 * TOUTES LES NODES(LES LAYOUTS EX; BORDERPANE, TABPANE, ETC.)
+			 ********************/
 
 			root = new BorderPane();
 			bPaneConnexion = new BorderPane();
 			bPaneEsthetique = new BorderPane();
 			tabPane = new TabPane();
 
-			/********************************************* DANS LA CONNEXION ********************************************************************************************/
-			
-			
-			/********************************************* GESTION PARTIE DE DROITE DE LA CONNEXION(ADHÉRENT,PRÉPOSÉ,ADMIN,ETC.) *********/
-			
+			/*********************************************
+			 * DANS LA CONNEXION
+			 ********************************************************************************************/
+
+			/*********************************************
+			 * GESTION PARTIE DE DROITE DE LA CONNEXION(ADHÉRENT,PRÉPOSÉ,ADMIN,ETC.)
+			 *********/
+
 			stageCatalogue = new Stage();
 			stageCatalogue.setTitle("Médiathèque");
 			stageCatalogue.getIcons().add(new Image("booklibrary.png"));
@@ -370,8 +376,7 @@ public class Mediatheque extends Application {
 
 			// Ajout des onglets de connexion
 			tabPaneConnexion.getTabs().addAll(tabConnexionAdherent, tabConnexionEmploye, tabConnexionAdmin);
-			
-			
+
 			btnConsulterCatalogue.setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override
@@ -383,7 +388,9 @@ public class Mediatheque extends Application {
 				}
 			});
 
-			/********************************************* GESTION PARTIE DE GAUCHE DE LA CONNEXION(TITRE, LOGO,ETC.) ********************************************************/
+			/*********************************************
+			 * GESTION PARTIE DE GAUCHE DE LA CONNEXION(TITRE, LOGO,ETC.)
+			 ********************************************************/
 			Text txtExplication = new Text("Veuillez choisir un des trois onglet pour accéder à notre médiathèque.");
 			HBox hBoxText = new HBox();
 			hBoxText.getChildren().add(txtExplication);
@@ -417,7 +424,9 @@ public class Mediatheque extends Application {
 			bPaneEsthetique.setMargin(txtBienvenue, new Insets(15, 5, 5, 15));
 			bPaneEsthetique.setCenter(image);
 
-			/********************************************* DANS LE CATALOGUE(GERE TOUT CE QUI EST DANS L'INTERFACE DEU CATALOGUE)********************************************************/
+			/*********************************************
+			 * DANS LE CATALOGUE(GERE TOUT CE QUI EST DANS L'INTERFACE DEU CATALOGUE)
+			 ********************************************************/
 			// premier onglet (Catalogue)
 			tabCatalogue = new Tab();
 			tabCatalogue.setClosable(false);
@@ -443,9 +452,6 @@ public class Mediatheque extends Application {
 			tabPeriodique.setGraphic(new ImageView(new Image("icon-periodique.png")));
 
 			// gestion des tablesViews
-		
-
-			
 
 			// pour la partie de droite du root(borderpane)
 			GestionConsulterCatalogue gCatalogue = new GestionConsulterCatalogue();
@@ -510,7 +516,7 @@ public class Mediatheque extends Application {
 			gpaneConnexionADroite.add(txtPrenomDroite, 0, 4, 2, 1);
 			gpaneConnexionADroite.add(txtFPrenomDroite, 2, 4, 2, 1);
 			gpaneConnexionADroite.add(btnConnecterAdherentDroite, 2, 5, 2, 1);
-			
+
 			ValidationAdherentDroite validationAdherentDroite = new ValidationAdherentDroite();
 
 			btnConnecterAdherentDroite.setOnMouseClicked(validationAdherentDroite);
@@ -519,7 +525,8 @@ public class Mediatheque extends Application {
 
 			root.setRight(bPaneDroite);
 
-			//***************************** PARTIE D'EN BAS DU CATALOGUE***********************/
+			// ***************************** PARTIE D'EN BAS DU
+			// CATALOGUE***********************/
 			hboxEnBas = new HBox(10);
 			hboxEnBas.setPadding(new Insets(10));
 			tGroupEnHaut = new ToggleGroup();
@@ -549,8 +556,6 @@ public class Mediatheque extends Application {
 			hboxButton.getChildren().add(btnQuitter);
 			hboxButton.setAlignment(Pos.CENTER);
 			bPaneDroite.setBottom(hboxButton);
-			
-			
 
 			btnQuitter.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
@@ -561,9 +566,11 @@ public class Mediatheque extends Application {
 				}
 
 			});
-			
-			/******************************************** DANS CHAQUE ONGLET DU CATALOGUE **********************************/
-			
+
+			/********************************************
+			 * DANS CHAQUE ONGLET DU CATALOGUE
+			 **********************************/
+
 			// Dans l'oglet Catalogue
 
 			// Node qui va avoir les tablesColumn
@@ -604,7 +611,8 @@ public class Mediatheque extends Application {
 			// Creation des colonnes dans l'onglet Livres
 			TableColumn<Livre, String> colonneNumDocLivre = new TableColumn<Livre, String>("Numéro Document");
 			TableColumn<Livre, String> colonneTitreLivre = new TableColumn<Livre, String>("Titre");
-			TableColumn<Livre, LocalDate> colonneDatePubLivre = new TableColumn<Livre, LocalDate>("Date de publication");
+			TableColumn<Livre, LocalDate> colonneDatePubLivre = new TableColumn<Livre, LocalDate>(
+					"Date de publication");
 			TableColumn<Livre, String> colonneDispoLivre = new TableColumn<Livre, String>("Disponible");
 			TableColumn<Livre, String> colonneAuteurLivre = new TableColumn<Livre, String>("auteur");
 
@@ -701,14 +709,17 @@ public class Mediatheque extends Application {
 
 			tableCatalogue.getColumns().addAll(colonneNumDocCatalogue, colonneTitreCatalogue, colonneDatePubCatalogue,
 					colonneDispoCatalogue);
-			tableLivre.getColumns().addAll(colonneNumDocLivre, colonneTitreLivre, colonneDatePubLivre, colonneDispoLivre,
-					colonneAuteurLivre);
+			tableLivre.getColumns().addAll(colonneNumDocLivre, colonneTitreLivre, colonneDatePubLivre,
+					colonneDispoLivre, colonneAuteurLivre);
 			tableDVD.getColumns().addAll(colonneNumDocDVD, colonneTitreDVD, colonneDatePubDVD, colonneDispoDVD,
 					colonneNbDisquesDVD, colonneRealisateurDVD);
-			tablePeriodique.getColumns().addAll(colonneNumDocPeriodique, colonneTitrePeriodique, colonneDatePubPeriodique,
-					colonneDispoPeriodique, colonneNoVolumePeriodique, colonneNoPeriodiquePeriodique);
+			tablePeriodique.getColumns().addAll(colonneNumDocPeriodique, colonneTitrePeriodique,
+					colonneDatePubPeriodique, colonneDispoPeriodique, colonneNoVolumePeriodique,
+					colonneNoPeriodiquePeriodique);
 
-			/********************************************* AFFICHAGE********************************************************/
+			/*********************************************
+			 * AFFICHAGE
+			 ********************************************************/
 			bPaneConnexion.setRight(tabPaneConnexion);
 			bPaneConnexion.setLeft(bPaneEsthetique);
 
@@ -729,14 +740,15 @@ public class Mediatheque extends Application {
 			primaryStage.setResizable(false);
 			primaryStage.setScene(sceneConnexion);
 			primaryStage.show();
-			
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-/*********************************************** METHODES ET EVENEMENT *******************************************************/
+	/***********************************************
+	 * METHODES ET EVENEMENT
+	 *******************************************************/
 
 	private class GestionConsulterCatalogue implements EventHandler<ActionEvent> {
 
@@ -904,13 +916,15 @@ public class Mediatheque extends Application {
 				try {
 
 					// dï¿½sï¿½rialisation des prï¿½posï¿½s
-					 //File fichierPreposes= new  File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
+					// File fichierPreposes= new
+					// File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
 					// File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
-					// File fichierPreposes = new File("/Users/r.merzius/Desktop/fichierPreposes.ser");
-					
+					// File fichierPreposes = new
+					// File("/Users/r.merzius/Desktop/fichierPreposes.ser");
+
 					File fichierPreposes = new File("C:/Users/cg.marrero/Downloads/test/fichierPreposes.ser");
-					// File fichierPreposes= new 
-					
+					// File fichierPreposes= new
+
 					FileInputStream fichier1 = new FileInputStream(fichierPreposes);
 
 					ObjectInputStream entree1 = new ObjectInputStream(fichier1);
@@ -922,31 +936,41 @@ public class Mediatheque extends Application {
 						if (lstPreposes.get(i).getNoEmploye().equals(txtFNoPrepose.getText())
 								&& lstPreposes.get(i).getMotDePasse().equals(txtFMotDePassePrepose.getText())) {
 							booValide = true;
-							Alert Validation = new Alert(AlertType.INFORMATION);
-							Validation.setTitle("Confirmation");
-							Validation.setHeaderText(null);
-							Validation.setContentText("Valide !");
-							Validation.showAndWait();
-
+					
 						}
 
 					}
-					if (booValide == false) {
-					/*	Alert Validation = new Alert(AlertType.INFORMATION);
+					if (booValide == true) {
+						/*
+						 * Alert Validation = new Alert(AlertType.INFORMATION);
+						 * Validation.setTitle("Confirmation"); Validation.setHeaderText(null);
+						 * Validation.setContentText("Nom d'utilisateur ou Mot de passe invalide");
+						 * Validation.showAndWait();
+						 * 
+						 */
+						
+						Alert Validation = new Alert(AlertType.INFORMATION);
 						Validation.setTitle("Confirmation");
 						Validation.setHeaderText(null);
-						Validation.setContentText("Nom d'utilisateur ou Mot de passe invalide");
-						Validation.showAndWait();*/
+						Validation.setContentText("Valide !");
+						Validation.showAndWait();
+
 						System.out.println("confirmé!");
-						//pour demarrer l'interface du préposé
+						// pour demarrer l'interface du préposé
 						Stage stagePrepose = new Stage();
 						stagePrepose.initModality(Modality.APPLICATION_MODAL);
 						InterfacePrepose interfacePrepose = new InterfacePrepose();
 						interfacePrepose.start(stagePrepose);
-						
-						//il faut trouvé une façon pour fermer le primary stage à partir d'ici
-						
-						
+
+						// il faut trouvé une façon pour fermer le primary stage à partir d'ici
+
+					}
+					else {
+						Alert Erreur = new Alert(AlertType.ERROR);
+						Erreur.setTitle("Erreur");
+						Erreur.setHeaderText(null);
+						Erreur.setContentText("Ce préposé n'existe pas! Veillez rentrer un préposé qui existe.");
+						Erreur.showAndWait();
 					}
 
 				} catch (IOException e) {
@@ -985,110 +1009,199 @@ public class Mediatheque extends Application {
 		}
 	}
 
-	private class ValidationAdherent implements EventHandler<MouseEvent> {
+	private class ValidationAdherent implements EventHandler<MouseEvent> { //aller voir validation employe pour pouvoir se connecter avec les fichiers serializables
 
 		@Override
 		public void handle(MouseEvent event) {
 			// TODO Auto-generated method stub
-			if (rbPrenomEtNom.isSelected() && txtFNom.getText().compareTo("") == 0) {
-				Alert Erreur = new Alert(AlertType.ERROR);
-				Erreur.setTitle("Erreur");
-				Erreur.setHeaderText(null);
-				Erreur.setContentText("Vous n'avez pas tapé votre Nom");
-				Erreur.showAndWait();
-				txtFNom.requestFocus();
-			} else if (rbPrenomEtNom.isSelected() && txtFPrenom.getText().compareTo("") == 0) {
-				Alert Erreur = new Alert(AlertType.ERROR);
-				Erreur.setTitle("Erreur");
-				Erreur.setHeaderText(null);
-				Erreur.setContentText("Vous n'avez pas tapé votre prénom");
-				Erreur.showAndWait();
-				txtFPrenom.requestFocus();
-			} else if (rbTelephone.isSelected() && txtFTelephone.getText().compareTo("") == 0) {
-				Alert Erreur = new Alert(AlertType.ERROR);
-				Erreur.setTitle("Erreur");
-				Erreur.setHeaderText(null);
-				Erreur.setContentText("Vous n'avez pas tapé votre téléphone");
-				Erreur.showAndWait();
-				txtFTelephone.requestFocus();
+			if (rbPrenomEtNom.isSelected()) {
+				if (txtFNom.getText().compareTo("") == 0) {
+					Alert Erreur = new Alert(AlertType.ERROR);
+					Erreur.setTitle("Erreur");
+					Erreur.setHeaderText(null);
+					Erreur.setContentText("Vous n'avez pas tapé votre Nom");
+					Erreur.showAndWait();
+					txtFNom.requestFocus();
+				} else if (txtFPrenom.getText().compareTo("") == 0) {
+					Alert Erreur = new Alert(AlertType.ERROR);
+					Erreur.setTitle("Erreur");
+					Erreur.setHeaderText(null);
+					Erreur.setContentText("Vous n'avez pas tapé votre prénom");
+					Erreur.showAndWait();
+					txtFPrenom.requestFocus();
+				}  else {
+					
+					boolean booValide = false;
 
-			} else if (!txtFTelephone.getText().matches("^[\\(][0-9]{3}[\\)][\\s][0-9]{3}[\\-][0-9]{4}$")) {
-				Alert Erreur = new Alert(AlertType.ERROR);
-				Erreur.setTitle("Erreur");
-				Erreur.setHeaderText(null);
-				Erreur.setContentText("Voici le format que vous devez mettre : (###) ###-####");
-				Erreur.showAndWait();
-				txtFTelephone.requestFocus();
-			} else {
-				Alert Valide = new Alert(AlertType.CONFIRMATION);
-				Valide.setTitle("Confirmation");
-				Valide.setHeaderText(null);
-				Valide.setContentText("Confirmation");
-				Valide.showAndWait();
-				
-				//pour demarrer l'interface de l'adhérent
-				Stage stageAdherent = new Stage();
-				stageAdherent.initModality(Modality.APPLICATION_MODAL);
-				InterfaceAdherent interfaceAdherent = new InterfaceAdherent();
-				interfaceAdherent.start(stageAdherent);
-				
+					try {
+
+						// dï¿½sï¿½rialisation des prï¿½posï¿½s
+						// File fichierPreposes= new
+						// File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
+						// File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
+						// File fichierPreposes = new
+						// File("/Users/r.merzius/Desktop/fichierPreposes.ser");
+
+						File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
+						// File fichierPreposes= new
+
+						FileInputStream fichier1 = new FileInputStream(fichierAdherents);
+
+						ObjectInputStream entree1 = new ObjectInputStream(fichier1);
+
+						ArrayList<Adherent> lstAdherents = (ArrayList) entree1.readObject();
+						fichier1.close();
+						entree1.close();
+						for (int i = 0; i < lstAdherents.size(); i++) {
+							if (lstAdherents.get(i).getStrNom().equals(txtFNom.getText())
+									&& lstAdherents.get(i).getStrPrenom().equals(txtFPrenom.getText())) {
+								booValide = true;
+						
+							}
+							
+
+						}
+						if (booValide == true) {
+							Alert Validation = new Alert(AlertType.INFORMATION);
+							Validation.setTitle("Confirmation");
+							Validation.setHeaderText(null);
+							Validation.setContentText("Valide !");
+							Validation.showAndWait();
+
+							// pour demarrer l'interface de l'adhérent
+							Stage stageAdherent = new Stage();
+							stageAdherent.initModality(Modality.APPLICATION_MODAL);
+							InterfaceAdherent interfaceAdherent = new InterfaceAdherent();
+							interfaceAdherent.start(stageAdherent);
+							
+
+						}
+						else {
+							Alert Erreur = new Alert(AlertType.ERROR);
+							Erreur.setTitle("Erreur");
+							Erreur.setHeaderText(null);
+							Erreur.setContentText("Cette adhérent n'existe pas! Veillez rentrer un adhérent qui existe.");
+							Erreur.showAndWait();
+						}
+
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+					}
+					
+					
+				}
 			}
-			
-		
+			else if(rbTelephone.isSelected()) {
+				 if (txtFTelephone.getText().compareTo("") == 0) {
+					Alert Erreur = new Alert(AlertType.ERROR);
+					Erreur.setTitle("Erreur");
+					Erreur.setHeaderText(null);
+					Erreur.setContentText("Vous n'avez pas tapé votre téléphone");
+					Erreur.showAndWait();
+					txtFTelephone.requestFocus();
+
+				} else if (!txtFTelephone.getText().matches("^[\\(][0-9]{3}[\\)][\\s][0-9]{3}[\\-][0-9]{4}$")) {
+					Alert Erreur = new Alert(AlertType.ERROR);
+					Erreur.setTitle("Erreur");
+					Erreur.setHeaderText(null);
+					Erreur.setContentText("Voici le format que vous devez mettre : (###) ###-####");
+					Erreur.showAndWait();
+					txtFTelephone.requestFocus();
+				}
+				else {
+					Alert Valide = new Alert(AlertType.CONFIRMATION);
+					Valide.setTitle("Confirmation");
+					Valide.setHeaderText(null);
+					Valide.setContentText("Confirmation");
+					Valide.showAndWait();
+
+					// pour demarrer l'interface de l'adhérent
+					Stage stageAdherent = new Stage();
+					stageAdherent.initModality(Modality.APPLICATION_MODAL);
+					InterfaceAdherent interfaceAdherent = new InterfaceAdherent();
+					interfaceAdherent.start(stageAdherent);
+
+				}
+			}
+
 		}
 
 	}
+
 	public class ValidationAdherentDroite implements EventHandler<MouseEvent> {
 
 		@Override
 		public void handle(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
-			if (rbPrenomEtNomDroite.isSelected() && txtFNomDroite.getText().compareTo("") == 0) {
-				Alert Erreur = new Alert(AlertType.ERROR);
-				Erreur.setTitle("Erreur");
-				Erreur.setHeaderText(null);
-				Erreur.setContentText("Vous n'avez pas tapez votre Nom");
-				Erreur.showAndWait();
-				txtFNom.requestFocus();
-			} else if (rbPrenomEtNomDroite.isSelected() && txtFPrenomDroite.getText().compareTo("") == 0) {
-				Alert Erreur = new Alert(AlertType.ERROR);
-				Erreur.setTitle("Erreur");
-				Erreur.setHeaderText(null);
-				Erreur.setContentText("Vous n'avez pas tapez votre prénom");
-				Erreur.showAndWait();
-				txtFPrenomDroite.requestFocus();
-			} else if (rbTelephoneDroite.isSelected() && txtFTelephoneDroite.getText().compareTo("") == 0) {
-				Alert Erreur = new Alert(AlertType.ERROR);
-				Erreur.setTitle("Erreur");
-				Erreur.setHeaderText(null);
-				Erreur.setContentText("Vous n'avez pas tapez votre téléphone");
-				Erreur.showAndWait();
-				txtFTelephoneDroite.requestFocus();
-			}else if (!txtFTelephoneDroite.getText().matches("^[\\(][0-9]{3}[\\)][\\s][0-9]{3}[\\-][0-9]{4}$")) {
-				Alert Erreur = new Alert(AlertType.ERROR);
-				Erreur.setTitle("Erreur");
-				Erreur.setHeaderText(null);
-				Erreur.setContentText("Voici le format que vous devez mettre : (###) ###-####");
-				Erreur.showAndWait();
-				txtFTelephoneDroite.requestFocus();
-			} else {
-				Alert Valide = new Alert(AlertType.CONFIRMATION);
-				Valide.setTitle("Confirmation");
-				Valide.setHeaderText(null);
-				Valide.setContentText("Confirmation");
-				Valide.showAndWait();
-				//pour demarrer l'interface de l'adhérent
-				Stage stageAdherent = new Stage();
-				stageAdherent.initModality(Modality.APPLICATION_MODAL);
-				InterfaceAdherent interfaceAdherent = new InterfaceAdherent();
-				interfaceAdherent.start(stageAdherent);
+
+			if (rbPrenomEtNomDroite.isSelected()) {
+
+				if (txtFNomDroite.getText().compareTo("") == 0) {
+
+					Alert Erreur = new Alert(AlertType.ERROR);
+					Erreur.setTitle("Erreur");
+					Erreur.setHeaderText(null);
+					Erreur.setContentText("Vous n'avez pas tapez votre Nom");
+					Erreur.showAndWait();
+					txtFNom.requestFocus();
+				} else if ( txtFPrenomDroite.getText().compareTo("") == 0) {
+					Alert Erreur = new Alert(AlertType.ERROR);
+					Erreur.setTitle("Erreur");
+					Erreur.setHeaderText(null);
+					Erreur.setContentText("Vous n'avez pas tapez votre prénom");
+					Erreur.showAndWait();
+					txtFPrenomDroite.requestFocus();
+				}  else {
+					Alert Valide = new Alert(AlertType.CONFIRMATION);
+					Valide.setTitle("Confirmation");
+					Valide.setHeaderText(null);
+					Valide.setContentText("Confirmation");
+					Valide.showAndWait();
+					// pour demarrer l'interface de l'adhérent
+					Stage stageAdherent = new Stage();
+					stageAdherent.initModality(Modality.APPLICATION_MODAL);
+					InterfaceAdherent interfaceAdherent = new InterfaceAdherent();
+					interfaceAdherent.start(stageAdherent);
+
+				}
 
 			}
+			else if(rbTelephoneDroite.isSelected()) {
+				 if ( txtFTelephoneDroite.getText().compareTo("") == 0) {
+					Alert Erreur = new Alert(AlertType.ERROR);
+					Erreur.setTitle("Erreur");
+					Erreur.setHeaderText(null);
+					Erreur.setContentText("Vous n'avez pas tapez votre téléphone");
+					Erreur.showAndWait();
+					txtFTelephoneDroite.requestFocus();
+				} else if (!txtFTelephoneDroite.getText().matches("^[\\(][0-9]{3}[\\)][\\s][0-9]{3}[\\-][0-9]{4}$")) {
+					Alert Erreur = new Alert(AlertType.ERROR);
+					Erreur.setTitle("Erreur");
+					Erreur.setHeaderText(null);
+					Erreur.setContentText("Voici le format que vous devez mettre : (###) ###-####");
+					Erreur.showAndWait();
+					txtFTelephoneDroite.requestFocus();
+				}
+				else {
+					Alert Valide = new Alert(AlertType.CONFIRMATION);
+					Valide.setTitle("Confirmation");
+					Valide.setHeaderText(null);
+					Valide.setContentText("Confirmation");
+					Valide.showAndWait();
+					// pour demarrer l'interface de l'adhérent
+					Stage stageAdherent = new Stage();
+					stageAdherent.initModality(Modality.APPLICATION_MODAL);
+					InterfaceAdherent interfaceAdherent = new InterfaceAdherent();
+					interfaceAdherent.start(stageAdherent);
+
+				}
+			}
 		}
-		
+
 	}
-	
 
 	public static void main(String[] args) {
 		launch(args);
