@@ -1,5 +1,6 @@
 package controleurEtVue;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -88,8 +89,8 @@ public class InterfacePrepose extends Application {
 
 	private Tab tabPeriodique;
 
-	private String fichierSerial = "";
-	private String FichierDeserial = "";
+	private File fichierSerial;
+	private File FichierDeserial;
 
 	private BorderPane root;
 	private Scene scene;
@@ -174,14 +175,14 @@ public class InterfacePrepose extends Application {
 			 * FICHIERS SERIALIZABLES
 			 ********************************************************/
 
-			 fichierSerial ="C:/Users/rn.merzius/Downloads/test/fichier.ser";
-			// fichierSerial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
-			//fichierSerial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
-			// fichierSerial= "/Users/r.merzius/Desktop/fichier.ser";
-			// FichierDeserial="/Users/r.merzius/Desktop/fichier.ser";
-			 FichierDeserial = "C:/Users/rn.merzius/Downloads/test/fichier.ser";
-			// FichierDeserial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
-			//FichierDeserial = "C:/Users/cg.marrero/Downloads/test/fichier.ser";
+			// fichierSerial = new File("C:/Users/rn.merzius/Downloads/test/fichier.ser");
+			// fichierSerial =  new File("C:/Users/GabrielMarrero/Downloads/test/fichier.ser");
+			fichierSerial = new File( "C:/Users/cg.marrero/Downloads/test/fichier.ser");
+			// fichierSerial= new File("C:/Users/r.merzius/Desktop/fichier.ser");
+			// FichierDeserial=new File("C:/Users/r.merzius/Desktop/fichier.ser");
+			// FichierDeserial = new File("C:/Users/rn.merzius/Downloads/test/fichier.ser");
+			// FichierDeserial = new File("C:/Users/GabrielMarrero/Downloads/test/fichier.ser");
+			FichierDeserial = new File("C:/Users/cg.marrero/Downloads/test/fichier.ser");
 
 			root = new BorderPane();
 			scene = new Scene(root);
@@ -341,7 +342,43 @@ public class InterfacePrepose extends Application {
 			 *TABLE VIEW POUR LES ADHERENTS 
 			 ***********************/
 			
+			//faire les donnesAdherents avec l'arraylist adheretn qui est dans prepose
+			
+			
+			TableColumn<Adherent, String> colonneNumeroAdherent = new TableColumn<Adherent, String>("Numéro d'adhérent");
+			TableColumn<Adherent, String> colonneNomAdherent= new TableColumn<Adherent, String>("Nom");
+			TableColumn<Adherent, String> colonnePrenomAdherent = new TableColumn<Adherent, String>("Prénom");
+			TableColumn<Adherent, String> colonneAdresseAdherent = new TableColumn<Adherent, String>("Adresse");
+			TableColumn<Adherent, String> colonneNumeroTelephoneAdherent = new TableColumn<Adherent, String>("Téléphone");
+			TableColumn<Adherent, String> colonnePretsActifsAdherent = new TableColumn<Adherent, String>("Prêts actif");
+			TableColumn<Adherent, String> colonneSoldeDuAdherent = new TableColumn<Adherent, String>("Solde dû");
+			
+			colonneNumeroAdherent.setPrefWidth(120);
+			colonneNomAdherent.setPrefWidth(100);
+			colonnePrenomAdherent.setPrefWidth(100);
+			colonneAdresseAdherent.setPrefWidth(150);
+			colonneNumeroTelephoneAdherent.setPrefWidth(100);
+			colonnePretsActifsAdherent.setPrefWidth(100);
+			colonneSoldeDuAdherent.setPrefWidth(100);
 
+			colonneNumeroAdherent.setMaxWidth(Double.MAX_VALUE);
+			colonneNomAdherent.setMaxWidth(Double.MAX_VALUE);
+			colonnePrenomAdherent.setMaxWidth(Double.MAX_VALUE);
+			colonneAdresseAdherent.setMaxWidth(Double.MAX_VALUE);
+			colonneNumeroTelephoneAdherent.setMaxWidth(Double.MAX_VALUE);
+			colonnePretsActifsAdherent.setMaxWidth(Double.MAX_VALUE);
+			colonneSoldeDuAdherent.setMaxWidth(Double.MAX_VALUE);
+
+			colonneNumeroAdherent.setCellValueFactory(new PropertyValueFactory<>("strNumeroAdherent"));
+			colonneNomAdherent.setCellValueFactory(new PropertyValueFactory<>("strNom"));
+			colonnePrenomAdherent.setCellValueFactory(new PropertyValueFactory<>("strPrenom"));
+			colonneAdresseAdherent.setCellValueFactory(new PropertyValueFactory<>("strAdresse"));
+			colonneNumeroTelephoneAdherent.setCellValueFactory(new PropertyValueFactory<>("strNumeroTelephone"));
+			colonnePretsActifsAdherent.setCellValueFactory(new PropertyValueFactory<>("intNbPrets"));
+			colonneSoldeDuAdherent.setCellValueFactory(new PropertyValueFactory<>("intSolde"));
+			
+			tableAdherent.getColumns().addAll(colonneNumeroAdherent,colonneNomAdherent,colonnePrenomAdherent,colonneAdresseAdherent,colonneNumeroTelephoneAdherent,colonnePretsActifsAdherent,colonneSoldeDuAdherent);
+			
 			/*****************************
 			 * PARTIE D'EN BAS DU CATALOGUE
 			 ***********************/
@@ -525,23 +562,30 @@ public class InterfacePrepose extends Application {
 	}
 
 	public void SerializationCatalogue() { // Methode qui permet d'aller chercher l'objet Catalogue pour le serializer
-		Catalogue catalogueSerialisation = Catalogue.getInstance("Livres.txt", "Periodiques.txt", "DVD.txt");
+		
+		if(!fichierSerial.exists()) {
+			Catalogue catalogueSerialisation = Catalogue.getInstance("Livres.txt", "Periodiques.txt", "DVD.txt");
 
-		try {
-			FileOutputStream fichier = new FileOutputStream(fichierSerial);
-			ObjectOutputStream sortie = new ObjectOutputStream(fichier);
+			try {
+				FileOutputStream fichier = new FileOutputStream(fichierSerial);
+				ObjectOutputStream sortie = new ObjectOutputStream(fichier);
 
-			sortie.writeObject(catalogueSerialisation);
+				sortie.writeObject(catalogueSerialisation);
 
-			sortie.close();
-			fichier.close();
+				sortie.close();
+				fichier.close();
 
-			// System.out.println("l'objet catalogue vient d'ï¿½tre seralizer");
+				// System.out.println("l'objet catalogue vient d'ï¿½tre seralizer");
 
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		else {
+			DeserialisationCatalogue();
+		}
+		
 
 	}
 
@@ -922,11 +966,13 @@ public class InterfacePrepose extends Application {
 				System.out.println("catalogue");
 				
 				root.setCenter(tabPane);
+				root.setBottom(hboxEnBas);
 				
 			}else if(e.getSource()==paneGestionAdherents) {
 				System.out.println("andherent");
 				root.getChildren().removeAll(tabPane);
 				root.getChildren().removeAll(hboxEnBas);
+				root.setCenter(tableAdherent);
 				//mettre le tableview des adherents
 				
 				
@@ -934,6 +980,7 @@ public class InterfacePrepose extends Application {
 			}else if(e.getSource()==paneGestionPrets) {
 				System.out.println("prets");
 				root.setCenter(tabPane);
+				root.setBottom(hboxEnBas);
 			}
 			
 			
