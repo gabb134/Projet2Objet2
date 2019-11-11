@@ -1112,17 +1112,65 @@ public class Mediatheque extends Application {
 					txtFTelephone.requestFocus();
 				}
 				else {
-					Alert Valide = new Alert(AlertType.CONFIRMATION);
-					Valide.setTitle("Confirmation");
-					Valide.setHeaderText(null);
-					Valide.setContentText("Confirmation");
-					Valide.showAndWait();
+					boolean booValide = false;
 
-					// pour demarrer l'interface de l'adhérent
-					Stage stageAdherent = new Stage();
-					stageAdherent.initModality(Modality.APPLICATION_MODAL);
-					InterfaceAdherent interfaceAdherent = new InterfaceAdherent();
-					interfaceAdherent.start(stageAdherent);
+					try {
+
+						// dï¿½sï¿½rialisation des prï¿½posï¿½s
+						// File fichierPreposes= new
+						// File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
+						// File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
+						// File fichierPreposes = new
+						// File("/Users/r.merzius/Desktop/fichierPreposes.ser");
+
+						File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
+						// File fichierPreposes= new
+
+						FileInputStream fichier1 = new FileInputStream(fichierAdherents);
+
+						ObjectInputStream entree1 = new ObjectInputStream(fichier1);
+
+						ArrayList<Adherent> lstAdherents = (ArrayList) entree1.readObject();
+						fichier1.close();
+						entree1.close();
+						for (int i = 0; i < lstAdherents.size(); i++) {
+							if (lstAdherents.get(i).getStrNumeroTelephone().equals(txtFTelephone.getText())) {
+								booValide = true;
+						
+							}
+							
+
+						}
+						if (booValide == true) {
+							Alert Validation = new Alert(AlertType.INFORMATION);
+							Validation.setTitle("Confirmation");
+							Validation.setHeaderText(null);
+							Validation.setContentText("Valide !");
+							Validation.showAndWait();
+
+							// pour demarrer l'interface de l'adhérent
+							Stage stageAdherent = new Stage();
+							stageAdherent.initModality(Modality.APPLICATION_MODAL);
+							InterfaceAdherent interfaceAdherent = new InterfaceAdherent();
+							interfaceAdherent.start(stageAdherent);
+							
+
+						}
+						else {
+							Alert Erreur = new Alert(AlertType.ERROR);
+							Erreur.setTitle("Erreur");
+							Erreur.setHeaderText(null);
+							Erreur.setContentText("Cette adhérent n'existe pas! Veillez rentrer un adhérent qui existe.");
+							Erreur.showAndWait();
+						}
+
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+					}
+					
 
 				}
 			}
@@ -1155,16 +1203,66 @@ public class Mediatheque extends Application {
 					Erreur.showAndWait();
 					txtFPrenomDroite.requestFocus();
 				}  else {
-					Alert Valide = new Alert(AlertType.CONFIRMATION);
-					Valide.setTitle("Confirmation");
-					Valide.setHeaderText(null);
-					Valide.setContentText("Confirmation");
-					Valide.showAndWait();
-					// pour demarrer l'interface de l'adhérent
-					Stage stageAdherent = new Stage();
-					stageAdherent.initModality(Modality.APPLICATION_MODAL);
-					InterfaceAdherent interfaceAdherent = new InterfaceAdherent();
-					interfaceAdherent.start(stageAdherent);
+					boolean booValide = false;
+
+					try {
+
+						// dï¿½sï¿½rialisation des prï¿½posï¿½s
+						// File fichierPreposes= new
+						// File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
+						// File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
+						// File fichierPreposes = new
+						// File("/Users/r.merzius/Desktop/fichierPreposes.ser");
+
+						File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
+						// File fichierPreposes= new
+
+						FileInputStream fichier1 = new FileInputStream(fichierAdherents);
+
+						ObjectInputStream entree1 = new ObjectInputStream(fichier1);
+
+						ArrayList<Adherent> lstAdherents = (ArrayList) entree1.readObject();
+						fichier1.close();
+						entree1.close();
+						for (int i = 0; i < lstAdherents.size(); i++) {
+							if (lstAdherents.get(i).getStrNom().equals(txtFNom.getText())
+									&& lstAdherents.get(i).getStrPrenom().equals(txtFPrenom.getText())) {
+								booValide = true;
+						
+							}
+							
+
+						}
+						if (booValide == true) {
+							Alert Validation = new Alert(AlertType.INFORMATION);
+							Validation.setTitle("Confirmation");
+							Validation.setHeaderText(null);
+							Validation.setContentText("Valide !");
+							Validation.showAndWait();
+
+							// pour demarrer l'interface de l'adhérent
+							Stage stageAdherent = new Stage();
+							stageAdherent.initModality(Modality.APPLICATION_MODAL);
+							InterfaceAdherent interfaceAdherent = new InterfaceAdherent();
+							interfaceAdherent.start(stageAdherent);
+							
+
+						}
+						else {
+							Alert Erreur = new Alert(AlertType.ERROR);
+							Erreur.setTitle("Erreur");
+							Erreur.setHeaderText(null);
+							Erreur.setContentText("Cette adhérent n'existe pas! Veillez rentrer un adhérent qui existe.");
+							Erreur.showAndWait();
+						}
+
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+					}
+					
 
 				}
 
@@ -1186,16 +1284,65 @@ public class Mediatheque extends Application {
 					txtFTelephoneDroite.requestFocus();
 				}
 				else {
-					Alert Valide = new Alert(AlertType.CONFIRMATION);
-					Valide.setTitle("Confirmation");
-					Valide.setHeaderText(null);
-					Valide.setContentText("Confirmation");
-					Valide.showAndWait();
-					// pour demarrer l'interface de l'adhérent
-					Stage stageAdherent = new Stage();
-					stageAdherent.initModality(Modality.APPLICATION_MODAL);
-					InterfaceAdherent interfaceAdherent = new InterfaceAdherent();
-					interfaceAdherent.start(stageAdherent);
+					boolean booValide = false;
+
+					try {
+
+						// dï¿½sï¿½rialisation des prï¿½posï¿½s
+						// File fichierPreposes= new
+						// File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
+						// File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
+						// File fichierPreposes = new
+						// File("/Users/r.merzius/Desktop/fichierPreposes.ser");
+
+						File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
+						// File fichierPreposes= new
+
+						FileInputStream fichier1 = new FileInputStream(fichierAdherents);
+
+						ObjectInputStream entree1 = new ObjectInputStream(fichier1);
+
+						ArrayList<Adherent> lstAdherents = (ArrayList) entree1.readObject();
+						fichier1.close();
+						entree1.close();
+						for (int i = 0; i < lstAdherents.size(); i++) {
+							if (lstAdherents.get(i).getStrNumeroTelephone().equals(txtFTelephoneDroite.getText())) {
+								booValide = true;
+						
+							}
+							
+
+						}
+						if (booValide == true) {
+							Alert Validation = new Alert(AlertType.INFORMATION);
+							Validation.setTitle("Confirmation");
+							Validation.setHeaderText(null);
+							Validation.setContentText("Valide !");
+							Validation.showAndWait();
+
+							// pour demarrer l'interface de l'adhérent
+							Stage stageAdherent = new Stage();
+							stageAdherent.initModality(Modality.APPLICATION_MODAL);
+							InterfaceAdherent interfaceAdherent = new InterfaceAdherent();
+							interfaceAdherent.start(stageAdherent);
+							
+
+						}
+						else {
+							Alert Erreur = new Alert(AlertType.ERROR);
+							Erreur.setTitle("Erreur");
+							Erreur.setHeaderText(null);
+							Erreur.setContentText("Cette adhérent n'existe pas! Veillez rentrer un adhérent qui existe.");
+							Erreur.showAndWait();
+						}
+
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+					}
+					
 
 				}
 			}
