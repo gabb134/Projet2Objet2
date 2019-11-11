@@ -55,6 +55,7 @@ import modele.DVD;
 import modele.Document;
 import modele.Livre;
 import modele.Periodique;
+import modele.Prepose;
 
 public class InterfacePrepose extends Application {
 
@@ -344,6 +345,7 @@ public class InterfacePrepose extends Application {
 			
 			//faire les donnesAdherents avec l'arraylist adheretn qui est dans prepose
 			
+			donneesAdherents = FXCollections.observableArrayList();
 			
 			TableColumn<Adherent, String> colonneNumeroAdherent = new TableColumn<Adherent, String>("Numéro d'adhérent");
 			TableColumn<Adherent, String> colonneNomAdherent= new TableColumn<Adherent, String>("Nom");
@@ -540,6 +542,12 @@ public class InterfacePrepose extends Application {
 			paneGestionAdherents.setOnMouseClicked(gestionnaireChangementTables);
 			paneGestionPrets.setOnMouseClicked(gestionnaireChangementTables);
 			//btnConfirmer.setOnMouseClicked(gestionnaireButtonPreposeCatalogue);
+			
+			GestionnaireButtonPreposeAherent gestionnaireButtonPreposeAherent = new GestionnaireButtonPreposeAherent();
+			btnajouterAherent.setOnMouseClicked(gestionnaireButtonPreposeAherent);
+			btnModifierAdherent.setOnMouseClicked(gestionnaireButtonPreposeAherent);
+			btnSupprimerAdherent.setOnMouseClicked(gestionnaireButtonPreposeAherent);
+			btnPayerSoldeAdhernent.setOnMouseClicked(gestionnaireButtonPreposeAherent);
 
 			/*********************************************
 			 * AFFICHAGE
@@ -994,9 +1002,164 @@ public class InterfacePrepose extends Application {
 		@Override
 		public void handle(MouseEvent e) {
 			// TODO Auto-generated method stub
+			if(e.getSource() == btnajouterAherent) {
+				Stage stageAjoutAdherent = new Stage();
+				GridPane gpaneAjoutAdherent = new GridPane();
+				Scene sceneAjoutAdherent = new Scene(gpaneAjoutAdherent,280,220);
+				
+				gpaneAjoutAdherent.setPadding(new Insets(10));
+				gpaneAjoutAdherent.setHgap(5);
+				gpaneAjoutAdherent.setVgap(10);
+				
+				Text txtNomAdherent = new Text("Nom :");
+				Text txtPrenomAdherent = new Text("Prenom :");
+				Text txtAdresseAdherent = new Text("Adresse :");
+				Text txtTelephoneAdherent = new Text("Téléphone :");
+				
+				TextField txtfNomAdherent = new TextField();
+				TextField txtfPrenomAdherent = new TextField();
+				TextField txtfAdresseAdherent = new TextField();
+				TextField txtfTelephoneAdherent = new TextField();
+				
+				Button btnConfirmerAJoutAdherent = new Button("Confirmer");
+				Button btnAnnulerAjoutAdherent = new Button("Annuler");
+				
+				HBox hboxButtonAhderent = new HBox(2);
+				hboxButtonAhderent.getChildren().addAll(btnConfirmerAJoutAdherent,btnAnnulerAjoutAdherent);
+				
+
+				txtfTelephoneAdherent.setPromptText("(###) ###-####");
+				
+				gpaneAjoutAdherent.add(txtNomAdherent, 0, 0);
+				gpaneAjoutAdherent.add(txtfNomAdherent, 1, 0);
+				gpaneAjoutAdherent.add(txtPrenomAdherent, 0, 1);
+				gpaneAjoutAdherent.add(txtfPrenomAdherent, 1, 1);
+				gpaneAjoutAdherent.add(txtAdresseAdherent, 0, 2);
+				gpaneAjoutAdherent.add(txtfAdresseAdherent, 1, 2);
+				gpaneAjoutAdherent.add(txtTelephoneAdherent, 0, 3);
+				gpaneAjoutAdherent.add(txtfTelephoneAdherent, 1, 3);
+				gpaneAjoutAdherent.add(hboxButtonAhderent, 1, 4);
+				
+				
+				
+				txtfNomAdherent.requestFocus();
+				
+
+				btnAnnulerAjoutAdherent.setOnAction(new EventHandler<ActionEvent>() {
+
+					@Override
+					public void handle(ActionEvent e) {
+						// TODO Auto-generated method stub
+						stageAjoutAdherent.close();
+					}
+				});
+				btnConfirmerAJoutAdherent.setOnAction(new EventHandler<ActionEvent>() {
+
+					@Override
+					public void handle(ActionEvent e) {
+						// TODO Auto-generated method stub
+					
+							if (txtfNomAdherent.getText().compareTo("") == 0) {
+								Alert Erreur = new Alert(AlertType.ERROR);
+								Erreur.setTitle("Erreur");
+								Erreur.setHeaderText(null);
+								Erreur.setContentText("Vous n'avez pas tapé le nom de l'adhérent");
+								Erreur.showAndWait();
+							}
+							else if (txtfPrenomAdherent.getText().compareTo("") == 0) {
+								Alert Erreur = new Alert(AlertType.ERROR);
+								Erreur.setTitle("Erreur");
+								Erreur.setHeaderText(null);
+								Erreur.setContentText("Vous n'avez pas tapé le prénom de l'adhérent");
+								Erreur.showAndWait();
+							}
+							else if (txtfAdresseAdherent.getText().compareTo("") == 0) {
+								Alert Erreur = new Alert(AlertType.ERROR);
+								Erreur.setTitle("Erreur");
+								Erreur.setHeaderText(null);
+								Erreur.setContentText("Vous n'avez pas tapé l'adresse de l'adhérent");
+								Erreur.showAndWait();
+							}
+							else if (txtfTelephoneAdherent.getText().compareTo("") == 0) {
+								Alert Erreur = new Alert(AlertType.ERROR);
+								Erreur.setTitle("Erreur");
+								Erreur.setHeaderText(null);
+								Erreur.setContentText("Vous n'avez pas tapé le téléphone");
+								Erreur.showAndWait();
+							}else if (!txtfTelephoneAdherent.getText().matches("^[\\(][0-9]{3}[\\)][\\s][0-9]{3}[\\-][0-9]{4}$")) {
+								Alert Erreur = new Alert(AlertType.ERROR);
+								Erreur.setTitle("Erreur");
+								Erreur.setHeaderText(null);
+								Erreur.setContentText("Voici le format que vous devez mettre : (###) ###-####");
+								Erreur.showAndWait();
+								txtfTelephoneAdherent.requestFocus();
+							}
+							else {// ajout d'un adhérent
+								
+							}
+							
+						
+
+					}
+				});
+				
+				
+				
+				stageAjoutAdherent.setTitle("Ajout d'un adhérent");
+				stageAjoutAdherent.getIcons().add(new Image("iconAjouterPersonne.png"));
+				stageAjoutAdherent.sizeToScene();
+				stageAjoutAdherent.setScene(sceneAjoutAdherent);
+				stageAjoutAdherent.show();
+
+			}
+			else if(e.getSource()==btnModifierAdherent) {
+				if(tableAdherent.getSelectionModel().getSelectedItem()==null) {//non selectionnee
+					Alert Erreur = new Alert(AlertType.ERROR);
+					Erreur.setTitle("Erreur");
+					Erreur.setHeaderText(null);
+					Erreur.setContentText("Vous devez sélectionner un adhérent pour le modifier");
+					Erreur.showAndWait();
+				}
+				else{
+					System.out.println("adhédent selectionnee");
+				}
+			}
+			else if(e.getSource()==btnSupprimerAdherent) {
+				if(tableAdherent.getSelectionModel().getSelectedItem()==null) {//non selectionnee
+					Alert Erreur = new Alert(AlertType.ERROR);
+					Erreur.setTitle("Erreur");
+					Erreur.setHeaderText(null);
+					Erreur.setContentText("Vous devez sélectionner un adhérent pour le supprimer.");
+					Erreur.showAndWait();
+				}
+				else{
+					System.out.println("adhédent selectionnee");
+				}
+			}
+			else if(e.getSource()==btnPayerSoldeAdhernent) {
+				if(tableAdherent.getSelectionModel().getSelectedItem()==null) {//non selectionnee
+					Alert Erreur = new Alert(AlertType.ERROR);
+					Erreur.setTitle("Erreur");
+					Erreur.setHeaderText(null);
+					Erreur.setContentText("Vous devez sélectionner un adhérent pour payer son solde.");
+					Erreur.showAndWait();
+				}
+				else{
+					System.out.println("adhédent selectionnee");
+				}
+			}
 
 		}
 
+	}
+	private class GestionnaireButtonPrets implements EventHandler<MouseEvent> {
+
+		@Override
+		public void handle(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
 	}
 
 	public static void main(String[] args) {
