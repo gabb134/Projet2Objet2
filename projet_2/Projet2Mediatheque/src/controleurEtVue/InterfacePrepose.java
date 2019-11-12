@@ -178,13 +178,13 @@ public class InterfacePrepose extends Application {
 			 ********************************************************/
 
 			// fichierSerial = new File("C:/Users/rn.merzius/Downloads/test/fichier.ser");
-			// fichierSerial =  new File("C:/Users/GabrielMarrero/Downloads/test/fichier.ser");
-			fichierSerial = new File( "C:/Users/cg.marrero/Downloads/test/fichier.ser");
+			 fichierSerial =  new File("C:/Users/GabrielMarrero/Downloads/test/fichier.ser");
+			//fichierSerial = new File( "C:/Users/cg.marrero/Downloads/test/fichier.ser");
 			// fichierSerial= new File("C:/Users/r.merzius/Desktop/fichier.ser");
 			// FichierDeserial=new File("C:/Users/r.merzius/Desktop/fichier.ser");
 			// FichierDeserial = new File("C:/Users/rn.merzius/Downloads/test/fichier.ser");
-			// FichierDeserial = new File("C:/Users/GabrielMarrero/Downloads/test/fichier.ser");
-			FichierDeserial = new File("C:/Users/cg.marrero/Downloads/test/fichier.ser");
+			 FichierDeserial = new File("C:/Users/GabrielMarrero/Downloads/test/fichier.ser");
+			//FichierDeserial = new File("C:/Users/cg.marrero/Downloads/test/fichier.ser");
 
 			root = new BorderPane();
 			scene = new Scene(root);
