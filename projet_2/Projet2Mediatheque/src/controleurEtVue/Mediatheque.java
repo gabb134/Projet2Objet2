@@ -204,14 +204,14 @@ public class Mediatheque extends Application {
 			 * FICHIERS SERIALIZABLES
 			 ********************************************************/
 
-			 fichierSerial =new File("C:/Users/rn.merzius/Downloads/test/fichier.ser");
+			// fichierSerial =new File("C:/Users/rn.merzius/Downloads/test/fichier.ser");
 			// fichierSerial = new File ("C:/Users/GabrielMarrero/Downloads/test/fichier.ser");
-			//fichierSerial = new File("C:/Users/cg.marrero/Downloads/test/fichier.ser");
+			fichierSerial = new File("C:/Users/cg.marrero/Downloads/test/fichier.ser");
 			// fichierSerial= "/Users/r.merzius/Desktop/fichier.ser";
 			// FichierDeserial="/Users/r.merzius/Desktop/fichier.ser";
-			 FichierDeserial = new File("C:/Users/rn.merzius/Downloads/test/fichier.ser");
+			// FichierDeserial = new File("C:/Users/rn.merzius/Downloads/test/fichier.ser");
 			// FichierDeserial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
-			//FichierDeserial = new File("C:/Users/cg.marrero/Downloads/test/fichier.ser");
+			FichierDeserial = new File("C:/Users/cg.marrero/Downloads/test/fichier.ser");
 
 			/*********************************************
 			 * TOUTES LES NODES(LES LAYOUTS EX; BORDERPANE, TABPANE, ETC.)
@@ -893,11 +893,11 @@ public class Mediatheque extends Application {
 					// d�s�rialisation des pr�pos�s
 					// File fichierPreposes= new
 					// File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
-					File fichierPreposes= new File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
+					//File fichierPreposes= new File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
 					// File fichierPreposes = new
 					// File("/Users/r.merzius/Desktop/fichierPreposes.ser");
-					File fichierAdherents= new File("C:/Users/rn.merzius/Downloads/test/fichierAdherents.ser");
-					//File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
+					//File fichierAdherents= new File("C:/Users/rn.merzius/Downloads/test/fichierAdherents.ser");
+					File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
 					// File fichierPreposes= new
 
 					FileInputStream fichier1 = new FileInputStream(fichierAdherents);
@@ -977,12 +977,12 @@ public class Mediatheque extends Application {
 					// d�s�rialisation des pr�pos�s
 					// File fichierPreposes= new
 					// File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
-					File fichierPreposes=new  File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
-					File fichierAdherents=new File("C:/Users/rn.merzius/Downloads/test/fichierAdherents.ser");
+					//File fichierPreposes=new  File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
+					//File fichierAdherents=new File("C:/Users/rn.merzius/Downloads/test/fichierAdherents.ser");
 					// File fichierPreposes = new
 					// File("/Users/r.merzius/Desktop/fichierPreposes.ser");
 
-					//File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
+					File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
 					// File fichierPreposes= new
 
 					FileInputStream fichier1 = new FileInputStream(fichierAdherents);
