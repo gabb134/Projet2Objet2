@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import controleurEtVue.Mediatheque.ClickValidationAdherentDroite;
 import javafx.application.Application;
@@ -345,7 +346,12 @@ public class InterfacePrepose extends Application {
 			
 			//faire les donnesAdherents avec l'arraylist adheretn qui est dans prepose
 			
-			donneesAdherents = FXCollections.observableArrayList();
+			
+		
+			Prepose p = new Prepose();
+			//donneesAdherents = FXCollections.observableArrayList(p.getLstAdherents());
+		
+			
 			
 			TableColumn<Adherent, String> colonneNumeroAdherent = new TableColumn<Adherent, String>("Numéro d'adhérent");
 			TableColumn<Adherent, String> colonneNomAdherent= new TableColumn<Adherent, String>("Nom");
@@ -379,6 +385,7 @@ public class InterfacePrepose extends Application {
 			colonnePretsActifsAdherent.setCellValueFactory(new PropertyValueFactory<>("intNbPrets"));
 			colonneSoldeDuAdherent.setCellValueFactory(new PropertyValueFactory<>("intSolde"));
 			
+			//tableAdherent.setItems(donneesAdherents);
 			tableAdherent.getColumns().addAll(colonneNumeroAdherent,colonneNomAdherent,colonnePrenomAdherent,colonneAdresseAdherent,colonneNumeroTelephoneAdherent,colonnePretsActifsAdherent,colonneSoldeDuAdherent);
 			
 			/*****************************
