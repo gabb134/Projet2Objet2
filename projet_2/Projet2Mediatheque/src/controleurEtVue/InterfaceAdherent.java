@@ -3,7 +3,6 @@ package controleurEtVue;
 import java.time.LocalDate;
 
 import javafx.application.Application;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -14,13 +13,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import modele.DVD;
 import modele.Document;
-import modele.Livre;
-import modele.Periodique;
 import modele.Pret;
 
 public class InterfaceAdherent extends Application{
@@ -52,10 +47,10 @@ public class InterfaceAdherent extends Application{
 		 btnQuitter.setOnMouseClicked(ClickBtnQuitter);
 		btnQuitter.setPrefWidth(150);
 		
-		 //Ajout des colonnes pour les documents emprunté des préposé
-			TableColumn<Document, String> colonneNumDocAdherent = new TableColumn<Document, String>("Numéro Document");
+		 //Ajout des colonnes pour les documents empruntï¿½ des prï¿½posï¿½
+			TableColumn<Document, String> colonneNumDocAdherent = new TableColumn<Document, String>("Numï¿½ro Document");
 			TableColumn<Document, String> colonneTitreAdherent= new TableColumn<Document, String>("Titre");
-			TableColumn<Document, String> colonneAuteurAdherent = new TableColumn<Document, String>("Auteur/Réalisateur");
+			TableColumn<Document, String> colonneAuteurAdherent = new TableColumn<Document, String>("Auteur/Rï¿½alisateur");
 			TableColumn<Document, LocalDate> colonneDatePubAdherent = new TableColumn<Document, LocalDate>(
 					"Date de publication");
 			
@@ -74,10 +69,10 @@ public class InterfaceAdherent extends Application{
 			colonneAuteurAdherent.setCellValueFactory(new PropertyValueFactory<>("dateParution"));
 			colonneDatePubAdherent.setCellValueFactory(new PropertyValueFactory<>("disponible"));
 			
-			//Ajout des colonnes pour l'information du prêt
-			TableColumn<Pret, Integer> colonneNumPretAdherent = new TableColumn<Pret, Integer>("Numéro de prêt");
-			TableColumn<Pret, LocalDate> colonneDatePretAdherent= new TableColumn<Pret, LocalDate>("Date du prêt");
-			TableColumn<Pret, LocalDate> colonneDatePrevuRetourAdherent = new TableColumn<Pret, LocalDate>("Date de retour prévu");
+			//Ajout des colonnes pour l'information du prï¿½t
+			TableColumn<Pret, Integer> colonneNumPretAdherent = new TableColumn<Pret, Integer>("Numï¿½ro de prï¿½t");
+			TableColumn<Pret, LocalDate> colonneDatePretAdherent= new TableColumn<Pret, LocalDate>("Date du prï¿½t");
+			TableColumn<Pret, LocalDate> colonneDatePrevuRetourAdherent = new TableColumn<Pret, LocalDate>("Date de retour prï¿½vu");
 			TableColumn<Pret, LocalDate> colonneDateRetourEffectueAdherent = new TableColumn<Pret, LocalDate>("Date du retour");
 			TableColumn<Pret, Double> colonneAmendeAdherent = new TableColumn<Pret, Double>("Amende");
 			
@@ -116,7 +111,7 @@ public class InterfaceAdherent extends Application{
 		root.setRight(bPaneDroitePrepose);
 	    PrimaryStage=primaryStage;
 		primaryStage.getIcons().add(new Image("booklibrary.png"));
-		primaryStage.setTitle("Médiathèque");
+		primaryStage.setTitle("Mï¿½diathï¿½que");
 		primaryStage.sizeToScene();
 		primaryStage.setResizable(false);
 		primaryStage.setScene(sceneAdherent);

@@ -151,7 +151,7 @@ public class InterfacePrepose extends Application {
 	private TextField txtFNbDisques;
 	private TextField txtFRealisateur;
 
-	// pour les périodiques
+	// pour les pï¿½riodiques
 	private Text txtNoVolume;
 	private Text txtNoPeriodique;
 
@@ -178,12 +178,12 @@ public class InterfacePrepose extends Application {
 
 			// fichierSerial = new File("C:/Users/rn.merzius/Downloads/test/fichier.ser");
 			// fichierSerial =  new File("C:/Users/GabrielMarrero/Downloads/test/fichier.ser");
-			fichierSerial = new File( "C:/Users/cg.marrero/Downloads/test/fichier.ser");
-			// fichierSerial= new File("C:/Users/r.merzius/Desktop/fichier.ser");
-			// FichierDeserial=new File("C:/Users/r.merzius/Desktop/fichier.ser");
+			//fichierSerial = new File( "C:/Users/cg.marrero/Downloads/test/fichier.ser");
+			 fichierSerial= new File("/Users/r.merzius/Desktop/fichier.ser");
+			 FichierDeserial=new File("/Users/r.merzius/Desktop/fichier.ser");
 			// FichierDeserial = new File("C:/Users/rn.merzius/Downloads/test/fichier.ser");
 			// FichierDeserial = new File("C:/Users/GabrielMarrero/Downloads/test/fichier.ser");
-			FichierDeserial = new File("C:/Users/cg.marrero/Downloads/test/fichier.ser");
+			//FichierDeserial = new File("C:/Users/cg.marrero/Downloads/test/fichier.ser");
 
 			root = new BorderPane();
 			scene = new Scene(root);
@@ -191,7 +191,7 @@ public class InterfacePrepose extends Application {
 			bPaneDroite = new BorderPane();
 
 			/********************************************
-			 * CATALOGUE PRÉPOSÉ
+			 * CATALOGUE PRï¿½POSï¿½
 			 *************************************************/
 
 			/********************************************
@@ -209,7 +209,7 @@ public class InterfacePrepose extends Application {
 			// Creation des colonnes dans l'onglet catalogue
 
 			donneesLivre = FXCollections.observableArrayList(catalogue.getLstLivres());
-			TableColumn<Document, String> colonneNumDocCatalogue = new TableColumn<Document, String>("Numéro Document");
+			TableColumn<Document, String> colonneNumDocCatalogue = new TableColumn<Document, String>("Numï¿½ro Document");
 			TableColumn<Document, String> colonneTitreCatalogue = new TableColumn<Document, String>("Titre");
 			TableColumn<Document, LocalDate> colonneDatePubCatalogue = new TableColumn<Document, LocalDate>(
 					"Date de publication");
@@ -231,7 +231,7 @@ public class InterfacePrepose extends Application {
 			colonneDispoCatalogue.setCellValueFactory(new PropertyValueFactory<>("disponible"));
 
 			// Creation des colonnes dans l'onglet Livres
-			TableColumn<Livre, String> colonneNumDocLivre = new TableColumn<Livre, String>("Numéro Document");
+			TableColumn<Livre, String> colonneNumDocLivre = new TableColumn<Livre, String>("Numï¿½ro Document");
 			TableColumn<Livre, String> colonneTitreLivre = new TableColumn<Livre, String>("Titre");
 			TableColumn<Livre, LocalDate> colonneDatePubLivre = new TableColumn<Livre, LocalDate>(
 					"Date de publication");
@@ -259,12 +259,12 @@ public class InterfacePrepose extends Application {
 			// Creation des colonnes dans l'onglet DVD
 			donneesDVD = FXCollections.observableArrayList(catalogue.getLstDvd());
 
-			TableColumn<DVD, String> colonneNumDocDVD = new TableColumn<DVD, String>("Numéro Document");
+			TableColumn<DVD, String> colonneNumDocDVD = new TableColumn<DVD, String>("Numï¿½ro Document");
 			TableColumn<DVD, String> colonneTitreDVD = new TableColumn<DVD, String>("Titre");
 			TableColumn<DVD, LocalDate> colonneDatePubDVD = new TableColumn<DVD, LocalDate>("Date de publication");
 			TableColumn<DVD, String> colonneDispoDVD = new TableColumn<DVD, String>("Disponible");
 			TableColumn<DVD, Integer> colonneNbDisquesDVD = new TableColumn<DVD, Integer>("Nombres de disques");
-			TableColumn<DVD, String> colonneRealisateurDVD = new TableColumn<DVD, String>("Réalisateur");
+			TableColumn<DVD, String> colonneRealisateurDVD = new TableColumn<DVD, String>("Rï¿½alisateur");
 
 			colonneNumDocDVD.setPrefWidth(120);
 			colonneTitreDVD.setPrefWidth(250);
@@ -292,15 +292,15 @@ public class InterfacePrepose extends Application {
 			donneesPeriodique = FXCollections.observableArrayList(catalogue.getLstPeriodiques());
 
 			TableColumn<Periodique, String> colonneNumDocPeriodique = new TableColumn<Periodique, String>(
-					"Numéro Document");
+					"Numï¿½ro Document");
 			TableColumn<Periodique, String> colonneTitrePeriodique = new TableColumn<Periodique, String>("Titre");
 			TableColumn<Periodique, LocalDate> colonneDatePubPeriodique = new TableColumn<Periodique, LocalDate>(
 					"Date de publication");
 			TableColumn<Periodique, String> colonneDispoPeriodique = new TableColumn<Periodique, String>("Disponible");
 			TableColumn<Periodique, Integer> colonneNoVolumePeriodique = new TableColumn<Periodique, Integer>(
-					"Numéro volume");
+					"Numï¿½ro volume");
 			TableColumn<Periodique, Integer> colonneNoPeriodiquePeriodique = new TableColumn<Periodique, Integer>(
-					"Numéro périodique");
+					"Numï¿½ro pï¿½riodique");
 
 			colonneNumDocPeriodique.setPrefWidth(120);
 			colonneTitrePeriodique.setPrefWidth(250);
@@ -347,13 +347,13 @@ public class InterfacePrepose extends Application {
 			
 			donneesAdherents = FXCollections.observableArrayList();
 			
-			TableColumn<Adherent, String> colonneNumeroAdherent = new TableColumn<Adherent, String>("Numéro d'adhérent");
+			TableColumn<Adherent, String> colonneNumeroAdherent = new TableColumn<Adherent, String>("Numï¿½ro d'adhï¿½rent");
 			TableColumn<Adherent, String> colonneNomAdherent= new TableColumn<Adherent, String>("Nom");
-			TableColumn<Adherent, String> colonnePrenomAdherent = new TableColumn<Adherent, String>("Prénom");
+			TableColumn<Adherent, String> colonnePrenomAdherent = new TableColumn<Adherent, String>("Prï¿½nom");
 			TableColumn<Adherent, String> colonneAdresseAdherent = new TableColumn<Adherent, String>("Adresse");
-			TableColumn<Adherent, String> colonneNumeroTelephoneAdherent = new TableColumn<Adherent, String>("Téléphone");
-			TableColumn<Adherent, String> colonnePretsActifsAdherent = new TableColumn<Adherent, String>("Prêts actif");
-			TableColumn<Adherent, String> colonneSoldeDuAdherent = new TableColumn<Adherent, String>("Solde dû");
+			TableColumn<Adherent, String> colonneNumeroTelephoneAdherent = new TableColumn<Adherent, String>("Tï¿½lï¿½phone");
+			TableColumn<Adherent, String> colonnePretsActifsAdherent = new TableColumn<Adherent, String>("Prï¿½ts actif");
+			TableColumn<Adherent, String> colonneSoldeDuAdherent = new TableColumn<Adherent, String>("Solde dï¿½");
 			
 			colonneNumeroAdherent.setPrefWidth(120);
 			colonneNomAdherent.setPrefWidth(100);
@@ -388,8 +388,8 @@ public class InterfacePrepose extends Application {
 			hboxEnBas.setPadding(new Insets(10));
 			tGroupEnHaut = new ToggleGroup();
 			txtRechercherPar = new Text("Rechercher par: ");
-			rbAuteurRealisateur = new RadioButton("auteur/réalisateur");
-			rbMotsCles = new RadioButton("Mos clés");
+			rbAuteurRealisateur = new RadioButton("auteur/rï¿½alisateur");
+			rbMotsCles = new RadioButton("Mos clï¿½s");
 			txtFRechercherPar = new TextField();
 			btnEffacer = new Button("Effacer");
 			btnEffacer.setPrefWidth(170);
@@ -403,7 +403,7 @@ public class InterfacePrepose extends Application {
 
 			/*********************************************
 			 * DANS LE CATALOGUE(GERE TOUT CE QUI EST DANS L'INTERFACE DEU CATALOGUE DU
-			 * PRÉPOSÉ)
+			 * PRï¿½POSï¿½)
 			 ********************************************************/
 			// premier onglet (Catalogue)
 			tabCatalogue = new Tab();
@@ -426,7 +426,7 @@ public class InterfacePrepose extends Application {
 			// Quatrieme onglet (Periodique)
 			tabPeriodique = new Tab();
 			tabPeriodique.setClosable(false);
-			tabPeriodique.setText("Périodiques");
+			tabPeriodique.setText("Pï¿½riodiques");
 			tabPeriodique.setGraphic(new ImageView(new Image("icon-periodique.png")));
 
 			tabCatalogue.setContent(tableCatalogue);
@@ -435,7 +435,7 @@ public class InterfacePrepose extends Application {
 			tabPeriodique.setContent(tablePeriodique);
 
 			/****************************************
-			 * DANS LE CATALOGUE PARTIE À DROITE(GESTION DES ADHERENT, CATALOGUE ET PRETS)
+			 * DANS LE CATALOGUE PARTIE ï¿½ DROITE(GESTION DES ADHERENT, CATALOGUE ET PRETS)
 			 ******************************************************/
 
 			// bPaneDroite.setPadding(new Insets(10));
@@ -449,12 +449,12 @@ public class InterfacePrepose extends Application {
 			btnAjouterDocumentCatalogue = new Button("Ajouter un document");
 			btnSupprimerDocumentCatalogue = new Button("Supprimer un document");
 
-			btnajouterAherent = new Button("Ajouter un adhérent");
-			btnModifierAdherent = new Button("Modifier un adhérent");
-			btnSupprimerAdherent = new Button("Supprimer un adhérent");
-			btnPayerSoldeAdhernent = new Button("Payer solde adhérent");
+			btnajouterAherent = new Button("Ajouter un adhï¿½rent");
+			btnModifierAdherent = new Button("Modifier un adhï¿½rent");
+			btnSupprimerAdherent = new Button("Supprimer un adhï¿½rent");
+			btnPayerSoldeAdhernent = new Button("Payer solde adhï¿½rent");
 
-			btnInscrireUnPret = new Button("Inscrire un prêt");
+			btnInscrireUnPret = new Button("Inscrire un prï¿½t");
 			btnIscrireUnRetour = new Button("Inscrire un retour");
 
 			hboxButtonDeconnexion = new HBox();
@@ -501,9 +501,9 @@ public class InterfacePrepose extends Application {
 
 			 paneGestionCatalogue = new TitledPane("Gestion du catalogue",
 					new Label("Show all boats available"));
-			 paneGestionAdherents = new TitledPane("Gestion des adhérents",
+			 paneGestionAdherents = new TitledPane("Gestion des adhï¿½rents",
 					new Label("Show all cars available"));
-			 paneGestionPrets = new TitledPane("Gestion des prêts", new Label("Show all planes available"));
+			 paneGestionPrets = new TitledPane("Gestion des prï¿½ts", new Label("Show all planes available"));
 
 			accordion.getPanes().add(paneGestionCatalogue);
 			accordion.getPanes().add(paneGestionAdherents);
@@ -557,7 +557,7 @@ public class InterfacePrepose extends Application {
 			root.setCenter(tabPane);
 
 			primaryStage.getIcons().add(new Image("booklibrary.png"));
-			primaryStage.setTitle("Médiathèque(Préposé)");
+			primaryStage.setTitle("Mï¿½diathï¿½que(Prï¿½posï¿½)");
 			primaryStage.sizeToScene();
 			primaryStage.setResizable(false);
 			primaryStage.setScene(scene);
@@ -640,7 +640,7 @@ public class InterfacePrepose extends Application {
 
 				tRadioAjout = new ToggleGroup();
 				rbLivre = new RadioButton("Livre");
-				rbPeriodique = new RadioButton("Périodique");
+				rbPeriodique = new RadioButton("Pï¿½riodique");
 				rbDvd = new RadioButton("Dvd");
 				hboxRadioButton = new HBox(5);
 				hboxRadioButton.getChildren().addAll(rbLivre, rbDvd, rbPeriodique);
@@ -655,18 +655,18 @@ public class InterfacePrepose extends Application {
 				txtTitre = new Text("Titre :");
 				txtAuteur = new Text("Auteur :");
 				txtDateParution = new Text("Date de parution :");
-				txtMotsCledEspaces = new Text("Mots clés (séparés par espaces):");
+				txtMotsCledEspaces = new Text("Mots clï¿½s (sï¿½parï¿½s par espaces):");
 
 				// pour les dvd
 				txtNbDisques = new Text("Nombre de disques :");
-				txtRealisateur = new Text("Réalisateur :");
+				txtRealisateur = new Text("Rï¿½alisateur :");
 
 				txtFNbDisques = new TextField();
 				txtFRealisateur = new TextField();
 
-				// pour les périodiques
-				txtNoVolume = new Text("Numéro de volume :");
-				txtNoPeriodique = new Text("Numéro de périodique :");
+				// pour les pï¿½riodiques
+				txtNoVolume = new Text("Numï¿½ro de volume :");
+				txtNoPeriodique = new Text("Numï¿½ro de pï¿½riodique :");
 
 				txtFNoVolume = new TextField();
 				txtFNoPeriodique = new TextField();
@@ -719,28 +719,28 @@ public class InterfacePrepose extends Application {
 								Alert Erreur = new Alert(AlertType.ERROR);
 								Erreur.setTitle("Erreur");
 								Erreur.setHeaderText(null);
-								Erreur.setContentText("Vous n'avez pas tapé le titre");
+								Erreur.setContentText("Vous n'avez pas tapï¿½ le titre");
 								Erreur.showAndWait();
 							}
 							else if (txtFAuteur.getText().compareTo("") == 0) {
 								Alert Erreur = new Alert(AlertType.ERROR);
 								Erreur.setTitle("Erreur");
 								Erreur.setHeaderText(null);
-								Erreur.setContentText("Vous n'avez pas tapé le nom de l'auteur");
+								Erreur.setContentText("Vous n'avez pas tapï¿½ le nom de l'auteur");
 								Erreur.showAndWait();
 							}
 							else if (txtFDateParution.getText().compareTo("") == 0) {
 								Alert Erreur = new Alert(AlertType.ERROR);
 								Erreur.setTitle("Erreur");
 								Erreur.setHeaderText(null);
-								Erreur.setContentText("Vous n'avez pas tapé la date de parution");
+								Erreur.setContentText("Vous n'avez pas tapï¿½ la date de parution");
 								Erreur.showAndWait();
 							}
 							else if (txtFMotsClesEspaces.getText().compareTo("") == 0) {
 								Alert Erreur = new Alert(AlertType.ERROR);
 								Erreur.setTitle("Erreur");
 								Erreur.setHeaderText(null);
-								Erreur.setContentText("Vous n'avez pas tapé le mot clé");
+								Erreur.setContentText("Vous n'avez pas tapï¿½ le mot clï¿½");
 								Erreur.showAndWait();
 							}
 							else {// ajout d'un document
@@ -890,7 +890,7 @@ public class InterfacePrepose extends Application {
 				stageAjout.show();
 
 			} else if (e.getSource() == btnSupprimerDocumentCatalogue) {
-				// vérifier si il a selectionner un doc sur le catalogue, si non mettre un
+				// vï¿½rifier si il a selectionner un doc sur le catalogue, si non mettre un
 				// mesage d'erreur
 				// System.out.println("allo");
 
@@ -901,7 +901,7 @@ public class InterfacePrepose extends Application {
 						Alert Erreur = new Alert(AlertType.ERROR);
 						Erreur.setTitle("Erreur");
 						Erreur.setHeaderText(null);
-						Erreur.setContentText("Vous devez sélectionner le document à supprimer.");
+						Erreur.setContentText("Vous devez sï¿½lectionner le document ï¿½ supprimer.");
 						Erreur.showAndWait();
 
 					} else {
@@ -919,7 +919,7 @@ public class InterfacePrepose extends Application {
 						Alert Erreur = new Alert(AlertType.ERROR);
 						Erreur.setTitle("Erreur");
 						Erreur.setHeaderText(null);
-						Erreur.setContentText("Vous devez sélectionner le document à supprimer.");
+						Erreur.setContentText("Vous devez sï¿½lectionner le document ï¿½ supprimer.");
 						Erreur.showAndWait();
 
 					} else {
@@ -934,7 +934,7 @@ public class InterfacePrepose extends Application {
 						Alert Erreur = new Alert(AlertType.ERROR);
 						Erreur.setTitle("Erreur");
 						Erreur.setHeaderText(null);
-						Erreur.setContentText("Vous devez sélectionner le document à supprimer.");
+						Erreur.setContentText("Vous devez sï¿½lectionner le document ï¿½ supprimer.");
 						Erreur.showAndWait();
 
 					} else {
@@ -949,7 +949,7 @@ public class InterfacePrepose extends Application {
 						Alert Erreur = new Alert(AlertType.ERROR);
 						Erreur.setTitle("Erreur");
 						Erreur.setHeaderText(null);
-						Erreur.setContentText("Vous devez sélectionner le document à supprimer.");
+						Erreur.setContentText("Vous devez sï¿½lectionner le document ï¿½ supprimer.");
 						Erreur.showAndWait();
 
 					} else {
@@ -1014,7 +1014,7 @@ public class InterfacePrepose extends Application {
 				Text txtNomAdherent = new Text("Nom :");
 				Text txtPrenomAdherent = new Text("Prenom :");
 				Text txtAdresseAdherent = new Text("Adresse :");
-				Text txtTelephoneAdherent = new Text("Téléphone :");
+				Text txtTelephoneAdherent = new Text("Tï¿½lï¿½phone :");
 				
 				TextField txtfNomAdherent = new TextField();
 				TextField txtfPrenomAdherent = new TextField();
@@ -1063,28 +1063,28 @@ public class InterfacePrepose extends Application {
 								Alert Erreur = new Alert(AlertType.ERROR);
 								Erreur.setTitle("Erreur");
 								Erreur.setHeaderText(null);
-								Erreur.setContentText("Vous n'avez pas tapé le nom de l'adhérent");
+								Erreur.setContentText("Vous n'avez pas tapï¿½ le nom de l'adhï¿½rent");
 								Erreur.showAndWait();
 							}
 							else if (txtfPrenomAdherent.getText().compareTo("") == 0) {
 								Alert Erreur = new Alert(AlertType.ERROR);
 								Erreur.setTitle("Erreur");
 								Erreur.setHeaderText(null);
-								Erreur.setContentText("Vous n'avez pas tapé le prénom de l'adhérent");
+								Erreur.setContentText("Vous n'avez pas tapï¿½ le prï¿½nom de l'adhï¿½rent");
 								Erreur.showAndWait();
 							}
 							else if (txtfAdresseAdherent.getText().compareTo("") == 0) {
 								Alert Erreur = new Alert(AlertType.ERROR);
 								Erreur.setTitle("Erreur");
 								Erreur.setHeaderText(null);
-								Erreur.setContentText("Vous n'avez pas tapé l'adresse de l'adhérent");
+								Erreur.setContentText("Vous n'avez pas tapï¿½ l'adresse de l'adhï¿½rent");
 								Erreur.showAndWait();
 							}
 							else if (txtfTelephoneAdherent.getText().compareTo("") == 0) {
 								Alert Erreur = new Alert(AlertType.ERROR);
 								Erreur.setTitle("Erreur");
 								Erreur.setHeaderText(null);
-								Erreur.setContentText("Vous n'avez pas tapé le téléphone");
+								Erreur.setContentText("Vous n'avez pas tapï¿½ le tï¿½lï¿½phone");
 								Erreur.showAndWait();
 							}else if (!txtfTelephoneAdherent.getText().matches("^[\\(][0-9]{3}[\\)][\\s][0-9]{3}[\\-][0-9]{4}$")) {
 								Alert Erreur = new Alert(AlertType.ERROR);
@@ -1094,7 +1094,7 @@ public class InterfacePrepose extends Application {
 								Erreur.showAndWait();
 								txtfTelephoneAdherent.requestFocus();
 							}
-							else {// ajout d'un adhérent
+							else {// ajout d'un adhï¿½rent
 								
 							}
 							
@@ -1105,7 +1105,7 @@ public class InterfacePrepose extends Application {
 				
 				
 				
-				stageAjoutAdherent.setTitle("Ajout d'un adhérent");
+				stageAjoutAdherent.setTitle("Ajout d'un adhï¿½rent");
 				stageAjoutAdherent.getIcons().add(new Image("iconAjouterPersonne.png"));
 				stageAjoutAdherent.sizeToScene();
 				stageAjoutAdherent.setScene(sceneAjoutAdherent);
@@ -1117,11 +1117,11 @@ public class InterfacePrepose extends Application {
 					Alert Erreur = new Alert(AlertType.ERROR);
 					Erreur.setTitle("Erreur");
 					Erreur.setHeaderText(null);
-					Erreur.setContentText("Vous devez sélectionner un adhérent pour le modifier");
+					Erreur.setContentText("Vous devez sï¿½lectionner un adhï¿½rent pour le modifier");
 					Erreur.showAndWait();
 				}
 				else{
-					System.out.println("adhédent selectionnee");
+					System.out.println("adhï¿½dent selectionnee");
 				}
 			}
 			else if(e.getSource()==btnSupprimerAdherent) {
@@ -1129,11 +1129,11 @@ public class InterfacePrepose extends Application {
 					Alert Erreur = new Alert(AlertType.ERROR);
 					Erreur.setTitle("Erreur");
 					Erreur.setHeaderText(null);
-					Erreur.setContentText("Vous devez sélectionner un adhérent pour le supprimer.");
+					Erreur.setContentText("Vous devez sï¿½lectionner un adhï¿½rent pour le supprimer.");
 					Erreur.showAndWait();
 				}
 				else{
-					System.out.println("adhédent selectionnee");
+					System.out.println("adhï¿½dent selectionnee");
 				}
 			}
 			else if(e.getSource()==btnPayerSoldeAdhernent) {
@@ -1141,11 +1141,11 @@ public class InterfacePrepose extends Application {
 					Alert Erreur = new Alert(AlertType.ERROR);
 					Erreur.setTitle("Erreur");
 					Erreur.setHeaderText(null);
-					Erreur.setContentText("Vous devez sélectionner un adhérent pour payer son solde.");
+					Erreur.setContentText("Vous devez sï¿½lectionner un adhï¿½rent pour payer son solde.");
 					Erreur.showAndWait();
 				}
 				else{
-					System.out.println("adhédent selectionnee");
+					System.out.println("adhï¿½dent selectionnee");
 				}
 			}
 

@@ -47,10 +47,10 @@ public class Prepose implements Serializable {
 	public void ajouterAdherent(String strNom,String strPrenom, String strAdresse,String strNumeroTelephone, int intNbPrets,int intSolde)  {
 		//int intNumeroPrepose=1900;
 		
-		//File fichierAdherents= new File("/Users/r.merzius/Desktop/fichierAdherents.ser");
+		File fichierAdherents= new File("/Users/r.merzius/Desktop/fichierAdherents.ser");
 		//File fichierAdherents= new File("C:/Users/rn.merzius/Downloads/test/fichierAdherents.ser");
 		//File fichierAdherents= new File("C:/Users/GabrielMarrero/Downloads/test/fichierAdherents.ser");
-		File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
+		//File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
 		int intNumeroAdherent=0; 
 		int intNumAjout=19000;
 		if(fichierAdherents.exists())

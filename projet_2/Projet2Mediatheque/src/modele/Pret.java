@@ -6,6 +6,10 @@ import java.time.LocalDate;
 public class Pret implements Serializable{
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int noEmprunt;
 	private LocalDate dateEmprunt;
 	private LocalDate dateRetourPrevu;
