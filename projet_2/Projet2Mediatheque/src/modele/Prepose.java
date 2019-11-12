@@ -132,7 +132,6 @@ public class Prepose implements Serializable {
 			System.out.println(a.getStrNumeroAdherent());
 			System.out.println("prenom: "+a.getStrPrenom()+" nom: "+a.getStrNom());
 		}*/
-		
 			
 
 
