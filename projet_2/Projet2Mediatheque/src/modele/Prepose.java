@@ -45,8 +45,17 @@ public class Prepose implements Serializable {
 	
 
 	@SuppressWarnings("unchecked")
-	public void ajouterAdherent(ListeAdherents liste,Adherent adherent)  {
-		//int intNumeroPrepose=1900;
+	public void ajouterAdherent(Adherent adherent)  {
+		
+		//voir comment attribuer un Numero d'adh�rent 
+		
+		ListeAdherents liste = ListeAdherents.getInstance();
+		
+		
+		
+		liste.getLstAdherents().add(adherent);
+		
+		/*//int intNumeroPrepose=1900;
 		
 		//File fichierAdherents= new File("/Users/r.merzius/Desktop/fichierAdherents.ser");
 		//File fichierAdherents= new File("C:/Users/rn.merzius/Downloads/test/fichierAdherents.ser");
@@ -101,10 +110,15 @@ public class Prepose implements Serializable {
 			liste.getLstAdherents().add(adherent);
 					
 		}
-		// serialization des adhérents
+		// serialization des adhérents*/
 		
 	}
 	public void supprimerAdherent(Adherent adherent) {
+	ListeAdherents liste = ListeAdherents.getInstance();
+		
+		
+		liste.getLstAdherents().remove(adherent);
+		
 		
 	}
 	public String getNoEmploye()
@@ -123,15 +137,25 @@ public class Prepose implements Serializable {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Prepose prepose = new Prepose();
-		//prepose.ajouterAdherent("merzius", "paul", "Aucune adresse" , "(111) 111-1111", 0,0);
-		//prepose.ajouterAdherent("marrero", "gab","Aucune adresse" ,"(222) 222-2222",0,0);
-		//System.out.println(lstAdherents.get(1).getStrNumeroAdherent());
-		//System.out.println(lstAdherents.get(0).getStrNumeroAdherent());
+	
+		ListeAdherents liste = ListeAdherents.getInstance();
+		Adherent a1 =new Adherent("12", "allossssttttt", "tets", "afge", "656546", 2, 2);
+	
+		a1.setStrNumeroAdherent(1+a1.getStrNumeroAdherent());
 		
-		/*for(Adherent a:lstAdherents) {
-			System.out.println(a.getStrNumeroAdherent());
-			System.out.println("prenom: "+a.getStrPrenom()+" nom: "+a.getStrNom());
-		}*/
+		
+		prepose.ajouterAdherent(a1);
+		
+		
+		//liste.serialisationAdherent();
+		
+		//prepose.supprimerAdherent(adherent);
+		
+		System.out.println(liste.getLstAdherents().get(0).getStrNumeroAdherent());
+		
+		
+		
+		
 			
 
 

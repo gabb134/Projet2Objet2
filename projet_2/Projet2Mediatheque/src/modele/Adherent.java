@@ -25,6 +25,16 @@ public Adherent (String strNumeroAdherent,String strNom,String strPrenom, String
 	this.intSolde=intSolde;
 }
 
+
+
+@Override
+public String toString() {
+	return "Adherent [strNom=" + strNom + ", strPrenom=" + strPrenom + ", strNumeroTelephone=" + strNumeroTelephone
+			+ "]";
+}
+
+
+
 public String getStrNom() {
 	return strNom;
 }
@@ -56,6 +66,12 @@ public void setStrNumeroTelephone(String strNumeroTelephone) {
 
 public String getStrNumeroAdherent() {
 	return strNumeroAdherent;
+}
+
+
+
+	public void setStrNumeroAdherent(String strNumeroAdherent) {
+	this.strNumeroAdherent = strNumeroAdherent;
 }
 
 
