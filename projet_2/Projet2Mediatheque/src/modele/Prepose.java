@@ -51,9 +51,34 @@ public class Prepose implements Serializable {
 		
 		ListeAdherents liste = ListeAdherents.getInstance();
 		
+		int numAhderent = 1900;
+		
+		//pour ne pas repeter le meme adhésrent
+		boolean bootrouver = false;
+		for(int i = 0; i< liste.getLstAdherents().size()&& !bootrouver;i++) {
+			if(!liste.getLstAdherents().get(i).getStrNumeroAdherent().equals(adherent.getStrNumeroAdherent())) {
+				bootrouver=true;
+				System.out.println(liste.getLstAdherents().get(i));
+			}
+			else 
+				bootrouver = false;
+		}
+		
+		if(bootrouver ==true) {
+			
+			
+			adherent.setStrNumeroAdherent(Integer.toString(numAhderent));
+			liste.getLstAdherents().add(adherent);
+			numAhderent++;
+			System.out.println("ajouté");
+		}
+		else {
+			System.out.println("même adhérent");
+		}
+		
+
 		
 		
-		liste.getLstAdherents().add(adherent);
 		
 		/*//int intNumeroPrepose=1900;
 		
@@ -140,18 +165,20 @@ public class Prepose implements Serializable {
 	
 		ListeAdherents liste = ListeAdherents.getInstance();
 		Adherent a1 =new Adherent("12", "allossssttttt", "tets", "afge", "656546", 2, 2);
+		Adherent a2 =new Adherent("3", "klk", "tets", "afge", "656546", 2, 2);
 	
-		a1.setStrNumeroAdherent(1+a1.getStrNumeroAdherent());
+		//a1.setStrNumeroAdherent(1+a1.getStrNumeroAdherent());
 		
 		
 		prepose.ajouterAdherent(a1);
+		prepose.ajouterAdherent(a2);
 		
 		
 		//liste.serialisationAdherent();
 		
 		//prepose.supprimerAdherent(adherent);
 		
-		System.out.println(liste.getLstAdherents().get(0).getStrNumeroAdherent());
+		//System.out.println(liste.getLstAdherents().get(0).getStrNumeroAdherent());
 		
 		
 		

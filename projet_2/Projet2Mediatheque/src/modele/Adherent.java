@@ -27,11 +27,17 @@ public Adherent (String strNumeroAdherent,String strNom,String strPrenom, String
 
 
 
+
+
+
 @Override
 public String toString() {
 	return "Adherent [strNom=" + strNom + ", strPrenom=" + strPrenom + ", strNumeroTelephone=" + strNumeroTelephone
-			+ "]";
+			+ ", strNumeroAdherent=" + strNumeroAdherent + ", strAdresse=" + strAdresse + "]";
 }
+
+
+
 
 
 
