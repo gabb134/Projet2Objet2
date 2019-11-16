@@ -12,6 +12,12 @@ private String strPrenom;
 private String strNumeroTelephone;
 private String strNumeroAdherent;
 private String strAdresse;
+public String getStrAdresse() {
+	return strAdresse;
+}
+
+
+
 private int intNbPrets;
 private int intSolde;
 

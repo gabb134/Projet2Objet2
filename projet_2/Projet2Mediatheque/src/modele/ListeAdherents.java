@@ -111,7 +111,7 @@ public class ListeAdherents implements Serializable {
 		//prepose.ajouterAdherent("merzius", "paul", "Aucune adresse" , "(111) 111-1111", 0,0);
 		//prepose.ajouterAdherent("marrero", "gab","Aucune adresse" ,"(222) 222-2222",0,0);
 		
-		Adherent a1 = new Adherent("marrero", "gab","Aucune adresse" ,"(222) 222-2222","allo",0,0);
+		/*Adherent a1 = new Adherent("marrero", "gab","Aucune adresse" ,"(222) 222-2222","allo",0,0);
 		Adherent a2 = new Adherent("merzius", "paul", "Aucune adresse" , "(111) 111-1111","allo", 0,0);
 		
 		try { 
@@ -139,7 +139,7 @@ public class ListeAdherents implements Serializable {
 			    
 			} 
 		
-		System.out.println(ListeAdherents.getInstance().getLstAdherents());
+		System.out.println(ListeAdherents.getInstance().getLstAdherents());*/
 
 	}
 
