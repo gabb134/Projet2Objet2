@@ -63,8 +63,8 @@ public final class Catalogue implements Serializable {
 					
 					//System.out.println(noDoc);
 
-					Livre livre = new Livre(noDoc, titre, dateParution, "Oui", null, auteur);
-					Document docLivre = new Document(noDoc, titre, dateParution, "oui");
+					Livre livre = new Livre(noDoc, titre, dateParution, "Oui", null,null, auteur);
+					Document docLivre = new Document(noDoc, titre, dateParution, "oui",null);
 					lstLivres.add(livre);
 					lstDocuments.add(docLivre);
 					
@@ -115,8 +115,8 @@ public final class Catalogue implements Serializable {
 					noVolume = Integer.parseInt(st2.nextToken().trim());
 					noPeriodique = Integer.parseInt(st2.nextToken().trim());
 					
-					Periodique periodique = new Periodique(noDocP, titreP, dateParutionP, "oui", noVolume, noPeriodique);
-					Document docPeriodique = new Document(noDocP, titreP, dateParutionP, "oui");
+					Periodique periodique = new Periodique(noDocP, titreP, dateParutionP, "oui",null,noVolume, noPeriodique);
+					Document docPeriodique = new Document(noDocP, titreP, dateParutionP, "oui",null);
 					lstPeriodiques.add(periodique);
 					lstDocuments.add(docPeriodique);
 					
@@ -164,8 +164,8 @@ public final class Catalogue implements Serializable {
 				dateParutionD = LocalDate.parse(st3.nextToken().trim(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 				nbDisques = Integer.parseInt(st3.nextToken().trim());
 				strRealisateur = st3.nextToken().trim();
-				DVD dvd = new DVD(noDocD, titreD, dateParutionD, "oui", nbDisques, strRealisateur);
-				Document docDVD = new Document(noDocD, titreD, dateParutionD, "oui");
+				DVD dvd = new DVD(noDocD, titreD, dateParutionD, "oui",null ,nbDisques, strRealisateur);
+				Document docDVD = new Document(noDocD, titreD, dateParutionD, "oui",null);
 				lstDvd.add(dvd);
 				lstDocuments.add(docDVD);
 			}
@@ -224,7 +224,7 @@ public final class Catalogue implements Serializable {
 		
 		
 		LocalDate d1 = LocalDate.now();
-		DVD d = new DVD("DVD11", "test", d1, "oui", 3, "Gabriel");
+		DVD d = new DVD("DVD11", "test", d1, "oui","gab", 3, "Gabriel");
 		
 		c.lstDvd.add(0, d );
 		//c.afficherLivre();

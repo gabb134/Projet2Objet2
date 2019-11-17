@@ -66,11 +66,15 @@ public void setStrPrenom(String strPrenom) {
 	this.strPrenom = strPrenom;
 }
 
-
+public void setintNbPrets(int intNbPrets) {
+	this.intNbPrets = intNbPrets;
+}
 public String getStrNumeroTelephone() {
 	return strNumeroTelephone;
 }
-
+public int getintNbPrets() {
+	return intNbPrets;
+}
 
 public void setStrNumeroTelephone(String strNumeroTelephone) {
 	this.strNumeroTelephone = strNumeroTelephone;
@@ -79,6 +83,7 @@ public void setStrNumeroTelephone(String strNumeroTelephone) {
 public String getStrNumeroAdherent() {
 	return strNumeroAdherent;
 }
+
 
 
 

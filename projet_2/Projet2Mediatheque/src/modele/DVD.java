@@ -26,15 +26,15 @@ public class DVD extends Document{
 	}
 
 	private String strRealisateur;
-	public DVD(String noDoc, String titre, LocalDate dateParution, String disponible, 
+	public DVD(String noDoc, String titre, LocalDate dateParution, String disponible,String emprunteur, 
 			   int nbDisques, String strRealisateur) {
 		
-		super(noDoc, titre, dateParution, disponible);
+		super(noDoc, titre, dateParution, disponible,emprunteur);
 		this.nbDisques = nbDisques;
 		this.strRealisateur = strRealisateur;
 	}
 	
 	public String toString() {
-		return " DVD :" + super.toString()+ "nbDisques: " +this.nbDisques+ " Réalisateur: "+ this.strRealisateur; 
+		return " DVD :" + super.toString()+ "nbDisques: " +this.nbDisques+ " Rï¿½alisateur: "+ this.strRealisateur; 
 	}
 }

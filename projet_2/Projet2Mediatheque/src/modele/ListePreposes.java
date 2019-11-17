@@ -111,12 +111,12 @@ public class ListePreposes implements Serializable {
 		//prepose.ajouterAdherent("merzius", "paul", "Aucune adresse" , "(111) 111-1111", 0,0);
 		//prepose.ajouterAdherent("marrero", "gab","Aucune adresse" ,"(222) 222-2222",0,0);
 		
-		Prepose p1 = new Prepose("P19000","merzius", "paul", "inconnue", "(111) 111-1111", "Password1");
-		Prepose p2 = new Prepose("P19001","marrero", "gab", "inconnue", "(222) 222-2222", "Password1");
+		Prepose p1 = new Prepose("P19000","Password1",  "inconnue","merzius","paul" ,"(111) 111-1111" );
+		Prepose p2 = new Prepose("P19001","Password1","inconnue" , "marrero","gab" ,"(222) 222-2222" );
 		
 		try { 
 		      
-			FileOutputStream fichier = new FileOutputStream("adherent.ser"); 
+			FileOutputStream fichier = new FileOutputStream("preposes.ser"); 
 		      
 			ObjectOutputStream os = new ObjectOutputStream(fichier); 
 			

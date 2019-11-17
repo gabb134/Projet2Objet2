@@ -10,10 +10,10 @@ public class Livre  extends Document {
 	
 private String auteur;
 	
-	public Livre(String noDoc, String titre, LocalDate dateParution, String disponible, String motsCles, 
+	public Livre(String noDoc, String titre, LocalDate dateParution, String disponible,String emprunteur ,String motsCles, 
 				 String auteur) {
 		
-		super(noDoc, titre, dateParution, disponible);
+		super(noDoc, titre, dateParution, disponible,emprunteur);
 		this.auteur =auteur;
 	}
 

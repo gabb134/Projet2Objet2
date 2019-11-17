@@ -48,14 +48,14 @@ public class Prepose implements Serializable {
 	@SuppressWarnings("unchecked")
 	public void ajouterAdherent(Adherent adherent) {
 
-		// voir comment attribuer un Numero d'adhérent
+		// voir comment attribuer un Numero d'adhï¿½rent
 
 		// ListeAdherents liste = ListeAdherents.getInstance();
 
 		int intNumAjout = 1900;
 		int intNumAdherent = 0;
 
-		// pour ne pas repeter le meme adhésrent
+		// pour ne pas repeter le meme adhï¿½srent
 
 		boolean bootrouver = false;
 
@@ -99,6 +99,13 @@ public class Prepose implements Serializable {
 		}
 		
 
+	}
+	public void inscrirePret(Document document,Adherent adherent) {
+		
+		adherent.setintNbPrets(adherent.getintNbPrets()+1);
+		document.setDisponible("Non disponible");
+		document.setEmprunteur(adherent.getStrPrenom()+" "+adherent.getStrNom());
+		
 	}
 
 	public String getNoEmploye() {
