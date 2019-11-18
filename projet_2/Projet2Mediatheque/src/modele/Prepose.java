@@ -129,7 +129,13 @@ public class Prepose implements Serializable {
 		}
 	}
 	public void supprimerDocument(Document document) {
-		
+		try {
+			if(catalogue.getLstDocuments().get(catalogue.getLstDocuments().size()-1)!=null) {
+				catalogue.getLstDocuments().remove(document);
+			}
+		}catch(Exception e) {
+			
+		}
 	}
 	public void inscrirePret(Document document,Adherent adherent) {
 		

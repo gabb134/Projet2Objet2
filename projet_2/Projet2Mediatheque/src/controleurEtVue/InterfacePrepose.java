@@ -1284,18 +1284,22 @@ public class InterfacePrepose extends Application {
 						}
 					});
 					btnConfirmerModificationAdherent.setOnAction(new EventHandler<ActionEvent>() {
-
 						@Override
 						public void handle(ActionEvent e) {
 							// TODO Auto-generated method stub
 							
 							//voir comment modifier 
 							
+							//1. get l'emplacement ou se trouve l'adherent que jai cliquer
+							//2. le supprimer
+							//3. ajouter un nouvel adherent à l'emplacement choisi
+							
+							
+							
+							
+
 						}
 					});
-					
-					
-					
 					
 					stageModifAdherent.setTitle("Modification d'un adhérent");
 					stageModifAdherent.getIcons().add(new Image("iconModifierAdherent.png"));
