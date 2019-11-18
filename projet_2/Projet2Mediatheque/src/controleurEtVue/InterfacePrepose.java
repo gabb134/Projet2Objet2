@@ -420,7 +420,8 @@ public class InterfacePrepose extends Application {
 			rbAuteurRealisateur.setToggleGroup(tGroupEnHaut);
 			rbMotsCles.setToggleGroup(tGroupEnHaut);
 			rbAuteurRealisateur.setSelected(true);
-
+			
+		
 			hboxEnBas.getChildren().addAll(txtRechercherPar, rbAuteurRealisateur, rbMotsCles, txtFRechercherPar,
 					btnEffacer);
 			root.setBottom(hboxEnBas);
@@ -557,6 +558,11 @@ public class InterfacePrepose extends Application {
 			/*********************************************
 			 * GESTION DES EVENEMENT DES BUTTON
 			 *******************************/
+			GestionConsulterCatalogue gCatalogue = new GestionConsulterCatalogue();
+			
+			rbAuteurRealisateur.setOnAction(gCatalogue);
+			rbMotsCles.setOnAction(gCatalogue);
+			btnEffacer.setOnAction(gCatalogue);
 
 			GestionnaireButtonPreposeCatalogue gestionnaireButtonPreposeCatalogue = new GestionnaireButtonPreposeCatalogue();
 			btnAjouterDocumentCatalogue.setOnMouseClicked(gestionnaireButtonPreposeCatalogue);
@@ -653,6 +659,24 @@ public class InterfacePrepose extends Application {
 			e.printStackTrace();
 		}
 		return catalogueDeserializer;
+
+	}
+	
+	private class GestionConsulterCatalogue implements EventHandler<ActionEvent> {
+
+		@Override
+		public void handle(ActionEvent e) {
+			// TODO Auto-generated method stub
+			if (e.getSource() == rbAuteurRealisateur) {
+				txtFRechercherPar.requestFocus();
+			} else if (e.getSource() == rbMotsCles) {
+				txtFRechercherPar.requestFocus();
+			}
+			if (e.getSource() == btnEffacer) {
+				txtFRechercherPar.clear();
+			}
+
+		}
 
 	}
 

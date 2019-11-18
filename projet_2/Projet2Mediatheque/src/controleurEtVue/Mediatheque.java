@@ -540,7 +540,7 @@ public class Mediatheque extends Application {
 			tGroupEnHaut = new ToggleGroup();
 			txtRechercherPar = new Text("Rechercher par: ");
 			rbAuteurRealisateur = new RadioButton("auteur/réalisateur");
-			rbMotsCles = new RadioButton("Mos clàs");
+			rbMotsCles = new RadioButton("Mos clès");
 			txtFRechercherPar = new TextField();
 			btnEffacer = new Button("Effacer");
 			btnEffacer.setPrefWidth(170);

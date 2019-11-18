@@ -70,10 +70,10 @@ public class Administrateur {
 		// TODO Auto-generated method stub
 		Administrateur admin=new Administrateur();
 		admin.AjouterPrepose("merzius", "paul", "inconnue", "(111) 111-1111", "Password1");
-		System.out.println(Administrateur.lstPreposes.get(5).getNoEmploye());
+		//System.out.println(Administrateur.lstPreposes.get(5).getNoEmploye());
 
-		if(Administrateur.supprimerPrepose("P19002"))
-			System.out.println("Supprimé avec succès");
+		//if(Administrateur.supprimerPrepose("P19002"))
+		//	System.out.println("Supprimé avec succès");
 
 	}
 
