@@ -1294,9 +1294,11 @@ public class InterfacePrepose extends Application {
 							//2. le supprimer
 							//3. ajouter un nouvel adherent à l'emplacement choisi
 							
+							Adherent adherentmodifier1 = tableAdherent.getSelectionModel().getSelectedItem();
 							
+							adherentmodifier1.setStrNom(txtfNomAdherent.getText());
 							
-							
+							tableAdherent.refresh();
 
 						}
 					});
