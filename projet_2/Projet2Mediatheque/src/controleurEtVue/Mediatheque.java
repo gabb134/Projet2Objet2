@@ -229,11 +229,11 @@ public class Mediatheque extends Application {
 			 ********************************************************************************************/
 
 			/*********************************************
-			 * GESTION PARTIE DE DROITE DE LA CONNEXION(ADHï¿½RENT,PRï¿½POSï¿½,ADMIN,ETC.)
+			 * GESTION PARTIE DE DROITE DE LA CONNEXION(adhérent,préposé,ADMIN,ETC.)
 			 *********/
 
 			stageCatalogue = new Stage();
-			stageCatalogue.setTitle("Mï¿½diathï¿½que");
+			stageCatalogue.setTitle("Médiathèque");
 			stageCatalogue.getIcons().add(new Image("booklibrary.png"));
 			sceneCatalogue = new Scene(root);
 			sceneConnexion = new Scene(bPaneConnexion, 600, 300);
@@ -266,22 +266,22 @@ public class Mediatheque extends Application {
 			txtFMotDePassePrepose = new TextField();
 			txtFNoAdmin = new TextField();
 			txtFMotDePasseAdmin = new TextField();
-			txtNom = new Text("Nom adhï¿½rent:");
+			txtNom = new Text("Nom adhérent:");
 			txtNom.setFill(Color.ANTIQUEWHITE);
 			txtNom.setFont(fontText1);
-			txtPrenom = new Text("Prï¿½nom adhï¿½rent:");
+			txtPrenom = new Text("prénom adhérent:");
 			txtPrenom.setFill(Color.ANTIQUEWHITE);
 			txtPrenom.setFont(fontText1);
-			txtTelephoneAdherent = new Text("Tï¿½lï¿½phone:");
+			txtTelephoneAdherent = new Text("téléphone:");
 			txtTelephoneAdherent.setFill(Color.ANTIQUEWHITE);
 			txtTelephoneAdherent.setFont(fontText1);
-			txtNoPrepose = new Text("Numï¿½ro de l'employï¿½:");
+			txtNoPrepose = new Text("Numéro de l'Employé:");
 			txtNoPrepose.setFill(Color.ANTIQUEWHITE);
 			txtNoPrepose.setFont(fontText1);
 			txtMotDePassePrepose = new Text("Mot de passe:");
 			txtMotDePassePrepose.setFill(Color.ANTIQUEWHITE);
 			txtMotDePassePrepose.setFont(fontText1);
-			txtNoAdmin = new Text("Numï¿½ro de l'admin:");
+			txtNoAdmin = new Text("Numéro de l'admin:");
 			txtNoAdmin.setFill(Color.ANTIQUEWHITE);
 			txtNoAdmin.setFont(fontText1);
 			txtMotDePasseAdmin = new Text("Mot de passe:");
@@ -299,8 +299,8 @@ public class Mediatheque extends Application {
 			fontText2 = Font.font("Arial", FontWeight.BOLD, 15);
 			ToggleGroup tgroup = new ToggleGroup();
 			txtChoixconnexion = new Text("S'identifier avec:");
-			txtNomEtPrenom = new Text("Nom et prï¿½nom");
-			txtTelephone = new Text("Tï¿½lï¿½phone");
+			txtNomEtPrenom = new Text("Nom et prénom");
+			txtTelephone = new Text("téléphone");
 			// HBox hboxChoix = new HBox(2);
 			// HBox hboxPrenom = new HBox(5);
 			txtChoixconnexion.setFont(fontText1);
@@ -325,7 +325,7 @@ public class Mediatheque extends Application {
 			// Premier onglet (Adherent)
 			tabConnexionAdherent = new Tab();
 			tabConnexionAdherent.setClosable(false);
-			tabConnexionAdherent.setText("Adhï¿½rent");
+			tabConnexionAdherent.setText("adhérent");
 			tabConnexionAdherent.setGraphic(new ImageView(new Image("Adherent.jpg")));
 			tabConnexionAdherent.setContent(gPaneAdherent);
 			// gPaneAdherent.setAlignment(Pos.TOP_CENTER);
@@ -348,7 +348,7 @@ public class Mediatheque extends Application {
 			// Deuxieme onglet (Prepose)
 			tabConnexionEmploye = new Tab();
 			tabConnexionEmploye.setClosable(false);
-			tabConnexionEmploye.setText("Employï¿½");
+			tabConnexionEmploye.setText("Employé");
 			tabConnexionEmploye.setGraphic(new ImageView(new Image("Employe.jpg")));
 			tabConnexionEmploye.setContent(gPaneEmploye);
 			gPaneEmploye.setVgap(10);
@@ -399,7 +399,7 @@ public class Mediatheque extends Application {
 			/*********************************************
 			 * GESTION PARTIE DE GAUCHE DE LA CONNEXION(TITRE, LOGO,ETC.)
 			 ********************************************************/
-			Text txtExplication = new Text("Veuillez choisir un des trois onglet pour accï¿½der ï¿½ notre mï¿½diathï¿½que.");
+			Text txtExplication = new Text("Veuillez choisir un des trois onglet pour accàder à notre Médiathèque.");
 			HBox hBoxText = new HBox();
 			hBoxText.getChildren().add(txtExplication);
 			// txtExplication.setFont(fontText1);
@@ -407,7 +407,7 @@ public class Mediatheque extends Application {
 			// bPaneConnexion.setTop(hBoxText);
 			Color color = Color.web("#541E1E");
 			bPaneConnexion.setBackground(new Background(new BackgroundFill(color, new CornerRadii(10), new Insets(0))));
-			Text txtBienvenue = new Text("          BIENVENUE \nï¿½ NOTRE Mï¿½DIATHï¿½QUE  ");
+			Text txtBienvenue = new Text("          BIENVENUE \nà NOTRE MÉDIATHÈQUE  ");
 
 			DropShadow ds = new DropShadow();
 			ds.setOffsetY(3.0f);
@@ -456,7 +456,7 @@ public class Mediatheque extends Application {
 			// Quatrieme onglet (Periodique)
 			tabPeriodique = new Tab();
 			tabPeriodique.setClosable(false);
-			tabPeriodique.setText("Pï¿½iodiques");
+			tabPeriodique.setText("Pàiodiques");
 			tabPeriodique.setGraphic(new ImageView(new Image("icon-periodique.png")));
 
 			// gestion des tablesViews
@@ -490,19 +490,19 @@ public class Mediatheque extends Application {
 
 			btnConnecterAdherentDroite = new Button("Consulter mon dossier");
 			txtChoixconnexionDroite = new Text("S'identifier avec : ");
-			txtNomEtPrenomDroite = new Text("Nom et prï¿½nom");
-			txtTelephoneDroite = new Text("Tï¿½lï¿½phone");
+			txtNomEtPrenomDroite = new Text("Nom et prénom");
+			txtTelephoneDroite = new Text("téléphone");
 			txtFNomDroite = new TextField();
 			txtFPrenomDroite = new TextField();
 			txtFTelephoneDroite = new TextField();
 			txtFTelephoneDroite.setPromptText("(###) ###-####");
-			txtNomDroite = new Text("Nom adhï¿½rent:");
+			txtNomDroite = new Text("Nom adhérent:");
 
 			txtNomDroite.setFont(fontText1);
-			txtPrenomDroite = new Text("Prï¿½nom adhï¿½rent:");
+			txtPrenomDroite = new Text("prénom adhérent:");
 
 			txtPrenomDroite.setFont(fontText1);
-			txtTelephoneAdherentDroite = new Text("Tï¿½lï¿½phone:");
+			txtTelephoneAdherentDroite = new Text("téléphone:");
 
 			txtTelephoneAdherentDroite.setFont(fontText1);
 
@@ -539,8 +539,8 @@ public class Mediatheque extends Application {
 			hboxEnBas.setPadding(new Insets(10));
 			tGroupEnHaut = new ToggleGroup();
 			txtRechercherPar = new Text("Rechercher par: ");
-			rbAuteurRealisateur = new RadioButton("auteur/rï¿½alisateur");
-			rbMotsCles = new RadioButton("Mos clï¿½s");
+			rbAuteurRealisateur = new RadioButton("auteur/réalisateur");
+			rbMotsCles = new RadioButton("Mos clàs");
 			txtFRechercherPar = new TextField();
 			btnEffacer = new Button("Effacer");
 			btnEffacer.setPrefWidth(170);
@@ -555,7 +555,7 @@ public class Mediatheque extends Application {
 
 			hboxEnBas.getChildren().addAll(txtRechercherPar, rbAuteurRealisateur, rbMotsCles, txtFRechercherPar,
 					btnEffacer);
-			root.setBottom(hboxEnBas); // faire la partie pour la recherche(mot clï¿½s )
+			root.setBottom(hboxEnBas); // faire la partie pour la recherche(mot clàs )
 
 			// partie d'en bas
 			HBox hboxButton = new HBox();
@@ -571,6 +571,8 @@ public class Mediatheque extends Application {
 					// TODO Auto-generated method stub
 					stageCatalogue.close();
 					primaryStage.show();
+					// Pour aller ecrire ce qui a ete fait dans le catalogue
+					SerializationCatalogue();
 				}
 
 			});
@@ -581,11 +583,9 @@ public class Mediatheque extends Application {
 
 			// Dans l'oglet Catalogue
 
-			// Node qui va avoir les tablesColumn
-			Group grCatalogue = new Group();
+	
 
-			// Pour aller cherche l'objet catalogue serializer
-			SerializationCatalogue();
+			
 			Catalogue catalogue = DeserialisationCatalogue();
 			// Catalogue catalogue = Catalogue.getInstance("Livres.txt", "Periodiques.txt",
 			// "DVD.txt");
@@ -595,7 +595,7 @@ public class Mediatheque extends Application {
 			// Creation des colonnes dans l'onglet catalogue
 
 			donneesLivre = FXCollections.observableArrayList(catalogue.getLstLivres());
-			TableColumn<Document, String> colonneNumDocCatalogue = new TableColumn<Document, String>("Numï¿½ro Document");
+			TableColumn<Document, String> colonneNumDocCatalogue = new TableColumn<Document, String>("Numéro Document");
 			TableColumn<Document, String> colonneTitreCatalogue = new TableColumn<Document, String>("Titre");
 			TableColumn<Document, LocalDate> colonneDatePubCatalogue = new TableColumn<Document, LocalDate>(
 					"Date de publication");
@@ -617,7 +617,7 @@ public class Mediatheque extends Application {
 			colonneDispoCatalogue.setCellValueFactory(new PropertyValueFactory<>("disponible"));
 
 			// Creation des colonnes dans l'onglet Livres
-			TableColumn<Livre, String> colonneNumDocLivre = new TableColumn<Livre, String>("Numï¿½ro Document");
+			TableColumn<Livre, String> colonneNumDocLivre = new TableColumn<Livre, String>("Numéro Document");
 			TableColumn<Livre, String> colonneTitreLivre = new TableColumn<Livre, String>("Titre");
 			TableColumn<Livre, LocalDate> colonneDatePubLivre = new TableColumn<Livre, LocalDate>(
 					"Date de publication");
@@ -645,12 +645,12 @@ public class Mediatheque extends Application {
 			// Creation des colonnes dans l'onglet DVD
 			donneesDVD = FXCollections.observableArrayList(catalogue.getLstDvd());
 
-			TableColumn<DVD, String> colonneNumDocDVD = new TableColumn<DVD, String>("Numï¿½ro Document");
+			TableColumn<DVD, String> colonneNumDocDVD = new TableColumn<DVD, String>("Numéro Document");
 			TableColumn<DVD, String> colonneTitreDVD = new TableColumn<DVD, String>("Titre");
 			TableColumn<DVD, LocalDate> colonneDatePubDVD = new TableColumn<DVD, LocalDate>("Date de publication");
 			TableColumn<DVD, String> colonneDispoDVD = new TableColumn<DVD, String>("Disponible");
 			TableColumn<DVD, Integer> colonneNbDisquesDVD = new TableColumn<DVD, Integer>("Nombres de disques");
-			TableColumn<DVD, String> colonneRealisateurDVD = new TableColumn<DVD, String>("Rï¿½alisateur");
+			TableColumn<DVD, String> colonneRealisateurDVD = new TableColumn<DVD, String>("Ràalisateur");
 
 			colonneNumDocDVD.setPrefWidth(120);
 			colonneTitreDVD.setPrefWidth(250);
@@ -678,15 +678,15 @@ public class Mediatheque extends Application {
 			donneesPeriodique = FXCollections.observableArrayList(catalogue.getLstPeriodiques());
 
 			TableColumn<Periodique, String> colonneNumDocPeriodique = new TableColumn<Periodique, String>(
-					"Numï¿½ro Document");
+					"Numéro Document");
 			TableColumn<Periodique, String> colonneTitrePeriodique = new TableColumn<Periodique, String>("Titre");
 			TableColumn<Periodique, LocalDate> colonneDatePubPeriodique = new TableColumn<Periodique, LocalDate>(
 					"Date de publication");
 			TableColumn<Periodique, String> colonneDispoPeriodique = new TableColumn<Periodique, String>("Disponible");
 			TableColumn<Periodique, Integer> colonneNoVolumePeriodique = new TableColumn<Periodique, Integer>(
-					"Numï¿½ro volume");
+					"Numéro volume");
 			TableColumn<Periodique, Integer> colonneNoPeriodiquePeriodique = new TableColumn<Periodique, Integer>(
-					"Numï¿½ro pï¿½riodique");
+					"Numéro périodique");
 
 			colonneNumDocPeriodique.setPrefWidth(120);
 			colonneTitrePeriodique.setPrefWidth(250);
@@ -743,7 +743,7 @@ public class Mediatheque extends Application {
 			root.setCenter(tabPane);
 			PrimaryStage=primaryStage;
 		    primaryStage.getIcons().add(new Image("booklibrary.png"));
-			primaryStage.setTitle("Connexion ï¿½ la mï¿½diathï¿½que");
+			primaryStage.setTitle("Connexion à la Médiathèque");
 			primaryStage.sizeToScene();
 			primaryStage.setResizable(false);
 			primaryStage.setScene(sceneConnexion);
@@ -766,14 +766,14 @@ public class Mediatheque extends Application {
 			Alert Erreur = new Alert(AlertType.ERROR);
 			Erreur.setTitle("Erreur");
 			Erreur.setHeaderText(null);
-			Erreur.setContentText("Vous n'avez pas tapï¿½ votre numï¿½ro d'employï¿½");
+			Erreur.setContentText("Vous n'avez pas tapé votre numéro d'employé");
 			Erreur.showAndWait();
 			txtFNoPrepose.requestFocus();
 		} else if (txtFMotDePassePrepose.getText().compareTo("") == 0) {
 			Alert Erreur = new Alert(AlertType.ERROR);
 			Erreur.setTitle("Erreur");
 			Erreur.setHeaderText(null);
-			Erreur.setContentText("Vous n'avez pas tapï¿½ votre mot de passe");
+			Erreur.setContentText("Vous n'avez pas tapé votre mot de passe");
 			Erreur.showAndWait();
 			txtFMotDePassePrepose.requestFocus();
 		} else
@@ -783,7 +783,7 @@ public class Mediatheque extends Application {
 
 			try {
 
-				// dï¿½sï¿½rialisation des prï¿½posï¿½s
+				// dàsàrialisation des préposés
 				// File fichierPreposes= new
 				// File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
 				//File fichierPreposes= new File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
@@ -819,20 +819,20 @@ public class Mediatheque extends Application {
 					 */
 					
 					
-					// pour demarrer l'interface du prï¿½posï¿½
+					// pour demarrer l'interface du préposé
 					Stage stagePrepose = new Stage();
 					stagePrepose.initModality(Modality.APPLICATION_MODAL);
 					InterfacePrepose interfacePrepose = new InterfacePrepose();
 					interfacePrepose.start(stagePrepose);
 
-					// il faut trouvï¿½ une faï¿½on pour fermer le primary stage ï¿½ partir d'ici
+					// il faut trouvà une faàon pour fermer le primary stage à partir d'ici
 					PrimaryStage.close();
 				}
 				else {
 					Alert Erreur = new Alert(AlertType.ERROR);
 					Erreur.setTitle("Erreur");
 					Erreur.setHeaderText(null);
-					Erreur.setContentText("Ce prï¿½posï¿½ n'existe pas! Veillez rentrer un prï¿½posï¿½ qui existe.");
+					Erreur.setContentText("Ce préposé n'existe pas! Veillez rentrer un préposé qui existe.");
 					Erreur.showAndWait();
 				}
 
@@ -851,14 +851,14 @@ public class Mediatheque extends Application {
 			Alert Erreur = new Alert(AlertType.ERROR);
 			Erreur.setTitle("Erreur");
 			Erreur.setHeaderText(null);
-			Erreur.setContentText("Vous n'avez pas tapï¿½ votre numï¿½ro d'administrateur");
+			Erreur.setContentText("Vous n'avez pas tapé votre Numéro d'administrateur");
 			Erreur.showAndWait();
 			txtFNoAdmin.requestFocus();
 		} else if (txtFMotDePasseAdmin.getText().compareTo("") == 0) {
 			Alert Erreur = new Alert(AlertType.ERROR);
 			Erreur.setTitle("Erreur");
 			Erreur.setHeaderText(null);
-			Erreur.setContentText("Vous n'avez pas tapï¿½ votre mot de passe");
+			Erreur.setContentText("Vous n'avez pas tapé votre mot de passe");
 			Erreur.showAndWait();
 			txtFMotDePasseAdmin.requestFocus();
 		}
@@ -871,14 +871,14 @@ public class Mediatheque extends Application {
 				Alert Erreur = new Alert(AlertType.ERROR);
 				Erreur.setTitle("Erreur");
 				Erreur.setHeaderText(null);
-				Erreur.setContentText("Vous n'avez pas tapï¿½ votre Nom");
+				Erreur.setContentText("Vous n'avez pas tapé votre Nom");
 				Erreur.showAndWait();
 				txtFNom.requestFocus();
 			} else if (txtFPrenom.getText().compareTo("") == 0) {
 				Alert Erreur = new Alert(AlertType.ERROR);
 				Erreur.setTitle("Erreur");
 				Erreur.setHeaderText(null);
-				Erreur.setContentText("Vous n'avez pas tapï¿½ votre prï¿½nom");
+				Erreur.setContentText("Vous n'avez pas tapé votre prénom");
 				Erreur.showAndWait();
 				txtFPrenom.requestFocus();
 			}  else {
@@ -887,15 +887,16 @@ public class Mediatheque extends Application {
 
 				try {
 
-					// dï¿½sï¿½rialisation des prï¿½posï¿½s
+					// dàsàrialisation des préposés
 					// File fichierPreposes= new
 					// File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
 					//File fichierPreposes= new File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
 					// File fichierPreposes = new
 					// File("/Users/r.merzius/Desktop/fichierPreposes.ser");
-					//File fichierAdherents= new File("C:/Users/rn.merzius/Downloads/test/fichierAdherents.ser");
-					File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
+					//File fichierAdherents= new File("C:/Users/rn.merzius/Downloads/test/adherent.ser");
+					//File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/adherent.ser");
 					// File fichierPreposes= new
+					File fichierAdherents= new File("adherent.ser");
 
 					FileInputStream fichier1 = new FileInputStream(fichierAdherents);
 
@@ -917,10 +918,10 @@ public class Mediatheque extends Application {
 						Alert Validation = new Alert(AlertType.INFORMATION);
 						Validation.setTitle("Confirmation");
 						Validation.setHeaderText(null);
-						Validation.setContentText("Connexion rï¿½ussi! Bienvenue ï¿½ la mï¿½diathï¿½que");
+						Validation.setContentText("Connexion ràussi! Bienvenue à la Médiathèque "+txtFPrenom.getText());
 						Validation.showAndWait();
 
-						// pour demarrer l'interface de l'adhï¿½rent
+						// pour demarrer l'interface de l'adhérent
 						PrimaryStage.close();
 						Stage stageAdherent = new Stage();
 						stageAdherent.initModality(Modality.APPLICATION_MODAL);
@@ -934,7 +935,7 @@ public class Mediatheque extends Application {
 						Alert Erreur = new Alert(AlertType.ERROR);
 						Erreur.setTitle("Erreur");
 						Erreur.setHeaderText(null);
-						Erreur.setContentText("Cette adhï¿½rent n'existe pas! Veuillez rentrer un adhï¿½rent qui existe.");
+						Erreur.setContentText("Cette adhérent n'existe pas! Veuillez rentrer un adhérent qui existe.");
 						Erreur.showAndWait();
 					}
 
@@ -954,7 +955,7 @@ public class Mediatheque extends Application {
 				Alert Erreur = new Alert(AlertType.ERROR);
 				Erreur.setTitle("Erreur");
 				Erreur.setHeaderText(null);
-				Erreur.setContentText("Vous n'avez pas tapï¿½ votre tï¿½lï¿½phone");
+				Erreur.setContentText("Vous n'avez pas tapé votre téléphone");
 				Erreur.showAndWait();
 				txtFTelephone.requestFocus();
 
@@ -971,16 +972,17 @@ public class Mediatheque extends Application {
 
 				try {
 
-					// dï¿½sï¿½rialisation des prï¿½posï¿½s
+					// dàsàrialisation des préposés
 					// File fichierPreposes= new
 					// File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
 					//File fichierPreposes=new  File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
-					//File fichierAdherents=new File("C:/Users/rn.merzius/Downloads/test/fichierAdherents.ser");
+					//File fichierAdherents=new File("C:/Users/rn.merzius/Downloads/test/adherent.ser");
 					// File fichierPreposes = new
 					// File("/Users/r.merzius/Desktop/fichierPreposes.ser");
 
-					File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
+					//File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/adherent.ser");
 					// File fichierPreposes= new
+					File fichierAdherents= new File("adherent.ser");
 
 					FileInputStream fichier1 = new FileInputStream(fichierAdherents);
 
@@ -1001,10 +1003,10 @@ public class Mediatheque extends Application {
 						Alert Validation = new Alert(AlertType.INFORMATION);
 						Validation.setTitle("Confirmation");
 						Validation.setHeaderText(null);
-						Validation.setContentText("Connexion rï¿½ussi! Bienvenue ï¿½ la mï¿½diathï¿½que");
+						Validation.setContentText("Connexion ràussi! Bienvenue à la Médiathèque");
 						Validation.showAndWait();
 
-						// pour demarrer l'interface de l'adhï¿½rent
+						// pour demarrer l'interface de l'adhérent
 						Stage stageAdherent = new Stage();
 						stageAdherent.initModality(Modality.APPLICATION_MODAL);
 						InterfaceAdherent interfaceAdherent = new InterfaceAdherent();
@@ -1017,7 +1019,7 @@ public class Mediatheque extends Application {
 						Alert Erreur = new Alert(AlertType.ERROR);
 						Erreur.setTitle("Erreur");
 						Erreur.setHeaderText(null);
-						Erreur.setContentText("Cette adhï¿½rent n'existe pas! Veillez rentrer un adhï¿½rent qui existe.");
+						Erreur.setContentText("Cette adhérent n'existe pas! Veillez rentrer un adhérent qui existe.");
 						Erreur.showAndWait();
 					}
 
@@ -1050,7 +1052,7 @@ public class Mediatheque extends Application {
 					Alert Erreur = new Alert(AlertType.ERROR);
 					Erreur.setTitle("Erreur");
 					Erreur.setHeaderText(null);
-					Erreur.setContentText("Vous n'avez pas tapez votre prï¿½nom");
+					Erreur.setContentText("Vous n'avez pas tapez votre prénom");
 					Erreur.showAndWait();
 					txtFPrenomDroite.requestFocus();
 				}  else {
@@ -1058,15 +1060,16 @@ public class Mediatheque extends Application {
 
 					try {
 
-						// dï¿½sï¿½rialisation des prï¿½posï¿½s
+						// dàsàrialisation des préposés
 						// File fichierPreposes= new
 						// File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
 						// File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
 						// File fichierPreposes = new
 						// File("/Users/r.merzius/Desktop/fichierPreposes.ser");
 
-						File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
+						//File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/adherent.ser");
 						// File fichierPreposes= new
+						File fichierAdherents= new File("adherent.ser");
 
 						FileInputStream fichier1 = new FileInputStream(fichierAdherents);
 
@@ -1088,10 +1091,10 @@ public class Mediatheque extends Application {
 							Alert Validation = new Alert(AlertType.INFORMATION);
 							Validation.setTitle("Confirmation");
 							Validation.setHeaderText(null);
-							Validation.setContentText("Connexion rï¿½ussi! Bienvenue ï¿½ la mï¿½diathï¿½que");
+							Validation.setContentText("Connexion ràussi! Bienvenue à la Médiathèque");
 							Validation.showAndWait();
 
-							// pour demarrer l'interface de l'adhï¿½rent
+							// pour demarrer l'interface de l'adhérent
 							Stage stageAdherent = new Stage();
 							stageAdherent.initModality(Modality.APPLICATION_MODAL);
 							InterfaceAdherent interfaceAdherent = new InterfaceAdherent();
@@ -1103,7 +1106,7 @@ public class Mediatheque extends Application {
 							Alert Erreur = new Alert(AlertType.ERROR);
 							Erreur.setTitle("Erreur");
 							Erreur.setHeaderText(null);
-							Erreur.setContentText("Cette adhï¿½rent n'existe pas! Veillez rentrer un adhï¿½rent qui existe.");
+							Erreur.setContentText("Cette adhérent n'existe pas! Veillez rentrer un adhérent qui existe.");
 							Erreur.showAndWait();
 						}
 
@@ -1123,7 +1126,7 @@ public class Mediatheque extends Application {
 					Alert Erreur = new Alert(AlertType.ERROR);
 					Erreur.setTitle("Erreur");
 					Erreur.setHeaderText(null);
-					Erreur.setContentText("Vous n'avez pas tapez votre tï¿½lï¿½phone");
+					Erreur.setContentText("Vous n'avez pas tapez votre téléphone");
 					Erreur.showAndWait();
 					txtFTelephoneDroite.requestFocus();
 				} else if (!txtFTelephoneDroite.getText().matches("^[\\(][0-9]{3}[\\)][\\s][0-9]{3}[\\-][0-9]{4}$")) {
@@ -1139,15 +1142,17 @@ public class Mediatheque extends Application {
 
 					try {
 
-						// dï¿½sï¿½rialisation des prï¿½posï¿½s
+						// dàsàrialisation des préposés
 						// File fichierPreposes= new
 						// File("C:/Users/GabrielMarrero/Downloads/test/fichierPreposes.ser");
 						// File("C:/Users/rn.merzius/Downloads/test/fichierPreposes.ser");
 						// File fichierPreposes = new
 						// File("/Users/r.merzius/Desktop/fichierPreposes.ser");
 
-						File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/fichierAdherents.ser");
+						//File fichierAdherents= new File("C:/Users/cg.marrero/Downloads/test/adherent.ser");
+						
 						// File fichierPreposes= new
+						File fichierAdherents= new File("adherent.ser");
 
 						FileInputStream fichier1 = new FileInputStream(fichierAdherents);
 
@@ -1168,10 +1173,10 @@ public class Mediatheque extends Application {
 							Alert Validation = new Alert(AlertType.INFORMATION);
 							Validation.setTitle("Confirmation");
 							Validation.setHeaderText(null);
-							Validation.setContentText("Connexion rï¿½ussi! Bienvenue ï¿½ la mï¿½diathï¿½que");
+							Validation.setContentText("Connexion réussi! Bienvenue à la Médiathèque");
 							Validation.showAndWait();
 
-							// pour demarrer l'interface de l'adhï¿½rent
+							// pour demarrer l'interface de l'adhérent
 							Stage stageAdherent = new Stage();
 							stageAdherent.initModality(Modality.APPLICATION_MODAL);
 							InterfaceAdherent interfaceAdherent = new InterfaceAdherent();
@@ -1183,7 +1188,7 @@ public class Mediatheque extends Application {
 							Alert Erreur = new Alert(AlertType.ERROR);
 							Erreur.setTitle("Erreur");
 							Erreur.setHeaderText(null);
-							Erreur.setContentText("Cette adhï¿½rent n'existe pas! Veillez rentrer un adhï¿½rent qui existe.");
+							Erreur.setContentText("Cette adhérent n'existe pas! Veillez rentrer un adhérent qui existe.");
 							Erreur.showAndWait();
 						}
 
@@ -1304,7 +1309,7 @@ public class Mediatheque extends Application {
 				sortie.close();
 				fichier.close();
 
-				// System.out.println("l'objet catalogue vient d'ï¿½tre seralizer");
+				// System.out.println("l'objet catalogue vient d'àtre seralizer");
 
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -1333,7 +1338,7 @@ public class Mediatheque extends Application {
 			fichier.close();
 			entree.close();
 
-			// System.out.println("l'objet catalogue vient d'ï¿½etre deserlializer");
+			// System.out.println("l'objet catalogue vient d'àetre deserlializer");
 			//// System.out.println(catalogueDeserializer);
 			// catalogueDeserializer.afficherDvd();
 

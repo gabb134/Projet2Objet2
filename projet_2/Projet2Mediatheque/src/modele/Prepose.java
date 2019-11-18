@@ -22,7 +22,8 @@ public class Prepose implements Serializable {
 	private String strNom;
 	private String strPrenom;
 	private String strTelephone;
-	static ListeAdherents liste = ListeAdherents.getInstance();
+	private ListeAdherents liste = ListeAdherents.getInstance();
+	private static Prepose instance;
 
 	public Prepose(String strNumEmploye, String strMotDePasse, String strAdresse, String strNom, String strPrenom,
 			String strTelephone) {
@@ -37,6 +38,15 @@ public class Prepose implements Serializable {
 
 	public Prepose() {
 
+	}
+	public static Prepose getInstance() {
+		if (instance == null) {
+			//
+			  instance = new Prepose();
+		}
+			
+			  return instance; 
+		
 	}
 
 	public void afficherAdherents() {
@@ -122,7 +132,7 @@ public class Prepose implements Serializable {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Prepose prepose = new Prepose();
+		/*Prepose prepose = new Prepose();
 
 	//ListeAdherents liste = ListeAdherents.getInstance();
 		Adherent a1 = new Adherent("2", "allossssttttt", "tets", "afge", "(333) 987-3344", 2, 2);
@@ -137,7 +147,7 @@ public class Prepose implements Serializable {
 		prepose.ajouterAdherent(a3);
 
 		//prepose.supprimerAdherent(a1);
-		prepose.afficherAdherents();
+		prepose.afficherAdherents();*/
 		// System.out.println(liste.getLstAdherents().get(0).getStrNumeroAdherent());
 
 	}

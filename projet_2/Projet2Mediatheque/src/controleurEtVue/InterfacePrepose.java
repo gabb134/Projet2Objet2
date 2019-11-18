@@ -54,6 +54,7 @@ import modele.Adherent;
 import modele.Catalogue;
 import modele.DVD;
 import modele.Document;
+import modele.ListeAdherents;
 import modele.Livre;
 import modele.Periodique;
 import modele.Prepose;
@@ -167,7 +168,7 @@ public class InterfacePrepose extends Application {
 	private Button btnConfirmer;
 	private Button btnAnnulerAjout;
 	private HBox hboxButtonAjout;
-
+	private ListeAdherents liste;
 	@Override
 	public void start(Stage primaryStage) {
 		// TODO Auto-generated method stub
@@ -346,12 +347,28 @@ public class InterfacePrepose extends Application {
 			
 			//faire les donnesAdherents avec l'arraylist adheretn qui est dans prepose
 			
-			
+			/*****************************************SEUELEMENT POUR DES TESTS*****************************************/
 		
-			Prepose p = new Prepose();
-			//donneesAdherents = FXCollections.observableArrayList(p.getLstAdherents());
 		
 			
+		/*	Adherent a1 = new Adherent("2", "allossssttttt", "tets", "afge", "(333) 987-3344", 2, 2);
+			Adherent a2 = new Adherent("3", "klk", "tets", "afge", "(334) 444-4444", 2, 2);
+			Adherent a3 = new Adherent("4", "klk", "tets", "afge", "(334) 444-2345", 2, 2);
+
+			// a1.setStrNumeroAdherent(1+a1.getStrNumeroAdherent());
+			
+			Prepose prepose  = new Prepose();
+			prepose.ajouterAdherent(a1);
+			prepose.ajouterAdherent(a2);
+			prepose.ajouterAdherent(a3);
+			prepose.afficherAdherents();*/
+			
+			
+			
+			/*************************************************************************************************/
+			 liste = ListeAdherents.getInstance();
+			donneesAdherents = FXCollections.observableArrayList(liste.getLstAdherents());
+			tableAdherent.setItems(donneesAdherents);
 			
 			TableColumn<Adherent, String> colonneNumeroAdherent = new TableColumn<Adherent, String>("Numéro d'adhérent");
 			TableColumn<Adherent, String> colonneNomAdherent= new TableColumn<Adherent, String>("Nom");
@@ -493,6 +510,8 @@ public class InterfacePrepose extends Application {
 					stageConnexionMediatheque.initModality(Modality.APPLICATION_MODAL);
 					Mediatheque meditheque = new Mediatheque();
 					meditheque.start(stageConnexionMediatheque);
+					//serialisation pour sauvegarder les adherents qui ont ete ajouter, modifier ou supprimer
+					liste.serialisationAdherent();
 
 				}
 			});
@@ -555,6 +574,11 @@ public class InterfacePrepose extends Application {
 			btnModifierAdherent.setOnMouseClicked(gestionnaireButtonPreposeAherent);
 			btnSupprimerAdherent.setOnMouseClicked(gestionnaireButtonPreposeAherent);
 			btnPayerSoldeAdhernent.setOnMouseClicked(gestionnaireButtonPreposeAherent);
+			
+			GestionnaireButtonPrets gestionnaireButtonPrets = new GestionnaireButtonPrets();
+
+			btnInscrireUnPret.setOnMouseClicked(gestionnaireButtonPrets);
+			btnIscrireUnRetour.setOnMouseClicked(gestionnaireButtonPrets);
 
 			/*********************************************
 			 * AFFICHAGE
@@ -1103,8 +1127,19 @@ public class InterfacePrepose extends Application {
 								Erreur.showAndWait();
 								txtfTelephoneAdherent.requestFocus();
 							}
-							else {// ajout d'un adhérent
-								
+							else {// ajout d'un adhérent **important il faut que ça soit le prepose qui est connecter qui ajoute les adherents
+							
+								Adherent adheretnAjouter = new Adherent("1", txtfNomAdherent.getText(), txtfPrenomAdherent.getText(), txtfAdresseAdherent.getText(), txtfTelephoneAdherent.getText(), 0, 0);
+								 Prepose prepose = new Prepose(); //juste pour faire des tests
+								 prepose.ajouterAdherent(adheretnAjouter);
+								 
+								 	Alert confirmation = new Alert(AlertType.CONFIRMATION);
+								 	confirmation.setTitle("Confirmation");
+								 	confirmation.setHeaderText(null);
+								 	confirmation.setContentText("L'adhérent vient d'être ajouté!");
+								 	confirmation.showAndWait();
+								 	stageAjoutAdherent.close();
+								 	donneesAdherents.add(adheretnAjouter);
 							}
 							
 						
@@ -1166,6 +1201,31 @@ public class InterfacePrepose extends Application {
 		@Override
 		public void handle(MouseEvent e) {
 			// TODO Auto-generated method stub
+			
+			if(e.getSource()==btnInscrireUnPret) {
+				if(tableAdherent.getSelectionModel().getSelectedItem()==null) {//non selectionnee
+					Alert Erreur = new Alert(AlertType.ERROR);
+					Erreur.setTitle("Erreur");
+					Erreur.setHeaderText(null);
+					Erreur.setContentText("Vous devez sélectionner un document pour l'emrpunter");
+					Erreur.showAndWait();
+				}
+				else{
+					System.out.println("adhédent selectionnee");
+				}
+			}
+			else if(e.getSource()==btnIscrireUnRetour) {
+				if(tableAdherent.getSelectionModel().getSelectedItem()==null) {//non selectionnee
+					Alert Erreur = new Alert(AlertType.ERROR);
+					Erreur.setTitle("Erreur");
+					Erreur.setHeaderText(null);
+					Erreur.setContentText("Vous devez sélectionner un document pour l'emrpunter");
+					Erreur.showAndWait();
+				}
+				else{
+					System.out.println("adhédent selectionnee");
+				}
+			}
 			
 		}
 		
