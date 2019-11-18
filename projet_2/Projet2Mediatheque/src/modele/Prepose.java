@@ -130,6 +130,9 @@ public class Prepose implements Serializable {
 	public String getPrenom() {
 		return strPrenom;
 	}
+	public void setNoEmploye(String strNoEmploye) {
+		this.strNumEmploye=strNoEmploye;
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
