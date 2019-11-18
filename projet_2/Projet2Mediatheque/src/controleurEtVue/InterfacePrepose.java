@@ -1367,7 +1367,7 @@ public class InterfacePrepose extends Application {
 			// TODO Auto-generated method stub
 			
 			if(e.getSource()==btnInscrireUnPret) {
-				if(tableAdherent.getSelectionModel().getSelectedItem()==null) {//non selectionnee
+				if(tableCatalogue.getSelectionModel().getSelectedItem()==null) {//non selectionnee
 					Alert Erreur = new Alert(AlertType.ERROR);
 					Erreur.setTitle("Erreur");
 					Erreur.setHeaderText(null);
@@ -1375,11 +1375,12 @@ public class InterfacePrepose extends Application {
 					Erreur.showAndWait();
 				}
 				else{
-					System.out.println("adhédent selectionnee");
+					Document doc=tableCatalogue.getSelectionModel().getSelectedItem();
+					System.out.println(doc.getTitre());
 				}
 			}
 			else if(e.getSource()==btnIscrireUnRetour) {
-				if(tableAdherent.getSelectionModel().getSelectedItem()==null) {//non selectionnee
+				if(tableCatalogue.getSelectionModel().getSelectedItem()==null) {//non selectionnee
 					Alert Erreur = new Alert(AlertType.ERROR);
 					Erreur.setTitle("Erreur");
 					Erreur.setHeaderText(null);

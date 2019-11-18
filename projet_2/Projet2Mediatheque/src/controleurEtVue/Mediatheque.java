@@ -117,7 +117,7 @@ public class Mediatheque extends Application {
 	private TextField txtFPrenom;
 	private TextField txtFTelephone;
 	private TextField txtFNoPrepose;
-	private TextField txtFMotDePassePrepose;
+	private PasswordField txtFMotDePassePrepose;
 	private TextField txtFNoAdmin;
 	private PasswordField txtFMotDePasseAdmin;
 
@@ -264,7 +264,7 @@ public class Mediatheque extends Application {
 			txtFTelephone = new TextField();
 			txtFTelephone.setPromptText("(###) ###-####");
 			txtFNoPrepose = new TextField();
-			txtFMotDePassePrepose = new TextField();
+			txtFMotDePassePrepose = new PasswordField();
 			txtFNoAdmin = new TextField();
 			txtFMotDePasseAdmin = new PasswordField();
 			txtNom = new Text("Nom adhérent:");
