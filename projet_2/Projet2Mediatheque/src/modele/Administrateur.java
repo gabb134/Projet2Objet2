@@ -54,19 +54,16 @@ public class Administrateur {
 
 
 	}
-	public static Boolean supprimerPrepose(String strNumeroEmploye)
+	public void supprimerPrepose(Prepose prepose)
 	{
-		Boolean booTrouver=false;
-		for(int i=0;i<lstPreposes.size();i++)
-		{
-			if(lstPreposes.get(i).getNoEmploye().equals(strNumeroEmploye))
-			{
-				lstPreposes.remove(i);
-				booTrouver=true;
+		try {
+			if (lstPreposes.get(lstPreposes.size() - 1) != null) {
+				lstPreposes.remove(prepose);
 			}
-		}
-		ListePreposes.serialisationPrepose();
-		return booTrouver;
+			}catch(Exception e) {
+			
+			}
+		
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

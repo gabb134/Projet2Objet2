@@ -34,6 +34,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -118,7 +119,7 @@ public class Mediatheque extends Application {
 	private TextField txtFNoPrepose;
 	private TextField txtFMotDePassePrepose;
 	private TextField txtFNoAdmin;
-	private TextField txtFMotDePasseAdmin;
+	private PasswordField txtFMotDePasseAdmin;
 
 	private Text txtNom;
 	private Text txtPrenom;
@@ -265,7 +266,7 @@ public class Mediatheque extends Application {
 			txtFNoPrepose = new TextField();
 			txtFMotDePassePrepose = new TextField();
 			txtFNoAdmin = new TextField();
-			txtFMotDePasseAdmin = new TextField();
+			txtFMotDePasseAdmin = new PasswordField();
 			txtNom = new Text("Nom adhérent:");
 			txtNom.setFill(Color.ANTIQUEWHITE);
 			txtNom.setFont(fontText1);
@@ -861,6 +862,33 @@ public class Mediatheque extends Application {
 			Erreur.setContentText("Vous n'avez pas tapé votre mot de passe");
 			Erreur.showAndWait();
 			txtFMotDePasseAdmin.requestFocus();
+		}
+		else if (txtFNoAdmin.getText().compareTo("Admin") != 0) {
+			Alert Erreur = new Alert(AlertType.ERROR);
+			Erreur.setTitle("Erreur");
+			Erreur.setHeaderText(null);
+			Erreur.setContentText("Ce numéro d'administrateur est invalide");
+			Erreur.showAndWait();
+			txtFMotDePasseAdmin.requestFocus();
+		}
+		else if (txtFMotDePasseAdmin.getText().compareTo("Password1") != 0) {
+			Alert Erreur = new Alert(AlertType.ERROR);
+			Erreur.setTitle("Erreur");
+			Erreur.setHeaderText(null);
+			Erreur.setContentText("Le mot de passe est invalide");
+			Erreur.showAndWait();
+			txtFMotDePasseAdmin.requestFocus();
+		}
+		else
+		{
+			PrimaryStage.close();
+			Stage stageAdmin = new Stage();
+			stageAdmin.initModality(Modality.APPLICATION_MODAL);
+			InterfaceAdmin interfaceAdmin = new InterfaceAdmin();
+			interfaceAdmin.start(stageAdmin);
+			txtFNoAdmin.clear();
+			txtFMotDePasseAdmin.clear();
+			txtFNoAdmin.requestFocus();
 		}
 	}
 	

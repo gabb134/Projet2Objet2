@@ -18,7 +18,6 @@ public class Prepose implements Serializable {
 	private String strNumEmploye;
 	private String strMotDePasse;
 	private String strAdresse;
-
 	private String strNom;
 	private String strPrenom;
 	private String strTelephone;
@@ -35,6 +34,78 @@ public class Prepose implements Serializable {
 		this.strNom = strNom;
 		this.strPrenom = strPrenom;
 		this.strTelephone = strTelephone;
+	}
+
+	public String getStrNumEmploye() {
+		return strNumEmploye;
+	}
+
+	public void setStrNumEmploye(String strNumEmploye) {
+		this.strNumEmploye = strNumEmploye;
+	}
+
+	public String getStrMotDePasse() {
+		return strMotDePasse;
+	}
+
+	public void setStrMotDePasse(String strMotDePasse) {
+		this.strMotDePasse = strMotDePasse;
+	}
+
+	public String getStrAdresse() {
+		return strAdresse;
+	}
+
+	public void setStrAdresse(String strAdresse) {
+		this.strAdresse = strAdresse;
+	}
+
+	public String getStrNom() {
+		return strNom;
+	}
+
+	public void setStrNom(String strNom) {
+		this.strNom = strNom;
+	}
+
+	public String getStrPrenom() {
+		return strPrenom;
+	}
+
+	public void setStrPrenom(String strPrenom) {
+		this.strPrenom = strPrenom;
+	}
+
+	public String getStrTelephone() {
+		return strTelephone;
+	}
+
+	public void setStrTelephone(String strTelephone) {
+		this.strTelephone = strTelephone;
+	}
+
+	public ListeAdherents getListe() {
+		return liste;
+	}
+
+	public void setListe(ListeAdherents liste) {
+		this.liste = liste;
+	}
+
+	public Catalogue getCatalogue() {
+		return catalogue;
+	}
+
+	public void setCatalogue(Catalogue catalogue) {
+		this.catalogue = catalogue;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public static void setInstance(Prepose instance) {
+		Prepose.instance = instance;
 	}
 
 	public Prepose() {
@@ -109,9 +180,6 @@ public class Prepose implements Serializable {
 		try {
 		if (liste.getLstAdherents().get(liste.getLstAdherents().size() - 1) != null) {
 			liste.getLstAdherents().remove(adherent);
-		}
-		else {
-			System.out.println("Echoue"); 
 		}
 		}catch(Exception e) {
 		
