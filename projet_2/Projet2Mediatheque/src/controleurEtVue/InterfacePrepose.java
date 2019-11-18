@@ -1288,17 +1288,23 @@ public class InterfacePrepose extends Application {
 						public void handle(ActionEvent e) {
 							// TODO Auto-generated method stub
 							
-							//voir comment modifier 
 							
-							//1. get l'emplacement ou se trouve l'adherent que jai cliquer
-							//2. le supprimer
-							//3. ajouter un nouvel adherent à l'emplacement choisi
 							
 							Adherent adherentmodifier1 = tableAdherent.getSelectionModel().getSelectedItem();
 							
 							adherentmodifier1.setStrNom(txtfNomAdherent.getText());
+							adherentmodifier1.setStrPrenom(txtfPrenomAdherent.getText());
+							adherentmodifier1.setStrAdresse(txtfAdresseAdherent.getText());
+							adherentmodifier1.setStrNumeroTelephone(txtfTelephoneAdherent.getText());
 							
 							tableAdherent.refresh();
+							
+							Alert confirmation = new Alert(AlertType.CONFIRMATION);
+						 	confirmation.setTitle("Confirmation");
+						 	confirmation.setHeaderText(null);
+						 	confirmation.setContentText("L'adhérent dont le numéro est "+adherentmodifier1.getStrNumeroAdherent() +" a été modifié!");
+						 	confirmation.showAndWait();
+						 	stageModifAdherent.close();
 
 						}
 					});
@@ -1356,6 +1362,17 @@ public class InterfacePrepose extends Application {
 				}
 				else{
 					System.out.println("adhédent selectionnee");
+					
+					//remttre le champ solde a 0.0
+					Adherent adherentSoldePaye = tableAdherent.getSelectionModel().getSelectedItem();
+					adherentSoldePaye.setDblSolde(0.0);
+					
+					tableAdherent.refresh();
+					Alert confirmation = new Alert(AlertType.CONFIRMATION);
+				 	confirmation.setTitle("Confirmation");
+				 	confirmation.setHeaderText(null);
+				 	confirmation.setContentText("Le solde de l'adhérent dont le numéro est "+adherentSoldePaye.getStrNumeroAdherent()+" a été payé");
+				 	confirmation.showAndWait();
 				}
 			}
 

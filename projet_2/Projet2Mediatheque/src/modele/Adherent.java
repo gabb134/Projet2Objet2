@@ -13,6 +13,10 @@ public class Adherent implements Serializable {
 	private String strNumeroAdherent;
 	private String strAdresse;
 
+	public void setStrAdresse(String strAdresse) {
+		this.strAdresse = strAdresse;
+	}
+
 	private int intNbPrets;
 	private double dblSolde;
 
