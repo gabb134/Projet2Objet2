@@ -169,6 +169,7 @@ public class InterfacePrepose extends Application {
 	private Button btnAnnulerAjout;
 	private HBox hboxButtonAjout;
 	private ListeAdherents liste;
+	private  Prepose prepose;
 	@Override
 	public void start(Stage primaryStage) {
 		// TODO Auto-generated method stub
@@ -401,6 +402,7 @@ public class InterfacePrepose extends Application {
 			colonneNumeroTelephoneAdherent.setCellValueFactory(new PropertyValueFactory<>("strNumeroTelephone"));
 			colonnePretsActifsAdherent.setCellValueFactory(new PropertyValueFactory<>("intNbPrets"));
 			colonneSoldeDuAdherent.setCellValueFactory(new PropertyValueFactory<>("intSolde"));
+			
 			
 			//tableAdherent.setItems(donneesAdherents);
 			tableAdherent.getColumns().addAll(colonneNumeroAdherent,colonneNomAdherent,colonnePrenomAdherent,colonneAdresseAdherent,colonneNumeroTelephoneAdherent,colonnePretsActifsAdherent,colonneSoldeDuAdherent);
@@ -1154,7 +1156,7 @@ public class InterfacePrepose extends Application {
 							else {// ajout d'un adhérent **important il faut que ça soit le prepose qui est connecter qui ajoute les adherents
 							
 								Adherent adheretnAjouter = new Adherent("1", txtfNomAdherent.getText(), txtfPrenomAdherent.getText(), txtfAdresseAdherent.getText(), txtfTelephoneAdherent.getText(), 0, 0);
-								 Prepose prepose = new Prepose(); //juste pour faire des tests
+								  prepose = new Prepose(); //juste pour faire des tests
 								 prepose.ajouterAdherent(adheretnAjouter);
 								 
 								 	Alert confirmation = new Alert(AlertType.CONFIRMATION);
@@ -1200,8 +1202,20 @@ public class InterfacePrepose extends Application {
 					Erreur.setContentText("Vous devez sélectionner un adhérent pour le supprimer.");
 					Erreur.showAndWait();
 				}
-				else{
+				else{ // ne marceh pas, voir erreur: java.lang.NullPointerException
 					System.out.println("adhédent selectionnee");
+					//suppresion adherent
+					
+					Adherent adherentSupprimer = tableAdherent.getSelectionModel().getSelectedItem();
+					
+					//prepose.afficherAdherents(adherentSupprimer);
+					
+					//System.out.println(adherentSupprimer.getStrNom());
+			
+					prepose.supprimerAdherent(adherentSupprimer);
+					
+					//donneesAdherents.removeAll(adherentSupprimer);
+					
 				}
 			}
 			else if(e.getSource()==btnPayerSoldeAdhernent) {
@@ -1231,7 +1245,7 @@ public class InterfacePrepose extends Application {
 					Alert Erreur = new Alert(AlertType.ERROR);
 					Erreur.setTitle("Erreur");
 					Erreur.setHeaderText(null);
-					Erreur.setContentText("Vous devez sélectionner un document pour l'emrpunter");
+					Erreur.setContentText("Vous devez sélectionner un document pour l'emprunter");
 					Erreur.showAndWait();
 				}
 				else{
@@ -1243,11 +1257,11 @@ public class InterfacePrepose extends Application {
 					Alert Erreur = new Alert(AlertType.ERROR);
 					Erreur.setTitle("Erreur");
 					Erreur.setHeaderText(null);
-					Erreur.setContentText("Vous devez sélectionner un document pour l'emrpunter");
+					Erreur.setContentText("Vous devez sélectionner un document pour le retourner");
 					Erreur.showAndWait();
 				}
 				else{
-					System.out.println("adhédent selectionnee");
+					System.out.println("adhérent selectionnee");
 				}
 			}
 			

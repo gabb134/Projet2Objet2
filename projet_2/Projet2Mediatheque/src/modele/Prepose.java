@@ -49,8 +49,9 @@ public class Prepose implements Serializable {
 		
 	}
 
-	public void afficherAdherents() {
+	public void afficherAdherents(Adherent adherent) {
 		for (int i = 0; i < liste.getLstAdherents().size(); i++) {
+			if(liste.getLstAdherents().get(i).equals(adherent))
 			System.out.println(liste.getLstAdherents().get(i));
 		}
 	}
@@ -101,11 +102,11 @@ public class Prepose implements Serializable {
 
 	public void supprimerAdherent(Adherent adherent) {
 		try {
-		if (liste.getLstAdherents().get(0) != null) {
+		if (liste.getLstAdherents().get(liste.getLstAdherents().size() - 1) != null) {
 			liste.getLstAdherents().remove(adherent);
 		}
 		}catch(Exception e) {
-			
+			System.out.println("Echoue");
 		}
 		
 
