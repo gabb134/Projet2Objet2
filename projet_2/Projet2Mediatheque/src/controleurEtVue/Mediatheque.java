@@ -456,7 +456,7 @@ public class Mediatheque extends Application {
 			// Quatrieme onglet (Periodique)
 			tabPeriodique = new Tab();
 			tabPeriodique.setClosable(false);
-			tabPeriodique.setText("Pàiodiques");
+			tabPeriodique.setText("Périodiques");
 			tabPeriodique.setGraphic(new ImageView(new Image("icon-periodique.png")));
 
 			// gestion des tablesViews

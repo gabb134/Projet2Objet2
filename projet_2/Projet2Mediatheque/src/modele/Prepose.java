@@ -23,6 +23,7 @@ public class Prepose implements Serializable {
 	private String strPrenom;
 	private String strTelephone;
 	private ListeAdherents liste = ListeAdherents.getInstance();
+	private Catalogue catalogue = Catalogue.getInstance("Livres.txt", "Periodiques.txt", "DVD.txt");
 	private static Prepose instance;
 
 	public Prepose(String strNumEmploye, String strMotDePasse, String strAdresse, String strNom, String strPrenom,
@@ -117,6 +118,18 @@ public class Prepose implements Serializable {
 		}
 		
 
+	}
+	public void ajouterDocument(Document document) {
+		try {
+			if(catalogue.getLstDocuments().get(0)!=null) {
+				catalogue.getLstDocuments().add(document);
+			}
+		}catch(Exception e) {
+			catalogue.getLstDocuments().add(document);
+		}
+	}
+	public void supprimerDocument(Document document) {
+		
 	}
 	public void inscrirePret(Document document,Adherent adherent) {
 		

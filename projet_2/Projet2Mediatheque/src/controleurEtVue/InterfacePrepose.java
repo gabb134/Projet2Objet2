@@ -186,7 +186,8 @@ public class InterfacePrepose extends Application {
 	private Button btnConfirmerAJoutAdherent ;
 	private Button btnAnnulerAjoutAdherent ;
 	
-	HBox hboxButtonAhderent = new HBox(2);
+	private HBox hboxButtonAhderent = new HBox(2);
+	private Catalogue catalogue;
 	@Override
 	public void start(Stage primaryStage) {
 		// TODO Auto-generated method stub
@@ -220,7 +221,7 @@ public class InterfacePrepose extends Application {
 
 			// Pour aller cherche l'objet catalogue serializer
 			SerializationCatalogue();
-			Catalogue catalogue = DeserialisationCatalogue();
+			 catalogue = DeserialisationCatalogue();
 			// Catalogue catalogue = Catalogue.getInstance("Livres.txt", "Periodiques.txt",
 			// "DVD.txt");
 			donneesCatalogue = FXCollections.observableArrayList(catalogue.getLstDocuments()); // ***Demander au prof
@@ -706,6 +707,7 @@ public class InterfacePrepose extends Application {
 		public void handle(MouseEvent e) {
 			// TODO Auto-generated method stub
 			if (e.getSource() == btnAjouterDocumentCatalogue) {
+				
 
 				stageAjout = new Stage();
 				gPaneAjoutDoc = new GridPane();
@@ -819,9 +821,20 @@ public class InterfacePrepose extends Application {
 								Erreur.showAndWait();
 							}
 							else {// ajout d'un document
+								Document documentAjouter = tableCatalogue.getSelectionModel().getSelectedItem();
+								Livre livreAjouter = (Livre) tableCatalogue.getSelectionModel().getSelectedItem();
+								//catalogue.getLstDocuments().add(documentAjouter);
+								//catalogue.getLstLivres().add(livreAjouter);
+								prepose.ajouterDocument(documentAjouter);
 								
+								donneesCatalogue.add(documentAjouter);
 								
-								
+								Alert confirmation = new Alert(AlertType.CONFIRMATION);
+							 	confirmation.setTitle("Confirmation");
+							 	confirmation.setHeaderText(null);
+							 	confirmation.setContentText("Le document "+txtFtitre.getText() +" a été ajouté!");
+							 	confirmation.showAndWait();
+							 	stageAjout.close();
 							}
 							
 						}
