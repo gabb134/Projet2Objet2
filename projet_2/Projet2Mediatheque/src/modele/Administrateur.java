@@ -12,7 +12,7 @@ public class Administrateur {
 
 	static ArrayList<Prepose> lstPreposes=ListePreposes.getInstance().getLstPreposes();
 	@SuppressWarnings("unchecked")
-	public void AjouterPrepose(String strNom, String strPrenom, String strAdresse, String strTelephone, String strMotDePasse )
+	public void AjouterPrepose(Prepose prepose)
 	{
 		//int intNumeroPrepose=1900;
 
@@ -32,7 +32,8 @@ public class Administrateur {
 				intNumeroEmploye=Integer.parseInt(lstPreposes.get(lstPreposes.size()-1).getNoEmploye().substring(1));
 				intNumeroEmploye++;
 				System.out.println(intNumeroEmploye);
-				lstPreposes.add(new Prepose("P"+intNumeroEmploye, strMotDePasse, strAdresse, strNom, strPrenom, strTelephone));
+				prepose.setNoEmploye("P"+intNumeroEmploye);
+				lstPreposes.add( prepose);
 
 
 
@@ -42,7 +43,8 @@ public class Administrateur {
 
 		}
 		catch (Exception e) {
-			lstPreposes.add(new Prepose("P"+Integer.toString(intNumAjout), strMotDePasse, strAdresse, strNom, strPrenom, strTelephone));}
+			prepose.setNoEmploye("P"+Integer.toString(intNumAjout));
+			lstPreposes.add(prepose);}
 
 		ListePreposes.serialisationPrepose();
 	}
@@ -69,7 +71,8 @@ public class Administrateur {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Administrateur admin=new Administrateur();
-		admin.AjouterPrepose("merzius", "paul", "inconnue", "(111) 111-1111", "Password1");
+		Prepose prep=new Prepose("","merzius", "paul", "inconnue", "(111) 111-1111", "Password1");
+		admin.AjouterPrepose(prep);
 		//System.out.println(Administrateur.lstPreposes.get(5).getNoEmploye());
 
 		//if(Administrateur.supprimerPrepose("P19002"))
