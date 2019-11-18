@@ -169,7 +169,7 @@ public class InterfacePrepose extends Application {
 	private Button btnAnnulerAjout;
 	private HBox hboxButtonAjout;
 	private ListeAdherents liste;
-	private  Prepose prepose;
+	private  Prepose prepose = new Prepose();
 	@Override
 	public void start(Stage primaryStage) {
 		// TODO Auto-generated method stub
@@ -376,8 +376,8 @@ public class InterfacePrepose extends Application {
 			TableColumn<Adherent, String> colonnePrenomAdherent = new TableColumn<Adherent, String>("Prénom");
 			TableColumn<Adherent, String> colonneAdresseAdherent = new TableColumn<Adherent, String>("Adresse");
 			TableColumn<Adherent, String> colonneNumeroTelephoneAdherent = new TableColumn<Adherent, String>("Téléphone");
-			TableColumn<Adherent, String> colonnePretsActifsAdherent = new TableColumn<Adherent, String>("Prêts actif");
-			TableColumn<Adherent, String> colonneSoldeDuAdherent = new TableColumn<Adherent, String>("Solde dû");
+			TableColumn<Adherent, Integer> colonnePretsActifsAdherent = new TableColumn<Adherent, Integer>("Prêts actif");
+			TableColumn<Adherent, Double> colonneSoldeDuAdherent = new TableColumn<Adherent, Double>("Solde dû");
 			
 			colonneNumeroAdherent.setPrefWidth(120);
 			colonneNomAdherent.setPrefWidth(100);
@@ -401,7 +401,7 @@ public class InterfacePrepose extends Application {
 			colonneAdresseAdherent.setCellValueFactory(new PropertyValueFactory<>("strAdresse"));
 			colonneNumeroTelephoneAdherent.setCellValueFactory(new PropertyValueFactory<>("strNumeroTelephone"));
 			colonnePretsActifsAdherent.setCellValueFactory(new PropertyValueFactory<>("intNbPrets"));
-			colonneSoldeDuAdherent.setCellValueFactory(new PropertyValueFactory<>("intSolde"));
+			colonneSoldeDuAdherent.setCellValueFactory(new PropertyValueFactory<>("dblSolde"));
 			
 			
 			//tableAdherent.setItems(donneesAdherents);
@@ -1156,13 +1156,14 @@ public class InterfacePrepose extends Application {
 							else {// ajout d'un adhérent **important il faut que ça soit le prepose qui est connecter qui ajoute les adherents
 							
 								Adherent adheretnAjouter = new Adherent("1", txtfNomAdherent.getText(), txtfPrenomAdherent.getText(), txtfAdresseAdherent.getText(), txtfTelephoneAdherent.getText(), 0, 0);
-								  prepose = new Prepose(); //juste pour faire des tests
+								
+								
 								 prepose.ajouterAdherent(adheretnAjouter);
 								 
 								 	Alert confirmation = new Alert(AlertType.CONFIRMATION);
 								 	confirmation.setTitle("Confirmation");
 								 	confirmation.setHeaderText(null);
-								 	confirmation.setContentText("L'adhérent vient d'être ajouté!");
+								 	confirmation.setContentText("L'adhérent dont le numéro est "+adheretnAjouter.getStrNumeroAdherent() +" a été ajouté!");
 								 	confirmation.showAndWait();
 								 	stageAjoutAdherent.close();
 								 	donneesAdherents.add(adheretnAjouter);
@@ -1213,8 +1214,14 @@ public class InterfacePrepose extends Application {
 					//System.out.println(adherentSupprimer.getStrNom());
 			
 					prepose.supprimerAdherent(adherentSupprimer);
+					Alert confirmation = new Alert(AlertType.CONFIRMATION);
+				 	confirmation.setTitle("Confirmation");
+				 	confirmation.setHeaderText(null);
+				 	confirmation.setContentText("L'adhérent dont le numéro est "+adherentSupprimer.getStrNumeroAdherent()+" a été supprimé!");
+				 	confirmation.showAndWait();
+				 	
 					
-					//donneesAdherents.removeAll(adherentSupprimer);
+					donneesAdherents.removeAll(adherentSupprimer);
 					
 				}
 			}

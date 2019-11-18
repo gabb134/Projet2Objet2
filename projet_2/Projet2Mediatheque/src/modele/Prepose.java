@@ -73,27 +73,31 @@ public class Prepose implements Serializable {
 		try {
 			if (liste.getLstAdherents().get(0) != null) {//si la liste est remplie
 
-				for (int i = 0; i < liste.getLstAdherents().size() && !bootrouver; i++) {
-					if (liste.getLstAdherents().get(i).getStrNumeroTelephone().equals(adherent.getStrNumeroTelephone())&&liste.getLstAdherents().get(i).getStrAdresse().equals(adherent.getStrAdresse()) ) {//si c'est le meme adherent
-						bootrouver = true;
-						// System.out.println(liste.getLstAdherents().get(i));
-					}
-				}
-				if (bootrouver) {// si on ajoute un adherent avec la mem adresse et le meme numero de telephone
-					System.out.println("meme adherent");
-				} else {
+				//for (int i = 0; i < liste.getLstAdherents().size() && !bootrouver; i++) {
+			//		if (liste.getLstAdherents().get(i).getStrNumeroTelephone().equals(adherent.getStrNumeroTelephone())&&liste.getLstAdherents().get(i).getStrAdresse().equals(adherent.getStrAdresse()) ) {//si c'est le meme adherent
+					//	bootrouver = true;
+			// System.out.println(liste.getLstAdherents().get(i));
+			//		}
+			//	}
+			////	if (bootrouver) {// si on ajoute un adherent avec la mem adresse et le meme numero de telephone
+			///		System.out.println("meme adherent");
+				//} else {
 					intNumAdherent = Integer.parseInt(liste.getLstAdherents().get(liste.getLstAdherents().size() - 1).getStrNumeroAdherent().substring(1));// Pour
 	
 					intNumAdherent++;
 					// System.out.println(intNumAdherent);
 					// liste.getLstAdherents().add(new Adherent(strNumeroAdherent, strNom,
 					// strPrenom, strAdresse, strNumeroTelephone, intNbPrets, intSolde))
+					adherent.setIntNbPrets(0);
+					adherent.setDblSolde(0);
 					adherent.setStrNumeroAdherent("A"+String.valueOf(intNumAdherent));
 					liste.getLstAdherents().add(adherent);
-				}
+				//}
 
 			}
 		} catch (Exception e) {
+			adherent.setIntNbPrets(0);
+			adherent.setDblSolde(0);
 			adherent.setStrNumeroAdherent("A"+String.valueOf(intNumAjout) +String.valueOf( intNumAdherent ));
 			liste.getLstAdherents().add(adherent);
 		}
@@ -105,15 +109,18 @@ public class Prepose implements Serializable {
 		if (liste.getLstAdherents().get(liste.getLstAdherents().size() - 1) != null) {
 			liste.getLstAdherents().remove(adherent);
 		}
+		else {
+			System.out.println("Echoue"); 
+		}
 		}catch(Exception e) {
-			System.out.println("Echoue");
+		
 		}
 		
 
 	}
 	public void inscrirePret(Document document,Adherent adherent) {
 		
-		adherent.setintNbPrets(adherent.getintNbPrets()+1);
+		adherent.setIntNbPrets(adherent.getintNbPrets()+1);
 		document.setDisponible("Non disponible");
 		document.setEmprunteur(adherent.getStrPrenom()+" "+adherent.getStrNom());
 		
