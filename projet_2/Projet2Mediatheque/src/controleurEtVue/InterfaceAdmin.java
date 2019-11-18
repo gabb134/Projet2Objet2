@@ -1,6 +1,6 @@
 package controleurEtVue;
 
-import controleurEtVue.InterfacePrepose.GestionnaireButtonPreposeAherent;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -265,7 +265,7 @@ public class InterfaceAdmin extends Application {
 					
 					//System.out.println(adherentSupprimer.getStrNom());
 			
-					prepose.supprimerAdherent(adherentSupprimer);
+					//prepose.supprimerAdherent(adherentSupprimer);
 					
 					//donneesAdherents.removeAll(adherentSupprimer);
 					

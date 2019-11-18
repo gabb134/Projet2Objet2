@@ -27,6 +27,14 @@ public class Adherent implements Serializable {
 		this.dblSolde = dblSolde;
 	}
 
+	public int getIntNbPrets() {
+		return intNbPrets;
+	}
+
+	public double getDblSolde() {
+		return dblSolde;
+	}
+
 	public String getStrAdresse() {
 		return strAdresse;
 	}

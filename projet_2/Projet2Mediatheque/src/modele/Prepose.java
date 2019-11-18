@@ -88,16 +88,16 @@ public class Prepose implements Serializable {
 					// System.out.println(intNumAdherent);
 					// liste.getLstAdherents().add(new Adherent(strNumeroAdherent, strNom,
 					// strPrenom, strAdresse, strNumeroTelephone, intNbPrets, intSolde))
-					adherent.setIntNbPrets(0);
-					adherent.setDblSolde(0);
+					//adherent.setIntNbPrets(12);
+					//adherent.setDblSolde(12);
 					adherent.setStrNumeroAdherent("A"+String.valueOf(intNumAdherent));
 					liste.getLstAdherents().add(adherent);
 				//}
 
 			}
 		} catch (Exception e) {
-			adherent.setIntNbPrets(0);
-			adherent.setDblSolde(0);
+			//adherent.setIntNbPrets(0);
+			//adherent.setDblSolde(0);
 			adherent.setStrNumeroAdherent("A"+String.valueOf(intNumAjout) +String.valueOf( intNumAdherent ));
 			liste.getLstAdherents().add(adherent);
 		}

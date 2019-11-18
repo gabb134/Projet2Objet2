@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
@@ -169,7 +170,23 @@ public class InterfacePrepose extends Application {
 	private Button btnAnnulerAjout;
 	private HBox hboxButtonAjout;
 	private ListeAdherents liste;
-	private  Prepose prepose = new Prepose();
+	private Prepose prepose = new Prepose();
+	
+	//ajout adherent 
+	private Text txtNomAdherent ;
+	private Text txtPrenomAdherent ;
+	private Text txtAdresseAdherent ;
+	private Text txtTelephoneAdherent ;
+	
+	private TextField txtfNomAdherent;
+	private TextField txtfPrenomAdherent ;
+	private TextField txtfAdresseAdherent ;
+	private TextField txtfTelephoneAdherent;
+	
+	private Button btnConfirmerAJoutAdherent ;
+	private Button btnAnnulerAjoutAdherent ;
+	
+	HBox hboxButtonAhderent = new HBox(2);
 	@Override
 	public void start(Stage primaryStage) {
 		// TODO Auto-generated method stub
@@ -369,7 +386,7 @@ public class InterfacePrepose extends Application {
 			/*************************************************************************************************/
 			 liste = ListeAdherents.getInstance();
 			donneesAdherents = FXCollections.observableArrayList(liste.getLstAdherents());
-			tableAdherent.setItems(donneesAdherents);
+			//tableAdherent.setItems(donneesAdherents);
 			
 			TableColumn<Adherent, String> colonneNumeroAdherent = new TableColumn<Adherent, String>("Numéro d'adhérent");
 			TableColumn<Adherent, String> colonneNomAdherent= new TableColumn<Adherent, String>("Nom");
@@ -402,9 +419,10 @@ public class InterfacePrepose extends Application {
 			colonneNumeroTelephoneAdherent.setCellValueFactory(new PropertyValueFactory<>("strNumeroTelephone"));
 			colonnePretsActifsAdherent.setCellValueFactory(new PropertyValueFactory<>("intNbPrets"));
 			colonneSoldeDuAdherent.setCellValueFactory(new PropertyValueFactory<>("dblSolde"));
+			//colonneSoldeDuAdherent.setCellValueFactory(new PropertyValueFactory<Adherent, Double>("$"));
 			
 			
-			//tableAdherent.setItems(donneesAdherents);
+			tableAdherent.setItems(donneesAdherents);
 			tableAdherent.getColumns().addAll(colonneNumeroAdherent,colonneNomAdherent,colonnePrenomAdherent,colonneAdresseAdherent,colonneNumeroTelephoneAdherent,colonnePretsActifsAdherent,colonneSoldeDuAdherent);
 			
 			/*****************************
@@ -1070,20 +1088,20 @@ public class InterfacePrepose extends Application {
 				gpaneAjoutAdherent.setHgap(5);
 				gpaneAjoutAdherent.setVgap(10);
 				
-				Text txtNomAdherent = new Text("Nom :");
-				Text txtPrenomAdherent = new Text("Prenom :");
-				Text txtAdresseAdherent = new Text("Adresse :");
-				Text txtTelephoneAdherent = new Text("Téléphone :");
+				 txtNomAdherent = new Text("Nom :");
+				 txtPrenomAdherent = new Text("Prenom :");
+				 txtAdresseAdherent = new Text("Adresse :");
+				 txtTelephoneAdherent = new Text("Téléphone :");
 				
-				TextField txtfNomAdherent = new TextField();
-				TextField txtfPrenomAdherent = new TextField();
-				TextField txtfAdresseAdherent = new TextField();
-				TextField txtfTelephoneAdherent = new TextField();
+				 txtfNomAdherent = new TextField();
+				 txtfPrenomAdherent = new TextField();
+				 txtfAdresseAdherent = new TextField();
+				 txtfTelephoneAdherent = new TextField();
 				
-				Button btnConfirmerAJoutAdherent = new Button("Confirmer");
-				Button btnAnnulerAjoutAdherent = new Button("Annuler");
+				 btnConfirmerAJoutAdherent = new Button("Confirmer");
+				 btnAnnulerAjoutAdherent = new Button("Annuler");
 				
-				HBox hboxButtonAhderent = new HBox(2);
+				 hboxButtonAhderent = new HBox(2);
 				hboxButtonAhderent.getChildren().addAll(btnConfirmerAJoutAdherent,btnAnnulerAjoutAdherent);
 				
 
@@ -1156,9 +1174,14 @@ public class InterfacePrepose extends Application {
 							else {// ajout d'un adhérent **important il faut que ça soit le prepose qui est connecter qui ajoute les adherents
 							
 								Adherent adheretnAjouter = new Adherent("1", txtfNomAdherent.getText(), txtfPrenomAdherent.getText(), txtfAdresseAdherent.getText(), txtfTelephoneAdherent.getText(), 0, 0);
+								adheretnAjouter.setIntNbPrets(0);
+								adheretnAjouter.setDblSolde(0);
+								
 								
 								
 								 prepose.ajouterAdherent(adheretnAjouter);
+								 donneesAdherents.add(adheretnAjouter);
+								// System.out.println(adheretnAjouter.getintNbPrets());
 								 
 								 	Alert confirmation = new Alert(AlertType.CONFIRMATION);
 								 	confirmation.setTitle("Confirmation");
@@ -1166,7 +1189,7 @@ public class InterfacePrepose extends Application {
 								 	confirmation.setContentText("L'adhérent dont le numéro est "+adheretnAjouter.getStrNumeroAdherent() +" a été ajouté!");
 								 	confirmation.showAndWait();
 								 	stageAjoutAdherent.close();
-								 	donneesAdherents.add(adheretnAjouter);
+								 	
 							}
 							
 						
@@ -1193,6 +1216,80 @@ public class InterfacePrepose extends Application {
 				}
 				else{
 					System.out.println("adhédent selectionnee");
+					//modification adherent
+					Stage stageModifAdherent = new Stage();
+					GridPane gpaneModifAdherent = new GridPane();
+					Scene sceneModifAdherent = new Scene(gpaneModifAdherent,320,220);
+					
+					gpaneModifAdherent.setPadding(new Insets(10));
+					gpaneModifAdherent.setHgap(5);
+					gpaneModifAdherent.setVgap(10);
+					
+					 txtNomAdherent = new Text("Nom :");
+					 txtPrenomAdherent = new Text("Prenom :");
+					 txtAdresseAdherent = new Text("Adresse :");
+					 txtTelephoneAdherent = new Text("Téléphone :");
+					
+					 txtfNomAdherent = new TextField();
+					 txtfPrenomAdherent = new TextField();
+					 txtfAdresseAdherent = new TextField();
+					 txtfTelephoneAdherent = new TextField();
+					
+					Button btnConfirmerModificationAdherent = new Button("Modifier");
+					Button btnAnnulerModificationAdherent = new Button("Annuler");
+					
+					 hboxButtonAhderent = new HBox(2);
+					hboxButtonAhderent.getChildren().addAll(btnConfirmerModificationAdherent,btnAnnulerModificationAdherent);
+					
+
+					
+					
+					gpaneModifAdherent.add(txtNomAdherent, 0, 0);
+					gpaneModifAdherent.add(txtfNomAdherent, 1, 0);
+					gpaneModifAdherent.add(txtPrenomAdherent, 0, 1);
+					gpaneModifAdherent.add(txtfPrenomAdherent, 1, 1);
+					gpaneModifAdherent.add(txtAdresseAdherent, 0, 2);
+					gpaneModifAdherent.add(txtfAdresseAdherent, 1, 2);
+					gpaneModifAdherent.add(txtTelephoneAdherent, 0, 3);
+					gpaneModifAdherent.add(txtfTelephoneAdherent, 1, 3);
+					gpaneModifAdherent.add(hboxButtonAhderent, 1, 4);
+					
+					//il faut aller chercher l'infor de l'adhérent selectioneee
+					Adherent adherentModifier = tableAdherent.getSelectionModel().getSelectedItem();
+					
+					txtfNomAdherent.setText(adherentModifier.getStrNom());
+					txtfPrenomAdherent.setText(adherentModifier.getStrPrenom());
+					txtfAdresseAdherent.setText(adherentModifier.getStrAdresse());
+					txtfTelephoneAdherent.setText(adherentModifier.getStrNumeroTelephone());
+					
+					btnAnnulerModificationAdherent.setOnAction(new EventHandler<ActionEvent>() {
+
+						@Override
+						public void handle(ActionEvent e) {
+							// TODO Auto-generated method stub
+							stageModifAdherent.close();
+						}
+					});
+					btnConfirmerModificationAdherent.setOnAction(new EventHandler<ActionEvent>() {
+
+						@Override
+						public void handle(ActionEvent e) {
+							// TODO Auto-generated method stub
+							
+							//voir comment modifier 
+							
+						}
+					});
+					
+					
+					
+					
+					stageModifAdherent.setTitle("Modification d'un adhérent");
+					stageModifAdherent.getIcons().add(new Image("iconModifierAdherent.png"));
+					stageModifAdherent.sizeToScene();
+					stageModifAdherent.setScene(sceneModifAdherent);
+					stageModifAdherent.show();
+					
 				}
 			}
 			else if(e.getSource()==btnSupprimerAdherent) {
@@ -1213,15 +1310,20 @@ public class InterfacePrepose extends Application {
 					
 					//System.out.println(adherentSupprimer.getStrNom());
 			
-					prepose.supprimerAdherent(adherentSupprimer);
+					
 					Alert confirmation = new Alert(AlertType.CONFIRMATION);
 				 	confirmation.setTitle("Confirmation");
 				 	confirmation.setHeaderText(null);
-				 	confirmation.setContentText("L'adhérent dont le numéro est "+adherentSupprimer.getStrNumeroAdherent()+" a été supprimé!");
+				 	confirmation.setContentText("L'adhérent dont le numéro est "+adherentSupprimer.getStrNumeroAdherent()+" sera supprimer. \nÊtes-vous sur que vous voulez le supprimer?");
 				 	confirmation.showAndWait();
+				 	if (confirmation.getResult() == ButtonType.OK) {
+				 		prepose.supprimerAdherent(adherentSupprimer);
+				 		donneesAdherents.removeAll(adherentSupprimer);
+				 	}
+				 
 				 	
 					
-					donneesAdherents.removeAll(adherentSupprimer);
+					
 					
 				}
 			}
