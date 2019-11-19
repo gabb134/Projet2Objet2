@@ -870,7 +870,7 @@ public class InterfacePrepose extends Application {
 								intcompteurAjout++;
 								LocalDate localDateAjoutDoc = LocalDate.parse(txtFDateParution.getText());
 								Document documentAjouter = new Document("", txtFtitre.getText(),localDateAjoutDoc, "oui", a);
-
+								Livre livreAjouter = new Livre("", txtFtitre.getText(), localDateAjoutDoc, "oui", a, txtFMotsClesEspaces.getText(), txtFAuteur.getText());
 								
 								String strNomlivre = catalogue.getLstLivres().get(catalogue.getLstLivres().size()-1).getNoDoc().substring(0,3);
 								String strNumLivre = catalogue.getLstLivres().get(catalogue.getLstLivres().size()-1).getNoDoc().substring(3,5);
@@ -880,10 +880,17 @@ public class InterfacePrepose extends Application {
 								
 								
 								documentAjouter.setNoDoc(strNomlivre+String.valueOf(sum));
+								livreAjouter.setNoDoc(strNomlivre+String.valueOf(sum));
+								
 								prepose.ajouterDocument(documentAjouter);
+								prepose.ajouterLivre(livreAjouter);
 			
 								donneesCatalogue.add(documentAjouter);
+								
+								donneesLivre.add(livreAjouter);
+								
 								tableCatalogue.refresh();
+								tableLivre.refresh();
 								//donneesLivre.add((Livre) documentAjouter);
 								
 								Alert confirmation = new Alert(AlertType.CONFIRMATION);
