@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import controleurEtVue.Mediatheque.ClickValidationAdherentDroite;
@@ -190,6 +191,7 @@ public class InterfacePrepose extends Application {
 	
 	private HBox hboxButtonAhderent = new HBox(2);
 	private Catalogue catalogue;
+	private int intcompteurAjout = 0;
 	
 	Mediatheque mediatheque;
 	public InterfacePrepose(Mediatheque mediatheque){
@@ -863,14 +865,26 @@ public class InterfacePrepose extends Application {
 								Erreur.showAndWait();
 							}
 							else {// ajout d'un document (livres)
-								Document documentAjouter = tableCatalogue.getSelectionModel().getSelectedItem();
-								Livre livreAjouter = (Livre) tableCatalogue.getSelectionModel().getSelectedItem();
-								//catalogue.getLstDocuments().add(documentAjouter);
-								//catalogue.getLstLivres().add(livreAjouter);
-								prepose.ajouterDocument(documentAjouter);
+								Adherent a = null;
 								
+								intcompteurAjout++;
+								LocalDate localDateAjoutDoc = LocalDate.parse(txtFDateParution.getText());
+								Document documentAjouter = new Document("", txtFtitre.getText(),localDateAjoutDoc, "oui", a);
+
+								
+								String strNomlivre = catalogue.getLstLivres().get(catalogue.getLstLivres().size()-1).getNoDoc().substring(0,3);
+								String strNumLivre = catalogue.getLstLivres().get(catalogue.getLstLivres().size()-1).getNoDoc().substring(3,5);
+								
+								int sum = Integer.parseInt(strNumLivre)+intcompteurAjout;
+								
+								
+								
+								documentAjouter.setNoDoc(strNomlivre+String.valueOf(sum));
+								prepose.ajouterDocument(documentAjouter);
+			
 								donneesCatalogue.add(documentAjouter);
-								donneesLivre.add(livreAjouter);
+								tableCatalogue.refresh();
+								//donneesLivre.add((Livre) documentAjouter);
 								
 								Alert confirmation = new Alert(AlertType.CONFIRMATION);
 							 	confirmation.setTitle("Confirmation");

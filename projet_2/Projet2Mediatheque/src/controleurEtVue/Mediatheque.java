@@ -268,7 +268,7 @@ public class Mediatheque extends Application {
 			txtTelephoneAdherent = new Text("téléphone:");
 			txtTelephoneAdherent.setFill(Color.ANTIQUEWHITE);
 			txtTelephoneAdherent.setFont(fontText1);
-			txtNoPrepose = new Text("Numéro de l'Employé:");
+			txtNoPrepose = new Text("Numéro de l'employé:");
 			txtNoPrepose.setFill(Color.ANTIQUEWHITE);
 			txtNoPrepose.setFont(fontText1);
 			txtMotDePassePrepose = new Text("Mot de passe:");
