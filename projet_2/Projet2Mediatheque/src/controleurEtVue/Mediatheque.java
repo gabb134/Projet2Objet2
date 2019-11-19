@@ -206,7 +206,7 @@ public class Mediatheque extends Application {
 			 * FICHIERS SERIALIZABLES
 			 ********************************************************/
 
-		
+			fichierSerial = new File("fichier.ser");
 
 			/*********************************************
 			 * TOUTES LES NODES(LES LAYOUTS EX; BORDERPANE, TABPANE, ETC.)
@@ -1331,7 +1331,7 @@ public class Mediatheque extends Application {
 		
 		
 			try {
-				fichierSerial = new File("fichier.ser");
+				
 				FileOutputStream fichier = new FileOutputStream(fichierSerial);
 				ObjectOutputStream sortie = new ObjectOutputStream(fichier);
 
