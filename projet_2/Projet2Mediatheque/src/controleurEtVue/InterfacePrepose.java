@@ -1037,29 +1037,26 @@ public class InterfacePrepose extends Application {
 						
 						if(documentSupprimer.getNoDoc().substring(0, 3).equals("Liv")) {
 							System.out.println("livre");
-							
-						//prepose.supprimerLivre((Livre) documentSupprimer);
-							
-							/*for(Document doc: catalogue.getLstLivres()) {
-								if(doc == documentSupprimer){
-									
-									
-								}
-
-							}*/
+				
 							catalogue.getLstLivres().remove(documentSupprimer);
 							donneesLivre.remove(documentSupprimer);
 							tableLivre.refresh();
-							
 						
-							
 							
 						}
 						else if(documentSupprimer.getNoDoc().substring(0, 3).equals("DVD")) {
 							System.out.println("DVD");
+							
+							catalogue.getLstDvd().remove(documentSupprimer);
+							donneesDVD.remove(documentSupprimer);
+							tableDVD.refresh();
 						}
 						else if(documentSupprimer.getNoDoc().substring(0, 3).equals("Per")) {
 							System.out.println("Periodique");
+							
+							catalogue.getLstPeriodiques().remove(documentSupprimer);
+							donneesPeriodique.remove(documentSupprimer);
+							tablePeriodique.refresh();
 						}
 					
 						
@@ -1090,10 +1087,12 @@ public class InterfacePrepose extends Application {
 						Erreur.setContentText("Vous devez sélectionner le document à supprimer.");
 						Erreur.showAndWait();
 
-					} else {
+					} else { //suppression
 						System.out.println("Document choisi : " + tableLivre.getSelectionModel().getSelectedItem());
+						Document livreSupprimer = tableLivre.getSelectionModel().getSelectedItem();
+						
 
-						tableLivre.getSelectionModel().clearSelection(); // derniere instruction
+						
 					}
 				} else if (tabDVD.isSelected()) {
 					if (tableDVD.getSelectionModel().getSelectedItem() == null) { // non selectionnee
@@ -1105,7 +1104,7 @@ public class InterfacePrepose extends Application {
 						Erreur.setContentText("Vous devez sélectionner le document à supprimer.");
 						Erreur.showAndWait();
 
-					} else {
+					} else {//suppression
 						System.out.println("Document choisi : " + tableDVD.getSelectionModel().getSelectedItem());
 
 						tableDVD.getSelectionModel().clearSelection(); // derniere instruction
@@ -1120,7 +1119,7 @@ public class InterfacePrepose extends Application {
 						Erreur.setContentText("Vous devez sélectionner le document à supprimer.");
 						Erreur.showAndWait();
 
-					} else {
+					} else {//suppression
 						//System.out.println("Document choisi : " + tablePeriodique.getSelectionModel().getSelectedItem());
 
 						
