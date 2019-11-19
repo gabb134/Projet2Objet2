@@ -1365,7 +1365,7 @@ public class Mediatheque extends Application {
 				fichier.close();
 
 				// System.out.println("l'objet catalogue vient d'�tre seralizer");
-
+				catalogueDeserializer = catalogueDeserialisation;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
