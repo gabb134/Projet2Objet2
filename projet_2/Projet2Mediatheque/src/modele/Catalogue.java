@@ -224,7 +224,7 @@ public final class Catalogue implements Serializable {
 		
 		
 		LocalDate d1 = LocalDate.now();
-		DVD d = new DVD("DVD11", "test", d1, "oui","gab", 3, "Gabriel");
+		DVD d = new DVD("DVD11", "test", d1, "oui",null, 3, "");
 		
 		c.lstDvd.add(0, d );
 		//c.afficherLivre();

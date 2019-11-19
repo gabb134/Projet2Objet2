@@ -8,6 +8,10 @@ import java.time.LocalDate;
 
 public class DVD extends Document{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -919147072717446074L;
 	private int  nbDisques;
 	public int getNbDisques() {
 		return nbDisques;
@@ -26,7 +30,7 @@ public class DVD extends Document{
 	}
 
 	private String strRealisateur;
-	public DVD(String noDoc, String titre, LocalDate dateParution, String disponible,String emprunteur, 
+	public DVD(String noDoc, String titre, LocalDate dateParution, String disponible,Adherent emprunteur, 
 			   int nbDisques, String strRealisateur) {
 		
 		super(noDoc, titre, dateParution, disponible,emprunteur);

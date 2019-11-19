@@ -10,10 +10,14 @@ import java.time.LocalDate;
 public class Periodique extends Document {
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID =  -166741502189239066L;
 	private int noVolume;
 	private  int noPeriodique;
 
-	public Periodique(String noDoc, String titre, LocalDate dateParution, String disponible,String emprunteur, int noVolume, int noPeriodique) {
+	public Periodique(String noDoc, String titre, LocalDate dateParution, String disponible,Adherent emprunteur, int noVolume, int noPeriodique) {
 		super(noDoc, titre, dateParution, disponible,emprunteur);
 	this.noVolume= noVolume;
 	this.noPeriodique= noPeriodique;

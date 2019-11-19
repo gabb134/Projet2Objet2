@@ -13,8 +13,8 @@ public class Document implements Serializable{
 	private String  titre;
 	private LocalDate  dateParution;
 	private String disponible;
-	private String emprunteur;
-	public Document(String noDoc, String titre, LocalDate dateParution, String disponible,String emprunteur) {
+	private Adherent emprunteur;
+	public Document(String noDoc, String titre, LocalDate dateParution, String disponible,Adherent emprunteur) {
 		super();
 		this.noDoc = noDoc;
 		this.titre = titre;
@@ -53,11 +53,11 @@ public class Document implements Serializable{
 		this.dateParution = dateParution;
 	}
 
-	public String getEmprunteur() {
+	public Adherent getEmprunteur() {
 		return emprunteur;
 	}
 
-	public void setEmprunteur(String emprunteur) {
+	public void setEmprunteur(Adherent emprunteur) {
 		this.emprunteur = emprunteur;
 	}
 	public String getDisponible() {

@@ -207,9 +207,9 @@ public class Prepose implements Serializable {
 	}
 	public void inscrirePret(Document document,Adherent adherent) {
 		
-		adherent.setIntNbPrets(adherent.getintNbPrets()+1);
-		document.setDisponible("Non disponible");
-		document.setEmprunteur(adherent.getStrPrenom()+" "+adherent.getStrNom());
+		//adherent.setintNbPrets(adherent.getintNbPrets()+1);
+		document.setDisponible("non");
+		document.setEmprunteur(adherent);
 		
 	}
 
