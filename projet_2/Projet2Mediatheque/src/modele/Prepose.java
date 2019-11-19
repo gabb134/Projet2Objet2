@@ -205,21 +205,23 @@ public class Prepose implements Serializable {
 	}
 	public void supprimerDocument(Document document) {
 		try {
-			if(catalogue.getLstDocuments().get(catalogue.getLstDocuments().size()-1)!=null) {
+			
 				catalogue.getLstDocuments().remove(document);
-			}
+				System.out.println("suppression document");
+			
 		}catch(Exception e) {
 			
 		}
 	}
 	public void supprimerLivre(Livre livre) {
-		try {
-			if(catalogue.getLstDocuments().get(catalogue.getLstLivres().size()-1)!=null) {
+	//	try {
+	//		if(catalogue.getLstDocuments().get(catalogue.getLstLivres().size()-1)!=null) {
 				catalogue.getLstDocuments().remove(livre);
-			}
-		}catch(Exception e) {
+				System.out.println("allo");
+		//	}
+		//}catch(Exception e) {
 			
-		}
+		///}
 	}
 	public void supprimerDvd(DVD dvd) {
 		try {

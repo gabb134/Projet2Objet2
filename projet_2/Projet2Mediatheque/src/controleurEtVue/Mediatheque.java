@@ -138,7 +138,7 @@ public class Mediatheque extends Application {
 	private RadioButton rbTelephone;
 
 	private File fichierSerial;
-	private File FichierDeserial;
+
 
 	private Text txtChoixconnexion;
 	private Text txtNomEtPrenom;
@@ -206,16 +206,7 @@ public class Mediatheque extends Application {
 			 * FICHIERS SERIALIZABLES
 			 ********************************************************/
 
-			// fichierSerial =new File("C:/Users/rn.merzius/Downloads/test/fichier.ser");
-			// fichierSerial = new File ("C:/Users/GabrielMarrero/Downloads/test/fichier.ser");
-			//fichierSerial = new File("C:/Users/cg.marrero/Downloads/test/fichier.ser");
 			fichierSerial = new File("fichier.ser");
-			// fichierSerial= "/Users/r.merzius/Desktop/fichier.ser";
-			// FichierDeserial="/Users/r.merzius/Desktop/fichier.ser";
-			// FichierDeserial = new File("C:/Users/rn.merzius/Downloads/test/fichier.ser");
-			// FichierDeserial = "C:/Users/GabrielMarrero/Downloads/test/fichier.ser";
-			//FichierDeserial = new File("C:/Users/cg.marrero/Downloads/test/fichier.ser");
-			FichierDeserial = new File("fichier.ser");
 
 			/*********************************************
 			 * TOUTES LES NODES(LES LAYOUTS EX; BORDERPANE, TABPANE, ETC.)
@@ -574,7 +565,7 @@ public class Mediatheque extends Application {
 					stageCatalogue.close();
 					primaryStage.show();
 					// Pour aller ecrire ce qui a ete fait dans le catalogue
-					SerializationCatalogue();
+					//SerializationCatalogue();
 				}
 
 			});
@@ -586,10 +577,13 @@ public class Mediatheque extends Application {
 			// Dans l'oglet Catalogue
 
 	
-			
-			
+			//System.out.println(catalogue.getLstDocuments());
+		
 			 catalogue = DeserialisationCatalogue();
 			// Catalogue catalogue = Catalogue.getInstance("Livres.txt", "Periodiques.txt",
+			 
+			 System.out.println("************************************************");
+				System.out.println(catalogue.getLstDocuments());
 			// "DVD.txt");
 			donneesCatalogue = FXCollections.observableArrayList(catalogue.getLstDocuments()); // ***Demander au prof
 
@@ -756,6 +750,14 @@ public class Mediatheque extends Application {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public File getFichierSerial() {
+		return fichierSerial;
+	}
+
+	public void setFichierSerial(File fichierSerial) {
+		this.fichierSerial = fichierSerial;
 	}
 
 	/***********************************************
@@ -1336,6 +1338,7 @@ public class Mediatheque extends Application {
 
 				sortie.close();
 				fichier.close();
+				System.out.println("serialisation");
 
 				// System.out.println("l'objet catalogue vient d'àtre seralizer");
 
@@ -1353,35 +1356,48 @@ public class Mediatheque extends Application {
 		Catalogue catalogueDeserializer = null;
 
 		if(!fichierSerial.exists()) {
-			Catalogue catalogueDeserialisation = Catalogue.getInstance("Livres.txt", "Periodiques.txt", "DVD.txt");
+			catalogueDeserializer = Catalogue.getInstance("Livres.txt", "Periodiques.txt", "DVD.txt");
+			
+			System.out.println("premierefois");
 
-			try {
-				FileOutputStream fichier = new FileOutputStream(fichierSerial);
+			//try {
+			/*	FileOutputStream fichier = new FileOutputStream(fichierSerial);
 				ObjectOutputStream sortie = new ObjectOutputStream(fichier);
 
+	
 				sortie.writeObject(catalogueDeserialisation);
 
 				sortie.close();
 				fichier.close();
 
-				// System.out.println("l'objet catalogue vient d'ï¿½tre seralizer");
-				catalogueDeserializer = catalogueDeserialisation;
-			} catch (IOException e) {
+				// System.out.println("l'objet catalogue vient d'ï¿½tre seralizer");*/
+				
+			//} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			//	e.printStackTrace();
+			//}
 		}
 		else {
 			try {
 
-				FileInputStream fichier = new FileInputStream(FichierDeserial);
+				FileInputStream fichier = new FileInputStream(fichierSerial);
 
 				ObjectInputStream entree = new ObjectInputStream(fichier);
 
 				catalogueDeserializer = (Catalogue) entree.readObject();
+				
+				/*catalogue.setLstDocuments(catalogueDeserializer.getLstDocuments());
+				catalogue.setLstLivres(catalogueDeserializer.getLstLivres());
+				catalogue.setLstDvd(catalogueDeserializer.getLstDvd());
+				catalogue.setLstPeriodiques(catalogueDeserializer.getLstPeriodiques());*/
+				
+				System.out.println("deserialisation");
+
+				
 				fichier.close();
 				entree.close();
-
+				
+			
 				// System.out.println("l'objet catalogue vient d'àetre deserlializer");
 				//// System.out.println(catalogueDeserializer);
 				// catalogueDeserializer.afficherDvd();

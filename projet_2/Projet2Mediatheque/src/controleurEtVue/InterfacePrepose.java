@@ -96,7 +96,7 @@ public class InterfacePrepose extends Application {
 	private Tab tabPeriodique;
 
 	private File fichierSerial;
-	private File FichierDeserial;
+
 
 	private BorderPane root;
 	private Scene scene;
@@ -190,6 +190,8 @@ public class InterfacePrepose extends Application {
 	
 	private HBox hboxButtonAhderent = new HBox(2);
 	private Catalogue catalogue;
+	
+	
 	@Override
 	public void start(Stage primaryStage) {
 		// TODO Auto-generated method stub
@@ -201,12 +203,16 @@ public class InterfacePrepose extends Application {
 
 			// fichierSerial = new File("C:/Users/rn.merzius/Downloads/test/fichier.ser");
 			// fichierSerial =  new File("C:/Users/GabrielMarrero/Downloads/test/fichier.ser");
-			fichierSerial = new File( "fichier.ser");
+			//fichierSerial = new File( "fichier.ser");
 			// fichierSerial= new File("C:/Users/r.merzius/Desktop/fichier.ser");
 			// FichierDeserial=new File("C:/Users/r.merzius/Desktop/fichier.ser");
 			// FichierDeserial = new File("C:/Users/rn.merzius/Downloads/test/fichier.ser");
 			// FichierDeserial = new File("C:/Users/GabrielMarrero/Downloads/test/fichier.ser");
-			FichierDeserial = new File("fichier.ser");
+			//FichierDeserial = new File("fichier.ser");
+			Mediatheque mediathequeFichier = new Mediatheque();
+			
+			fichierSerial = mediathequeFichier.getFichierSerial();
+			
 
 			root = new BorderPane();
 			scene = new Scene(root);
@@ -536,8 +542,9 @@ public class InterfacePrepose extends Application {
 					meditheque.start(stageConnexionMediatheque);
 					//serialisation pour sauvegarder les adherents qui ont ete ajouter, modifier ou supprimer
 					liste.serialisationAdherent();
+					System.out.println(catalogue.getLstDocuments());
 					SerializationCatalogue();
-				
+					
 
 				}
 			});
@@ -655,34 +662,38 @@ public class InterfacePrepose extends Application {
 	public Catalogue DeserialisationCatalogue() {// Methode qui permet de deserializer l'objet Catalogue pour pouvoir
 		Catalogue catalogueDeserializer = null;											// l'utiliser
 		if(!fichierSerial.exists()) {
-			Catalogue catalogueDeserialisation = Catalogue.getInstance("Livres.txt", "Periodiques.txt", "DVD.txt");
+			catalogueDeserializer = Catalogue.getInstance("Livres.txt", "Periodiques.txt", "DVD.txt");
 
-			try {
-				FileOutputStream fichier = new FileOutputStream(fichierSerial);
-				ObjectOutputStream sortie = new ObjectOutputStream(fichier);
+			//try {
+				//FileOutputStream fichier = new FileOutputStream(fichierSerial);
+				//ObjectOutputStream sortie = new ObjectOutputStream(fichier);
 
-				sortie.writeObject(catalogueDeserialisation);
+				//sortie.writeObject(catalogueDeserialisation);
 
-				sortie.close();
-				fichier.close();
+				//sortie.close();
+				//fichier.close();
 
 				// System.out.println("l'objet catalogue vient d'ï¿½tre seralizer");
-				catalogueDeserializer = catalogueDeserialisation;
+				
 
-			} catch (IOException e) {
+			//} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			///	e.printStackTrace();
+			//}
 		}
 		
 		else {
 			try {
 
-				FileInputStream fichier = new FileInputStream(FichierDeserial);
+				FileInputStream fichier = new FileInputStream(fichierSerial);
 
 				ObjectInputStream entree = new ObjectInputStream(fichier);
 
 				catalogueDeserializer = (Catalogue) entree.readObject();
+				/*catalogue.setLstDocuments(catalogueDeserializer.getLstDocuments());
+				catalogue.setLstLivres(catalogueDeserializer.getLstLivres());
+				catalogue.setLstDvd(catalogueDeserializer.getLstDvd());
+				catalogue.setLstPeriodiques(catalogueDeserializer.getLstPeriodiques());*/
 				fichier.close();
 				entree.close();
 
@@ -1022,7 +1033,7 @@ public class InterfacePrepose extends Application {
 						Alert Erreur = new Alert(AlertType.ERROR);
 						Erreur.setTitle("Erreur");
 						Erreur.setHeaderText(null);
-						Erreur.setContentText("Vous devez sélectionner le document à supprimer.");
+						Erreur.setContentText("Vous devez sélectionner le document pour le supprimer.");
 						Erreur.showAndWait();
 
 					} else {
@@ -1035,7 +1046,9 @@ public class InterfacePrepose extends Application {
 						//Livre livreSupprimer = tableCatalogue.getSelectionModel().getSelectedItem();
 						//System.out.println(documentSupprimer.getNoDoc().substring(0, 3));
 						
-						
+						prepose.supprimerDocument(documentSupprimer);
+						donneesCatalogue.remove(documentSupprimer);
+						tableCatalogue.refresh();
 						
 						if(documentSupprimer.getNoDoc().substring(0, 3).equals("Liv")) {
 							System.out.println("livre");
@@ -1062,10 +1075,10 @@ public class InterfacePrepose extends Application {
 						}
 					
 						
-						prepose.supprimerDocument(documentSupprimer);
 						
 						
-						donneesCatalogue.removeAll(documentSupprimer);
+						
+						
 						
 						
 						
@@ -1086,15 +1099,28 @@ public class InterfacePrepose extends Application {
 						Alert Erreur = new Alert(AlertType.ERROR);
 						Erreur.setTitle("Erreur");
 						Erreur.setHeaderText(null);
-						Erreur.setContentText("Vous devez sélectionner le document à supprimer.");
+						Erreur.setContentText("Vous devez sélectionner le document pour le supprimer.");
 						Erreur.showAndWait();
 
 					} else { //suppression
 						System.out.println("Document choisi : " + tableLivre.getSelectionModel().getSelectedItem());
-						Document livreSupprimer = tableLivre.getSelectionModel().getSelectedItem();
+						Livre livreSupprimer = tableLivre.getSelectionModel().getSelectedItem();
 						
-
+						prepose.supprimerLivre(livreSupprimer);
+						donneesLivre.remove(livreSupprimer);
 						
+						catalogue.getLstDocuments().remove(livreSupprimer);
+						
+						donneesCatalogue.remove(livreSupprimer);
+						
+						tableCatalogue.refresh();
+						
+						
+						Alert confirmation = new Alert(AlertType.CONFIRMATION);
+					 	confirmation.setTitle("Confirmation");
+					 	confirmation.setHeaderText(null);
+					 	confirmation.setContentText("Le document dont le numéro est "+livreSupprimer.getNoDoc() +" a été supprimer!");
+					 	confirmation.showAndWait();
 					}
 				} else if (tabDVD.isSelected()) {
 					if (tableDVD.getSelectionModel().getSelectedItem() == null) { // non selectionnee
@@ -1103,13 +1129,26 @@ public class InterfacePrepose extends Application {
 						Alert Erreur = new Alert(AlertType.ERROR);
 						Erreur.setTitle("Erreur");
 						Erreur.setHeaderText(null);
-						Erreur.setContentText("Vous devez sélectionner le document à supprimer.");
+						Erreur.setContentText("Vous devez sélectionner le document pour le supprimer.");
 						Erreur.showAndWait();
 
 					} else {//suppression
 						System.out.println("Document choisi : " + tableDVD.getSelectionModel().getSelectedItem());
 
-						tableDVD.getSelectionModel().clearSelection(); // derniere instruction
+						DVD dvdSupprimer = tableDVD.getSelectionModel().getSelectedItem();
+						prepose.supprimerDvd(dvdSupprimer);
+						donneesDVD.remove(dvdSupprimer);
+						
+						catalogue.getLstDvd().remove(dvdSupprimer);
+						donneesCatalogue.remove(dvdSupprimer);
+						
+						tableCatalogue.refresh();
+						
+						Alert confirmation = new Alert(AlertType.CONFIRMATION);
+					 	confirmation.setTitle("Confirmation");
+					 	confirmation.setHeaderText(null);
+					 	confirmation.setContentText("Le document dont le numéro est "+dvdSupprimer.getNoDoc() +" a été supprimer!");
+					 	confirmation.showAndWait();
 					}
 				} else if (tabPeriodique.isSelected()) {
 					if (tablePeriodique.getSelectionModel().getSelectedItem() == null) { // non selectionnee
@@ -1118,13 +1157,26 @@ public class InterfacePrepose extends Application {
 						Alert Erreur = new Alert(AlertType.ERROR);
 						Erreur.setTitle("Erreur");
 						Erreur.setHeaderText(null);
-						Erreur.setContentText("Vous devez sélectionner le document à supprimer.");
+						Erreur.setContentText("Vous devez sélectionner le document pour le supprimer.");
 						Erreur.showAndWait();
 
 					} else {//suppression
 						//System.out.println("Document choisi : " + tablePeriodique.getSelectionModel().getSelectedItem());
-
+						Periodique periodiqueSupprimer = tablePeriodique.getSelectionModel().getSelectedItem();
+						prepose.supprimerPeriodique(periodiqueSupprimer);
+						donneesPeriodique.remove(periodiqueSupprimer);
 						
+						catalogue.getLstPeriodiques().remove(periodiqueSupprimer);
+						donneesCatalogue.remove(periodiqueSupprimer);
+						
+						tableCatalogue.refresh();
+						
+						
+						Alert confirmation = new Alert(AlertType.CONFIRMATION);
+					 	confirmation.setTitle("Confirmation");
+					 	confirmation.setHeaderText(null);
+					 	confirmation.setContentText("Le document dont le numéro est "+periodiqueSupprimer.getNoDoc() +" a été supprimer!");
+					 	confirmation.showAndWait();
 					}
 				}
 

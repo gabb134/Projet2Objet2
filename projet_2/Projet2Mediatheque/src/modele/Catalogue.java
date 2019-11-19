@@ -63,7 +63,7 @@ public final class Catalogue implements Serializable {
 					
 					//System.out.println(noDoc);
 
-					Livre livre = new Livre(noDoc, titre, dateParution, "Oui", null,null, auteur);
+					Livre livre = new Livre(noDoc, titre, dateParution, "oui", null,null, auteur);
 					Document docLivre = new Document(noDoc, titre, dateParution, "oui",null);
 					lstLivres.add(livre);
 					
@@ -182,6 +182,22 @@ public final class Catalogue implements Serializable {
 		lstDocuments.addAll(lstPeriodiques);
 	}
 	
+	public void setLstDocuments(ArrayList<Document> lstDocuments) {
+		this.lstDocuments = lstDocuments;
+	}
+
+	public void setLstLivres(ArrayList<Livre> lstLivres) {
+		this.lstLivres = lstLivres;
+	}
+
+	public void setLstPeriodiques(ArrayList<Periodique> lstPeriodiques) {
+		this.lstPeriodiques = lstPeriodiques;
+	}
+
+	public void setLstDvd(ArrayList<DVD> lstDvd) {
+		this.lstDvd = lstDvd;
+	}
+
 	public ArrayList<Document> getLstDocuments() {
 		return lstDocuments;
 	}
