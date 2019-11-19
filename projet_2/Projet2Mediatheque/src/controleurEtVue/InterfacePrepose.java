@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.time.LocalDate;
+import java.time.Month;
+import java.time.Period;
 import java.util.ArrayList;
 
 import controleurEtVue.Mediatheque.ClickValidationAdherentDroite;
@@ -1194,7 +1196,7 @@ public class InterfacePrepose extends Application {
 							}
 							else {// ajout d'un adhï¿½rent **important il faut que ï¿½a soit le prepose qui est connecter qui ajoute les adherents
 							
-								Adherent adheretnAjouter = new Adherent("1", txtfNomAdherent.getText(), txtfPrenomAdherent.getText(), txtfAdresseAdherent.getText(), txtfTelephoneAdherent.getText(), 0, 0);
+								Adherent adheretnAjouter = new Adherent("1", txtfNomAdherent.getText(), txtfPrenomAdherent.getText(), txtfAdresseAdherent.getText(), txtfTelephoneAdherent.getText(), 0, 0,0,0,0);
 								adheretnAjouter.setIntNbPrets(0);
 								adheretnAjouter.setDblSolde(0);
 								
@@ -1428,7 +1430,8 @@ public class InterfacePrepose extends Application {
 						@Override
 						public void handle(ActionEvent e) {
 							// TODO Auto-generated method stub
-							
+							Boolean booValide=false;
+							Adherent ad=null;
 						if(tableAdherent.getSelectionModel().getSelectedItem()==null)
 					{
 						Alert Erreur = new Alert(AlertType.ERROR);
@@ -1437,6 +1440,8 @@ public class InterfacePrepose extends Application {
 						Erreur.setContentText("Vous devez sélectionner un adhérent pour l'emprunter");
 						Erreur.showAndWait();
 					}
+						
+						
 						else if(tableAdherent.getSelectionModel().getSelectedItem().getdblSolde()!=0)
 						{
 							Alert Erreur = new Alert(AlertType.ERROR);
@@ -1447,6 +1452,55 @@ public class InterfacePrepose extends Application {
 						}
 						else 
 						{
+							
+							for (int i = 0; i < liste.getLstAdherents().size(); i++) {
+								if(liste.getLstAdherents().get(i).getStrNumeroAdherent().equals(tableAdherent.getSelectionModel().getSelectedItem().getStrNumeroAdherent()))
+								{
+									ad=liste.getLstAdherents().get(i);
+								}
+								
+							}
+						}
+						 if(tableCatalogue.getSelectionModel().getSelectedItem().getNoDoc().toLowerCase().substring(0, 3).equals("dvd")&&ad.getIntnbDVD()!=2) 
+						{
+							
+							for (int i = 0; i < liste.getLstAdherents().size(); i++) {
+								if(liste.getLstAdherents().get(i).getStrNumeroAdherent().equals(ad.getStrNumeroAdherent()))
+								{
+									liste.getLstAdherents().get(i).setIntnbDVD(liste.getLstAdherents().get(i).getIntnbDVD()+1);
+									booValide=true;
+								}
+								
+							}
+							
+							
+							
+							
+						}
+						else if(tableCatalogue.getSelectionModel().getSelectedItem().getNoDoc().toLowerCase().substring(0, 3).equals("per")&&ad.getIntnbPer()!=1) 
+						{
+							for (int i = 0; i < liste.getLstAdherents().size(); i++) {
+								if(liste.getLstAdherents().get(i).getStrNumeroAdherent().equals(ad.getStrNumeroAdherent()))
+								{
+									liste.getLstAdherents().get(i).setIntnbPer(liste.getLstAdherents().get(i).getIntnbPer()+1);
+									booValide=true;
+								}
+								
+							}
+						}
+						else if(tableCatalogue.getSelectionModel().getSelectedItem().getNoDoc().toLowerCase().substring(0, 3).equals("liv")&&ad.getIntnbLiv()!=3) 
+						{
+							for (int i = 0; i < liste.getLstAdherents().size(); i++) {
+								if(liste.getLstAdherents().get(i).getStrNumeroAdherent().equals(ad.getStrNumeroAdherent()))
+								{
+									liste.getLstAdherents().get(i).setIntnbLiv(liste.getLstAdherents().get(i).getIntnbLiv()+1);
+									booValide=true;
+								}
+								
+							}
+						}
+						if(booValide==true)
+						{
 							int intnbPret=tableAdherent.getSelectionModel().getSelectedItem().getintNbPrets();
 							tableAdherent.getSelectionModel().getSelectedItem().setIntNbPrets(intnbPret+1);
 							stagePret.close();
@@ -1455,7 +1509,15 @@ public class InterfacePrepose extends Application {
 							tableCatalogue.getSelectionModel().getSelectedItem().setDisponible("non");
 							tableCatalogue.refresh();
 						}
-					
+						else 
+						{
+							
+							Alert Erreur = new Alert(AlertType.ERROR);
+							Erreur.setTitle("Erreur");
+							Erreur.setHeaderText(null);
+							Erreur.setContentText("L'adhérent que vous avez sélectionné a atteint la limite de prêts pour ce document");
+							Erreur.showAndWait();
+						}
 
 						}
 					});
@@ -1474,6 +1536,7 @@ public class InterfacePrepose extends Application {
 				}
 			}
 			else if(e.getSource()==btnIscrireUnRetour) {
+				Adherent ad=null;
 				if(tableCatalogue.getSelectionModel().getSelectedItem()==null) {//non selectionnee
 					Alert Erreur = new Alert(AlertType.ERROR);
 					Erreur.setTitle("Erreur");
@@ -1481,17 +1544,81 @@ public class InterfacePrepose extends Application {
 					Erreur.setContentText("Vous devez sélectionner un document pour le retourner");
 					Erreur.showAndWait();
 				}
+				else if(tableCatalogue.getSelectionModel().getSelectedItem().getDisponible().equals("oui")) {//non selectionnee
+					Alert Erreur = new Alert(AlertType.ERROR);
+					Erreur.setTitle("Erreur");
+					Erreur.setHeaderText(null);
+					Erreur.setContentText("Le document sélectionné n'a pas été emprunté");
+					Erreur.showAndWait();
+				}
 				else{
-					
-						int intnbprets=tableCatalogue.getSelectionModel().getSelectedItem().getEmprunteur().getIntNbPrets();
+					for (int i = 0; i < liste.getLstAdherents().size(); i++) {
+						if(liste.getLstAdherents().get(i).getStrNumeroAdherent().equals(tableCatalogue.getSelectionModel().getSelectedItem().getEmprunteur().getStrNumeroAdherent()))
+						{
+							ad=liste.getLstAdherents().get(i);
+						}
 						
+					}
+						int intnbprets=ad.getIntNbPrets();
+						 if(tableCatalogue.getSelectionModel().getSelectedItem().getNoDoc().toLowerCase().substring(0, 3).equals("dvd")) 
+						{
+							
+							int intnbPretsDoc=ad.getIntnbDVD();
+							ad.setIntnbDVD(intnbPretsDoc-1);
+							for (int i = 0; i < liste.getLstAdherents().size(); i++) {
+								if(liste.getLstAdherents().get(i).getStrNumeroAdherent().equals(ad.getStrNumeroAdherent()))
+								{
+									liste.getLstAdherents().get(i).setIntnbDVD(ad.getIntnbDVD());
+									liste.getLstAdherents().get(i).setIntNbPrets(intnbprets-1);
+								
+								}
+								
+							}
+						}
+						 else if(tableCatalogue.getSelectionModel().getSelectedItem().getNoDoc().toLowerCase().substring(0, 3).equals("per")) 
+							{
+								
+								int intnbPretsDoc=ad.getIntnbPer();
+								ad.setIntnbPer(intnbPretsDoc-1);
+								for (int i = 0; i < liste.getLstAdherents().size(); i++) {
+									if(liste.getLstAdherents().get(i).getStrNumeroAdherent().equals(ad.getStrNumeroAdherent()))
+									{
+										liste.getLstAdherents().get(i).setIntnbPer(ad.getIntnbPer());
+										liste.getLstAdherents().get(i).setIntnbPer(intnbprets-1);
+										
+									}
+									
+								}
+							}
+						 else if(tableCatalogue.getSelectionModel().getSelectedItem().getNoDoc().toLowerCase().substring(0, 3).equals("liv")) 
+							{
+								
+								int intnbPretsDoc=ad.getIntnbLiv();
+								ad.setIntnbLiv(intnbPretsDoc-1);
+								for (int i = 0; i < liste.getLstAdherents().size(); i++) {
+									if(liste.getLstAdherents().get(i).getStrNumeroAdherent().equals(ad.getStrNumeroAdherent()))
+									{
+										liste.getLstAdherents().get(i).setIntnbLiv(ad.getIntnbLiv());
+										liste.getLstAdherents().get(i).setIntNbPrets(intnbprets-1);
+	
+									}
+									
+								}
+							}
+					
+					
+					//tableCatalogue.getSelectionModel().getSelectedItem().getEmprunteur().setIntNbPrets(intnbprets-1);
+					for (int i = 0; i < liste.getLstAdherents().size(); i++) {
+						if(liste.getLstAdherents().get(i).getStrNumeroAdherent().equals(tableCatalogue.getSelectionModel().getSelectedItem().getEmprunteur().getStrNumeroAdherent()))
+						{
+							liste.getLstAdherents().get(i).setIntNbPrets(intnbprets-1);
+							tableCatalogue.getSelectionModel().getSelectedItem().setDisponible("oui");
+						}
 						
-					
-					tableCatalogue.getSelectionModel().getSelectedItem().setDisponible("oui");
-					
-					tableCatalogue.getSelectionModel().getSelectedItem().getEmprunteur().setIntNbPrets(intnbprets-1);
+					}
 					
 					tableCatalogue.refresh();
+					tableAdherent.refresh();
 				}
 			}
 			
@@ -1502,6 +1629,10 @@ public class InterfacePrepose extends Application {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		launch(args);
+		LocalDate oldDate = LocalDate.of(2019, Month.NOVEMBER, 5);
+        LocalDate newDate = LocalDate.now();
+        Period periode = Period.between(oldDate, newDate);
+        System.out.println(periode.getDays() +" Jours");
 	}
 
 }

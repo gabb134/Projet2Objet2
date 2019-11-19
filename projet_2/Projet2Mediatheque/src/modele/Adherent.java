@@ -1,6 +1,7 @@
 package modele;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public class Adherent implements Serializable {
 	/**
@@ -12,6 +13,36 @@ public class Adherent implements Serializable {
 	private String strNumeroTelephone;
 	private String strNumeroAdherent;
 	private String strAdresse;
+	private int intnbDVD;
+	private int intnbPer;
+	private int intnbLiv;
+	private Amende amende;
+	private LocalDate datePretDvd;
+	private LocalDate datePretPer;
+	private LocalDate datePretLiv;
+	public LocalDate getDatePretDvd() {
+		return datePretDvd;
+	}
+
+	public void setDatePretDvd(LocalDate datePretDvd) {
+		this.datePretDvd = datePretDvd;
+	}
+
+	public LocalDate getDatePretPer() {
+		return datePretPer;
+	}
+
+	public void setDatePretPer(LocalDate datePretPer) {
+		this.datePretPer = datePretPer;
+	}
+
+	public LocalDate getDatePretLiv() {
+		return datePretLiv;
+	}
+
+	public void setDatePretLiv(LocalDate datePretLiv) {
+		this.datePretLiv = datePretLiv;
+	}
 
 	public void setStrAdresse(String strAdresse) {
 		this.strAdresse = strAdresse;
@@ -21,7 +52,7 @@ public class Adherent implements Serializable {
 	private double dblSolde;
 
 	public Adherent(String strNumeroAdherent, String strNom, String strPrenom, String strAdresse,
-			String strNumeroTelephone, int intNbPrets, double dblSolde) {
+			String strNumeroTelephone, int intNbPrets, double dblSolde, int intnbDVD, int intnbPer, int intnbLiv ) {
 		this.strNumeroAdherent = strNumeroAdherent;
 		this.strNom = strNom;
 		this.strPrenom = strPrenom;
@@ -95,6 +126,30 @@ public class Adherent implements Serializable {
 
 	public void setStrNumeroAdherent(String strNumeroAdherent) {
 		this.strNumeroAdherent = strNumeroAdherent;
+	}
+
+	public int getIntnbDVD() {
+		return intnbDVD;
+	}
+
+	public void setIntnbDVD(int intnbDVD) {
+		this.intnbDVD = intnbDVD;
+	}
+
+	public int getIntnbPer() {
+		return intnbPer;
+	}
+
+	public void setIntnbPer(int intnbPer) {
+		this.intnbPer = intnbPer;
+	}
+
+	public int getIntnbLiv() {
+		return intnbLiv;
+	}
+
+	public void setIntnbLiv(int intnbLiv) {
+		this.intnbLiv = intnbLiv;
 	}
 
 	public static void main(String[] args) {
