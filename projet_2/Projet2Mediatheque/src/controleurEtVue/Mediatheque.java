@@ -206,7 +206,7 @@ public class Mediatheque extends Application {
 			 * FICHIERS SERIALIZABLES
 			 ********************************************************/
 
-			fichierSerial = new File("fichier.ser");
+		
 
 			/*********************************************
 			 * TOUTES LES NODES(LES LAYOUTS EX; BORDERPANE, TABPANE, ETC.)
@@ -579,11 +579,11 @@ public class Mediatheque extends Application {
 	
 			//System.out.println(catalogue.getLstDocuments());
 		
-			 catalogue = DeserialisationCatalogue();
+			 catalogue = Catalogue.getInstance("Livres.txt", "Periodiques.txt", "DVD.txt");
 			// Catalogue catalogue = Catalogue.getInstance("Livres.txt", "Periodiques.txt",
 			 
 			 System.out.println("************************************************");
-				System.out.println(catalogue.getLstDocuments());
+				//System.out.println(catalogue.getLstDocuments());
 			// "DVD.txt");
 			donneesCatalogue = FXCollections.observableArrayList(catalogue.getLstDocuments()); // ***Demander au prof
 
@@ -826,7 +826,7 @@ public class Mediatheque extends Application {
 					// pour demarrer l'interface du préposé
 					Stage stagePrepose = new Stage();
 					stagePrepose.initModality(Modality.APPLICATION_MODAL);
-					InterfacePrepose interfacePrepose = new InterfacePrepose();
+					InterfacePrepose interfacePrepose = new InterfacePrepose(this);
 					interfacePrepose.start(stagePrepose);
 
 					// il faut trouvà une faàon pour fermer le primary stage à partir d'ici
@@ -1331,6 +1331,7 @@ public class Mediatheque extends Application {
 		
 		
 			try {
+				fichierSerial = new File("fichier.ser");
 				FileOutputStream fichier = new FileOutputStream(fichierSerial);
 				ObjectOutputStream sortie = new ObjectOutputStream(fichier);
 
@@ -1338,7 +1339,7 @@ public class Mediatheque extends Application {
 
 				sortie.close();
 				fichier.close();
-				System.out.println("serialisation");
+				System.out.println("serialisation lorsque je quitte");
 
 				// System.out.println("l'objet catalogue vient d'àtre seralizer");
 
@@ -1352,13 +1353,13 @@ public class Mediatheque extends Application {
 	}
 
 	public Catalogue DeserialisationCatalogue() {// Methode qui permet de deserializer l'objet Catalogue pour pouvoir
-													// l'utiliser
+		// l'utiliser
 		Catalogue catalogueDeserializer = null;
 
 		if(!fichierSerial.exists()) {
 			catalogueDeserializer = Catalogue.getInstance("Livres.txt", "Periodiques.txt", "DVD.txt");
 			
-			System.out.println("premierefois");
+			System.out.println("premiere deserialization dans mediatheque");
 
 			//try {
 			/*	FileOutputStream fichier = new FileOutputStream(fichierSerial);
@@ -1391,7 +1392,7 @@ public class Mediatheque extends Application {
 				catalogue.setLstDvd(catalogueDeserializer.getLstDvd());
 				catalogue.setLstPeriodiques(catalogueDeserializer.getLstPeriodiques());*/
 				
-				System.out.println("deserialisation");
+				System.out.println("deuxieme deserialisation dans mediatheque");
 
 				
 				fichier.close();

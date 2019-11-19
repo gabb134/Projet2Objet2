@@ -191,7 +191,10 @@ public class InterfacePrepose extends Application {
 	private HBox hboxButtonAhderent = new HBox(2);
 	private Catalogue catalogue;
 	
-	
+	Mediatheque mediatheque;
+	public InterfacePrepose(Mediatheque mediatheque){
+		this.mediatheque = mediatheque;
+	}
 	@Override
 	public void start(Stage primaryStage) {
 		// TODO Auto-generated method stub
@@ -209,9 +212,9 @@ public class InterfacePrepose extends Application {
 			// FichierDeserial = new File("C:/Users/rn.merzius/Downloads/test/fichier.ser");
 			// FichierDeserial = new File("C:/Users/GabrielMarrero/Downloads/test/fichier.ser");
 			//FichierDeserial = new File("fichier.ser");
-			Mediatheque mediathequeFichier = new Mediatheque();
 			
-			fichierSerial = mediathequeFichier.getFichierSerial();
+			
+			
 			
 
 			root = new BorderPane();
@@ -229,7 +232,7 @@ public class InterfacePrepose extends Application {
 
 			// Pour aller cherche l'objet catalogue serializer
 			//SerializationCatalogue();
-			 catalogue = DeserialisationCatalogue();
+			 catalogue =  Catalogue.getInstance("Livres.txt", "Periodiques.txt", "DVD.txt");
 			// Catalogue catalogue = Catalogue.getInstance("Livres.txt", "Periodiques.txt",
 			// "DVD.txt");
 			donneesCatalogue = FXCollections.observableArrayList(catalogue.getLstDocuments()); // ***Demander au prof
@@ -641,9 +644,12 @@ public class InterfacePrepose extends Application {
 	public void SerializationCatalogue() { // Methode qui permet d'aller chercher l'objet Catalogue pour le serializer
 		
 		try {
+			fichierSerial = mediatheque.getFichierSerial();// l'utiliser
 			FileOutputStream fichier = new FileOutputStream(fichierSerial);
 			ObjectOutputStream sortie = new ObjectOutputStream(fichier);
 
+			
+			System.out.println("serialisation dans interface prepose");
 			sortie.writeObject(catalogue);
 
 			sortie.close();
@@ -658,9 +664,9 @@ public class InterfacePrepose extends Application {
 		
 
 	}
-
 	public Catalogue DeserialisationCatalogue() {// Methode qui permet de deserializer l'objet Catalogue pour pouvoir
-		Catalogue catalogueDeserializer = null;											// l'utiliser
+		Catalogue catalogueDeserializer = null;		
+		
 		if(!fichierSerial.exists()) {
 			catalogueDeserializer = Catalogue.getInstance("Livres.txt", "Periodiques.txt", "DVD.txt");
 
@@ -680,6 +686,7 @@ public class InterfacePrepose extends Application {
 				// TODO Auto-generated catch block
 			///	e.printStackTrace();
 			//}
+			System.out.println("deserialisation dans interface prepose");
 		}
 		
 		else {
@@ -1114,6 +1121,7 @@ public class InterfacePrepose extends Application {
 						donneesCatalogue.remove(livreSupprimer);
 						
 						tableCatalogue.refresh();
+						tableLivre.refresh();
 						
 						
 						Alert confirmation = new Alert(AlertType.CONFIRMATION);
@@ -1143,6 +1151,7 @@ public class InterfacePrepose extends Application {
 						donneesCatalogue.remove(dvdSupprimer);
 						
 						tableCatalogue.refresh();
+						tableDVD.refresh();
 						
 						Alert confirmation = new Alert(AlertType.CONFIRMATION);
 					 	confirmation.setTitle("Confirmation");
@@ -1170,7 +1179,7 @@ public class InterfacePrepose extends Application {
 						donneesCatalogue.remove(periodiqueSupprimer);
 						
 						tableCatalogue.refresh();
-						
+						tablePeriodique.refresh();
 						
 						Alert confirmation = new Alert(AlertType.CONFIRMATION);
 					 	confirmation.setTitle("Confirmation");

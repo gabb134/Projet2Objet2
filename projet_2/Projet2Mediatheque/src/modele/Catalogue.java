@@ -1,8 +1,13 @@
 package modele;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -22,9 +27,10 @@ public final class Catalogue implements Serializable {
 	private ArrayList<Livre> lstLivres = new ArrayList<>();
 	private ArrayList<Periodique> lstPeriodiques = new ArrayList<>();
 	private ArrayList<DVD> lstDvd = new ArrayList<>();
+	static File fichierSerial = new File("fichier.ser");
 
-	public Catalogue(String fichierLivre, String fichierPeriodique, String fichierDvd) {
-
+	private Catalogue(String fichierLivre, String fichierPeriodique, String fichierDvd) {
+        
 		// Pour le fichier livre
 		BufferedReader brFichierLivre = null;
 		String allo;
@@ -232,23 +238,65 @@ public final class Catalogue implements Serializable {
 		for(Document d:lstDocuments)
 			System.out.println(d);
 	}
-	public static Catalogue getInstance(String fichierLivre,String fichierPeriodique,String fichierDvd) {
-		if (instance == null) 
-			  instance = new Catalogue(fichierLivre,fichierPeriodique,fichierDvd);
+	public static Catalogue getInstance(String fichierLivre,String fichierPeriodique,String fichierDvd) {//deserialisation
+		
+		if (instance == null) {
+			if(!fichierSerial.exists()) {
+				instance = new Catalogue(fichierLivre,fichierPeriodique,fichierDvd);
+				System.out.println("premiere fois");
+			}
+			else {
+				try {
+					System.out.println("deuxieme fois");
+				FileInputStream fichier = new FileInputStream(fichierSerial);
+
+				ObjectInputStream entree = new ObjectInputStream(fichier);
+
+				instance = (Catalogue) entree.readObject();
+				System.out.println(instance.getLstDocuments());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+			  
+	
+		
 			  return instance; 
 		  }
+	
+	
+	
+	
+	
 	public static void main(String[] args) {
 		Catalogue c = Catalogue.getInstance("Livres.txt", "Periodiques.txt", "DVD.txt");
 		
-		
-		LocalDate d1 = LocalDate.now();
-		DVD d = new DVD("DVD11", "test", d1, "oui",null, 3, "");
-		
-		c.lstDvd.add(0, d );
+		try { //serialisation
+			
+			FileOutputStream fichier = new FileOutputStream(fichierSerial);
+			ObjectOutputStream sortie = new ObjectOutputStream(fichier);
+
+			sortie.writeObject(c);
+            
+			sortie.close();
+			fichier.close();
+			//System.out.println("serialisation lorsque je quitte");
+
+			// System.out.println("l'objet catalogue vient d'àtre seralizer");
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 		//c.afficherLivre();
 		//c.afficherPeriodique();
 		//c.afficherDvd();
-		c.afficherDocument();
+		//c.afficherDocument();
 	}
 
 }
