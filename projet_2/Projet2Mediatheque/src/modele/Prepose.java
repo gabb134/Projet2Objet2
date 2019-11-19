@@ -194,16 +194,46 @@ public class Prepose implements Serializable {
 				String strNumCatalogue = catalogue.getLstDocuments().get(catalogue.getLstDocuments().size()-1).getNoDoc();
 				
 				System.out.println(strNumCatalogue);
-				//catalogue.getLstDocuments().add(document);
+				catalogue.getLstDocuments().add(document);
 			}
 		}catch(Exception e) {
 			catalogue.getLstDocuments().add(document);
 		}
 	}
+	public void ajouterLivre(Livre livre) {
+		
+	}
 	public void supprimerDocument(Document document) {
 		try {
 			if(catalogue.getLstDocuments().get(catalogue.getLstDocuments().size()-1)!=null) {
 				catalogue.getLstDocuments().remove(document);
+			}
+		}catch(Exception e) {
+			
+		}
+	}
+	public void supprimerLivre(Livre livre) {
+		try {
+			if(catalogue.getLstDocuments().get(catalogue.getLstLivres().size()-1)!=null) {
+				catalogue.getLstDocuments().remove(livre);
+			}
+		}catch(Exception e) {
+			
+		}
+	}
+	public void supprimerDvd(DVD dvd) {
+		try {
+			if(catalogue.getLstDocuments().get(catalogue.getLstDvd().size()-1)!=null) {
+				catalogue.getLstDocuments().remove(dvd);
+			}
+		}catch(Exception e) {
+			
+		}
+	}
+	public void supprimerPeriodique(Periodique periodique) {
+		try {
+			if(catalogue.getLstDocuments().get(catalogue.getLstPeriodiques().size()-1)!=null) {
+				catalogue.getLstDocuments().remove(periodique);
 			}
 		}catch(Exception e) {
 			

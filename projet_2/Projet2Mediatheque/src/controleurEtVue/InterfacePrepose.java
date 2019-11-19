@@ -629,16 +629,37 @@ public class InterfacePrepose extends Application {
 
 	}
 
-	public void SerializationCatalogue( ) { // Methode qui permet d'aller chercher l'objet Catalogue pour le serializer
+	public void SerializationCatalogue() { // Methode qui permet d'aller chercher l'objet Catalogue pour le serializer
 		
-		if(fichierSerial.exists()) {
-			//Catalogue catalogueSerialisation = Catalogue.getInstance("Livres.txt", "Periodiques.txt", "DVD.txt");
+		try {
+			FileOutputStream fichier = new FileOutputStream(fichierSerial);
+			ObjectOutputStream sortie = new ObjectOutputStream(fichier);
+
+			sortie.writeObject(catalogue);
+
+			sortie.close();
+			fichier.close();
+
+			// System.out.println("l'objet catalogue vient d'ï¿½tre seralizer");
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+	}
+
+	public Catalogue DeserialisationCatalogue() {// Methode qui permet de deserializer l'objet Catalogue pour pouvoir
+		Catalogue catalogueDeserializer = null;											// l'utiliser
+		if(!fichierSerial.exists()) {
+			Catalogue catalogueDeserialisation = Catalogue.getInstance("Livres.txt", "Periodiques.txt", "DVD.txt");
 
 			try {
 				FileOutputStream fichier = new FileOutputStream(fichierSerial);
 				ObjectOutputStream sortie = new ObjectOutputStream(fichier);
 
-				sortie.writeObject(catalogue);
+				sortie.writeObject(catalogueDeserialisation);
 
 				sortie.close();
 				fichier.close();
@@ -650,37 +671,35 @@ public class InterfacePrepose extends Application {
 				e.printStackTrace();
 			}
 		}
+		
 		else {
-			DeserialisationCatalogue();
+			try {
+
+				FileInputStream fichier = new FileInputStream(FichierDeserial);
+
+				ObjectInputStream entree = new ObjectInputStream(fichier);
+
+				catalogueDeserializer = (Catalogue) entree.readObject();
+				fichier.close();
+				entree.close();
+
+				// System.out.println("l'objet catalogue vient d'ï¿½etre deserlializer");
+				//// System.out.println(catalogueDeserializer);
+				// catalogueDeserializer.afficherDvd();
+
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
 		}
 		
+		
+		
+	
 
-	}
-
-	public Catalogue DeserialisationCatalogue() {// Methode qui permet de deserializer l'objet Catalogue pour pouvoir
-													// l'utiliser
-		Catalogue catalogueDeserializer = null;
-
-		try {
-
-			FileInputStream fichier = new FileInputStream(FichierDeserial);
-
-			ObjectInputStream entree = new ObjectInputStream(fichier);
-
-			catalogueDeserializer = (Catalogue) entree.readObject();
-			fichier.close();
-			entree.close();
-
-			// System.out.println("l'objet catalogue vient d'ï¿½etre deserlializer");
-			//// System.out.println(catalogueDeserializer);
-			// catalogueDeserializer.afficherDvd();
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+	
 		return catalogueDeserializer;
 
 	}
@@ -824,12 +843,13 @@ public class InterfacePrepose extends Application {
 							}
 							else {// ajout d'un document (livres)
 								Document documentAjouter = tableCatalogue.getSelectionModel().getSelectedItem();
-								//Livre livreAjouter = (Livre) tableCatalogue.getSelectionModel().getSelectedItem();
+								Livre livreAjouter = (Livre) tableCatalogue.getSelectionModel().getSelectedItem();
 								//catalogue.getLstDocuments().add(documentAjouter);
 								//catalogue.getLstLivres().add(livreAjouter);
 								prepose.ajouterDocument(documentAjouter);
 								
 								donneesCatalogue.add(documentAjouter);
+								donneesLivre.add(livreAjouter);
 								
 								Alert confirmation = new Alert(AlertType.CONFIRMATION);
 							 	confirmation.setTitle("Confirmation");
@@ -1007,7 +1027,56 @@ public class InterfacePrepose extends Application {
 						System.out.println("Document choisi : " + tableCatalogue.getSelectionModel().getSelectedItem());
 						// suppresion du document selectionnee
 
-						tableCatalogue.getSelectionModel().clearSelection(); // derniere instruction
+
+						Document documentSupprimer = tableCatalogue.getSelectionModel().getSelectedItem();
+						//Livre livreSupprimer = tableCatalogue.getSelectionModel().getSelectedItem();
+						//System.out.println(documentSupprimer.getNoDoc().substring(0, 3));
+						
+						
+						
+						if(documentSupprimer.getNoDoc().substring(0, 3).equals("Liv")) {
+							System.out.println("livre");
+							
+						//prepose.supprimerLivre((Livre) documentSupprimer);
+							
+							/*for(Document doc: catalogue.getLstLivres()) {
+								if(doc == documentSupprimer){
+									
+									
+								}
+
+							}*/
+							catalogue.getLstLivres().remove(documentSupprimer);
+							donneesLivre.remove(documentSupprimer);
+							tableLivre.refresh();
+							
+						
+							
+							
+						}
+						else if(documentSupprimer.getNoDoc().substring(0, 3).equals("DVD")) {
+							System.out.println("DVD");
+						}
+						else if(documentSupprimer.getNoDoc().substring(0, 3).equals("Per")) {
+							System.out.println("Periodique");
+						}
+					
+						
+						prepose.supprimerDocument(documentSupprimer);
+						
+						
+						donneesCatalogue.removeAll(documentSupprimer);
+						
+						
+						
+						
+						
+						Alert confirmation = new Alert(AlertType.CONFIRMATION);
+					 	confirmation.setTitle("Confirmation");
+					 	confirmation.setHeaderText(null);
+					 	confirmation.setContentText("Le document dont le numéro est "+documentSupprimer.getNoDoc() +" a été supprimer!");
+					 	confirmation.showAndWait();
+					 	
 
 					}
 				} else if (tabLivres.isSelected()) {
@@ -1051,10 +1120,9 @@ public class InterfacePrepose extends Application {
 						Erreur.showAndWait();
 
 					} else {
-						System.out
-								.println("Document choisi : " + tablePeriodique.getSelectionModel().getSelectedItem());
+						//System.out.println("Document choisi : " + tablePeriodique.getSelectionModel().getSelectedItem());
 
-						tablePeriodique.getSelectionModel().clearSelection(); // derniere instruction
+						
 					}
 				}
 
