@@ -631,58 +631,78 @@ public class InterfacePrepose extends Application {
 
 	}
 
-	public void SerializationCatalogue( ) { // Methode qui permet d'aller chercher l'objet Catalogue pour le serializer
+	public void SerializationCatalogue() { // Methode qui permet d'aller chercher l'objet Catalogue pour le serializer
 		
-		if(fichierSerial.exists()) {
-			//Catalogue catalogueSerialisation = Catalogue.getInstance("Livres.txt", "Periodiques.txt", "DVD.txt");
+		try {
+			FileOutputStream fichier = new FileOutputStream(fichierSerial);
+			ObjectOutputStream sortie = new ObjectOutputStream(fichier);
 
-			try {
-				FileOutputStream fichier = new FileOutputStream(fichierSerial);
-				ObjectOutputStream sortie = new ObjectOutputStream(fichier);
+			sortie.writeObject(catalogue);
 
-				sortie.writeObject(catalogue);
+			sortie.close();
+			fichier.close();
 
-				sortie.close();
-				fichier.close();
+			// System.out.println("l'objet catalogue vient d'ï¿½tre seralizer");
 
-				// System.out.println("l'objet catalogue vient d'ï¿½tre seralizer");
-
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		else {
-			DeserialisationCatalogue();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 
 	}
 
 	public Catalogue DeserialisationCatalogue() {// Methode qui permet de deserializer l'objet Catalogue pour pouvoir
-													// l'utiliser
-		Catalogue catalogueDeserializer = null;
+		Catalogue catalogueDeserializer = null;											// l'utiliser
+		if(!fichierSerial.exists()) {
+			Catalogue catalogueDeserialisation = Catalogue.getInstance("Livres.txt", "Periodiques.txt", "DVD.txt");
 
-		try {
+			try {
+				FileOutputStream fichier = new FileOutputStream(fichierSerial);
+				ObjectOutputStream sortie = new ObjectOutputStream(fichier);
 
-			FileInputStream fichier = new FileInputStream(FichierDeserial);
+				sortie.writeObject(catalogueDeserialisation);
 
-			ObjectInputStream entree = new ObjectInputStream(fichier);
+				sortie.close();
+				fichier.close();
 
-			catalogueDeserializer = (Catalogue) entree.readObject();
-			fichier.close();
-			entree.close();
+				// System.out.println("l'objet catalogue vient d'ï¿½tre seralizer");
+				catalogueDeserializer = catalogueDeserialisation;
 
-			// System.out.println("l'objet catalogue vient d'ï¿½etre deserlializer");
-			//// System.out.println(catalogueDeserializer);
-			// catalogueDeserializer.afficherDvd();
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		
+		else {
+			try {
+
+				FileInputStream fichier = new FileInputStream(FichierDeserial);
+
+				ObjectInputStream entree = new ObjectInputStream(fichier);
+
+				catalogueDeserializer = (Catalogue) entree.readObject();
+				fichier.close();
+				entree.close();
+
+				// System.out.println("l'objet catalogue vient d'ï¿½etre deserlializer");
+				//// System.out.println(catalogueDeserializer);
+				// catalogueDeserializer.afficherDvd();
+
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+		
+	
+
+	
 		return catalogueDeserializer;
 
 	}
@@ -826,12 +846,13 @@ public class InterfacePrepose extends Application {
 							}
 							else {// ajout d'un document (livres)
 								Document documentAjouter = tableCatalogue.getSelectionModel().getSelectedItem();
-								//Livre livreAjouter = (Livre) tableCatalogue.getSelectionModel().getSelectedItem();
+								Livre livreAjouter = (Livre) tableCatalogue.getSelectionModel().getSelectedItem();
 								//catalogue.getLstDocuments().add(documentAjouter);
 								//catalogue.getLstLivres().add(livreAjouter);
 								prepose.ajouterDocument(documentAjouter);
 								
 								donneesCatalogue.add(documentAjouter);
+								donneesLivre.add(livreAjouter);
 								
 								Alert confirmation = new Alert(AlertType.CONFIRMATION);
 							 	confirmation.setTitle("Confirmation");
@@ -1009,7 +1030,53 @@ public class InterfacePrepose extends Application {
 						System.out.println("Document choisi : " + tableCatalogue.getSelectionModel().getSelectedItem());
 						// suppresion du document selectionnee
 
-						tableCatalogue.getSelectionModel().clearSelection(); // derniere instruction
+
+						Document documentSupprimer = tableCatalogue.getSelectionModel().getSelectedItem();
+						//Livre livreSupprimer = tableCatalogue.getSelectionModel().getSelectedItem();
+						//System.out.println(documentSupprimer.getNoDoc().substring(0, 3));
+						
+						
+						
+						if(documentSupprimer.getNoDoc().substring(0, 3).equals("Liv")) {
+							System.out.println("livre");
+				
+							catalogue.getLstLivres().remove(documentSupprimer);
+							donneesLivre.remove(documentSupprimer);
+							tableLivre.refresh();
+						
+							
+						}
+						else if(documentSupprimer.getNoDoc().substring(0, 3).equals("DVD")) {
+							System.out.println("DVD");
+							
+							catalogue.getLstDvd().remove(documentSupprimer);
+							donneesDVD.remove(documentSupprimer);
+							tableDVD.refresh();
+						}
+						else if(documentSupprimer.getNoDoc().substring(0, 3).equals("Per")) {
+							System.out.println("Periodique");
+							
+							catalogue.getLstPeriodiques().remove(documentSupprimer);
+							donneesPeriodique.remove(documentSupprimer);
+							tablePeriodique.refresh();
+						}
+					
+						
+						prepose.supprimerDocument(documentSupprimer);
+						
+						
+						donneesCatalogue.removeAll(documentSupprimer);
+						
+						
+						
+						
+						
+						Alert confirmation = new Alert(AlertType.CONFIRMATION);
+					 	confirmation.setTitle("Confirmation");
+					 	confirmation.setHeaderText(null);
+					 	confirmation.setContentText("Le document dont le numéro est "+documentSupprimer.getNoDoc() +" a été supprimer!");
+					 	confirmation.showAndWait();
+					 	
 
 					}
 				} else if (tabLivres.isSelected()) {
@@ -1022,10 +1089,12 @@ public class InterfacePrepose extends Application {
 						Erreur.setContentText("Vous devez sélectionner le document à supprimer.");
 						Erreur.showAndWait();
 
-					} else {
+					} else { //suppression
 						System.out.println("Document choisi : " + tableLivre.getSelectionModel().getSelectedItem());
+						Document livreSupprimer = tableLivre.getSelectionModel().getSelectedItem();
+						
 
-						tableLivre.getSelectionModel().clearSelection(); // derniere instruction
+						
 					}
 				} else if (tabDVD.isSelected()) {
 					if (tableDVD.getSelectionModel().getSelectedItem() == null) { // non selectionnee
@@ -1037,7 +1106,7 @@ public class InterfacePrepose extends Application {
 						Erreur.setContentText("Vous devez sélectionner le document à supprimer.");
 						Erreur.showAndWait();
 
-					} else {
+					} else {//suppression
 						System.out.println("Document choisi : " + tableDVD.getSelectionModel().getSelectedItem());
 
 						tableDVD.getSelectionModel().clearSelection(); // derniere instruction
@@ -1052,11 +1121,10 @@ public class InterfacePrepose extends Application {
 						Erreur.setContentText("Vous devez sélectionner le document à supprimer.");
 						Erreur.showAndWait();
 
-					} else {
-						System.out
-								.println("Document choisi : " + tablePeriodique.getSelectionModel().getSelectedItem());
+					} else {//suppression
+						//System.out.println("Document choisi : " + tablePeriodique.getSelectionModel().getSelectedItem());
 
-						tablePeriodique.getSelectionModel().clearSelection(); // derniere instruction
+						
 					}
 				}
 

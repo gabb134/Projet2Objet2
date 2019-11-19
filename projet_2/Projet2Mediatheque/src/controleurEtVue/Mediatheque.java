@@ -195,6 +195,7 @@ public class Mediatheque extends Application {
 	private Tab tabDVD;
 
 	private Tab tabPeriodique;
+	private Catalogue catalogue;
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -408,7 +409,7 @@ public class Mediatheque extends Application {
 			// bPaneConnexion.setTop(hBoxText);
 			Color color = Color.web("#541E1E");
 			bPaneConnexion.setBackground(new Background(new BackgroundFill(color, new CornerRadii(10), new Insets(0))));
-			Text txtBienvenue = new Text("          BIENVENUE \nà NOTRE MÉDIATHÈQUE  ");
+			Text txtBienvenue = new Text("          BIENVENUE \nÀ NOTRE MÉDIATHÈQUE  ");
 
 			DropShadow ds = new DropShadow();
 			ds.setOffsetY(3.0f);
@@ -585,9 +586,9 @@ public class Mediatheque extends Application {
 			// Dans l'oglet Catalogue
 
 	
-
 			
-			Catalogue catalogue = DeserialisationCatalogue();
+			
+			 catalogue = DeserialisationCatalogue();
 			// Catalogue catalogue = Catalogue.getInstance("Livres.txt", "Periodiques.txt",
 			// "DVD.txt");
 			donneesCatalogue = FXCollections.observableArrayList(catalogue.getLstDocuments()); // ***Demander au prof
@@ -1326,14 +1327,12 @@ public class Mediatheque extends Application {
 
 	public void SerializationCatalogue() {
 		
-		if(!fichierSerial.exists()) {
-			Catalogue catalogueSerialisation = Catalogue.getInstance("Livres.txt", "Periodiques.txt", "DVD.txt");
-
+		
 			try {
 				FileOutputStream fichier = new FileOutputStream(fichierSerial);
 				ObjectOutputStream sortie = new ObjectOutputStream(fichier);
 
-				sortie.writeObject(catalogueSerialisation);
+				sortie.writeObject(catalogue);
 
 				sortie.close();
 				fichier.close();
@@ -1344,12 +1343,8 @@ public class Mediatheque extends Application {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		else {
-			DeserialisationCatalogue();
-		}
-		// Methode qui permet d'aller chercher l'objet Catalogue pour le serializer
 		
+	
 
 	}
 
@@ -1357,26 +1352,49 @@ public class Mediatheque extends Application {
 													// l'utiliser
 		Catalogue catalogueDeserializer = null;
 
-		try {
+		if(!fichierSerial.exists()) {
+			Catalogue catalogueDeserialisation = Catalogue.getInstance("Livres.txt", "Periodiques.txt", "DVD.txt");
 
-			FileInputStream fichier = new FileInputStream(FichierDeserial);
+			try {
+				FileOutputStream fichier = new FileOutputStream(fichierSerial);
+				ObjectOutputStream sortie = new ObjectOutputStream(fichier);
 
-			ObjectInputStream entree = new ObjectInputStream(fichier);
+				sortie.writeObject(catalogueDeserialisation);
 
-			catalogueDeserializer = (Catalogue) entree.readObject();
-			fichier.close();
-			entree.close();
+				sortie.close();
+				fichier.close();
 
-			// System.out.println("l'objet catalogue vient d'àetre deserlializer");
-			//// System.out.println(catalogueDeserializer);
-			// catalogueDeserializer.afficherDvd();
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+				// System.out.println("l'objet catalogue vient d'ï¿½tre seralizer");
+				catalogueDeserializer = catalogueDeserialisation;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		else {
+			try {
+
+				FileInputStream fichier = new FileInputStream(FichierDeserial);
+
+				ObjectInputStream entree = new ObjectInputStream(fichier);
+
+				catalogueDeserializer = (Catalogue) entree.readObject();
+				fichier.close();
+				entree.close();
+
+				// System.out.println("l'objet catalogue vient d'àetre deserlializer");
+				//// System.out.println(catalogueDeserializer);
+				// catalogueDeserializer.afficherDvd();
+
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
 		return catalogueDeserializer;
 
 	}

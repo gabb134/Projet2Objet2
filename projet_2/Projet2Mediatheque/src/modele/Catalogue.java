@@ -66,7 +66,7 @@ public final class Catalogue implements Serializable {
 					Livre livre = new Livre(noDoc, titre, dateParution, "Oui", null,null, auteur);
 					Document docLivre = new Document(noDoc, titre, dateParution, "oui",null);
 					lstLivres.add(livre);
-					lstDocuments.add(docLivre);
+					
 					
 				} catch (NoSuchElementException e) {
 
@@ -118,7 +118,7 @@ public final class Catalogue implements Serializable {
 					Periodique periodique = new Periodique(noDocP, titreP, dateParutionP, "oui",null,noVolume, noPeriodique);
 					Document docPeriodique = new Document(noDocP, titreP, dateParutionP, "oui",null);
 					lstPeriodiques.add(periodique);
-					lstDocuments.add(docPeriodique);
+					
 					
 				}catch(NoSuchElementException e) {
 					
@@ -167,7 +167,7 @@ public final class Catalogue implements Serializable {
 				DVD dvd = new DVD(noDocD, titreD, dateParutionD, "oui",null ,nbDisques, strRealisateur);
 				Document docDVD = new Document(noDocD, titreD, dateParutionD, "oui",null);
 				lstDvd.add(dvd);
-				lstDocuments.add(docDVD);
+		
 			}
 
 		} catch (IOException e) {
@@ -177,7 +177,9 @@ public final class Catalogue implements Serializable {
 		
 		//Remplir lstDocument
 	
-
+		lstDocuments.addAll(lstLivres);
+		lstDocuments.addAll(lstDvd);
+		lstDocuments.addAll(lstPeriodiques);
 	}
 	
 	public ArrayList<Document> getLstDocuments() {
