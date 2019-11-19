@@ -1123,6 +1123,7 @@ public class Mediatheque extends Application {
 							Validation.showAndWait();
 
 							// pour demarrer l'interface de l'adhérent
+							stageCatalogue.close();
 							Stage stageAdherent = new Stage();
 							stageAdherent.initModality(Modality.APPLICATION_MODAL);
 							InterfaceAdherent interfaceAdherent = new InterfaceAdherent();
@@ -1203,7 +1204,7 @@ public class Mediatheque extends Application {
 							Validation.setHeaderText(null);
 							Validation.setContentText("Connexion réussi! Bienvenue à la Médiathèque");
 							Validation.showAndWait();
-
+							stageCatalogue.close();
 							// pour demarrer l'interface de l'adhérent
 							Stage stageAdherent = new Stage();
 							stageAdherent.initModality(Modality.APPLICATION_MODAL);

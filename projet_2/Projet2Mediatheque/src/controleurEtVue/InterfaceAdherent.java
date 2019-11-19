@@ -34,7 +34,8 @@ public class InterfaceAdherent extends Application{
 	private ObservableList<DVD> donneesDVDPrepose;
 	private ObservableList<Periodique> donneesPeriodiquePrepose;*/
 
-
+    private ObservableList<Document> donneesDocument;
+    private ObservableList<Pret> donneesPrets;
 
 	@Override
 	public void start(Stage primaryStage)  {

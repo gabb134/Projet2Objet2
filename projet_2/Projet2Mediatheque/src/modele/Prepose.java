@@ -190,7 +190,11 @@ public class Prepose implements Serializable {
 	public void ajouterDocument(Document document) {
 		try {
 			if(catalogue.getLstDocuments().get(0)!=null) {
-				catalogue.getLstDocuments().add(document);
+				
+				String strNumCatalogue = catalogue.getLstDocuments().get(catalogue.getLstDocuments().size()-1).getNoDoc();
+				
+				System.out.println(strNumCatalogue);
+				//catalogue.getLstDocuments().add(document);
 			}
 		}catch(Exception e) {
 			catalogue.getLstDocuments().add(document);
