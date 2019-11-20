@@ -2,6 +2,7 @@ package modele;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Adherent implements Serializable {
 	/**
@@ -25,6 +26,27 @@ public class Adherent implements Serializable {
 	private LocalDate datePretLiv3;
 	public Amende getAmende() {
 		return amende;
+	private Amende amende;
+
+
+	private LocalDate datePretDvd;
+	private LocalDate datePretPer;
+	private LocalDate datePretLiv;
+	
+	
+	private ArrayList<Document> lstDocAdherent = new ArrayList<Document>();
+
+	
+	public ArrayList<Document> getLstDocAdherent() {
+		return lstDocAdherent;
+	}
+
+	public void setLstDocAdherent(ArrayList<Document> lstDocAdherent) {
+		this.lstDocAdherent = lstDocAdherent;
+	}
+
+	public LocalDate getDatePretDvd() {
+		return datePretDvd;
 	}
 
 	public void setAmende(Amende amende) {
@@ -90,6 +112,9 @@ public class Adherent implements Serializable {
 		this.strNumeroTelephone = strNumeroTelephone;
 		this.intNbPrets = intNbPrets;
 		this.dblSolde = dblSolde;
+	}
+	public void ajouterDocument(Document doc) {
+		lstDocAdherent.add(doc);
 	}
 
 	public int getIntNbPrets() {

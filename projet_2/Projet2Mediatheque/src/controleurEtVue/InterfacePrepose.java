@@ -61,6 +61,7 @@ import modele.Catalogue;
 import modele.DVD;
 import modele.Document;
 import modele.ListeAdherents;
+import modele.ListeDocumentsEmpruntes;
 import modele.Livre;
 import modele.Periodique;
 import modele.Prepose;
@@ -198,6 +199,8 @@ public class InterfacePrepose extends Application implements Serializable {
 	private HBox hboxButtonAhderent = new HBox(2);
 	private Catalogue catalogue;
 	private int intcompteurAjout = 0;
+	
+	private ListeDocumentsEmpruntes listeDocumentsEmpruntes;
 	
 	Mediatheque mediatheque;
 	public InterfacePrepose(Mediatheque mediatheque){
@@ -556,6 +559,12 @@ public class InterfacePrepose extends Application implements Serializable {
 					liste.serialisationAdherent();
 					System.out.println(catalogue.getLstDocuments());
 					SerializationCatalogue();
+					try {
+					listeDocumentsEmpruntes.serialisationDocumentsEmpruntes();
+					}
+					catch(Exception e1) {
+						
+					}
 					
 
 				}
@@ -991,9 +1000,149 @@ public class InterfacePrepose extends Application implements Serializable {
 						}
 						else if(rbDvd.isSelected()) {
 							//pour l'ajout d'n dvd
+							if (txtFtitre.getText().compareTo("") == 0) {
+								Alert Erreur = new Alert(AlertType.ERROR);
+								Erreur.setTitle("Erreur");
+								Erreur.setHeaderText(null);
+								Erreur.setContentText("Vous n'avez pas tapé le titre");
+								Erreur.showAndWait();
+							}
+							else if (txtFNbDisques.getText().compareTo("") == 0) {
+								Alert Erreur = new Alert(AlertType.ERROR);
+								Erreur.setTitle("Erreur");
+								Erreur.setHeaderText(null);
+								Erreur.setContentText("Vous n'avez pas tapé le nombre de disques");
+								Erreur.showAndWait();
+							}
+							else if (txtFRealisateur.getText().compareTo("") == 0) {
+								Alert Erreur = new Alert(AlertType.ERROR);
+								Erreur.setTitle("Erreur");
+								Erreur.setHeaderText(null);
+								Erreur.setContentText("Vous n'avez pas tapé le réalisateur");
+								Erreur.showAndWait();
+							}else if (txtFDateParution.getText().compareTo("") == 0) {
+								Alert Erreur = new Alert(AlertType.ERROR);
+								Erreur.setTitle("Erreur");
+								Erreur.setHeaderText(null);
+								Erreur.setContentText("Vous n'avez pas tapé la date de parution");
+								Erreur.showAndWait();
+							}else if (txtFMotsClesEspaces.getText().compareTo("") == 0) {
+								Alert Erreur = new Alert(AlertType.ERROR);
+								Erreur.setTitle("Erreur");
+								Erreur.setHeaderText(null);
+								Erreur.setContentText("Vous n'avez pas tapé le mot clé");
+								Erreur.showAndWait();
+							}else {
+								Adherent a1 = null;
+								intcompteurAjout++;
+								LocalDate localDateAjoutDoc = LocalDate.parse(txtFDateParution.getText());
+								Document documentAjouter = new Document("", txtFtitre.getText(),localDateAjoutDoc, "oui", a1);
+								//dvd d = new DVD(noDoc, titre, dateParution, disponible, emprunteur, nbDisques, strRealisateur)
+								DVD dvdAjouter = new DVD("", txtFtitre.getText(), localDateAjoutDoc, "oui", a1, Integer.parseInt(txtFNbDisques.getText()), txtFRealisateur.getText());								
+								String strNomDvd = catalogue.getLstDvd().get(catalogue.getLstDvd().size()-1).getNoDoc().substring(0,3);
+								String strNumDvd = catalogue.getLstDvd().get(catalogue.getLstDvd().size()-1).getNoDoc().substring(3,5);
+								
+								int sum = Integer.parseInt(strNumDvd)+intcompteurAjout;
+								
+								
+								
+								documentAjouter.setNoDoc(strNomDvd+String.valueOf(sum));
+								dvdAjouter.setNoDoc(strNomDvd+String.valueOf(sum));
+								
+								prepose.ajouterDocument(documentAjouter);
+								prepose.ajouterDvd(dvdAjouter);
+			
+								donneesCatalogue.add(documentAjouter);
+								
+								donneesDVD.add(dvdAjouter);
+								
+								tableCatalogue.refresh();
+								tableDVD.refresh();
+								//donneesLivre.add((Livre) documentAjouter);
+								
+								Alert confirmation = new Alert(AlertType.CONFIRMATION);
+							 	confirmation.setTitle("Confirmation");
+							 	confirmation.setHeaderText(null);
+							 	confirmation.setContentText("Le document "+txtFtitre.getText() +" a été ajouté!");
+							 	confirmation.showAndWait();
+							 	stageAjout.close();
+								
+							}
+							
+							
+							
+							
 						}
 						else if(rbPeriodique.isSelected()) {
 							//pour l'ajout d'un periodique
+							if (txtFtitre.getText().compareTo("") == 0) {
+								Alert Erreur = new Alert(AlertType.ERROR);
+								Erreur.setTitle("Erreur");
+								Erreur.setHeaderText(null);
+								Erreur.setContentText("Vous n'avez pas tapé le titre");
+								Erreur.showAndWait();
+							}
+							else if (txtFNoVolume.getText().compareTo("") == 0) {
+								Alert Erreur = new Alert(AlertType.ERROR);
+								Erreur.setTitle("Erreur");
+								Erreur.setHeaderText(null);
+								Erreur.setContentText("Vous n'avez pas tapé le numéro de volume");
+								Erreur.showAndWait();
+							}
+							else if (txtFNoPeriodique.getText().compareTo("") == 0) {
+								Alert Erreur = new Alert(AlertType.ERROR);
+								Erreur.setTitle("Erreur");
+								Erreur.setHeaderText(null);
+								Erreur.setContentText("Vous n'avez pas tapé le numéro de périodique");
+								Erreur.showAndWait();
+							}else if (txtFDateParution.getText().compareTo("") == 0) {
+								Alert Erreur = new Alert(AlertType.ERROR);
+								Erreur.setTitle("Erreur");
+								Erreur.setHeaderText(null);
+								Erreur.setContentText("Vous n'avez pas tapé la date de parution");
+								Erreur.showAndWait();
+							}else if (txtFMotsClesEspaces.getText().compareTo("") == 0) {
+								Alert Erreur = new Alert(AlertType.ERROR);
+								Erreur.setTitle("Erreur");
+								Erreur.setHeaderText(null);
+								Erreur.setContentText("Vous n'avez pas tapé le mot clé");
+								Erreur.showAndWait();
+							}else {
+								Adherent a2 = null;
+								intcompteurAjout++;
+								LocalDate localDateAjoutDoc = LocalDate.parse(txtFDateParution.getText());
+								Document documentAjouter = new Document("", txtFtitre.getText(),localDateAjoutDoc, "oui", a2);
+								//dvd d = new DVD(noDoc, titre, dateParution, disponible, emprunteur, nbDisques, strRealisateur)
+								Periodique periodiqueAjouter = new Periodique("", txtFtitre.getText(), localDateAjoutDoc, "oui", a2, Integer.parseInt(txtFNoVolume.getText()),Integer.parseInt(txtFNoPeriodique.getText()));								
+								String strNomPeriodique = catalogue.getLstPeriodiques().get(catalogue.getLstPeriodiques().size()-1).getNoDoc().substring(0,3);
+								String strNumPeriodique = catalogue.getLstPeriodiques().get(catalogue.getLstPeriodiques().size()-1).getNoDoc().substring(3,4);
+								
+								int sum = Integer.parseInt(strNumPeriodique)+intcompteurAjout;
+								
+								
+								
+								documentAjouter.setNoDoc(strNomPeriodique+String.valueOf(sum));
+								periodiqueAjouter.setNoDoc(strNomPeriodique+String.valueOf(sum));
+								
+								prepose.ajouterDocument(documentAjouter);
+								prepose.ajouterPeriodique(periodiqueAjouter);
+			
+								donneesCatalogue.add(documentAjouter);
+								
+								donneesPeriodique.add(periodiqueAjouter);
+								
+								tableCatalogue.refresh();
+								tablePeriodique.refresh();
+								//donneesLivre.add((Livre) documentAjouter);
+								
+								Alert confirmation = new Alert(AlertType.CONFIRMATION);
+							 	confirmation.setTitle("Confirmation");
+							 	confirmation.setHeaderText(null);
+							 	confirmation.setContentText("Le document "+txtFtitre.getText() +" a été ajouté!");
+							 	confirmation.showAndWait();
+							 	stageAjout.close();
+								
+							}
 						}
 
 					}
@@ -1709,6 +1858,7 @@ public class InterfacePrepose extends Application implements Serializable {
 									liste.getLstAdherents().get(i).setDatePretDvd2(LocalDate.now());
 									tableCatalogue.getSelectionModel().getSelectedItem().setIntNumDocEmprunte(2);
 									booValide=true;
+								//	liste.getLstAdherents().get(i).getLstDocumentsEmpruntes().add(tableCatalogue.getSelectionModel().getSelectedItem());// pas sur de ca
 								}
 								
 							}
@@ -1738,6 +1888,7 @@ public class InterfacePrepose extends Application implements Serializable {
 									liste.getLstAdherents().get(i).setIntnbPer(liste.getLstAdherents().get(i).getIntnbPer()+1);
 									liste.getLstAdherents().get(i).setDatePretPer(LocalDate.of(2019, 11, 15));
 									booValide=true;
+									//liste.getLstAdherents().get(i).getLstDocumentsEmpruntes().add(tableCatalogue.getSelectionModel().getSelectedItem());// pas sur de ca
 								}
 								
 							}
@@ -1766,6 +1917,7 @@ public class InterfacePrepose extends Application implements Serializable {
 									liste.getLstAdherents().get(i).setDatePretLiv3(LocalDate.now());
 									tableCatalogue.getSelectionModel().getSelectedItem().setIntNumDocEmprunte(3);
 									booValide=true;
+								//	liste.getLstAdherents().get(i).getLstDocumentsEmpruntes().add(tableCatalogue.getSelectionModel().getSelectedItem()); // pas sur de ca
 								}
 								
 							}
@@ -1793,6 +1945,28 @@ public class InterfacePrepose extends Application implements Serializable {
 							tableAdherent.refresh();
 							tableCatalogue.getSelectionModel().getSelectedItem().setDisponible("non");
 							tableCatalogue.refresh();
+							
+							
+							listeDocumentsEmpruntes = ListeDocumentsEmpruntes.getInstance();
+							
+							
+							//voir comment ajouter les documents empriuntes pour chaque adherent ** demander au prof
+							
+							// adherent qui a emprunter 
+							
+							Adherent adherentEmprunter = tableCatalogue.getSelectionModel().getSelectedItem().getEmprunteur();
+							//ajout du document emprunter
+							Document documentEmprunter = tableCatalogue.getSelectionModel().getSelectedItem();
+							
+							//adherentEmprunter.getLstDocAdherent().add(documentEmprunter);
+							
+							//listeDocumentsEmpruntes.getLstDocumentsEmpruntes().add(documentEmprunter);
+							System.out.println(documentEmprunter);
+							//for(Document doc: listeDocumentsEmpruntes.getLstDocumentsEmpruntes())
+								//System.out.println(doc);
+							
+							//for(Document doc: adherentEmprunter.getLstDocAdherent())
+								//System.out.println(doc);
 						}
 						else 
 						{
