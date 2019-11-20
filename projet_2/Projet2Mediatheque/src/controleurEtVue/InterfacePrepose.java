@@ -60,6 +60,7 @@ import modele.Amende;
 import modele.Catalogue;
 import modele.DVD;
 import modele.Document;
+import modele.DocumentEmprunter;
 import modele.ListeAdherents;
 import modele.ListeDocumentsEmpruntes;
 import modele.Livre;
@@ -1823,8 +1824,35 @@ public class InterfacePrepose extends Application implements Serializable {
 							Adherent adherentEmprunt = tableCatalogue.getSelectionModel().getSelectedItem().getEmprunteur();
 							Document documentEmprunt = tableCatalogue.getSelectionModel().getSelectedItem();
 							
-							listeDocEmpruntes.emprunterPar(adherentEmprunt, documentEmprunt);//methode qui ajoute le document emprunté à l'adhérent
 							
+							
+						//	listeDocEmpruntes.emprunterPar(adherentEmprunt, documentEmprunt);//methode qui ajoute le document emprunté à l'adhérent
+							//pour voir quel document a ete choisi
+							if(documentEmprunt.getNoDoc().substring(0, 3).equals("Liv")) {
+								System.out.println("livre");
+								
+								Livre livreEmprunt = (Livre) tableCatalogue.getSelectionModel().getSelectedItem();
+								
+								DocumentEmprunter docEmpruntLivre = new DocumentEmprunter(livreEmprunt.getNoDoc(), livreEmprunt.getTitre(), livreEmprunt.getAuteur(), livreEmprunt.getDateParution());
+								//ajouter dans une liste
+								
+							}
+							else if(documentEmprunt.getNoDoc().substring(0, 3).equals("DVD")) {
+								System.out.println("DVD");
+								DVD dvdEmprunt = (DVD) tableCatalogue.getSelectionModel().getSelectedItem();
+								
+								DocumentEmprunter docEmpruntDvd = new DocumentEmprunter(dvdEmprunt.getNoDoc(), dvdEmprunt.getTitre(), dvdEmprunt.getStrRealisateur(), dvdEmprunt.getDateParution());
+								//ajouter dans une liste
+								
+							}
+							else if(documentEmprunt.getNoDoc().substring(0, 3).equals("Per")) {
+								System.out.println("Periodique");
+								Periodique periodiqueEmprunt = (Periodique) tableCatalogue.getSelectionModel().getSelectedItem();
+								DocumentEmprunter docEmpruntPeriodique = new DocumentEmprunter(periodiqueEmprunt.getNoDoc(), periodiqueEmprunt.getTitre(), "", periodiqueEmprunt.getDateParution());
+								//ajouter dans une liste
+								
+							}
+						
 							
 							
 						}
