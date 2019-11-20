@@ -92,9 +92,12 @@ public class ListeDocumentsEmpruntes implements Serializable {
 	
 }
 	
-	
-	
-	
+	public void emprunterPar(Adherent adherent, Document document) {
+		
+		adherent.getLstDocAdherent().add(document);
+		System.out.println("ajout du document pour l'adhérent "+adherent.getStrNom());
+	}
+
 	public ArrayList<Adherent> getLstemprunter() {
 		return lstemprunter;
 	}
