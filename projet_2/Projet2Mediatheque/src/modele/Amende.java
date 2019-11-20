@@ -12,7 +12,7 @@ public class Amende implements Serializable  {
 	 */
 	private static final long serialVersionUID = 1L;
 	private LocalDate DateRetard;
-	private double Montant;
+	private double Montant=0.50;
 	
 	public Amende( LocalDate DateRetard)
 	{
@@ -25,7 +25,7 @@ public class Amende implements Serializable  {
 		int jourRetard=DateRetard.getDayOfMonth();
 		int jourPresent=DateDuJour.getDayOfMonth();
 		int intNombreJoursRetard= Period.between(DateRetard, DateDuJour).getDays();
-		Montant=intNombreJoursRetard*0.50;
+		Montant+=intNombreJoursRetard*0.50;
 		
 	}
 	

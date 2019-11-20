@@ -2,6 +2,7 @@ package modele;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 
 public class Adherent implements Serializable {
@@ -19,11 +20,77 @@ public class Adherent implements Serializable {
 	private int intnbLiv;
 	private Amende amende=null;
 	private LocalDate datePretDvd1;
+	private LocalDate dateRetourDvd1;
 	private LocalDate datePretDvd2;
+	private LocalDate dateRetourDvd2;
 	private LocalDate datePretPer;
+	private LocalDate dateRetourPer;
 	private LocalDate datePretLiv1;
+	private LocalDate dateRetourLiv1;
 	private LocalDate datePretLiv2;
+	private LocalDate dateRetourLiv2;
 	private LocalDate datePretLiv3;
+	private LocalDate dateRetourLiv3;
+	public LocalDate getDateRetourDvd1() {
+		return dateRetourDvd1;
+	}
+
+	public void setDateRetourDvd1(LocalDate dateRetourDvd1) {
+		this.dateRetourDvd1 = dateRetourDvd1;
+	}
+
+	public LocalDate getDateRetourDvd2() {
+		return dateRetourDvd2;
+	}
+
+	public void setDateRetourDvd2(LocalDate dateRetourDvd2) {
+		this.dateRetourDvd2 = dateRetourDvd2;
+	}
+
+	public LocalDate getDateRetourPer() {
+		return dateRetourPer;
+	}
+
+	public void setDateRetourPer(LocalDate dateRetourPer) {
+		this.dateRetourPer = dateRetourPer;
+	}
+
+	public LocalDate getDateRetourLiv1() {
+		return dateRetourLiv1;
+	}
+
+	public void setDateRetourLiv1(LocalDate dateRetourLiv1) {
+		this.dateRetourLiv1 = dateRetourLiv1;
+	}
+
+	public LocalDate getDateRetourLiv2() {
+		return dateRetourLiv2;
+	}
+
+	public void setDateRetourLiv2(LocalDate dateRetourLiv2) {
+		this.dateRetourLiv2 = dateRetourLiv2;
+	}
+
+	public LocalDate getDateRetourLiv3() {
+		return dateRetourLiv3;
+	}
+
+	public void setDateRetourLiv3(LocalDate dateRetourLiv3) {
+		this.dateRetourLiv3 = dateRetourLiv3;
+	}
+
+	public LocalDate getDatePretLiv() {
+		return datePretLiv;
+	}
+
+	public void setDatePretLiv(LocalDate datePretLiv) {
+		this.datePretLiv = datePretLiv;
+	}
+
+	public void setDatePretDvd(LocalDate datePretDvd) {
+		this.datePretDvd = datePretDvd;
+	}
+
 	public Amende getAmende() {
 		return amende;
 	}
@@ -210,6 +277,10 @@ public class Adherent implements Serializable {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		LocalDate datedujour=LocalDate.now();
+		LocalDate datedufutur=datedujour.plusDays(11);
+		//System.out.println(Period.between(datedufutur, datedujour).getDays());
+		System.out.println(datedufutur);
 
 	}
 
