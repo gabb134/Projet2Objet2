@@ -26,11 +26,12 @@ public class Adherent implements Serializable {
 	private LocalDate datePretLiv3;
 	public Amende getAmende() {
 		return amende;
-	private Amende amende;
+	}
+
 
 
 	private LocalDate datePretDvd;
-	private LocalDate datePretPer;
+
 	private LocalDate datePretLiv;
 	
 	
