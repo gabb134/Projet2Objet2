@@ -14,6 +14,7 @@ public class Document implements Serializable{
 	private LocalDate  dateParution;
 	private String disponible;
 	private Adherent emprunteur;
+	
 	public Document(String noDoc, String titre, LocalDate dateParution, String disponible,Adherent emprunteur) {
 		super();
 		this.noDoc = noDoc;

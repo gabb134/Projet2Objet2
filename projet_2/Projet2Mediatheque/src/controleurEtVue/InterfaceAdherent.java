@@ -3,6 +3,7 @@ package controleurEtVue;
 import java.time.LocalDate;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -19,6 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import modele.DVD;
 import modele.Document;
+import modele.ListeDocumentsEmpruntes;
 import modele.Livre;
 import modele.Periodique;
 import modele.Pret;
@@ -52,6 +54,10 @@ public class InterfaceAdherent extends Application{
 		 Button btnQuitter = new Button("Quitter");
 		 btnQuitter.setOnMouseClicked(ClickBtnQuitter);
 		btnQuitter.setPrefWidth(150);
+		
+		ListeDocumentsEmpruntes listeDocumentEmprunter = ListeDocumentsEmpruntes.getInstance();
+		
+		donneesDocument = FXCollections.observableArrayList(listeDocumentEmprunter.getLstDocumentsEmpruntes());
 		
 		 //Ajout des colonnes pour les documents emprunté des préposé
 			TableColumn<Document, String> colonneNumDocAdherent = new TableColumn<Document, String>("Numéro Document");
@@ -102,6 +108,8 @@ public class InterfaceAdherent extends Application{
 			
 			
 			//Ajout des colonnes dans les tables
+			
+			tableDocumentsDelAdherent.setItems(donneesDocument);
 			tableDocumentsDelAdherent.getColumns().addAll(colonneNumDocAdherent,colonneTitreAdherent,colonneAuteurAdherent,colonneDatePubAdherent);
 			tablePret.getColumns().addAll(colonneNumPretAdherent,colonneDatePretAdherent,colonneDatePrevuRetourAdherent,colonneDateRetourEffectueAdherent,colonneAmendeAdherent);
 			

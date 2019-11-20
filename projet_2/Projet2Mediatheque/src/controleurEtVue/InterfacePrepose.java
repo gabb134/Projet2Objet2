@@ -59,6 +59,7 @@ import modele.Catalogue;
 import modele.DVD;
 import modele.Document;
 import modele.ListeAdherents;
+import modele.ListeDocumentsEmpruntes;
 import modele.Livre;
 import modele.Periodique;
 import modele.Prepose;
@@ -192,6 +193,8 @@ public class InterfacePrepose extends Application {
 	private HBox hboxButtonAhderent = new HBox(2);
 	private Catalogue catalogue;
 	private int intcompteurAjout = 0;
+	
+	private ListeDocumentsEmpruntes listeDocumentsEmpruntes;
 	
 	Mediatheque mediatheque;
 	public InterfacePrepose(Mediatheque mediatheque){
@@ -549,6 +552,12 @@ public class InterfacePrepose extends Application {
 					liste.serialisationAdherent();
 					System.out.println(catalogue.getLstDocuments());
 					SerializationCatalogue();
+					try {
+					listeDocumentsEmpruntes.serialisationDocumentsEmpruntes();
+					}
+					catch(Exception e1) {
+						
+					}
 					
 
 				}
@@ -1690,7 +1699,7 @@ public class InterfacePrepose extends Application {
 					Alert Erreur = new Alert(AlertType.ERROR);
 					Erreur.setTitle("Erreur");
 					Erreur.setHeaderText(null);
-					Erreur.setContentText("Vous devez sï¿½lectionner un document pour l'emprunter");
+					Erreur.setContentText("Vous devez sélectionner un document pour l'emprunter");
 					Erreur.showAndWait();
 				}
 				else if(tableCatalogue.getSelectionModel().getSelectedItem().getDisponible().equals("non"))
@@ -1759,6 +1768,7 @@ public class InterfacePrepose extends Application {
 								{
 									liste.getLstAdherents().get(i).setIntnbDVD(liste.getLstAdherents().get(i).getIntnbDVD()+1);
 									booValide=true;
+								//	liste.getLstAdherents().get(i).getLstDocumentsEmpruntes().add(tableCatalogue.getSelectionModel().getSelectedItem());// pas sur de ca
 								}
 								
 							}
@@ -1774,6 +1784,7 @@ public class InterfacePrepose extends Application {
 								{
 									liste.getLstAdherents().get(i).setIntnbPer(liste.getLstAdherents().get(i).getIntnbPer()+1);
 									booValide=true;
+									//liste.getLstAdherents().get(i).getLstDocumentsEmpruntes().add(tableCatalogue.getSelectionModel().getSelectedItem());// pas sur de ca
 								}
 								
 							}
@@ -1785,6 +1796,7 @@ public class InterfacePrepose extends Application {
 								{
 									liste.getLstAdherents().get(i).setIntnbLiv(liste.getLstAdherents().get(i).getIntnbLiv()+1);
 									booValide=true;
+								//	liste.getLstAdherents().get(i).getLstDocumentsEmpruntes().add(tableCatalogue.getSelectionModel().getSelectedItem()); // pas sur de ca
 								}
 								
 							}
@@ -1798,6 +1810,28 @@ public class InterfacePrepose extends Application {
 							tableAdherent.refresh();
 							tableCatalogue.getSelectionModel().getSelectedItem().setDisponible("non");
 							tableCatalogue.refresh();
+							
+							
+							listeDocumentsEmpruntes = ListeDocumentsEmpruntes.getInstance();
+							
+							
+							//voir comment ajouter les documents empriuntes pour chaque adherent ** demander au prof
+							
+							// adherent qui a emprunter 
+							
+							Adherent adherentEmprunter = tableCatalogue.getSelectionModel().getSelectedItem().getEmprunteur();
+							//ajout du document emprunter
+							Document documentEmprunter = tableCatalogue.getSelectionModel().getSelectedItem();
+							
+							//adherentEmprunter.getLstDocAdherent().add(documentEmprunter);
+							
+							//listeDocumentsEmpruntes.getLstDocumentsEmpruntes().add(documentEmprunter);
+							System.out.println(documentEmprunter);
+							//for(Document doc: listeDocumentsEmpruntes.getLstDocumentsEmpruntes())
+								//System.out.println(doc);
+							
+							//for(Document doc: adherentEmprunter.getLstDocAdherent())
+								//System.out.println(doc);
 						}
 						else 
 						{
