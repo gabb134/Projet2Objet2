@@ -1,11 +1,16 @@
 package modele;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 
 import javafx.util.converter.LocalDateStringConverter;
 
-public class Amende {
+public class Amende implements Serializable  {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private LocalDate DateRetard;
 	private double Montant;
 	
@@ -23,6 +28,15 @@ public class Amende {
 		Montant=intNombreJoursRetard*0.50;
 		
 	}
+	
+	public double getMontant() {
+		return Montant;
+	}
+
+	public void setMontant(double montant) {
+		Montant = montant;
+	}
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		LocalDate DateRetard=LocalDate.of(2019, 10, 20);

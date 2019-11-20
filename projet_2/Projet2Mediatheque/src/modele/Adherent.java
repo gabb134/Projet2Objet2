@@ -16,18 +16,35 @@ public class Adherent implements Serializable {
 	private int intnbDVD;
 	private int intnbPer;
 	private int intnbLiv;
-	private Amende amende;
-	private LocalDate datePretDvd;
+	private Amende amende=null;
+	private LocalDate datePretDvd1;
+	private LocalDate datePretDvd2;
 	private LocalDate datePretPer;
-	private LocalDate datePretLiv;
-	public LocalDate getDatePretDvd() {
-		return datePretDvd;
+	private LocalDate datePretLiv1;
+	private LocalDate datePretLiv2;
+	private LocalDate datePretLiv3;
+	public Amende getAmende() {
+		return amende;
 	}
 
-	public void setDatePretDvd(LocalDate datePretDvd) {
-		this.datePretDvd = datePretDvd;
+	public void setAmende(Amende amende) {
+		this.amende = amende;
 	}
 
+	public LocalDate getDatePretDvd1() {
+		return datePretDvd1;
+	}
+
+	public void setDatePretDvd1(LocalDate datePretDvd1) {
+		this.datePretDvd1 = datePretDvd1;
+	}
+	public LocalDate getDatePretDvd2() {
+		return datePretDvd2;
+	}
+
+	public void setDatePretDvd2(LocalDate datePretDvd2) {
+		this.datePretDvd2 = datePretDvd2;
+	}
 	public LocalDate getDatePretPer() {
 		return datePretPer;
 	}
@@ -36,14 +53,27 @@ public class Adherent implements Serializable {
 		this.datePretPer = datePretPer;
 	}
 
-	public LocalDate getDatePretLiv() {
-		return datePretLiv;
+	public LocalDate getDatePretLiv1() {
+		return datePretLiv1;
 	}
 
-	public void setDatePretLiv(LocalDate datePretLiv) {
-		this.datePretLiv = datePretLiv;
+	public void setDatePretLiv1(LocalDate datePretLiv1) {
+		this.datePretLiv1 = datePretLiv1;
+	}
+	public LocalDate getDatePretLiv2() {
+		return datePretLiv2;
 	}
 
+	public void setDatePretLiv2(LocalDate datePretLiv2) {
+		this.datePretLiv2 = datePretLiv2;
+	}
+	public LocalDate getDatePretLiv3() {
+		return datePretLiv3;
+	}
+
+	public void setDatePretLiv3(LocalDate datePretLiv3) {
+		this.datePretLiv3 = datePretLiv3;
+	}
 	public void setStrAdresse(String strAdresse) {
 		this.strAdresse = strAdresse;
 	}

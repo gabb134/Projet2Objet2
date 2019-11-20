@@ -14,6 +14,7 @@ public class Document implements Serializable{
 	private LocalDate  dateParution;
 	private String disponible;
 	private Adherent emprunteur;
+	private int intNumDocEmprunte;
 	public Document(String noDoc, String titre, LocalDate dateParution, String disponible,Adherent emprunteur) {
 		super();
 		this.noDoc = noDoc;
@@ -29,6 +30,14 @@ public class Document implements Serializable{
 				+ disponible + emprunteur;
 	}
 	
+	public int getIntNumDocEmprunte() {
+		return intNumDocEmprunte;
+	}
+
+	public void setIntNumDocEmprunte(int intNumDocEmprunte) {
+		this.intNumDocEmprunte = intNumDocEmprunte;
+	}
+
 	public String getNoDoc() {
 		return noDoc;
 	}

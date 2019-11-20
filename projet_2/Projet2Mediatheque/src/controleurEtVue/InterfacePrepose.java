@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Period;
@@ -55,6 +56,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modele.Adherent;
+import modele.Amende;
 import modele.Catalogue;
 import modele.DVD;
 import modele.Document;
@@ -63,8 +65,12 @@ import modele.Livre;
 import modele.Periodique;
 import modele.Prepose;
 
-public class InterfacePrepose extends Application {
+public class InterfacePrepose extends Application implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private TableView<Document> tableCatalogue = new TableView<Document>();
 	private TableView<Livre> tableLivre = new TableView<Livre>();
 	private TableView<DVD> tableDVD = new TableView<DVD>();
@@ -399,6 +405,7 @@ public class InterfacePrepose extends Application {
 			
 			/*************************************************************************************************/
 			 liste = ListeAdherents.getInstance();
+			 MiseAJourAmende();
 			donneesAdherents = FXCollections.observableArrayList(liste.getLstAdherents());
 			//tableAdherent.setItems(donneesAdherents);
 			
@@ -665,6 +672,86 @@ public class InterfacePrepose extends Application {
 		}
 		
 
+	}
+	public void MiseAJourAmende()
+	{
+		for (int i = 0; i < liste.getLstAdherents().size(); i++) {
+			/* Vérification de l'emprunt d'un Périodique*/
+			if(liste.getLstAdherents().get(i).getDatePretPer()!=null&&liste.getLstAdherents().get(i).getAmende()==null)
+			{	
+		if(Period.between(liste.getLstAdherents().get(i).getDatePretPer(), LocalDate.now()).getDays()>=4)
+		{
+			liste.getLstAdherents().get(i).setAmende(new Amende(liste.getLstAdherents().get(i).getDatePretPer()));
+			liste.getLstAdherents().get(i).getAmende().CoutAmende();
+			liste.getLstAdherents().get(i).setDblSolde(liste.getLstAdherents().get(i).getAmende().getMontant());
+		}
+		
+		}
+			/* Vérification de l'emprunt d'un DVD*/
+			else if(liste.getLstAdherents().get(i).getDatePretDvd1()!=null&&liste.getLstAdherents().get(i).getAmende()==null)
+			{	
+		if(Period.between(liste.getLstAdherents().get(i).getDatePretDvd1(), LocalDate.now()).getDays()==8)
+		{
+			liste.getLstAdherents().get(i).setAmende(new Amende(LocalDate.now()));
+			liste.getLstAdherents().get(i).getAmende().CoutAmende();
+			liste.getLstAdherents().get(i).setDblSolde(liste.getLstAdherents().get(i).getAmende().getMontant());
+		}
+		
+		}
+			else if(liste.getLstAdherents().get(i).getDatePretDvd2()!=null&&liste.getLstAdherents().get(i).getAmende()==null)
+			{	
+		if(Period.between(liste.getLstAdherents().get(i).getDatePretDvd2(), LocalDate.now()).getDays()==8)
+		{
+			liste.getLstAdherents().get(i).setAmende(new Amende(LocalDate.now()));
+			liste.getLstAdherents().get(i).getAmende().CoutAmende();
+			liste.getLstAdherents().get(i).setDblSolde(liste.getLstAdherents().get(i).getAmende().getMontant());
+		}
+		
+		}
+			/* Vérification de l'emprunt d'un Livre*/
+			else if(liste.getLstAdherents().get(i).getDatePretLiv1()!=null&&liste.getLstAdherents().get(i).getAmende()==null)
+			{	
+		if(Period.between(liste.getLstAdherents().get(i).getDatePretLiv1(), LocalDate.now()).getDays()==15)
+		{
+			liste.getLstAdherents().get(i).setAmende(new Amende(LocalDate.now()));
+			liste.getLstAdherents().get(i).getAmende().CoutAmende();
+			liste.getLstAdherents().get(i).setDblSolde(liste.getLstAdherents().get(i).getAmende().getMontant());
+		}
+		
+		}
+			else if(liste.getLstAdherents().get(i).getDatePretLiv2()!=null&&liste.getLstAdherents().get(i).getAmende()==null)
+			{	
+		if(Period.between(liste.getLstAdherents().get(i).getDatePretLiv2(), LocalDate.now()).getDays()==15)
+		{
+			liste.getLstAdherents().get(i).setAmende(new Amende(LocalDate.now()));
+			liste.getLstAdherents().get(i).getAmende().CoutAmende();
+			liste.getLstAdherents().get(i).setDblSolde(liste.getLstAdherents().get(i).getAmende().getMontant());
+		}
+		
+		}
+			else if(liste.getLstAdherents().get(i).getDatePretLiv3()!=null&&liste.getLstAdherents().get(i).getAmende()==null)
+			{	
+		if(Period.between(liste.getLstAdherents().get(i).getDatePretLiv3(), LocalDate.now()).getDays()==15)
+		{
+			liste.getLstAdherents().get(i).setAmende(new Amende(LocalDate.now()));
+			liste.getLstAdherents().get(i).getAmende().CoutAmende();
+			liste.getLstAdherents().get(i).setDblSolde(liste.getLstAdherents().get(i).getAmende().getMontant());
+		}
+		
+		}
+			if(liste.getLstAdherents().get(i).getAmende()!=null)
+			{
+				liste.getLstAdherents().get(i).getAmende().CoutAmende();
+				liste.getLstAdherents().get(i).setDblSolde(liste.getLstAdherents().get(i).getAmende().getMontant());
+			}
+			/*else
+			{
+				liste.getLstAdherents().get(i).setAmende(new Amende());
+				liste.getLstAdherents().get(i).getAmende().CoutAmende();
+				liste.getLstAdherents().get(i).setDblSolde(liste.getLstAdherents().get(i).getAmende().getMontant());
+			}*/
+		}
+		
 	}
 	public Catalogue DeserialisationCatalogue() {// Methode qui permet de deserializer l'objet Catalogue pour pouvoir
 		Catalogue catalogueDeserializer = null;		
@@ -1550,7 +1637,7 @@ public class InterfacePrepose extends Application {
 					Alert Erreur = new Alert(AlertType.ERROR);
 					Erreur.setTitle("Erreur");
 					Erreur.setHeaderText(null);
-					Erreur.setContentText("Vous devez sï¿½lectionner un document pour l'emprunter");
+					Erreur.setContentText("Vous devez sélectionner un document pour l'emprunter");
 					Erreur.showAndWait();
 				}
 				else if(tableCatalogue.getSelectionModel().getSelectedItem().getDisponible().equals("non"))
@@ -1613,16 +1700,32 @@ public class InterfacePrepose extends Application {
 						}
 						 if(tableCatalogue.getSelectionModel().getSelectedItem().getNoDoc().toLowerCase().substring(0, 3).equals("dvd")&&ad.getIntnbDVD()!=2) 
 						{
-							
+							if(ad.getIntnbDVD()+1==2)
+							{
 							for (int i = 0; i < liste.getLstAdherents().size(); i++) {
 								if(liste.getLstAdherents().get(i).getStrNumeroAdherent().equals(ad.getStrNumeroAdherent()))
 								{
 									liste.getLstAdherents().get(i).setIntnbDVD(liste.getLstAdherents().get(i).getIntnbDVD()+1);
+									liste.getLstAdherents().get(i).setDatePretDvd2(LocalDate.now());
+									tableCatalogue.getSelectionModel().getSelectedItem().setIntNumDocEmprunte(2);
 									booValide=true;
 								}
 								
 							}
-							
+							}
+							else
+							{
+							for (int i = 0; i < liste.getLstAdherents().size(); i++) {
+								if(liste.getLstAdherents().get(i).getStrNumeroAdherent().equals(ad.getStrNumeroAdherent()))
+								{
+									liste.getLstAdherents().get(i).setIntnbDVD(liste.getLstAdherents().get(i).getIntnbDVD()+1);
+									liste.getLstAdherents().get(i).setDatePretDvd1(LocalDate.now());
+									tableCatalogue.getSelectionModel().getSelectedItem().setIntNumDocEmprunte(1);
+									booValide=true;
+								}
+								
+							}
+							}
 							
 							
 							
@@ -1633,6 +1736,7 @@ public class InterfacePrepose extends Application {
 								if(liste.getLstAdherents().get(i).getStrNumeroAdherent().equals(ad.getStrNumeroAdherent()))
 								{
 									liste.getLstAdherents().get(i).setIntnbPer(liste.getLstAdherents().get(i).getIntnbPer()+1);
+									liste.getLstAdherents().get(i).setDatePretPer(LocalDate.of(2019, 11, 15));
 									booValide=true;
 								}
 								
@@ -1640,13 +1744,44 @@ public class InterfacePrepose extends Application {
 						}
 						else if(tableCatalogue.getSelectionModel().getSelectedItem().getNoDoc().toLowerCase().substring(0, 3).equals("liv")&&ad.getIntnbLiv()!=3) 
 						{
+							if(ad.getIntnbLiv()+1==2)
+							{
+							for (int i = 0; i < liste.getLstAdherents().size(); i++) {
+								if(liste.getLstAdherents().get(i).getStrNumeroAdherent().equals(ad.getStrNumeroAdherent()))
+								{
+									liste.getLstAdherents().get(i).setIntnbLiv(liste.getLstAdherents().get(i).getIntnbDVD()+1);
+									liste.getLstAdherents().get(i).setDatePretLiv2(LocalDate.now());
+									tableCatalogue.getSelectionModel().getSelectedItem().setIntNumDocEmprunte(2);
+									booValide=true;
+								}
+								
+							}
+							}
+							else if(ad.getIntnbLiv()+1==3)
+							{
 							for (int i = 0; i < liste.getLstAdherents().size(); i++) {
 								if(liste.getLstAdherents().get(i).getStrNumeroAdherent().equals(ad.getStrNumeroAdherent()))
 								{
 									liste.getLstAdherents().get(i).setIntnbLiv(liste.getLstAdherents().get(i).getIntnbLiv()+1);
+									liste.getLstAdherents().get(i).setDatePretLiv3(LocalDate.now());
+									tableCatalogue.getSelectionModel().getSelectedItem().setIntNumDocEmprunte(3);
 									booValide=true;
 								}
 								
+							}
+							}
+							else
+							{
+							for (int i = 0; i < liste.getLstAdherents().size(); i++) {
+								if(liste.getLstAdherents().get(i).getStrNumeroAdherent().equals(ad.getStrNumeroAdherent()))
+								{
+									liste.getLstAdherents().get(i).setIntnbLiv(liste.getLstAdherents().get(i).getIntnbLiv()+1);
+									liste.getLstAdherents().get(i).setDatePretLiv1(LocalDate.now());
+									tableCatalogue.getSelectionModel().getSelectedItem().setIntNumDocEmprunte(1);
+									booValide=true;
+								}
+								
+							}
 							}
 						}
 						if(booValide==true)
@@ -1718,8 +1853,15 @@ public class InterfacePrepose extends Application {
 							for (int i = 0; i < liste.getLstAdherents().size(); i++) {
 								if(liste.getLstAdherents().get(i).getStrNumeroAdherent().equals(ad.getStrNumeroAdherent()))
 								{
+									
 									liste.getLstAdherents().get(i).setIntnbDVD(ad.getIntnbDVD());
 									liste.getLstAdherents().get(i).setIntNbPrets(intnbprets-1);
+									int intNumDvd=tableCatalogue.getSelectionModel().getSelectedItem().getIntNumDocEmprunte();
+									if(intNumDvd==1)
+									liste.getLstAdherents().get(i).setDatePretDvd1(null);
+									else if(intNumDvd==2)
+									liste.getLstAdherents().get(i).setDatePretDvd2(null);
+									
 								
 								}
 								
@@ -1733,8 +1875,14 @@ public class InterfacePrepose extends Application {
 								for (int i = 0; i < liste.getLstAdherents().size(); i++) {
 									if(liste.getLstAdherents().get(i).getStrNumeroAdherent().equals(ad.getStrNumeroAdherent()))
 									{
-										liste.getLstAdherents().get(i).setIntnbPer(ad.getIntnbPer());
-										liste.getLstAdherents().get(i).setIntnbPer(intnbprets-1);
+										
+										if(liste.getLstAdherents().get(i).getdblSolde()==0) 
+										{
+											liste.getLstAdherents().get(i).setIntnbPer(ad.getIntnbPer());
+										    liste.getLstAdherents().get(i).setIntnbPer(intnbprets-1);
+										    liste.getLstAdherents().get(i).setDatePretPer(null);
+										}
+										
 										
 									}
 									
@@ -1750,6 +1898,13 @@ public class InterfacePrepose extends Application {
 									{
 										liste.getLstAdherents().get(i).setIntnbLiv(ad.getIntnbLiv());
 										liste.getLstAdherents().get(i).setIntNbPrets(intnbprets-1);
+										int intNumLiv=tableCatalogue.getSelectionModel().getSelectedItem().getIntNumDocEmprunte();
+										if(intNumLiv==1)
+										liste.getLstAdherents().get(i).setDatePretLiv1(null);
+										else if(intNumLiv==2)
+										liste.getLstAdherents().get(i).setDatePretLiv2(null);
+										else if(intNumLiv==3)
+										liste.getLstAdherents().get(i).setDatePretLiv3(null);
 	
 									}
 									
