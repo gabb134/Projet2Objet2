@@ -3,6 +3,7 @@ package modele;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.temporal.ChronoUnit;
 
 import javafx.util.converter.LocalDateStringConverter;
 
@@ -11,8 +12,16 @@ public class Amende implements Serializable  {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	//private LocalDate DateRetard;
-	private double Montant=0.50;
+	private LocalDate MiseAJour=LocalDate.now().minusDays(1);
+	public LocalDate getMiseAJour() {
+		return MiseAJour;
+	}
+
+	public void setMiseAJour(LocalDate miseAJour) {
+		MiseAJour = miseAJour;
+	}
+
+	private double Montant=0;
 	
 	//public Amende( LocalDate DateRetard)
 	//{
@@ -24,8 +33,9 @@ public class Amende implements Serializable  {
 		LocalDate DateDuJour=java.time.LocalDate.now();
 		//int jourRetard=DateRetard.getDayOfMonth();
 		//int jourPresent=DateDuJour.getDayOfMonth();
-		int intNombreJoursRetard= Period.between(DateRetard, DateDuJour).getDays();
+		int intNombreJoursRetard= (int) ChronoUnit.DAYS.between(DateDuJour,DateRetard );
 		Montant+=intNombreJoursRetard*0.50;
+		MiseAJour=LocalDate.now();
 		
 	}
 	

@@ -3,6 +3,7 @@ package modele;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class Adherent implements Serializable {
@@ -18,7 +19,7 @@ public class Adherent implements Serializable {
 	private int intnbDVD;
 	private int intnbPer;
 	private int intnbLiv;
-	private Amende amende=null;
+	private Amende amende=new Amende();
 	private LocalDate datePretDvd1;
 	private LocalDate dateRetourDvd1;
 	private LocalDate datePretDvd2;
@@ -304,9 +305,11 @@ public class Adherent implements Serializable {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		LocalDate datedepret=LocalDate.now();
-		LocalDate datederetour=LocalDate.now();
-		System.out.println(datedepret.isAfter(datederetour));
+		LocalDate datedepret=LocalDate.now().minusDays(14);
+		LocalDate datederetour=datedepret.plusDays(30);
+		System.out.println("date de pret: "+datedepret);
+		System.out.println("date de retour: "+datederetour);
+		System.out.println(ChronoUnit.DAYS.between(datedepret, datederetour));
 		//System.out.println(datedufutur);
 
 	}

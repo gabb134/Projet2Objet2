@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 import controleurEtVue.Mediatheque.ClickValidationAdherentDroite;
@@ -412,7 +413,7 @@ public class InterfacePrepose extends Application implements Serializable {
 			
 			 for (int i = 0; i < liste.getLstAdherents().size(); i++) {
 					
-						if(liste.getLstAdherents().get(i).getAmende()!=null) 
+						if(liste.getLstAdherents().get(i).getAmende().getMontant()>0)
 							MiseAJourAmende();
 					
 					}
@@ -694,82 +695,73 @@ public class InterfacePrepose extends Application implements Serializable {
 	{
 		for (int i = 0; i < liste.getLstAdherents().size(); i++) {
 			/* V�rification de l'emprunt d'un p�riodique*/
-			if(liste.getLstAdherents().get(i).getDatePretPer()!=null&&liste.getLstAdherents().get(i).getAmende()==null)
+			if(liste.getLstAdherents().get(i).getAmende().getMiseAJour().compareTo(LocalDate.now())!=0) 
+			{
+			if(liste.getLstAdherents().get(i).getDatePretPer()!=null)
 			{	
-		if(Period.between(liste.getLstAdherents().get(i).getDatePretPer(), liste.getLstAdherents().get(i).getDateRetourPer()).getDays()>=4)
+		if((int) ChronoUnit.DAYS.between(liste.getLstAdherents().get(i).getDatePretPer(), liste.getLstAdherents().get(i).getDateRetourPer())>=4)
 		{
-			liste.getLstAdherents().get(i).setAmende(new Amende());
-			liste.getLstAdherents().get(i).getAmende().CoutAmende(LocalDate.now());
-			liste.getLstAdherents().get(i).setDblSolde(liste.getLstAdherents().get(i).getDblSolde()+liste.getLstAdherents().get(i).getAmende().getMontant());
+			
+			liste.getLstAdherents().get(i).getAmende().CoutAmende(liste.getLstAdherents().get(i).getDateRetourPer());
+			liste.getLstAdherents().get(i).setDblSolde(liste.getLstAdherents().get(i).getAmende().getMontant());
 		}
 		
 		}
 			/* V�rification de l'emprunt d'un DVD*/
 			 if(liste.getLstAdherents().get(i).getDatePretDvd1()!=null)
 			{	
-		if(Period.between(liste.getLstAdherents().get(i).getDatePretDvd1(), liste.getLstAdherents().get(i).getDateRetourDvd1()).getDays()>=8)
+		if((int) ChronoUnit.DAYS.between(liste.getLstAdherents().get(i).getDatePretDvd1(), liste.getLstAdherents().get(i).getDateRetourDvd1())>=8)
 		{
-			if(liste.getLstAdherents().get(i).getAmende()==null)
-			liste.getLstAdherents().get(i).setAmende(new Amende());
-			liste.getLstAdherents().get(i).getAmende().CoutAmende(LocalDate.now());
-			liste.getLstAdherents().get(i).setDblSolde(liste.getLstAdherents().get(i).getDblSolde()+liste.getLstAdherents().get(i).getAmende().getMontant());
+			
+			liste.getLstAdherents().get(i).getAmende().CoutAmende(liste.getLstAdherents().get(i).getDateRetourDvd1());
+			liste.getLstAdherents().get(i).setDblSolde(liste.getLstAdherents().get(i).getAmende().getMontant());
 		}
 		
 		}
 			 if(liste.getLstAdherents().get(i).getDatePretDvd2()!=null)
 			{	
 				System.out.println(Period.between(liste.getLstAdherents().get(i).getDatePretDvd2(),liste.getLstAdherents().get(i).getDateRetourDvd2()).getDays() );
-		if(Period.between(liste.getLstAdherents().get(i).getDatePretDvd2(),liste.getLstAdherents().get(i).getDateRetourDvd2() ).getDays()>=8)
+		if((int) ChronoUnit.DAYS.between(liste.getLstAdherents().get(i).getDatePretDvd2(),liste.getLstAdherents().get(i).getDateRetourDvd2() )>=8)
 		{
-			if(liste.getLstAdherents().get(i).getAmende()==null)
-			liste.getLstAdherents().get(i).setAmende(new Amende());
-			liste.getLstAdherents().get(i).getAmende().CoutAmende(LocalDate.now());
-			liste.getLstAdherents().get(i).setDblSolde(liste.getLstAdherents().get(i).getDblSolde()+liste.getLstAdherents().get(i).getAmende().getMontant());
-		}
-		
-		}
-			/* V�rification de l'emprunt d'un Livre*/
-			 if(liste.getLstAdherents().get(i).getDatePretLiv1()!=null&&liste.getLstAdherents().get(i).getAmende()==null)
-			{	
-		if(Period.between(liste.getLstAdherents().get(i).getDatePretLiv1(), liste.getLstAdherents().get(i).getDateRetourLiv1()).getDays()>=15)
-		{
-			liste.getLstAdherents().get(i).setAmende(new Amende());
-			liste.getLstAdherents().get(i).getAmende().CoutAmende(LocalDate.now());
+			
+			liste.getLstAdherents().get(i).getAmende().CoutAmende(liste.getLstAdherents().get(i).getDateRetourDvd2());
 			liste.getLstAdherents().get(i).setDblSolde(liste.getLstAdherents().get(i).getAmende().getMontant());
 		}
 		
 		}
-			 if(liste.getLstAdherents().get(i).getDatePretLiv2()!=null&&liste.getLstAdherents().get(i).getAmende()==null)
+			/* V�rification de l'emprunt d'un Livre*/
+			 if(liste.getLstAdherents().get(i).getDatePretLiv1()!=null)
 			{	
-		if(Period.between(liste.getLstAdherents().get(i).getDatePretLiv2(), liste.getLstAdherents().get(i).getDateRetourLiv2()).getDays()>=15)
+		if((int) ChronoUnit.DAYS.between(liste.getLstAdherents().get(i).getDatePretLiv1(), liste.getLstAdherents().get(i).getDateRetourLiv1())>=15)
 		{
-			liste.getLstAdherents().get(i).setAmende(new Amende());
-			liste.getLstAdherents().get(i).getAmende().CoutAmende(LocalDate.now());
-			liste.getLstAdherents().get(i).setDblSolde(liste.getLstAdherents().get(i).getDblSolde()+liste.getLstAdherents().get(i).getAmende().getMontant());
+			
+			liste.getLstAdherents().get(i).getAmende().CoutAmende(liste.getLstAdherents().get(i).getDateRetourLiv1());
+			liste.getLstAdherents().get(i).setDblSolde(liste.getLstAdherents().get(i).getAmende().getMontant());
 		}
 		
 		}
-			 if(liste.getLstAdherents().get(i).getDatePretLiv3()!=null&&liste.getLstAdherents().get(i).getAmende()==null)
+			 if(liste.getLstAdherents().get(i).getDatePretLiv2()!=null)
 			{	
-		if(Period.between(liste.getLstAdherents().get(i).getDatePretLiv3(), liste.getLstAdherents().get(i).getDateRetourLiv3()).getDays()>=15)
+		if((int) ChronoUnit.DAYS.between(liste.getLstAdherents().get(i).getDatePretLiv2(), liste.getLstAdherents().get(i).getDateRetourLiv2())>=15)
 		{
-			liste.getLstAdherents().get(i).setAmende(new Amende());
-			liste.getLstAdherents().get(i).getAmende().CoutAmende(LocalDate.now());
-			liste.getLstAdherents().get(i).setDblSolde(liste.getLstAdherents().get(i).getDblSolde()+liste.getLstAdherents().get(i).getAmende().getMontant());
+			
+			liste.getLstAdherents().get(i).getAmende().CoutAmende(liste.getLstAdherents().get(i).getDateRetourLiv2());
+			liste.getLstAdherents().get(i).setDblSolde(liste.getLstAdherents().get(i).getAmende().getMontant());
 		}
 		
 		}
-			/*if(liste.getLstAdherents().get(i).getAmende()!=null)
-			{
-				liste.getLstAdherents().get(i).getAmende().CoutAmende();
-				liste.getLstAdherents().get(i).setDblSolde(liste.getLstAdherents().get(i).getAmende().getMontant());
-			}*/
-			/*else
-			{
-				liste.getLstAdherents().get(i).setAmende(new Amende());
-				liste.getLstAdherents().get(i).getAmende().CoutAmende();
-				liste.getLstAdherents().get(i).setDblSolde(liste.getLstAdherents().get(i).getAmende().getMontant());
-			}*/
+			 if(liste.getLstAdherents().get(i).getDatePretLiv3()!=null)
+			{	
+		if((int) ChronoUnit.DAYS.between(liste.getLstAdherents().get(i).getDatePretLiv3(), liste.getLstAdherents().get(i).getDateRetourLiv3())>=15)
+		{
+			
+			liste.getLstAdherents().get(i).getAmende().CoutAmende(liste.getLstAdherents().get(i).getDateRetourLiv3());
+			liste.getLstAdherents().get(i).setDblSolde(liste.getLstAdherents().get(i).getAmende().getMontant());
+		}
+		
+		}
+			
+		}
 		}
 		
 	}
@@ -1647,8 +1639,10 @@ public class InterfacePrepose extends Application implements Serializable {
 					for (int i = 0; i < liste.getLstAdherents().size(); i++) {
 						if(liste.getLstAdherents().get(i).getStrNumeroAdherent().equals(tableAdherent.getSelectionModel().getSelectedItem().getStrNumeroAdherent()))
 						{
-							liste.getLstAdherents().get(i).setAmende(null);
+							
 							liste.getLstAdherents().get(i).setDblSolde(0.0);
+							liste.getLstAdherents().get(i).getAmende().setMontant(0.0);
+							liste.getLstAdherents().get(i).getAmende().setMiseAJour(LocalDate.now().minusDays(1));
 						}
 					}
 					tableAdherent.refresh();
@@ -1747,7 +1741,7 @@ public class InterfacePrepose extends Application implements Serializable {
 									liste.getLstAdherents().get(i).setIntnbDVD(liste.getLstAdherents().get(i).getIntnbDVD()+1);
 									
 									liste.getLstAdherents().get(i).setDatePretDvd2(LocalDate.now().minusDays(7));
-									liste.getLstAdherents().get(i).setDateRetourDvd2(liste.getLstAdherents().get(i).getDatePretDvd2().plusDays(8));
+									liste.getLstAdherents().get(i).setDateRetourDvd2(liste.getLstAdherents().get(i).getDatePretDvd2().plusDays(16));
 									tableCatalogue.getSelectionModel().getSelectedItem().setIntNumDocEmprunte(2);
 									System.out.println("bon pret dvd2");
 								
@@ -1766,7 +1760,7 @@ public class InterfacePrepose extends Application implements Serializable {
 								{
 									liste.getLstAdherents().get(i).setIntnbDVD(liste.getLstAdherents().get(i).getIntnbDVD()+1);
 									liste.getLstAdherents().get(i).setDatePretDvd1(LocalDate.now().minusDays(7));
-									liste.getLstAdherents().get(i).setDateRetourDvd1(liste.getLstAdherents().get(i).getDatePretDvd1().plusDays(8));
+									liste.getLstAdherents().get(i).setDateRetourDvd1(liste.getLstAdherents().get(i).getDatePretDvd1().plusDays(16));
 									tableCatalogue.getSelectionModel().getSelectedItem().setIntNumDocEmprunte(1);
 									System.out.println(liste.getLstAdherents().get(i).getDatePretDvd1());
 									System.out.println(liste.getLstAdherents().get(i).getDateRetourDvd1());
@@ -1785,8 +1779,8 @@ public class InterfacePrepose extends Application implements Serializable {
 								if(liste.getLstAdherents().get(i).getStrNumeroAdherent().equals(ad.getStrNumeroAdherent()))
 								{
 									liste.getLstAdherents().get(i).setIntnbPer(liste.getLstAdherents().get(i).getIntnbPer()+1);
-									liste.getLstAdherents().get(i).setDatePretPer(LocalDate.of(2019, 11, 15));
-									liste.getLstAdherents().get(i).setDateRetourPer(liste.getLstAdherents().get(i).getDatePretPer().plusDays(3));
+									liste.getLstAdherents().get(i).setDatePretPer(LocalDate.now().minusDays(3));
+									liste.getLstAdherents().get(i).setDateRetourPer(liste.getLstAdherents().get(i).getDatePretPer().plusDays(8));
 									System.out.println(liste.getLstAdherents().get(i).getDatePretPer());
 									System.out.println(liste.getLstAdherents().get(i).getDateRetourPer());
 									booValide=true;
@@ -1827,8 +1821,8 @@ public class InterfacePrepose extends Application implements Serializable {
 								if(liste.getLstAdherents().get(i).getStrNumeroAdherent().equals(ad.getStrNumeroAdherent()))
 								{
 									liste.getLstAdherents().get(i).setIntnbLiv(liste.getLstAdherents().get(i).getIntnbLiv()+1);
-									liste.getLstAdherents().get(i).setDatePretLiv2(LocalDate.now());
-									liste.getLstAdherents().get(i).setDateRetourLiv2(liste.getLstAdherents().get(i).getDatePretLiv2().plusDays(14));
+									liste.getLstAdherents().get(i).setDatePretLiv2(LocalDate.now().minusDays(14));
+									liste.getLstAdherents().get(i).setDateRetourLiv2(liste.getLstAdherents().get(i).getDatePretLiv2().plusDays(30));
 									tableCatalogue.getSelectionModel().getSelectedItem().setIntNumDocEmprunte(2);
 									System.out.println(liste.getLstAdherents().get(i).getDatePretLiv2());
 									System.out.println(liste.getLstAdherents().get(i).getDateRetourLiv2());
@@ -1843,8 +1837,8 @@ public class InterfacePrepose extends Application implements Serializable {
 								if(liste.getLstAdherents().get(i).getStrNumeroAdherent().equals(ad.getStrNumeroAdherent()))
 								{
 									liste.getLstAdherents().get(i).setIntnbLiv(liste.getLstAdherents().get(i).getIntnbLiv()+1);
-									liste.getLstAdherents().get(i).setDatePretLiv3(LocalDate.now());
-									liste.getLstAdherents().get(i).setDateRetourLiv3(liste.getLstAdherents().get(i).getDatePretLiv3().plusDays(14));
+									liste.getLstAdherents().get(i).setDatePretLiv3(LocalDate.now().minusDays(14));
+									liste.getLstAdherents().get(i).setDateRetourLiv3(liste.getLstAdherents().get(i).getDatePretLiv3().plusDays(30));
 									tableCatalogue.getSelectionModel().getSelectedItem().setIntNumDocEmprunte(3);
 									System.out.println(liste.getLstAdherents().get(i).getDatePretLiv3());
 									System.out.println(liste.getLstAdherents().get(i).getDateRetourLiv3());
@@ -1859,8 +1853,8 @@ public class InterfacePrepose extends Application implements Serializable {
 								if(liste.getLstAdherents().get(i).getStrNumeroAdherent().equals(ad.getStrNumeroAdherent()))
 								{
 									liste.getLstAdherents().get(i).setIntnbLiv(liste.getLstAdherents().get(i).getIntnbLiv()+1);
-									liste.getLstAdherents().get(i).setDatePretLiv1(LocalDate.now());
-									liste.getLstAdherents().get(i).setDateRetourLiv1(liste.getLstAdherents().get(i).getDatePretLiv1().plusDays(14));
+									liste.getLstAdherents().get(i).setDatePretLiv1(LocalDate.now().minusDays(14));
+									liste.getLstAdherents().get(i).setDateRetourLiv1(liste.getLstAdherents().get(i).getDatePretLiv1().plusDays(30));
 									tableCatalogue.getSelectionModel().getSelectedItem().setIntNumDocEmprunte(1);
 									System.out.println(liste.getLstAdherents().get(i).getDatePretLiv1());
 									System.out.println(liste.getLstAdherents().get(i).getDateRetourLiv1());
@@ -1980,7 +1974,7 @@ public class InterfacePrepose extends Application implements Serializable {
 								if(liste.getLstAdherents().get(i).getStrNumeroAdherent().equals(ad.getStrNumeroAdherent()))
 								{
 									
-									
+										MiseAJourAmende();
 									liste.getLstAdherents().get(i).setIntnbDVD(ad.getIntnbDVD());
 									liste.getLstAdherents().get(i).setIntNbPrets(intnbprets-1);
 									if(liste.getLstAdherents().get(i).getAmende()==null)
@@ -2001,7 +1995,7 @@ public class InterfacePrepose extends Application implements Serializable {
 								}
 								}
 								
-									MiseAJourAmende();
+								
 							}
 						}
 						 else if(tableCatalogue.getSelectionModel().getSelectedItem().getNoDoc().toLowerCase().substring(0, 3).equals("per")) 
@@ -2015,17 +2009,17 @@ public class InterfacePrepose extends Application implements Serializable {
 										
 										  
 										
-											
+											MiseAJourAmende();
 											liste.getLstAdherents().get(i).setIntnbPer(ad.getIntnbPer());
 										    liste.getLstAdherents().get(i).setIntnbPer(intnbprets-1);
 										    
-										    if(liste.getLstAdherents().get(i).getAmende()==null)
+										    if(liste.getLstAdherents().get(i).getAmende().getMontant()==0&&liste.getLstAdherents().get(i).getdblSolde()==0)
 											{
 										    liste.getLstAdherents().get(i).setDatePretPer(null);
 										    liste.getLstAdherents().get(i).setDateRetourPer(null);
 											}
-										else
-										    MiseAJourAmende();
+										
+										    
 									}
 									
 								}
@@ -2038,10 +2032,10 @@ public class InterfacePrepose extends Application implements Serializable {
 								for (int i = 0; i < liste.getLstAdherents().size(); i++) {
 									if(liste.getLstAdherents().get(i).getStrNumeroAdherent().equals(ad.getStrNumeroAdherent()))
 									{
-										
+										MiseAJourAmende();
 										liste.getLstAdherents().get(i).setIntnbLiv(ad.getIntnbLiv());
 										liste.getLstAdherents().get(i).setIntNbPrets(intnbprets-1);
-										if(liste.getLstAdherents().get(i).getAmende()==null)
+										if(liste.getLstAdherents().get(i).getAmende().getMontant()==0&&liste.getLstAdherents().get(i).getdblSolde()==0)
 										{
 										int intNumLiv=tableCatalogue.getSelectionModel().getSelectedItem().getIntNumDocEmprunte();
 										if(intNumLiv==1)
@@ -2063,8 +2057,8 @@ public class InterfacePrepose extends Application implements Serializable {
 										System.out.println("Liv3");
 										}
 										}
-										else
-										MiseAJourAmende();	
+										
+											
 									}
 									
 								}
