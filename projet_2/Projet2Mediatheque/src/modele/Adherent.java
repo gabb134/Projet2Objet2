@@ -103,8 +103,35 @@ public class Adherent implements Serializable {
 	
 	
 	private ArrayList<Document> lstDocAdherent = new ArrayList<Document>();
+	private ArrayList<DVD> lstDvdAdherent = new ArrayList<DVD>();
+	private ArrayList<Livre> lstLivreAdherent = new ArrayList<Livre>();
+	private ArrayList<Periodique> lstPeriodiqueAdherent = new ArrayList<Periodique>();
 
 	
+	public ArrayList<DVD> getLstDvdAdherent() {
+		return lstDvdAdherent;
+	}
+
+	public void setLstDvdAdherent(ArrayList<DVD> lstDvdAdherent) {
+		this.lstDvdAdherent = lstDvdAdherent;
+	}
+
+	public ArrayList<Livre> getLstLivreAdherent() {
+		return lstLivreAdherent;
+	}
+
+	public void setLstLivreAdherent(ArrayList<Livre> lstLivreAdherent) {
+		this.lstLivreAdherent = lstLivreAdherent;
+	}
+
+	public ArrayList<Periodique> getLstPeriodiqueAdherent() {
+		return lstPeriodiqueAdherent;
+	}
+
+	public void setLstPeriodiqueAdherent(ArrayList<Periodique> lstPeriodiqueAdherent) {
+		this.lstPeriodiqueAdherent = lstPeriodiqueAdherent;
+	}
+
 	public ArrayList<Document> getLstDocAdherent() {
 		return lstDocAdherent;
 	}

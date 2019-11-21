@@ -1893,23 +1893,26 @@ public class InterfacePrepose extends Application implements Serializable {
 								
 								Livre livreEmprunt = (Livre) tableCatalogue.getSelectionModel().getSelectedItem();
 								
-								DocumentEmprunter docEmpruntLivre = new DocumentEmprunter(livreEmprunt.getNoDoc(), livreEmprunt.getTitre(), livreEmprunt.getAuteur(), livreEmprunt.getDateParution());
+								//DocumentEmprunter docEmpruntLivre = new DocumentEmprunter(livreEmprunt.getNoDoc(), livreEmprunt.getTitre(), livreEmprunt.getAuteur(), livreEmprunt.getDateParution());
 								//ajouter dans une liste
+								
+								adherentEmprunt.getLstLivreAdherent().add(livreEmprunt);
 								
 							}
 							else if(documentEmprunt.getNoDoc().substring(0, 3).equals("DVD")) {
 								System.out.println("DVD");
 								DVD dvdEmprunt = (DVD) tableCatalogue.getSelectionModel().getSelectedItem();
 								
-								DocumentEmprunter docEmpruntDvd = new DocumentEmprunter(dvdEmprunt.getNoDoc(), dvdEmprunt.getTitre(), dvdEmprunt.getStrRealisateur(), dvdEmprunt.getDateParution());
+								//DocumentEmprunter docEmpruntDvd = new DocumentEmprunter(dvdEmprunt.getNoDoc(), dvdEmprunt.getTitre(), dvdEmprunt.getStrRealisateur(), dvdEmprunt.getDateParution());
 								//ajouter dans une liste
-								
+								adherentEmprunt.getLstDvdAdherent().add(dvdEmprunt);
 							}
 							else if(documentEmprunt.getNoDoc().substring(0, 3).equals("Per")) {
 								System.out.println("Periodique");
 								Periodique periodiqueEmprunt = (Periodique) tableCatalogue.getSelectionModel().getSelectedItem();
-								DocumentEmprunter docEmpruntPeriodique = new DocumentEmprunter(periodiqueEmprunt.getNoDoc(), periodiqueEmprunt.getTitre(), "", periodiqueEmprunt.getDateParution());
+								//DocumentEmprunter docEmpruntPeriodique = new DocumentEmprunter(periodiqueEmprunt.getNoDoc(), periodiqueEmprunt.getTitre(), "", periodiqueEmprunt.getDateParution());
 								//ajouter dans une liste
+								adherentEmprunt.getLstPeriodiqueAdherent().add(periodiqueEmprunt);
 								
 							}
 						
