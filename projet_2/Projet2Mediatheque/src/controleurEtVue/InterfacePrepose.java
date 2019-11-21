@@ -1978,7 +1978,7 @@ public class InterfacePrepose extends Application implements Serializable {
 							for (int i = 0; i < liste.getLstAdherents().size(); i++) {
 								if(liste.getLstAdherents().get(i).getStrNumeroAdherent().equals(ad.getStrNumeroAdherent()))
 								{
-									MiseAJourAmende();
+									
 									
 									liste.getLstAdherents().get(i).setIntnbDVD(ad.getIntnbDVD());
 									liste.getLstAdherents().get(i).setIntNbPrets(intnbprets-1);
@@ -2000,6 +2000,7 @@ public class InterfacePrepose extends Application implements Serializable {
 								}
 								}
 								
+									MiseAJourAmende();
 							}
 						}
 						 else if(tableCatalogue.getSelectionModel().getSelectedItem().getNoDoc().toLowerCase().substring(0, 3).equals("per")) 
@@ -2036,7 +2037,7 @@ public class InterfacePrepose extends Application implements Serializable {
 								for (int i = 0; i < liste.getLstAdherents().size(); i++) {
 									if(liste.getLstAdherents().get(i).getStrNumeroAdherent().equals(ad.getStrNumeroAdherent()))
 									{
-										MiseAJourAmende();
+										
 										liste.getLstAdherents().get(i).setIntnbLiv(ad.getIntnbLiv());
 										liste.getLstAdherents().get(i).setIntNbPrets(intnbprets-1);
 										if(liste.getLstAdherents().get(i).getAmende()==null)
@@ -2061,6 +2062,8 @@ public class InterfacePrepose extends Application implements Serializable {
 										System.out.println("Liv3");
 										}
 										}
+										else
+										MiseAJourAmende();	
 									}
 									
 								}
