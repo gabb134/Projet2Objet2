@@ -1881,7 +1881,7 @@ public class InterfacePrepose extends Application implements Serializable {
 								//DocumentEmprunter docEmpruntLivre = new DocumentEmprunter(livreEmprunt.getNoDoc(), livreEmprunt.getTitre(), livreEmprunt.getAuteur(), livreEmprunt.getDateParution());
 								//ajouter dans une liste
 								
-								adherentEmprunt.getLstDocAdherent().add(livreEmprunt);
+								adherentEmprunt.getLstLivreAdherent().add(livreEmprunt);
 								
 							}
 							else if(documentEmprunt.getNoDoc().substring(0, 3).equals("DVD")) {
@@ -1890,14 +1890,14 @@ public class InterfacePrepose extends Application implements Serializable {
 								
 								//DocumentEmprunter docEmpruntDvd = new DocumentEmprunter(dvdEmprunt.getNoDoc(), dvdEmprunt.getTitre(), dvdEmprunt.getStrRealisateur(), dvdEmprunt.getDateParution());
 								//ajouter dans une liste
-								adherentEmprunt.getLstDocAdherent().add(dvdEmprunt);
+								adherentEmprunt.getLstDvdAdherent().add(dvdEmprunt);
 							}
 							else if(documentEmprunt.getNoDoc().substring(0, 3).equals("Per")) {
 								System.out.println("Periodique");
 								Periodique periodiqueEmprunt = (Periodique) tableCatalogue.getSelectionModel().getSelectedItem();
 								//DocumentEmprunter docEmpruntPeriodique = new DocumentEmprunter(periodiqueEmprunt.getNoDoc(), periodiqueEmprunt.getTitre(), "", periodiqueEmprunt.getDateParution());
 								//ajouter dans une liste
-								adherentEmprunt.getLstDocAdherent().add(periodiqueEmprunt);
+								adherentEmprunt.getLstPeriodiqueAdherent().add(periodiqueEmprunt);
 								
 							}
 						

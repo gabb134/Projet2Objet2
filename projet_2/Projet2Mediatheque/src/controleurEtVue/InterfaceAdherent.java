@@ -43,7 +43,12 @@ public class InterfaceAdherent extends Application{
 	Mediatheque mediatheque;
 	
 	private ArrayList<DocumentEmprunter> lstDocumentEmprunter = new ArrayList<DocumentEmprunter>();
+	private ArrayList<Pret> lstPrets = new ArrayList<Pret>();
 	private DocumentEmprunter docEmprunter;
+	private DocumentEmprunter dvdEmprunter;
+	private DocumentEmprunter livreEmprunter;
+	private DocumentEmprunter periodiqueEmprunter;
+	private Pret pret;
 	
 	public InterfaceAdherent(Mediatheque mediatheque){
 		this.mediatheque = mediatheque;
@@ -78,23 +83,61 @@ public class InterfaceAdherent extends Application{
 			if(liste.getLstAdherents().get(i).getStrNom().equals(mediatheque.getTxtFNom().getText()) && liste.getLstAdherents().get(i).getStrPrenom().equals(mediatheque.getTxtFPrenom().getText())||liste.getLstAdherents().get(i).getStrNom().equals(mediatheque.getTxtFNomDroite().getText()) && liste.getLstAdherents().get(i).getStrPrenom().equals(mediatheque.getTxtFPrenomDroite().getText())) {
 			//booTrouver= true;	
 				System.out.println("trouver!");
+				//pret = new Pret(liste.getLstAdherents().get(i).get, dateEmprunt, dateRetourPrevu, dateRetourEffectue, amende) 
 				
-				for(int j = 0;j <  liste.getLstAdherents().get(i).getLstDocAdherent().size();j++) {
-					docEmprunter = new DocumentEmprunter(liste.getLstAdherents().get(i).getLstDocAdherent().get(j).getNoDoc(), liste.getLstAdherents().get(i).getLstDocAdherent().get(j).getTitre(), "", liste.getLstAdherents().get(i).getLstDocAdherent().get(j).getDateParution());
-					lstDocumentEmprunter.add(docEmprunter);
+				
+				for(int j = 0;j <  liste.getLstAdherents().get(i).getLstDvdAdherent().size();j++) {
+					//docEmprunter = new DocumentEmprunter(liste.getLstAdherents().get(i).getLstDocAdherent().get(j).getNoDoc(), liste.getLstAdherents().get(i).getLstDocAdherent().get(j).getTitre(), "test", liste.getLstAdherents().get(i).getLstDocAdherent().get(j).getDateParution());
+					
+					dvdEmprunter = new DocumentEmprunter(liste.getLstAdherents().get(i).getLstDvdAdherent().get(j).getNoDoc(), liste.getLstAdherents().get(i).getLstDvdAdherent().get(j).getTitre(), liste.getLstAdherents().get(i).getLstDvdAdherent().get(j).getStrRealisateur(), liste.getLstAdherents().get(i).getLstDvdAdherent().get(j).getDateParution());
+					
+					//livreEmprunter = new DocumentEmprunter(liste.getLstAdherents().get(i).getLstLivreAdherent().get(j).getNoDoc(), liste.getLstAdherents().get(i).getLstLivreAdherent().get(j).getTitre(), liste.getLstAdherents().get(i).getLstLivreAdherent().get(j).getAuteur(), liste.getLstAdherents().get(i).getLstLivreAdherent().get(j).getDateParution());
+					
+					//
+
+					
+				/*	if(dvdEmprunter.getNoDoc().substring(0, 3).equals("DVD")) {
+						System.out.println("DVD");
+		
+						lstDocumentEmprunter.add(dvdEmprunter);
+						
+						
+					}
+					else if(livreEmprunter.getNoDoc().substring(0, 3).equals("Livre")) {
+						System.out.println("Livre");
+						lstDocumentEmprunter.add(dvdEmprunter);
+						
+				
+					}
+					else if(periodiqueEmprunter.getNoDoc().substring(0, 3).equals("Per")) {
+						System.out.println("Periodique");
+						lstDocumentEmprunter.add(periodiqueEmprunter);
+						
+					}*/
+					
+					
+					
+					lstDocumentEmprunter.add(dvdEmprunter);
+				}
+				for(int j = 0;j <  liste.getLstAdherents().get(i).getLstLivreAdherent().size();j++) {
+					livreEmprunter = new DocumentEmprunter(liste.getLstAdherents().get(i).getLstLivreAdherent().get(j).getNoDoc(), liste.getLstAdherents().get(i).getLstLivreAdherent().get(j).getTitre(), liste.getLstAdherents().get(i).getLstLivreAdherent().get(j).getAuteur(), liste.getLstAdherents().get(i).getLstLivreAdherent().get(j).getDateParution());
+					
+					lstDocumentEmprunter.add(livreEmprunter);
+				}
+				for(int j = 0;j <  liste.getLstAdherents().get(i).getLstPeriodiqueAdherent().size();j++) {
+					periodiqueEmprunter = new DocumentEmprunter(liste.getLstAdherents().get(i).getLstPeriodiqueAdherent().get(j).getNoDoc(), liste.getLstAdherents().get(i).getLstPeriodiqueAdherent().get(j).getTitre(), "Inconnu", liste.getLstAdherents().get(i).getLstPeriodiqueAdherent().get(j).getDateParution());
+					
+					lstDocumentEmprunter.add(periodiqueEmprunter);
 				}
 								
 			
 			}
 					
 		}
-		if(booTrouver) {
-			
-			//voir comment ajouter ca dans une liste et le mettre dans le observablelist pour le mettre dans les donnees 
-			
-		}
 		
-		System.out.println("Documents empruntés");
+		
+		
+		System.out.println("Documents empruntés par l'adhérent connecté");
 		for(DocumentEmprunter doc: lstDocumentEmprunter) {
 			System.out.println(doc);
 		}
@@ -105,8 +148,7 @@ public class InterfaceAdherent extends Application{
 			TableColumn<DocumentEmprunter, String> colonneNumDocAdherent = new TableColumn<DocumentEmprunter, String>("Numéro Document");
 			TableColumn<DocumentEmprunter, String> colonneTitreAdherent= new TableColumn<DocumentEmprunter, String>("Titre");
 			TableColumn<DocumentEmprunter, String> colonneAuteurAdherent = new TableColumn<DocumentEmprunter, String>("Auteur/Réalisateur");
-			TableColumn<DocumentEmprunter, LocalDate> colonneDatePubAdherent = new TableColumn<DocumentEmprunter, LocalDate>(
-					"Date de publication");
+			TableColumn<DocumentEmprunter, LocalDate> colonneDatePubAdherent = new TableColumn<DocumentEmprunter, LocalDate>("Date de publication");
 			
 			colonneNumDocAdherent.setPrefWidth(200);
 			colonneTitreAdherent.setPrefWidth(300);
@@ -120,8 +162,8 @@ public class InterfaceAdherent extends Application{
 
 			colonneNumDocAdherent.setCellValueFactory(new PropertyValueFactory<>("noDoc"));
 			colonneTitreAdherent.setCellValueFactory(new PropertyValueFactory<>("titre"));
-			colonneAuteurAdherent.setCellValueFactory(new PropertyValueFactory<>("dateParution"));
-			colonneDatePubAdherent.setCellValueFactory(new PropertyValueFactory<>("disponible"));
+			colonneAuteurAdherent.setCellValueFactory(new PropertyValueFactory<>("auteur"));
+			colonneDatePubAdherent.setCellValueFactory(new PropertyValueFactory<>("dateParution"));
 			
 			//Ajout des colonnes pour l'information du prêt
 			TableColumn<Pret, Integer> colonneNumPretAdherent = new TableColumn<Pret, Integer>("Numéro de prêt");
