@@ -1524,10 +1524,10 @@ public class InterfacePrepose extends Application implements Serializable {
 
 					
 					
-					gpaneModifAdherent.add(txtNomAdherent, 0, 0);
-					gpaneModifAdherent.add(txtfNomAdherent, 1, 0);
-					gpaneModifAdherent.add(txtPrenomAdherent, 0, 1);
-					gpaneModifAdherent.add(txtfPrenomAdherent, 1, 1);
+					//gpaneModifAdherent.add(txtNomAdherent, 0, 0);
+					//gpaneModifAdherent.add(txtfNomAdherent, 1, 0);
+					//gpaneModifAdherent.add(txtPrenomAdherent, 0, 1);
+					//gpaneModifAdherent.add(txtfPrenomAdherent, 1, 1);
 					gpaneModifAdherent.add(txtAdresseAdherent, 0, 2);
 					gpaneModifAdherent.add(txtfAdresseAdherent, 1, 2);
 					gpaneModifAdherent.add(txtTelephoneAdherent, 0, 3);
@@ -1537,8 +1537,8 @@ public class InterfacePrepose extends Application implements Serializable {
 					//il faut aller chercher l'infor de l'adh�rent selectioneee
 					Adherent adherentModifier = tableAdherent.getSelectionModel().getSelectedItem();
 					
-					txtfNomAdherent.setText(adherentModifier.getStrNom());
-					txtfPrenomAdherent.setText(adherentModifier.getStrPrenom());
+					//txtfNomAdherent.setText(adherentModifier.getStrNom());
+				//txtfPrenomAdherent.setText(adherentModifier.getStrPrenom());
 					txtfAdresseAdherent.setText(adherentModifier.getStrAdresse());
 					txtfTelephoneAdherent.setText(adherentModifier.getStrNumeroTelephone());
 					
@@ -1559,8 +1559,8 @@ public class InterfacePrepose extends Application implements Serializable {
 							
 							Adherent adherentmodifier1 = tableAdherent.getSelectionModel().getSelectedItem();
 							
-							adherentmodifier1.setStrNom(txtfNomAdherent.getText());
-							adherentmodifier1.setStrPrenom(txtfPrenomAdherent.getText());
+						//	adherentmodifier1.setStrNom(txtfNomAdherent.getText());
+							//adherentmodifier1.setStrPrenom(txtfPrenomAdherent.getText());
 							adherentmodifier1.setStrAdresse(txtfAdresseAdherent.getText());
 							adherentmodifier1.setStrNumeroTelephone(txtfTelephoneAdherent.getText());
 							
@@ -1905,6 +1905,7 @@ public class InterfacePrepose extends Application implements Serializable {
 								
 								//DocumentEmprunter docEmpruntDvd = new DocumentEmprunter(dvdEmprunt.getNoDoc(), dvdEmprunt.getTitre(), dvdEmprunt.getStrRealisateur(), dvdEmprunt.getDateParution());
 								//ajouter dans une liste
+								
 								adherentEmprunt.getLstDvdAdherent().add(dvdEmprunt);
 							}
 							else if(documentEmprunt.getNoDoc().substring(0, 3).equals("Per")) {
