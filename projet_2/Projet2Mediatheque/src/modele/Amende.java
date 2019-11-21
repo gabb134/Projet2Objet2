@@ -11,19 +11,19 @@ public class Amende implements Serializable  {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private LocalDate DateRetard;
+	//private LocalDate DateRetard;
 	private double Montant=0.50;
 	
-	public Amende( LocalDate DateRetard)
-	{
-		this.DateRetard=DateRetard;
-	}
+	//public Amende( LocalDate DateRetard)
+	//{
+	//	this.DateRetard=DateRetard;
+	//}
 
-	public void  CoutAmende()
+	public void  CoutAmende(LocalDate DateRetard)
 	{
 		LocalDate DateDuJour=java.time.LocalDate.now();
-		int jourRetard=DateRetard.getDayOfMonth();
-		int jourPresent=DateDuJour.getDayOfMonth();
+		//int jourRetard=DateRetard.getDayOfMonth();
+		//int jourPresent=DateDuJour.getDayOfMonth();
 		int intNombreJoursRetard= Period.between(DateRetard, DateDuJour).getDays();
 		Montant+=intNombreJoursRetard*0.50;
 		
@@ -40,7 +40,7 @@ public class Amende implements Serializable  {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		LocalDate DateRetard=LocalDate.of(2019, 10, 20);
-Amende amende=new Amende(DateRetard);
+Amende amende=new Amende();
 
 	}
 }

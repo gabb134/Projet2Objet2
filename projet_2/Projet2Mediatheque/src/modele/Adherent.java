@@ -277,9 +277,9 @@ public class Adherent implements Serializable {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		LocalDate datedepret=LocalDate.now().minusDays(1);
+		LocalDate datedepret=LocalDate.now();
 		LocalDate datederetour=LocalDate.now();
-		System.out.println(Period.between(datedepret,datederetour ).getDays());
+		System.out.println(datedepret.isAfter(datederetour));
 		//System.out.println(datedufutur);
 
 	}
