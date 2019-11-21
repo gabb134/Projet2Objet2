@@ -32,17 +32,13 @@ import modele.Pret;
 public class InterfaceAdherent extends Application{
 
 	
-	private TableView<Document> tableDocumentsDelAdherent = new TableView<Document>();
-	private TableView<Pret> tablePret = new TableView<Pret>();
+	private TableView<DocumentEmprunter> tableDocumentsDelAdherent = new TableView<DocumentEmprunter>();
+	 private ObservableList<DocumentEmprunter> donneesDocument;
     private static Stage PrimaryStage;
-/*	private ObservableList<Document> donneesCataloguePrepose;
-	private ObservableList<Livre> donneesLivrePrepose;
-	private ObservableList<DVD> donneesDVDPrepose;
-	private ObservableList<Periodique> donneesPeriodiquePrepose;*/
-
-    private ObservableList<Document> donneesDocument;
+   
+	private TableView<Pret> tablePret = new TableView<Pret>();
     private ObservableList<Pret> donneesPrets;
-    private Catalogue catalogue =  Catalogue.getInstance("Livres.txt", "Periodiques.txt", "DVD.txt");
+  //  private Catalogue catalogue =  Catalogue.getInstance("Livres.txt", "Periodiques.txt", "DVD.txt");
 	private ListeAdherents liste = ListeAdherents.getInstance();
 	Mediatheque mediatheque;
 	
@@ -71,7 +67,7 @@ public class InterfaceAdherent extends Application{
 		
 		//ListeDocumentsEmpruntes listeDocumentEmprunter = ListeDocumentsEmpruntes.getInstance();
 		
-		//donneesDocument = FXCollections.observableArrayList(listeDocumentEmprunter.getLstDocumentsEmpruntes());
+		//
 		
 		//Voir comment je peux parcourir les adhéent pour reperer celui qui ses connecter(si les adherent dans la liste est eal a celui qui s'est connecter)
 		Boolean booTrouver = false;
@@ -80,22 +76,36 @@ public class InterfaceAdherent extends Application{
 			//System.out.println(liste.getLstAdherents().get(i));
 			
 			if(liste.getLstAdherents().get(i).getStrNom().equals(mediatheque.getTxtFNom().getText()) && liste.getLstAdherents().get(i).getStrPrenom().equals(mediatheque.getTxtFPrenom().getText())||liste.getLstAdherents().get(i).getStrNom().equals(mediatheque.getTxtFNomDroite().getText()) && liste.getLstAdherents().get(i).getStrPrenom().equals(mediatheque.getTxtFPrenomDroite().getText())) {
-			booTrouver= true;	
-			System.out.println("trouver!");
-			//voir comment ajouter ca dans une liste et le mettre dans le observablelist pour le mettre dans les donnees 
-			//docEmprunter = new DocumentEmprunter(noDoc, titre, auteur, dateParution)
+			//booTrouver= true;	
+				System.out.println("trouver!");
+				
+				for(int j = 0;j <  liste.getLstAdherents().get(i).getLstDocAdherent().size();j++) {
+					docEmprunter = new DocumentEmprunter(liste.getLstAdherents().get(i).getLstDocAdherent().get(j).getNoDoc(), liste.getLstAdherents().get(i).getLstDocAdherent().get(j).getTitre(), "", liste.getLstAdherents().get(i).getLstDocAdherent().get(j).getDateParution());
+					lstDocumentEmprunter.add(docEmprunter);
+				}
+								
 			
 			}
 					
 		}
-	
+		if(booTrouver) {
+			
+			//voir comment ajouter ca dans une liste et le mettre dans le observablelist pour le mettre dans les donnees 
+			
+		}
 		
+		System.out.println("Documents empruntés");
+		for(DocumentEmprunter doc: lstDocumentEmprunter) {
+			System.out.println(doc);
+		}
+	
+		donneesDocument = FXCollections.observableArrayList(lstDocumentEmprunter);
 		//System.out.println(mediatheque.getTxtFNom().getText());
 		 //Ajout des colonnes pour les documents emprunté des préposé
-			TableColumn<Document, String> colonneNumDocAdherent = new TableColumn<Document, String>("Numéro Document");
-			TableColumn<Document, String> colonneTitreAdherent= new TableColumn<Document, String>("Titre");
-			TableColumn<Document, String> colonneAuteurAdherent = new TableColumn<Document, String>("Auteur/Réalisateur");
-			TableColumn<Document, LocalDate> colonneDatePubAdherent = new TableColumn<Document, LocalDate>(
+			TableColumn<DocumentEmprunter, String> colonneNumDocAdherent = new TableColumn<DocumentEmprunter, String>("Numéro Document");
+			TableColumn<DocumentEmprunter, String> colonneTitreAdherent= new TableColumn<DocumentEmprunter, String>("Titre");
+			TableColumn<DocumentEmprunter, String> colonneAuteurAdherent = new TableColumn<DocumentEmprunter, String>("Auteur/Réalisateur");
+			TableColumn<DocumentEmprunter, LocalDate> colonneDatePubAdherent = new TableColumn<DocumentEmprunter, LocalDate>(
 					"Date de publication");
 			
 			colonneNumDocAdherent.setPrefWidth(200);
