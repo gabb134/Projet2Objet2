@@ -1,6 +1,7 @@
 package controleurEtVue;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -18,8 +19,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import modele.Catalogue;
 import modele.DVD;
 import modele.Document;
+import modele.DocumentEmprunter;
+import modele.ListeAdherents;
 import modele.ListeDocumentsEmpruntes;
 import modele.Livre;
 import modele.Periodique;
@@ -38,6 +42,16 @@ public class InterfaceAdherent extends Application{
 
     private ObservableList<Document> donneesDocument;
     private ObservableList<Pret> donneesPrets;
+    private Catalogue catalogue =  Catalogue.getInstance("Livres.txt", "Periodiques.txt", "DVD.txt");
+	private ListeAdherents liste = ListeAdherents.getInstance();
+	Mediatheque mediatheque;
+	
+	private ArrayList<DocumentEmprunter> lstDocumentEmprunter = new ArrayList<DocumentEmprunter>();
+	private DocumentEmprunter docEmprunter;
+	
+	public InterfaceAdherent(Mediatheque mediatheque){
+		this.mediatheque = mediatheque;
+	}
 
 	@Override
 	public void start(Stage primaryStage)  {
@@ -55,10 +69,28 @@ public class InterfaceAdherent extends Application{
 		 btnQuitter.setOnMouseClicked(ClickBtnQuitter);
 		btnQuitter.setPrefWidth(150);
 		
-		ListeDocumentsEmpruntes listeDocumentEmprunter = ListeDocumentsEmpruntes.getInstance();
+		//ListeDocumentsEmpruntes listeDocumentEmprunter = ListeDocumentsEmpruntes.getInstance();
 		
-		donneesDocument = FXCollections.observableArrayList(listeDocumentEmprunter.getLstDocumentsEmpruntes());
+		//donneesDocument = FXCollections.observableArrayList(listeDocumentEmprunter.getLstDocumentsEmpruntes());
 		
+		//Voir comment je peux parcourir les adhéent pour reperer celui qui ses connecter(si les adherent dans la liste est eal a celui qui s'est connecter)
+		Boolean booTrouver = false;
+		
+		for(int i = 0; i < liste.getLstAdherents().size()&& !booTrouver;i++) {
+			//System.out.println(liste.getLstAdherents().get(i));
+			
+			if(liste.getLstAdherents().get(i).getStrNom().equals(mediatheque.getTxtFNom().getText()) && liste.getLstAdherents().get(i).getStrPrenom().equals(mediatheque.getTxtFPrenom().getText())||liste.getLstAdherents().get(i).getStrNom().equals(mediatheque.getTxtFNomDroite().getText()) && liste.getLstAdherents().get(i).getStrPrenom().equals(mediatheque.getTxtFPrenomDroite().getText())) {
+			booTrouver= true;	
+			System.out.println("trouver!");
+			//voir comment ajouter ca dans une liste et le mettre dans le observablelist pour le mettre dans les donnees 
+			//docEmprunter = new DocumentEmprunter(noDoc, titre, auteur, dateParution)
+			
+			}
+					
+		}
+	
+		
+		//System.out.println(mediatheque.getTxtFNom().getText());
 		 //Ajout des colonnes pour les documents emprunté des préposé
 			TableColumn<Document, String> colonneNumDocAdherent = new TableColumn<Document, String>("Numéro Document");
 			TableColumn<Document, String> colonneTitreAdherent= new TableColumn<Document, String>("Titre");

@@ -113,6 +113,53 @@ public class Mediatheque extends Application {
 	private GridPane gPaneEmploye;
 	private GridPane gPaneAdmin;
 
+	public TextField getTxtFNom() {
+		return txtFNom;
+	}
+
+	public void setTxtFNom(TextField txtFNom) {
+		this.txtFNom = txtFNom;
+	}
+
+	public TextField getTxtFPrenom() {
+		return txtFPrenom;
+	}
+
+	public void setTxtFPrenom(TextField txtFPrenom) {
+		this.txtFPrenom = txtFPrenom;
+	}
+
+	public TextField getTxtFTelephone() {
+		return txtFTelephone;
+	}
+
+	public void setTxtFTelephone(TextField txtFTelephone) {
+		this.txtFTelephone = txtFTelephone;
+	}
+
+	public TextField getTxtFNomDroite() {
+		return txtFNomDroite;
+	}
+
+	public void setTxtFNomDroite(TextField txtFNomDroite) {
+		this.txtFNomDroite = txtFNomDroite;
+	}
+
+	public TextField getTxtFPrenomDroite() {
+		return txtFPrenomDroite;
+	}
+
+	public void setTxtFPrenomDroite(TextField txtFPrenomDroite) {
+		this.txtFPrenomDroite = txtFPrenomDroite;
+	}
+
+	public TextField getTxtFTelephoneDroite() {
+		return txtFTelephoneDroite;
+	}
+
+	public void setTxtFTelephoneDroite(TextField txtFTelephoneDroite) {
+		this.txtFTelephoneDroite = txtFTelephoneDroite;
+	}
 	private TextField txtFNom;
 	private TextField txtFPrenom;
 	private TextField txtFTelephone;
@@ -956,7 +1003,7 @@ public class Mediatheque extends Application {
 						PrimaryStage.close();
 						Stage stageAdherent = new Stage();
 						stageAdherent.initModality(Modality.APPLICATION_MODAL);
-						InterfaceAdherent interfaceAdherent = new InterfaceAdherent();
+						InterfaceAdherent interfaceAdherent = new InterfaceAdherent(this);
 						interfaceAdherent.start(stageAdherent);
 						txtFPrenom.clear();
 						txtFNom.clear();
@@ -1040,7 +1087,7 @@ public class Mediatheque extends Application {
 						// pour demarrer l'interface de l'adhérent
 						Stage stageAdherent = new Stage();
 						stageAdherent.initModality(Modality.APPLICATION_MODAL);
-						InterfaceAdherent interfaceAdherent = new InterfaceAdherent();
+						InterfaceAdherent interfaceAdherent = new InterfaceAdherent(this);
 						interfaceAdherent.start(stageAdherent);
 						txtFTelephone.clear();
 						txtFTelephone.requestFocus();
@@ -1129,7 +1176,7 @@ public class Mediatheque extends Application {
 							stageCatalogue.close();
 							Stage stageAdherent = new Stage();
 							stageAdherent.initModality(Modality.APPLICATION_MODAL);
-							InterfaceAdherent interfaceAdherent = new InterfaceAdherent();
+							InterfaceAdherent interfaceAdherent = new InterfaceAdherent(this);
 							interfaceAdherent.start(stageAdherent);
 							
 
@@ -1211,7 +1258,7 @@ public class Mediatheque extends Application {
 							// pour demarrer l'interface de l'adhérent
 							Stage stageAdherent = new Stage();
 							stageAdherent.initModality(Modality.APPLICATION_MODAL);
-							InterfaceAdherent interfaceAdherent = new InterfaceAdherent();
+							InterfaceAdherent interfaceAdherent = new InterfaceAdherent(this);
 							interfaceAdherent.start(stageAdherent);
 							
 
