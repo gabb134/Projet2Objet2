@@ -1722,12 +1722,8 @@ public class InterfacePrepose extends Application implements Serializable {
 						
 						 if(tableCatalogue.getSelectionModel().getSelectedItem().getNoDoc().toLowerCase().substring(0, 3).equals("dvd")&&ad.getIntnbDVD()!=2) 
 						{
-							 int intNumAttribuer=0;
-									if(ad.getIntnbDVD()==1&&ad.getDatePretDvd1()==null)
-									{
-										intNumAttribuer=1;
-									}
-							if(ad.getIntnbDVD()+1==2)
+							 
+							if(ad.getIntnbDVD()+1==2&&ad.getDatePretDvd1()!=null)
 							{
 							for (int i = 0; i < liste.getLstAdherents().size(); i++) {
 								if(liste.getLstAdherents().get(i).getStrNumeroAdherent().equals(ad.getStrNumeroAdherent()))
@@ -1785,7 +1781,32 @@ public class InterfacePrepose extends Application implements Serializable {
 						}
 						else if(tableCatalogue.getSelectionModel().getSelectedItem().getNoDoc().toLowerCase().substring(0, 3).equals("liv")&&ad.getIntnbLiv()!=3) 
 						{
-							if(ad.getIntnbLiv()+1==2)
+							int intNumAttribuer=0;
+							if(ad.getIntnbLiv()==1&&ad.getDatePretLiv2()==null&&ad.getDatePretLiv3()==null)
+							{
+								intNumAttribuer=2;
+							}
+							if(ad.getIntnbLiv()==1&&ad.getDatePretLiv1()==null&&ad.getDatePretLiv3()==null)
+							{
+								intNumAttribuer=3;
+							}
+							if(ad.getIntnbLiv()==1&&ad.getDatePretLiv1()==null&&ad.getDatePretLiv2()==null)
+							{
+								intNumAttribuer=1;
+							}
+							if(ad.getIntnbLiv()==2&&ad.getDatePretLiv1()==null)
+							{
+								intNumAttribuer=1;
+							}
+							if(ad.getIntnbLiv()==2&&ad.getDatePretLiv2()==null)
+							{
+								intNumAttribuer=2;
+							}
+							if(ad.getIntnbLiv()==2&&ad.getDatePretLiv3()==null)
+							{
+								intNumAttribuer=3;
+							}
+							if(intNumAttribuer==2)
 							{
 							for (int i = 0; i < liste.getLstAdherents().size(); i++) {
 								if(liste.getLstAdherents().get(i).getStrNumeroAdherent().equals(ad.getStrNumeroAdherent()))
@@ -1801,7 +1822,7 @@ public class InterfacePrepose extends Application implements Serializable {
 								
 							}
 							}
-							else if(ad.getIntnbLiv()+1==3)
+							else if(intNumAttribuer==3)
 							{
 							for (int i = 0; i < liste.getLstAdherents().size(); i++) {
 								if(liste.getLstAdherents().get(i).getStrNumeroAdherent().equals(ad.getStrNumeroAdherent()))
