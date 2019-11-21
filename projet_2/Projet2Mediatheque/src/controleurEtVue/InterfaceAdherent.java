@@ -83,39 +83,14 @@ public class InterfaceAdherent extends Application{
 			if(liste.getLstAdherents().get(i).getStrNom().equals(mediatheque.getTxtFNom().getText()) && liste.getLstAdherents().get(i).getStrPrenom().equals(mediatheque.getTxtFPrenom().getText())||liste.getLstAdherents().get(i).getStrNom().equals(mediatheque.getTxtFNomDroite().getText()) && liste.getLstAdherents().get(i).getStrPrenom().equals(mediatheque.getTxtFPrenomDroite().getText())) {
 			//booTrouver= true;	
 				System.out.println("trouver!");
-				//pret = new Pret(liste.getLstAdherents().get(i).get, dateEmprunt, dateRetourPrevu, dateRetourEffectue, amende) 
+				//pret = new Pret(0, liste.getLstAdherents().get(i).getDatePretDvd(), liste.getLstAdherents().get(i).getDatePretDvd1(), liste.getLstAdherents().get(i).getDateRetourDvd1(), liste.getLstAdherents().get(i).getAmende()); 
 				
 				
 				for(int j = 0;j <  liste.getLstAdherents().get(i).getLstDvdAdherent().size();j++) {
 					//docEmprunter = new DocumentEmprunter(liste.getLstAdherents().get(i).getLstDocAdherent().get(j).getNoDoc(), liste.getLstAdherents().get(i).getLstDocAdherent().get(j).getTitre(), "test", liste.getLstAdherents().get(i).getLstDocAdherent().get(j).getDateParution());
 					
 					dvdEmprunter = new DocumentEmprunter(liste.getLstAdherents().get(i).getLstDvdAdherent().get(j).getNoDoc(), liste.getLstAdherents().get(i).getLstDvdAdherent().get(j).getTitre(), liste.getLstAdherents().get(i).getLstDvdAdherent().get(j).getStrRealisateur(), liste.getLstAdherents().get(i).getLstDvdAdherent().get(j).getDateParution());
-					
-					//livreEmprunter = new DocumentEmprunter(liste.getLstAdherents().get(i).getLstLivreAdherent().get(j).getNoDoc(), liste.getLstAdherents().get(i).getLstLivreAdherent().get(j).getTitre(), liste.getLstAdherents().get(i).getLstLivreAdherent().get(j).getAuteur(), liste.getLstAdherents().get(i).getLstLivreAdherent().get(j).getDateParution());
-					
-					//
-
-					
-				/*	if(dvdEmprunter.getNoDoc().substring(0, 3).equals("DVD")) {
-						System.out.println("DVD");
-		
-						lstDocumentEmprunter.add(dvdEmprunter);
-						
-						
-					}
-					else if(livreEmprunter.getNoDoc().substring(0, 3).equals("Livre")) {
-						System.out.println("Livre");
-						lstDocumentEmprunter.add(dvdEmprunter);
-						
-				
-					}
-					else if(periodiqueEmprunter.getNoDoc().substring(0, 3).equals("Per")) {
-						System.out.println("Periodique");
-						lstDocumentEmprunter.add(periodiqueEmprunter);
-						
-					}*/
-					
-					
+			
 					
 					lstDocumentEmprunter.add(dvdEmprunter);
 				}
@@ -134,6 +109,7 @@ public class InterfaceAdherent extends Application{
 			}
 					
 		}
+		
 		
 		
 		
