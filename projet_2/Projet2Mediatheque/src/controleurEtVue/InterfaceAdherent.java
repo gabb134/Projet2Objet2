@@ -74,7 +74,7 @@ public class InterfaceAdherent extends Application{
 		
 		//
 		
-		//Voir comment je peux parcourir les adhéent pour reperer celui qui ses connecter(si les adherent dans la liste est eal a celui qui s'est connecter)
+		//Voir comment je peux parcourir les adhï¿½ent pour reperer celui qui ses connecter(si les adherent dans la liste est eal a celui qui s'est connecter)
 		Boolean booTrouver = false;
 		
 		for(int i = 0; i < liste.getLstAdherents().size()&& !booTrouver;i++) {
@@ -113,17 +113,17 @@ public class InterfaceAdherent extends Application{
 		
 		
 		
-		System.out.println("Documents empruntés par l'adhérent connecté");
+		System.out.println("Documents empruntï¿½s par l'adhï¿½rent connectï¿½");
 		for(DocumentEmprunter doc: lstDocumentEmprunter) {
 			System.out.println(doc);
 		}
 	
 		donneesDocument = FXCollections.observableArrayList(lstDocumentEmprunter);
 		//System.out.println(mediatheque.getTxtFNom().getText());
-		 //Ajout des colonnes pour les documents emprunté des préposé
-			TableColumn<DocumentEmprunter, String> colonneNumDocAdherent = new TableColumn<DocumentEmprunter, String>("Numéro Document");
+		 //Ajout des colonnes pour les documents empruntï¿½ des prï¿½posï¿½
+			TableColumn<DocumentEmprunter, String> colonneNumDocAdherent = new TableColumn<DocumentEmprunter, String>("Numï¿½ro Document");
 			TableColumn<DocumentEmprunter, String> colonneTitreAdherent= new TableColumn<DocumentEmprunter, String>("Titre");
-			TableColumn<DocumentEmprunter, String> colonneAuteurAdherent = new TableColumn<DocumentEmprunter, String>("Auteur/Réalisateur");
+			TableColumn<DocumentEmprunter, String> colonneAuteurAdherent = new TableColumn<DocumentEmprunter, String>("Auteur/Rï¿½alisateur");
 			TableColumn<DocumentEmprunter, LocalDate> colonneDatePubAdherent = new TableColumn<DocumentEmprunter, LocalDate>("Date de publication");
 			
 			colonneNumDocAdherent.setPrefWidth(200);
@@ -141,10 +141,10 @@ public class InterfaceAdherent extends Application{
 			colonneAuteurAdherent.setCellValueFactory(new PropertyValueFactory<>("auteur"));
 			colonneDatePubAdherent.setCellValueFactory(new PropertyValueFactory<>("dateParution"));
 			
-			//Ajout des colonnes pour l'information du prêt
-			TableColumn<Pret, Integer> colonneNumPretAdherent = new TableColumn<Pret, Integer>("Numéro de prêt");
-			TableColumn<Pret, LocalDate> colonneDatePretAdherent= new TableColumn<Pret, LocalDate>("Date du prêt");
-			TableColumn<Pret, LocalDate> colonneDatePrevuRetourAdherent = new TableColumn<Pret, LocalDate>("Date de retour prévu");
+			//Ajout des colonnes pour l'information du prï¿½t
+			TableColumn<Pret, Integer> colonneNumPretAdherent = new TableColumn<Pret, Integer>("Numï¿½ro de prï¿½t");
+			TableColumn<Pret, LocalDate> colonneDatePretAdherent= new TableColumn<Pret, LocalDate>("Date du prï¿½t");
+			TableColumn<Pret, LocalDate> colonneDatePrevuRetourAdherent = new TableColumn<Pret, LocalDate>("Date de retour prï¿½vu");
 			TableColumn<Pret, LocalDate> colonneDateRetourEffectueAdherent = new TableColumn<Pret, LocalDate>("Date du retour");
 			TableColumn<Pret, Double> colonneAmendeAdherent = new TableColumn<Pret, Double>("Amende");
 			
@@ -185,7 +185,7 @@ public class InterfaceAdherent extends Application{
 		root.setRight(bPaneDroitePrepose);
 	    PrimaryStage=primaryStage;
 		primaryStage.getIcons().add(new Image("booklibrary.png"));
-		primaryStage.setTitle("Médiathèque");
+		primaryStage.setTitle("Mï¿½diathï¿½que");
 		primaryStage.sizeToScene();
 		primaryStage.setResizable(false);
 		primaryStage.setScene(sceneAdherent);

@@ -16,24 +16,118 @@ public class Adherent implements Serializable {
 	private String strNumeroTelephone;
 	private String strNumeroAdherent;
 	private String strAdresse;
+	private String strSolde="0,00 $";
 	private int intnbDVD;
 	private int intnbPer;
 	private int intnbLiv;
 	private Amende amende=new Amende();
 	private LocalDate datePretDvd1;
+	private Amende amendeDvd1=new Amende();
+	private String strAmendeDvd1;
 	private LocalDate dateRetourDvd1;
 	private LocalDate datePretDvd2;
+	private Amende amendeDvd2=new Amende();
+	private String strAmendeDvd2;
 	private LocalDate dateRetourDvd2;
 	private LocalDate datePretPer;
+	private Amende amendePer=new Amende();
+	private String strAmendePer;
 	private LocalDate dateRetourPer;
 	private LocalDate datePretLiv1;
 	private LocalDate dateRetourLiv1;
+	private Amende amendeLiv1=new Amende();
+	private String strAmendeLiv1;
 	private LocalDate datePretLiv2;
+	private Amende amendeLiv2=new Amende();
+	private String strAmendeLiv2;
 	private LocalDate dateRetourLiv2;
 	private LocalDate datePretLiv3;
+	private Amende amendeLiv3=new Amende();
+	private String strAmendeLiv3;
 	private LocalDate dateRetourLiv3;
+	
+	
+	public String getStrAmendeDvd1() {
+		return strAmendeDvd1;
+	}
+	public void setStrAmendeDvd1(String strAmendeDvd1) {
+		this.strAmendeDvd1 = strAmendeDvd1;
+	}
+	public String getStrAmendeDvd2() {
+		return strAmendeDvd2;
+	}
+	public void setStrAmendeDvd2(String strAmendeDvd2) {
+		this.strAmendeDvd2 = strAmendeDvd2;
+	}
+	public String getStrAmendePer() {
+		return strAmendePer;
+	}
+	public void setStrAmendePer(String strAmendePer) {
+		this.strAmendePer = strAmendePer;
+	}
+	public String getStrAmendeLiv1() {
+		return strAmendeLiv1;
+	}
+	public void setStrAmendeLiv1(String strAmendeLiv1) {
+		this.strAmendeLiv1 = strAmendeLiv1;
+	}
+	public String getStrAmendeLiv2() {
+		return strAmendeLiv2;
+	}
+	public void setStrAmendeLiv2(String strAmendeLiv2) {
+		this.strAmendeLiv2 = strAmendeLiv2;
+	}
+	public String getStrAmendeLiv3() {
+		return strAmendeLiv3;
+	}
+	public void setStrAmendeLiv3(String strAmendeLiv3) {
+		this.strAmendeLiv3 = strAmendeLiv3;
+	}
+	public Amende getAmendeDvd1() {
+		return amendeDvd1;
+	}
+	public void setAmendeDvd1(Amende amendeDvd1) {
+		this.amendeDvd1 = amendeDvd1;
+	}
+	public Amende getAmendeDvd2() {
+		return amendeDvd2;
+	}
+	public void setAmendeDvd2(Amende amendeDvd2) {
+		this.amendeDvd2 = amendeDvd2;
+	}
+	public Amende getAmendePer() {
+		return amendePer;
+	}
+	public void setAmendePer(Amende amendePer) {
+		this.amendePer = amendePer;
+	}
+	public Amende getAmendeLiv1() {
+		return amendeLiv1;
+	}
+	public void setAmendeLiv1(Amende amendeLiv1) {
+		this.amendeLiv1 = amendeLiv1;
+	}
+	public Amende getAmendeLiv2() {
+		return amendeLiv2;
+	}
+	public void setAmendeLiv2(Amende amendeLiv2) {
+		this.amendeLiv2 = amendeLiv2;
+	}
+	public Amende getAmendeLiv3() {
+		return amendeLiv3;
+	}
+	public void setAmendeLiv3(Amende amendeLiv3) {
+		this.amendeLiv3 = amendeLiv3;
+	}
 	public LocalDate getDateRetourDvd1() {
 		return dateRetourDvd1;
+	}
+	public String getStrSolde() {
+		return strSolde;
+	}
+
+	public void setStrSolde(String strSolde) {
+		this.strSolde = strSolde;
 	}
 
 	public void setDateRetourDvd1(LocalDate dateRetourDvd1) {
@@ -305,11 +399,11 @@ public class Adherent implements Serializable {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		LocalDate datedepret=LocalDate.now().minusDays(14);
-		LocalDate datederetour=datedepret.plusDays(30);
-		System.out.println("date de pret: "+datedepret);
+		LocalDate datedujour=LocalDate.now();
+		LocalDate datederetour=LocalDate.now().minusDays(14);
+		System.out.println("date de pret: "+datedujour);
 		System.out.println("date de retour: "+datederetour);
-		System.out.println(ChronoUnit.DAYS.between(datedepret, datederetour));
+		System.out.println(ChronoUnit.DAYS.between(datedujour, datederetour.plusDays(30)));
 		//System.out.println(datedufutur);
 
 	}

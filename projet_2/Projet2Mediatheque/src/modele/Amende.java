@@ -13,6 +13,15 @@ public class Amende implements Serializable  {
 	 */
 	private static final long serialVersionUID = 1L;
 	private LocalDate MiseAJour=LocalDate.now().minusDays(1);
+	private LocalDate DateduRetour;
+	public LocalDate getDateduRetour() {
+		return DateduRetour;
+	}
+
+	public void setDateduRetour(LocalDate dateduRetour) {
+		DateduRetour = dateduRetour;
+	}
+
 	public LocalDate getMiseAJour() {
 		return MiseAJour;
 	}
@@ -34,6 +43,7 @@ public class Amende implements Serializable  {
 		//int jourRetard=DateRetard.getDayOfMonth();
 		//int jourPresent=DateDuJour.getDayOfMonth();
 		int intNombreJoursRetard= (int) ChronoUnit.DAYS.between(DateDuJour,DateRetard );
+		System.out.println(intNombreJoursRetard);
 		Montant+=intNombreJoursRetard*0.50;
 		MiseAJour=LocalDate.now();
 		
