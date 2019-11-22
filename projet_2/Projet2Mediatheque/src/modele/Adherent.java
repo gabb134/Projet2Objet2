@@ -45,8 +45,15 @@ public class Adherent implements Serializable {
 	private Amende amendeLiv3=new Amende();
 	private String strAmendeLiv3;
 	private LocalDate dateRetourLiv3;
+	private int noPret;
 	
 	
+	public int getNoPret() {
+		return noPret;
+	}
+	public void setNoPret(int noPret) {
+		this.noPret = noPret;
+	}
 	public String getStrAmendeDvd1() {
 		return strAmendeDvd1;
 	}

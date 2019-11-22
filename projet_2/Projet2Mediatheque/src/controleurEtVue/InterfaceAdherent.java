@@ -86,34 +86,58 @@ public class InterfaceAdherent extends Application{
 				//pret = new Pret(0, liste.getLstAdherents().get(i).getDatePretDvd(), liste.getLstAdherents().get(i).getDatePretDvd1(), liste.getLstAdherents().get(i).getDateRetourDvd1(), liste.getLstAdherents().get(i).getAmende()); 
 				
 				
+				//les prets des adherents
+				//1. creer un objet pretEffectuer
+				//2. ajouter dans un arraylist pret 
+				//3. le mettre dans le observablelist
+				
+				
+				
+				//les documents des adherents
 				for(int j = 0;j <  liste.getLstAdherents().get(i).getLstDvdAdherent().size();j++) {
 					//docEmprunter = new DocumentEmprunter(liste.getLstAdherents().get(i).getLstDocAdherent().get(j).getNoDoc(), liste.getLstAdherents().get(i).getLstDocAdherent().get(j).getTitre(), "test", liste.getLstAdherents().get(i).getLstDocAdherent().get(j).getDateParution());
 					
 					dvdEmprunter = new DocumentEmprunter(liste.getLstAdherents().get(i).getLstDvdAdherent().get(j).getNoDoc(), liste.getLstAdherents().get(i).getLstDvdAdherent().get(j).getTitre(), liste.getLstAdherents().get(i).getLstDvdAdherent().get(j).getStrRealisateur(), liste.getLstAdherents().get(i).getLstDvdAdherent().get(j).getDateParution());
-			
+					
 					
 					lstDocumentEmprunter.add(dvdEmprunter);
+					
+					//if(liste.getLstAdherents().get(i).equals(liste.getLstAdherents().get(i).getLstDocAdherent().get(j).getEmprunteur())) {//si il a emprunter
+						
+						Pret pretDvd = new Pret(liste.getLstAdherents().get(i).getNoPret(), liste.getLstAdherents().get(i).getDatePretDvd(), liste.getLstAdherents().get(i).getDateRetourDvd1(), null, liste.getLstAdherents().get(i).getAmende().getMontant());
+						lstPrets.add(pretDvd);
+						
+					//}
+					
 				}
 				for(int j = 0;j <  liste.getLstAdherents().get(i).getLstLivreAdherent().size();j++) {
 					livreEmprunter = new DocumentEmprunter(liste.getLstAdherents().get(i).getLstLivreAdherent().get(j).getNoDoc(), liste.getLstAdherents().get(i).getLstLivreAdherent().get(j).getTitre(), liste.getLstAdherents().get(i).getLstLivreAdherent().get(j).getAuteur(), liste.getLstAdherents().get(i).getLstLivreAdherent().get(j).getDateParution());
 					
 					lstDocumentEmprunter.add(livreEmprunter);
+					
+					Pret pretLivre = new Pret(liste.getLstAdherents().get(i).getNoPret(), liste.getLstAdherents().get(i).getDatePretLiv(), liste.getLstAdherents().get(i).getDateRetourLiv1(), null, liste.getLstAdherents().get(i).getAmende().getMontant());
+					lstPrets.add(pretLivre);
 				}
 				for(int j = 0;j <  liste.getLstAdherents().get(i).getLstPeriodiqueAdherent().size();j++) {
 					periodiqueEmprunter = new DocumentEmprunter(liste.getLstAdherents().get(i).getLstPeriodiqueAdherent().get(j).getNoDoc(), liste.getLstAdherents().get(i).getLstPeriodiqueAdherent().get(j).getTitre(), "Inconnu", liste.getLstAdherents().get(i).getLstPeriodiqueAdherent().get(j).getDateParution());
 					
 					lstDocumentEmprunter.add(periodiqueEmprunter);
+					
+					Pret pretPeriodique = new Pret(liste.getLstAdherents().get(i).getNoPret(), liste.getLstAdherents().get(i).getDatePretPer(), liste.getLstAdherents().get(i).getDateRetourPer(), null, liste.getLstAdherents().get(i).getAmende().getMontant());
+					lstPrets.add(pretPeriodique);
 				}
+				
+				
+				
 								
 			
 			}
 					
 		}
+	
 		
 		
-		
-		
-		System.out.println("Documents empruntï¿½s par l'adhï¿½rent connectï¿½");
+		System.out.println("Documents empruntés par l'adhérents connectï¿½");
 		for(DocumentEmprunter doc: lstDocumentEmprunter) {
 			System.out.println(doc);
 		}
@@ -121,9 +145,9 @@ public class InterfaceAdherent extends Application{
 		donneesDocument = FXCollections.observableArrayList(lstDocumentEmprunter);
 		//System.out.println(mediatheque.getTxtFNom().getText());
 		 //Ajout des colonnes pour les documents empruntï¿½ des prï¿½posï¿½
-			TableColumn<DocumentEmprunter, String> colonneNumDocAdherent = new TableColumn<DocumentEmprunter, String>("Numï¿½ro Document");
+			TableColumn<DocumentEmprunter, String> colonneNumDocAdherent = new TableColumn<DocumentEmprunter, String>("Numéro Document");
 			TableColumn<DocumentEmprunter, String> colonneTitreAdherent= new TableColumn<DocumentEmprunter, String>("Titre");
-			TableColumn<DocumentEmprunter, String> colonneAuteurAdherent = new TableColumn<DocumentEmprunter, String>("Auteur/Rï¿½alisateur");
+			TableColumn<DocumentEmprunter, String> colonneAuteurAdherent = new TableColumn<DocumentEmprunter, String>("Auteur/Réalisateur");
 			TableColumn<DocumentEmprunter, LocalDate> colonneDatePubAdherent = new TableColumn<DocumentEmprunter, LocalDate>("Date de publication");
 			
 			colonneNumDocAdherent.setPrefWidth(200);
@@ -141,10 +165,13 @@ public class InterfaceAdherent extends Application{
 			colonneAuteurAdherent.setCellValueFactory(new PropertyValueFactory<>("auteur"));
 			colonneDatePubAdherent.setCellValueFactory(new PropertyValueFactory<>("dateParution"));
 			
-			//Ajout des colonnes pour l'information du prï¿½t
-			TableColumn<Pret, Integer> colonneNumPretAdherent = new TableColumn<Pret, Integer>("Numï¿½ro de prï¿½t");
-			TableColumn<Pret, LocalDate> colonneDatePretAdherent= new TableColumn<Pret, LocalDate>("Date du prï¿½t");
-			TableColumn<Pret, LocalDate> colonneDatePrevuRetourAdherent = new TableColumn<Pret, LocalDate>("Date de retour prï¿½vu");
+			//Ajout des colonnes pour l'information du prêt
+			
+			donneesPrets = FXCollections.observableArrayList(lstPrets);
+			
+			TableColumn<Pret, Integer> colonneNumPretAdherent = new TableColumn<Pret, Integer>("Numéro de prêt");
+			TableColumn<Pret, LocalDate> colonneDatePretAdherent= new TableColumn<Pret, LocalDate>("Date du prêt");
+			TableColumn<Pret, LocalDate> colonneDatePrevuRetourAdherent = new TableColumn<Pret, LocalDate>("Date de retour prévu");
 			TableColumn<Pret, LocalDate> colonneDateRetourEffectueAdherent = new TableColumn<Pret, LocalDate>("Date du retour");
 			TableColumn<Pret, Double> colonneAmendeAdherent = new TableColumn<Pret, Double>("Amende");
 			
@@ -171,6 +198,7 @@ public class InterfaceAdherent extends Application{
 			
 			tableDocumentsDelAdherent.setItems(donneesDocument);
 			tableDocumentsDelAdherent.getColumns().addAll(colonneNumDocAdherent,colonneTitreAdherent,colonneAuteurAdherent,colonneDatePubAdherent);
+			tablePret.setItems(donneesPrets);
 			tablePret.getColumns().addAll(colonneNumPretAdherent,colonneDatePretAdherent,colonneDatePrevuRetourAdherent,colonneDateRetourEffectueAdherent,colonneAmendeAdherent);
 			
 			

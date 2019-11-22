@@ -84,6 +84,8 @@ import modele.Periodique;
 import modele.Prepose;
 
 public class Mediatheque extends Application {
+	
+	//variables d'instances
 	private TableView<Document> tableCatalogue = new TableView<Document>();
 	private TableView<Livre> tableLivre = new TableView<Livre>();
 	private TableView<DVD> tableDVD = new TableView<DVD>();
@@ -245,7 +247,7 @@ public class Mediatheque extends Application {
 	private Catalogue catalogue;
 
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(Stage primaryStage) { //methode qui permet de demarrer le catalogue
 		// TODO Auto-generated method stub
 
 		try {
@@ -425,7 +427,7 @@ public class Mediatheque extends Application {
 			// Ajout des onglets de connexion
 			tabPaneConnexion.getTabs().addAll(tabConnexionAdherent, tabConnexionEmploye, tabConnexionAdmin);
 
-			btnConsulterCatalogue.setOnAction(new EventHandler<ActionEvent>() {
+			btnConsulterCatalogue.setOnAction(new EventHandler<ActionEvent>() { // event qui permet d'affcher le formulaire du catalogue et de fermer le formulaire de la connexion
 
 				@Override
 				public void handle(ActionEvent event) {
@@ -799,7 +801,7 @@ public class Mediatheque extends Application {
 		}
 	}
 
-	public File getFichierSerial() {
+	public File getFichierSerial() { // getters qui permet d'aller prendre le fichier serialisable ser pour l'utiliser dans l'interface du prepose
 		return fichierSerial;
 	}
 
@@ -811,7 +813,7 @@ public class Mediatheque extends Application {
 	 * METHODES ET EVENEMENT
 	 *******************************************************/
 
-	public void ValidationEmploye()
+	public void ValidationEmploye() // methode qui permet de valider la connexion d'un employe
 	{
 		if (txtFNoPrepose.getText().compareTo("") == 0) {
 			Alert Erreur = new Alert(AlertType.ERROR);
@@ -896,7 +898,7 @@ public class Mediatheque extends Application {
 		}
 	}
 	
-	public void ValidationAdmin()
+	public void ValidationAdmin() // methode qui permet de valider la connexion d'un administrateur
 	{
 		if (txtFNoAdmin.getText().compareTo("") == 0) {
 			Alert Erreur = new Alert(AlertType.ERROR);
@@ -942,7 +944,7 @@ public class Mediatheque extends Application {
 		}
 	}
 	
-	public void ValidationAdherent()
+	public void ValidationAdherent() // methode qui permet de valider la connexion d'un adherent
 	{
 		if (rbPrenomEtNom.isSelected()) {
 			if (txtFNom.getText().compareTo("") == 0) {
@@ -1113,7 +1115,7 @@ public class Mediatheque extends Application {
 		}
 	}
 	
-	public void ValidationAdherentDroite()
+	public void ValidationAdherentDroite() // methode qui permet de valider la connexion d'un adherent a partir du catalogue
 	{
 		
 			if (rbPrenomEtNomDroite.isSelected()) {
@@ -1283,7 +1285,7 @@ public class Mediatheque extends Application {
 			}
 		
 	}
-	private class GestionConsulterCatalogue implements EventHandler<ActionEvent> {
+	private class GestionConsulterCatalogue implements EventHandler<ActionEvent> { // classe qui permet de gerer les radiobutton de la recherche des documents
 
 		@Override
 		public void handle(ActionEvent e) {
@@ -1301,7 +1303,7 @@ public class Mediatheque extends Application {
 
 	}
 
-	private class GestionAdherentConnexion1 implements EventHandler<ActionEvent> {
+	private class GestionAdherentConnexion1 implements EventHandler<ActionEvent> { //classe qui permet de gerer l'event dans la connexion de l'adherent
 
 		@Override
 		public void handle(ActionEvent e) {
@@ -1336,7 +1338,7 @@ public class Mediatheque extends Application {
 		}
 	}
 
-	private class GestionAdherentConnexion2 implements EventHandler<ActionEvent> {
+	private class GestionAdherentConnexion2 implements EventHandler<ActionEvent> { //classe qui permet de gerer l'event dans la connexion de l'adherent
 
 		@Override
 		public void handle(ActionEvent e) {
@@ -1374,7 +1376,7 @@ public class Mediatheque extends Application {
 
 	}
 
-	public void SerializationCatalogue() {
+	public void SerializationCatalogue() { // methode qui serialize les changements du catalogue
 		
 		
 			try {
@@ -1462,8 +1464,8 @@ public class Mediatheque extends Application {
 		return catalogueDeserializer;
 
 	}
-
-	private class ClickValidationEmploye implements EventHandler<MouseEvent> {
+ 
+	private class ClickValidationEmploye implements EventHandler<MouseEvent> {  //classe qui gere l'event click dans la connexion d'un employe
 
 		public void handle(MouseEvent event) {
 			// TODO Auto-generated method stub
@@ -1472,7 +1474,7 @@ public class Mediatheque extends Application {
 
 	}
 
-	private class ClickValidationAdmin implements EventHandler<MouseEvent> {
+	private class ClickValidationAdmin implements EventHandler<MouseEvent> {//classe qui gere l'event click dans la connexion d'un admin
 
 		@Override
 		public void handle(MouseEvent event) {
@@ -1482,7 +1484,7 @@ public class Mediatheque extends Application {
 		}
 	}
 
-	private class ClickValidationAdherent implements EventHandler<MouseEvent> { //aller voir validation employe pour pouvoir se connecter avec les fichiers serializables
+	private class ClickValidationAdherent implements EventHandler<MouseEvent> { //classe qui gere l'event click dans la connexion d'un adherent
 
 		@Override
 		public void handle(MouseEvent event) {

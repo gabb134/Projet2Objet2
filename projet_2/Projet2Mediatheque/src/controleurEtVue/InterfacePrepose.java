@@ -68,12 +68,14 @@ import modele.ListeDocumentsEmpruntes;
 import modele.Livre;
 import modele.Periodique;
 import modele.Prepose;
+import modele.Pret;
 
 public class InterfacePrepose extends Application implements Serializable {
 
 	/**
 	 * 
 	 */
+	//Variables d'instance
 	private static final long serialVersionUID = 1L;
 	private TableView<Document> tableCatalogue = new TableView<Document>();
 	private TableView<Livre> tableLivre = new TableView<Livre>();
@@ -204,13 +206,14 @@ public class InterfacePrepose extends Application implements Serializable {
 	private int intcompteurAjout = 0;
 	
 	private ListeDocumentsEmpruntes listeDocEmpruntes;
+	private int intCompteurNoPret = 0;
 	
 	Mediatheque mediatheque;
 	public InterfacePrepose(Mediatheque mediatheque){
 		this.mediatheque = mediatheque;
 	}
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(Stage primaryStage) { //Methode qui permet de de demarrer le catalogue
 		// TODO Auto-generated method stub
 
 		try {
@@ -255,7 +258,7 @@ public class InterfacePrepose extends Application implements Serializable {
 			// Creation des colonnes dans l'onglet catalogue
 
 			donneesLivre = FXCollections.observableArrayList(catalogue.getLstLivres());
-			TableColumn<Document, String> colonneNumDocCatalogue = new TableColumn<Document, String>("Numï¿½ro Document");
+			TableColumn<Document, String> colonneNumDocCatalogue = new TableColumn<Document, String>("Numéro Document");
 			TableColumn<Document, String> colonneTitreCatalogue = new TableColumn<Document, String>("Titre");
 			TableColumn<Document, LocalDate> colonneDatePubCatalogue = new TableColumn<Document, LocalDate>(
 					"Date de publication");
@@ -277,7 +280,7 @@ public class InterfacePrepose extends Application implements Serializable {
 			colonneDispoCatalogue.setCellValueFactory(new PropertyValueFactory<>("disponible"));
 
 			// Creation des colonnes dans l'onglet Livres
-			TableColumn<Livre, String> colonneNumDocLivre = new TableColumn<Livre, String>("Numï¿½ro Document");
+			TableColumn<Livre, String> colonneNumDocLivre = new TableColumn<Livre, String>("Numéro Document");
 			TableColumn<Livre, String> colonneTitreLivre = new TableColumn<Livre, String>("Titre");
 			TableColumn<Livre, LocalDate> colonneDatePubLivre = new TableColumn<Livre, LocalDate>(
 					"Date de publication");
@@ -305,12 +308,12 @@ public class InterfacePrepose extends Application implements Serializable {
 			// Creation des colonnes dans l'onglet DVD
 			donneesDVD = FXCollections.observableArrayList(catalogue.getLstDvd());
 
-			TableColumn<DVD, String> colonneNumDocDVD = new TableColumn<DVD, String>("Numï¿½ro Document");
+			TableColumn<DVD, String> colonneNumDocDVD = new TableColumn<DVD, String>("Numéro Document");
 			TableColumn<DVD, String> colonneTitreDVD = new TableColumn<DVD, String>("Titre");
 			TableColumn<DVD, LocalDate> colonneDatePubDVD = new TableColumn<DVD, LocalDate>("Date de publication");
 			TableColumn<DVD, String> colonneDispoDVD = new TableColumn<DVD, String>("Disponible");
 			TableColumn<DVD, Integer> colonneNbDisquesDVD = new TableColumn<DVD, Integer>("Nombres de disques");
-			TableColumn<DVD, String> colonneRealisateurDVD = new TableColumn<DVD, String>("Rï¿½alisateur");
+			TableColumn<DVD, String> colonneRealisateurDVD = new TableColumn<DVD, String>("Réalisateur");
 
 			colonneNumDocDVD.setPrefWidth(120);
 			colonneTitreDVD.setPrefWidth(250);
@@ -338,15 +341,15 @@ public class InterfacePrepose extends Application implements Serializable {
 			donneesPeriodique = FXCollections.observableArrayList(catalogue.getLstPeriodiques());
 
 			TableColumn<Periodique, String> colonneNumDocPeriodique = new TableColumn<Periodique, String>(
-					"Numï¿½ro Document");
+					"Numéro Document");
 			TableColumn<Periodique, String> colonneTitrePeriodique = new TableColumn<Periodique, String>("Titre");
 			TableColumn<Periodique, LocalDate> colonneDatePubPeriodique = new TableColumn<Periodique, LocalDate>(
 					"Date de publication");
 			TableColumn<Periodique, String> colonneDispoPeriodique = new TableColumn<Periodique, String>("Disponible");
 			TableColumn<Periodique, Integer> colonneNoVolumePeriodique = new TableColumn<Periodique, Integer>(
-					"Numï¿½ro volume");
+					"Numéro volume");
 			TableColumn<Periodique, Integer> colonneNoPeriodiquePeriodique = new TableColumn<Periodique, Integer>(
-					"Numï¿½ro pï¿½riodique");
+					"Numéro périodique");
 
 			colonneNumDocPeriodique.setPrefWidth(120);
 			colonneTitrePeriodique.setPrefWidth(250);
@@ -388,28 +391,7 @@ public class InterfacePrepose extends Application implements Serializable {
 			/*****************************
 			 *TABLE VIEW POUR LES ADHERENTS 
 			 ***********************/
-			
-			//faire les donnesAdherents avec l'arraylist adheretn qui est dans prepose
-			
-			/*****************************************SEUELEMENT POUR DES TESTS*****************************************/
-		
-		
-			
-		/*	Adherent a1 = new Adherent("2", "allossssttttt", "tets", "afge", "(333) 987-3344", 2, 2);
-			Adherent a2 = new Adherent("3", "klk", "tets", "afge", "(334) 444-4444", 2, 2);
-			Adherent a3 = new Adherent("4", "klk", "tets", "afge", "(334) 444-2345", 2, 2);
 
-			// a1.setStrNumeroAdherent(1+a1.getStrNumeroAdherent());
-			
-			Prepose prepose  = new Prepose();
-			prepose.ajouterAdherent(a1);
-			prepose.ajouterAdherent(a2);
-			prepose.ajouterAdherent(a3);
-			prepose.afficherAdherents();*/
-			
-			
-			
-			/*************************************************************************************************/
 			 liste = ListeAdherents.getInstance();
 			
 			 for (int i = 0; i < liste.getLstAdherents().size(); i++) {
@@ -422,13 +404,13 @@ public class InterfacePrepose extends Application implements Serializable {
 			donneesAdherents = FXCollections.observableArrayList(liste.getLstAdherents());
 			//tableAdherent.setItems(donneesAdherents);
 			
-			TableColumn<Adherent, String> colonneNumeroAdherent = new TableColumn<Adherent, String>("Numï¿½ro d'adhï¿½rent");
+			TableColumn<Adherent, String> colonneNumeroAdherent = new TableColumn<Adherent, String>("Numéro d'adhérent");
 			TableColumn<Adherent, String> colonneNomAdherent= new TableColumn<Adherent, String>("Nom");
-			TableColumn<Adherent, String> colonnePrenomAdherent = new TableColumn<Adherent, String>("prï¿½nom");
+			TableColumn<Adherent, String> colonnePrenomAdherent = new TableColumn<Adherent, String>("prénom");
 			TableColumn<Adherent, String> colonneAdresseAdherent = new TableColumn<Adherent, String>("Adresse");
-			TableColumn<Adherent, String> colonneNumeroTelephoneAdherent = new TableColumn<Adherent, String>("tï¿½lï¿½phone");
-			TableColumn<Adherent, Integer> colonnePretsActifsAdherent = new TableColumn<Adherent, Integer>("prï¿½ts actif");
-			TableColumn<Adherent, String> colonneSoldeDuAdherent = new TableColumn<Adherent, String>("Solde dï¿½");
+			TableColumn<Adherent, String> colonneNumeroTelephoneAdherent = new TableColumn<Adherent, String>("téléphone");
+			TableColumn<Adherent, Integer> colonnePretsActifsAdherent = new TableColumn<Adherent, Integer>("prêts actif");
+			TableColumn<Adherent, String> colonneSoldeDuAdherent = new TableColumn<Adherent, String>("Solde dû");
 			
 			colonneNumeroAdherent.setPrefWidth(120);
 			colonneNomAdherent.setPrefWidth(100);
@@ -466,8 +448,8 @@ public class InterfacePrepose extends Application implements Serializable {
 			hboxEnBas.setPadding(new Insets(10));
 			tGroupEnHaut = new ToggleGroup();
 			txtRechercherPar = new Text("Rechercher par: ");
-			rbAuteurRealisateur = new RadioButton("auteur/Rï¿½alisateur");
-			rbMotsCles = new RadioButton("Mos clï¿½s");
+			rbAuteurRealisateur = new RadioButton("auteur/Réalisateur");
+			rbMotsCles = new RadioButton("Mos clés");
 			txtFRechercherPar = new TextField();
 			btnEffacer = new Button("Effacer");
 			btnEffacer.setPrefWidth(170);
@@ -528,12 +510,12 @@ public class InterfacePrepose extends Application implements Serializable {
 			btnAjouterDocumentCatalogue = new Button("Ajouter un document");
 			btnSupprimerDocumentCatalogue = new Button("Supprimer un document");
 
-			btnajouterAherent = new Button("Ajouter un adhï¿½rent");
-			btnModifierAdherent = new Button("Modifier un adhï¿½rent");
-			btnSupprimerAdherent = new Button("Supprimer un adhï¿½rent");
-			btnPayerSoldeAdhernent = new Button("Payer solde adhï¿½rent");
+			btnajouterAherent = new Button("Ajouter un adhérent");
+			btnModifierAdherent = new Button("Modifier un adhérent");
+			btnSupprimerAdherent = new Button("Supprimer un adhérent");
+			btnPayerSoldeAdhernent = new Button("Payer solde adhérent");
 
-			btnInscrireUnPret = new Button("Inscrire un prï¿½t");
+			btnInscrireUnPret = new Button("Inscrire un prêt");
 			btnIscrireUnRetour = new Button("Inscrire un retour");
 
 			hboxButtonDeconnexion = new HBox();
@@ -555,7 +537,7 @@ public class InterfacePrepose extends Application implements Serializable {
 
 			btnDeconnexion.setPrefWidth(150);
 
-			btnDeconnexion.setOnAction(new EventHandler<ActionEvent>() {
+			btnDeconnexion.setOnAction(new EventHandler<ActionEvent>() { //event qui permet de  se deconnecter et qui serialise la liste des adherent, le catalogue et les emprunts 
 
 				@Override
 				public void handle(ActionEvent e) {
@@ -591,9 +573,9 @@ public class InterfacePrepose extends Application implements Serializable {
 
 			 paneGestionCatalogue = new TitledPane("Gestion du catalogue",
 					new Label("Show all boats available"));
-			 paneGestionAdherents = new TitledPane("Gestion des adhï¿½rents",
+			 paneGestionAdherents = new TitledPane("Gestion des adhérents",
 					new Label("Show all cars available"));
-			 paneGestionPrets = new TitledPane("Gestion des prï¿½ts", new Label("Show all planes available"));
+			 paneGestionPrets = new TitledPane("Gestion des prêts", new Label("Show all planes available"));
 
 			accordion.getPanes().add(paneGestionCatalogue);
 			accordion.getPanes().add(paneGestionAdherents);
@@ -657,7 +639,7 @@ public class InterfacePrepose extends Application implements Serializable {
 			root.setCenter(tabPane);
 
 			primaryStage.getIcons().add(new Image("booklibrary.png"));
-			primaryStage.setTitle("Mï¿½diathï¿½que(prï¿½posï¿½)");
+			primaryStage.setTitle("Médiathèque(préposé)");
 			primaryStage.sizeToScene();
 			primaryStage.setResizable(false);
 			primaryStage.setScene(scene);
@@ -692,7 +674,7 @@ public class InterfacePrepose extends Application implements Serializable {
 		
 
 	}
-	public void MiseAJourAmende()
+	public void MiseAJourAmende() //methode qui met a jour l'amande des adherents
 	{
 		for (int i = 0; i < liste.getLstAdherents().size(); i++) {
 			/* Vï¿½rification de l'emprunt d'un pï¿½riodique*/
@@ -851,7 +833,7 @@ public class InterfacePrepose extends Application implements Serializable {
 
 	}
 	
-	private class GestionConsulterCatalogue implements EventHandler<ActionEvent> {
+	private class GestionConsulterCatalogue implements EventHandler<ActionEvent> { //classe qui permet de gerer les radiobuttons de la recherche dans le catalogue
 
 		@Override
 		public void handle(ActionEvent e) {
@@ -869,7 +851,7 @@ public class InterfacePrepose extends Application implements Serializable {
 
 	}
 
-	private class GestionnaireButtonPreposeCatalogue implements EventHandler<MouseEvent> {
+	private class GestionnaireButtonPreposeCatalogue implements EventHandler<MouseEvent> { //classe qui permet de gerer les button qui gere l'ajout et la suppression des documents du catalogue
 
 		@Override
 		public void handle(MouseEvent e) {
@@ -885,7 +867,7 @@ public class InterfacePrepose extends Application implements Serializable {
 
 				tRadioAjout = new ToggleGroup();
 				rbLivre = new RadioButton("Livre");
-				rbPeriodique = new RadioButton("pï¿½riodique");
+				rbPeriodique = new RadioButton("périodique");
 				rbDvd = new RadioButton("Dvd");
 				hboxRadioButton = new HBox(5);
 				hboxRadioButton.getChildren().addAll(rbLivre, rbDvd, rbPeriodique);
@@ -900,18 +882,18 @@ public class InterfacePrepose extends Application implements Serializable {
 				txtTitre = new Text("Titre :");
 				txtAuteur = new Text("Auteur :");
 				txtDateParution = new Text("Date de parution :");
-				txtMotsCledEspaces = new Text("Mots clï¿½s (sï¿½parï¿½s par espaces):");
+				txtMotsCledEspaces = new Text("Mots clés (séparés par espaces):");
 
 				// pour les dvd
 				txtNbDisques = new Text("Nombre de disques :");
-				txtRealisateur = new Text("Rï¿½alisateur :");
+				txtRealisateur = new Text("Réalisateur :");
 
 				txtFNbDisques = new TextField();
 				txtFRealisateur = new TextField();
 
 				// pour les pï¿½riodiques
-				txtNoVolume = new Text("Numï¿½ro de volume :");
-				txtNoPeriodique = new Text("Numï¿½ro de pï¿½riodique :");
+				txtNoVolume = new Text("Numéro de volume :");
+				txtNoPeriodique = new Text("Numéro de périodique :");
 
 				txtFNoVolume = new TextField();
 				txtFNoPeriodique = new TextField();
@@ -964,28 +946,28 @@ public class InterfacePrepose extends Application implements Serializable {
 								Alert Erreur = new Alert(AlertType.ERROR);
 								Erreur.setTitle("Erreur");
 								Erreur.setHeaderText(null);
-								Erreur.setContentText("Vous n'avez pas tapï¿½ le titre");
+								Erreur.setContentText("Vous n'avez pas tapé le titre");
 								Erreur.showAndWait();
 							}
 							else if (txtFAuteur.getText().compareTo("") == 0) {
 								Alert Erreur = new Alert(AlertType.ERROR);
 								Erreur.setTitle("Erreur");
 								Erreur.setHeaderText(null);
-								Erreur.setContentText("Vous n'avez pas tapï¿½ le nom de l'auteur");
+								Erreur.setContentText("Vous n'avez pas tapé le nom de l'auteur");
 								Erreur.showAndWait();
 							}
 							else if (txtFDateParution.getText().compareTo("") == 0) {
 								Alert Erreur = new Alert(AlertType.ERROR);
 								Erreur.setTitle("Erreur");
 								Erreur.setHeaderText(null);
-								Erreur.setContentText("Vous n'avez pas tapï¿½ la date de parution");
+								Erreur.setContentText("Vous n'avez pas tapé la date de parution");
 								Erreur.showAndWait();
 							}
 							else if (txtFMotsClesEspaces.getText().compareTo("") == 0) {
 								Alert Erreur = new Alert(AlertType.ERROR);
 								Erreur.setTitle("Erreur");
 								Erreur.setHeaderText(null);
-								Erreur.setContentText("Vous n'avez pas tapï¿½ le mot clï¿½");
+								Erreur.setContentText("Vous n'avez pas tapé le mot clé");
 								Erreur.showAndWait();
 							}
 							else {// ajout d'un document (livres)
@@ -1020,7 +1002,7 @@ public class InterfacePrepose extends Application implements Serializable {
 								Alert confirmation = new Alert(AlertType.CONFIRMATION);
 							 	confirmation.setTitle("Confirmation");
 							 	confirmation.setHeaderText(null);
-							 	confirmation.setContentText("Le document "+txtFtitre.getText() +" a ï¿½tï¿½ ajoutï¿½!");
+							 	confirmation.setContentText("Le document "+txtFtitre.getText() +" a été ajouté!");
 							 	confirmation.showAndWait();
 							 	stageAjout.close();
 							}
@@ -1185,7 +1167,7 @@ public class InterfacePrepose extends Application implements Serializable {
 						Alert Erreur = new Alert(AlertType.ERROR);
 						Erreur.setTitle("Erreur");
 						Erreur.setHeaderText(null);
-						Erreur.setContentText("Vous devez sï¿½lectionner le document pour le supprimer.");
+						Erreur.setContentText("Vous devez sélectionner le document pour le supprimer.");
 						Erreur.showAndWait();
 
 					} else {
@@ -1239,7 +1221,7 @@ public class InterfacePrepose extends Application implements Serializable {
 						Alert confirmation = new Alert(AlertType.CONFIRMATION);
 					 	confirmation.setTitle("Confirmation");
 					 	confirmation.setHeaderText(null);
-					 	confirmation.setContentText("Le document dont le Numï¿½ro est "+documentSupprimer.getNoDoc() +" a ï¿½tï¿½ supprimer!");
+					 	confirmation.setContentText("Le document dont le Numéro est "+documentSupprimer.getNoDoc() +" a été supprimer!");
 					 	confirmation.showAndWait();
 					 	
 
@@ -1251,7 +1233,7 @@ public class InterfacePrepose extends Application implements Serializable {
 						Alert Erreur = new Alert(AlertType.ERROR);
 						Erreur.setTitle("Erreur");
 						Erreur.setHeaderText(null);
-						Erreur.setContentText("Vous devez sï¿½lectionner le document pour le supprimer.");
+						Erreur.setContentText("Vous devez sélectionner le document pour le supprimer.");
 						Erreur.showAndWait();
 
 					} else { //suppression
@@ -1272,7 +1254,7 @@ public class InterfacePrepose extends Application implements Serializable {
 						Alert confirmation = new Alert(AlertType.CONFIRMATION);
 					 	confirmation.setTitle("Confirmation");
 					 	confirmation.setHeaderText(null);
-					 	confirmation.setContentText("Le document dont le Numï¿½ro est "+livreSupprimer.getNoDoc() +" a ï¿½tï¿½ supprimer!");
+					 	confirmation.setContentText("Le document dont le Numéro est "+livreSupprimer.getNoDoc() +" a été supprimer!");
 					 	confirmation.showAndWait();
 					}
 				} else if (tabDVD.isSelected()) {
@@ -1282,7 +1264,7 @@ public class InterfacePrepose extends Application implements Serializable {
 						Alert Erreur = new Alert(AlertType.ERROR);
 						Erreur.setTitle("Erreur");
 						Erreur.setHeaderText(null);
-						Erreur.setContentText("Vous devez sï¿½lectionner le document pour le supprimer.");
+						Erreur.setContentText("Vous devez sélectionner le document pour le supprimer.");
 						Erreur.showAndWait();
 
 					} else {//suppression
@@ -1301,7 +1283,7 @@ public class InterfacePrepose extends Application implements Serializable {
 						Alert confirmation = new Alert(AlertType.CONFIRMATION);
 					 	confirmation.setTitle("Confirmation");
 					 	confirmation.setHeaderText(null);
-					 	confirmation.setContentText("Le document dont le Numï¿½ro est "+dvdSupprimer.getNoDoc() +" a ï¿½tï¿½ supprimï¿½!");
+					 	confirmation.setContentText("Le document dont le Numéro est "+dvdSupprimer.getNoDoc() +" a été supprimé!");
 					 	confirmation.showAndWait();
 					}
 				} else if (tabPeriodique.isSelected()) {
@@ -1311,7 +1293,7 @@ public class InterfacePrepose extends Application implements Serializable {
 						Alert Erreur = new Alert(AlertType.ERROR);
 						Erreur.setTitle("Erreur");
 						Erreur.setHeaderText(null);
-						Erreur.setContentText("Vous devez sï¿½lectionner le document pour le supprimer.");
+						Erreur.setContentText("Vous devez sélectionner le document pour le supprimer.");
 						Erreur.showAndWait();
 
 					} else {//suppression
@@ -1329,7 +1311,7 @@ public class InterfacePrepose extends Application implements Serializable {
 						Alert confirmation = new Alert(AlertType.CONFIRMATION);
 					 	confirmation.setTitle("Confirmation");
 					 	confirmation.setHeaderText(null);
-					 	confirmation.setContentText("Le document dont le Numï¿½ro est "+periodiqueSupprimer.getNoDoc() +" a ï¿½tï¿½ supprimï¿½!");
+					 	confirmation.setContentText("Le document dont le Numéro est "+periodiqueSupprimer.getNoDoc() +" a été supprimé!");
 					 	confirmation.showAndWait();
 					}
 				}
@@ -1339,7 +1321,7 @@ public class InterfacePrepose extends Application implements Serializable {
 		}
 
 	}
-	private class GestionnaireChangementTables implements EventHandler<MouseEvent> {
+	private class GestionnaireChangementTables implements EventHandler<MouseEvent> { //classe qui permet de changer de tableView lorsque on clique sur l'accordeon
 
 		@Override
 		public void handle(MouseEvent e) {
@@ -1371,7 +1353,7 @@ public class InterfacePrepose extends Application implements Serializable {
 		
 	}
 
-	private class GestionnaireButtonPreposeAherent implements EventHandler<MouseEvent> {
+	private class GestionnaireButtonPreposeAherent implements EventHandler<MouseEvent> { // classe qui permet de gerer l'ajout, la modification, la suppression et le solde des adherents
 
 		@Override
 		public void handle(MouseEvent e) {
@@ -1388,7 +1370,7 @@ public class InterfacePrepose extends Application implements Serializable {
 				 txtNomAdherent = new Text("Nom :");
 				 txtPrenomAdherent = new Text("Prenom :");
 				 txtAdresseAdherent = new Text("Adresse :");
-				 txtTelephoneAdherent = new Text("tï¿½lï¿½phone :");
+				 txtTelephoneAdherent = new Text("téléphone :");
 				
 				 txtfNomAdherent = new TextField();
 				 txtfPrenomAdherent = new TextField();
@@ -1437,28 +1419,28 @@ public class InterfacePrepose extends Application implements Serializable {
 								Alert Erreur = new Alert(AlertType.ERROR);
 								Erreur.setTitle("Erreur");
 								Erreur.setHeaderText(null);
-								Erreur.setContentText("Vous n'avez pas tapï¿½ le nom de l'adhï¿½rent");
+								Erreur.setContentText("Vous n'avez pas tapé le nom de l'adhérent");
 								Erreur.showAndWait();
 							}
 							else if (txtfPrenomAdherent.getText().compareTo("") == 0) {
 								Alert Erreur = new Alert(AlertType.ERROR);
 								Erreur.setTitle("Erreur");
 								Erreur.setHeaderText(null);
-								Erreur.setContentText("Vous n'avez pas tapï¿½ le prï¿½nom de l'adhï¿½rent");
+								Erreur.setContentText("Vous n'avez pas tapé le prénom de l'adhérent");
 								Erreur.showAndWait();
 							}
 							else if (txtfAdresseAdherent.getText().compareTo("") == 0) {
 								Alert Erreur = new Alert(AlertType.ERROR);
 								Erreur.setTitle("Erreur");
 								Erreur.setHeaderText(null);
-								Erreur.setContentText("Vous n'avez pas tapï¿½ l'adresse de l'adhï¿½rent");
+								Erreur.setContentText("Vous n'avez pas tapé l'adresse de l'adhérent");
 								Erreur.showAndWait();
 							}
 							else if (txtfTelephoneAdherent.getText().compareTo("") == 0) {
 								Alert Erreur = new Alert(AlertType.ERROR);
 								Erreur.setTitle("Erreur");
 								Erreur.setHeaderText(null);
-								Erreur.setContentText("Vous n'avez pas tapï¿½ le tï¿½lï¿½phone");
+								Erreur.setContentText("Vous n'avez pas tapé le téléphone");
 								Erreur.showAndWait();
 							}else if (!txtfTelephoneAdherent.getText().matches("^[\\(][0-9]{3}[\\)][\\s][0-9]{3}[\\-][0-9]{4}$")) {
 								Alert Erreur = new Alert(AlertType.ERROR);
@@ -1468,7 +1450,7 @@ public class InterfacePrepose extends Application implements Serializable {
 								Erreur.showAndWait();
 								txtfTelephoneAdherent.requestFocus();
 							}
-							else {// ajout d'un adhï¿½rent **important il faut que ï¿½a soit le prepose qui est connecter qui ajoute les adherents
+							else {// ajout d'un adhérent **important il faut que ï¿½a soit le prepose qui est connecter qui ajoute les adherents
 							
 								Adherent adheretnAjouter = new Adherent("1", txtfNomAdherent.getText(), txtfPrenomAdherent.getText(), txtfAdresseAdherent.getText(), txtfTelephoneAdherent.getText(), 0, 0,0,0,0);
 								adheretnAjouter.setIntNbPrets(0);
@@ -1483,7 +1465,7 @@ public class InterfacePrepose extends Application implements Serializable {
 								 	Alert confirmation = new Alert(AlertType.CONFIRMATION);
 								 	confirmation.setTitle("Confirmation");
 								 	confirmation.setHeaderText(null);
-								 	confirmation.setContentText("L'adhï¿½rent dont le Numï¿½ro est "+adheretnAjouter.getStrNumeroAdherent() +" a ï¿½tï¿½ ajoutï¿½!");
+								 	confirmation.setContentText("L'adhérent dont le Numéro est "+adheretnAjouter.getStrNumeroAdherent() +" a été ajouté!");
 								 	confirmation.showAndWait();
 								 	stageAjoutAdherent.close();
 								 	
@@ -1496,7 +1478,7 @@ public class InterfacePrepose extends Application implements Serializable {
 				
 				
 				
-				stageAjoutAdherent.setTitle("Ajout d'un adhï¿½rent");
+				stageAjoutAdherent.setTitle("Ajout d'un adhérent");
 				stageAjoutAdherent.getIcons().add(new Image("iconAjouterPersonne.png"));
 				stageAjoutAdherent.sizeToScene();
 				stageAjoutAdherent.setScene(sceneAjoutAdherent);
@@ -1508,11 +1490,11 @@ public class InterfacePrepose extends Application implements Serializable {
 					Alert Erreur = new Alert(AlertType.ERROR);
 					Erreur.setTitle("Erreur");
 					Erreur.setHeaderText(null);
-					Erreur.setContentText("Vous devez sï¿½lectionner un adhï¿½rent pour le modifier");
+					Erreur.setContentText("Vous devez sélectionner un adhérent pour le modifier");
 					Erreur.showAndWait();
 				}
 				else{
-					System.out.println("adhï¿½rent selectionnee");
+					System.out.println("adhérent selectionnee");
 					//modification adherent
 					Stage stageModifAdherent = new Stage();
 					GridPane gpaneModifAdherent = new GridPane();
@@ -1525,7 +1507,7 @@ public class InterfacePrepose extends Application implements Serializable {
 					 txtNomAdherent = new Text("Nom :");
 					 txtPrenomAdherent = new Text("Prenom :");
 					 txtAdresseAdherent = new Text("Adresse :");
-					 txtTelephoneAdherent = new Text("tï¿½lï¿½phone :");
+					 txtTelephoneAdherent = new Text("téléphone :");
 					
 					 txtfNomAdherent = new TextField();
 					 txtfPrenomAdherent = new TextField();
@@ -1551,7 +1533,7 @@ public class InterfacePrepose extends Application implements Serializable {
 					gpaneModifAdherent.add(txtfTelephoneAdherent, 1, 3);
 					gpaneModifAdherent.add(hboxButtonAhderent, 1, 4);
 					
-					//il faut aller chercher l'infor de l'adhï¿½rent selectioneee
+					//il faut aller chercher l'infor de l'adhérent selectioneee
 					Adherent adherentModifier = tableAdherent.getSelectionModel().getSelectedItem();
 					
 					//txtfNomAdherent.setText(adherentModifier.getStrNom());
@@ -1586,14 +1568,14 @@ public class InterfacePrepose extends Application implements Serializable {
 							Alert confirmation = new Alert(AlertType.CONFIRMATION);
 						 	confirmation.setTitle("Confirmation");
 						 	confirmation.setHeaderText(null);
-						 	confirmation.setContentText("L'adhï¿½rent dont le Numï¿½ro est "+adherentmodifier1.getStrNumeroAdherent() +" a ï¿½tï¿½ modifiï¿½!");
+						 	confirmation.setContentText("L'adhérent dont le Numéro est "+adherentmodifier1.getStrNumeroAdherent() +" a été modifié!");
 						 	confirmation.showAndWait();
 						 	stageModifAdherent.close();
 
 						}
 					});
 					
-					stageModifAdherent.setTitle("Modification d'un adhï¿½rent");
+					stageModifAdherent.setTitle("Modification d'un adhérent");
 					stageModifAdherent.getIcons().add(new Image("iconModifierAdherent.png"));
 					stageModifAdherent.sizeToScene();
 					stageModifAdherent.setScene(sceneModifAdherent);
@@ -1606,11 +1588,11 @@ public class InterfacePrepose extends Application implements Serializable {
 					Alert Erreur = new Alert(AlertType.ERROR);
 					Erreur.setTitle("Erreur");
 					Erreur.setHeaderText(null);
-					Erreur.setContentText("Vous devez sï¿½lectionner un adhï¿½rent pour le supprimer.");
+					Erreur.setContentText("Vous devez sélectionner un adhérent pour le supprimer.");
 					Erreur.showAndWait();
 				}
 				else{
-					System.out.println("adhï¿½rent selectionnee");
+					System.out.println("adhérent selectionnee");
 					//suppresion adherent
 					
 					Adherent adherentSupprimer = tableAdherent.getSelectionModel().getSelectedItem();
@@ -1623,14 +1605,14 @@ public class InterfacePrepose extends Application implements Serializable {
 						Alert confirmation = new Alert(AlertType.WARNING);
 					 	confirmation.setTitle("Attention");
 					 	confirmation.setHeaderText(null);
-					 	confirmation.setContentText("L'adhï¿½rent dont le Numï¿½ro est "+adherentSupprimer.getStrNumeroAdherent()+" contientn des prï¿½ts! \nVous ne pouvez pas supprimer un adhï¿½rent qui a des prï¿½ts");
+					 	confirmation.setContentText("L'adhérent dont le Numéro est "+adherentSupprimer.getStrNumeroAdherent()+" contientn des prêts! \nVous ne pouvez pas supprimer un adhérent qui a des prêts");
 					 	confirmation.showAndWait();
 					}
 					else {
 						Alert confirmation = new Alert(AlertType.CONFIRMATION);
 					 	confirmation.setTitle("Confirmation");
 					 	confirmation.setHeaderText(null);
-					 	confirmation.setContentText("L'adhï¿½rent dont le Numï¿½ro est "+adherentSupprimer.getStrNumeroAdherent()+" sera supprimer. \nï¿½tes-vous sur que vous voulez le supprimer?");
+					 	confirmation.setContentText("L'adhérent dont le Numéro est "+adherentSupprimer.getStrNumeroAdherent()+" sera supprimer. \nÊtes-vous sur que vous voulez le supprimer?");
 					 	confirmation.showAndWait();
 					 	if (confirmation.getResult() == ButtonType.OK) {
 					 		prepose.supprimerAdherent(adherentSupprimer);
@@ -1652,11 +1634,11 @@ public class InterfacePrepose extends Application implements Serializable {
 					Alert Erreur = new Alert(AlertType.ERROR);
 					Erreur.setTitle("Erreur");
 					Erreur.setHeaderText(null);
-					Erreur.setContentText("Vous devez sï¿½lectionner un adhï¿½rent pour payer son solde.");
+					Erreur.setContentText("Vous devez sélectionner un adhérent pour payer son solde.");
 					Erreur.showAndWait();
 				}
 				else{
-					System.out.println("adhï¿½rent selectionnee");
+					System.out.println("adhérent selectionnee");
 					
 					//remttre le champ solde a 0.0
 					Adherent adherentSoldePaye = tableAdherent.getSelectionModel().getSelectedItem();
@@ -1675,7 +1657,7 @@ public class InterfacePrepose extends Application implements Serializable {
 					Alert confirmation = new Alert(AlertType.CONFIRMATION);
 				 	confirmation.setTitle("Confirmation");
 				 	confirmation.setHeaderText(null);
-				 	confirmation.setContentText("Le solde de l'adhï¿½rent dont le Numï¿½ro est "+adherentSoldePaye.getStrNumeroAdherent()+" a ï¿½tï¿½ payï¿½!");
+				 	confirmation.setContentText("Le solde de l'adhérent dont le Numéro est "+adherentSoldePaye.getStrNumeroAdherent()+" a été payé!");
 				 	confirmation.showAndWait();
 				}
 			}
@@ -1683,7 +1665,7 @@ public class InterfacePrepose extends Application implements Serializable {
 		}
 
 	}
-	private class GestionnaireButtonPrets implements EventHandler<MouseEvent> {
+	private class GestionnaireButtonPrets implements EventHandler<MouseEvent> {  //classe qui permet de gerer les prets et les retours des adherents
 
 		@Override
 		public void handle(MouseEvent e) {
@@ -1694,7 +1676,7 @@ public class InterfacePrepose extends Application implements Serializable {
 					Alert Erreur = new Alert(AlertType.ERROR);
 					Erreur.setTitle("Erreur");
 					Erreur.setHeaderText(null);
-					Erreur.setContentText("Vous devez sï¿½lectionner un document pour l'emprunter");
+					Erreur.setContentText("Vous devez sélectionner un document pour l'emprunter");
 					Erreur.showAndWait();
 				}
 				else if(tableCatalogue.getSelectionModel().getSelectedItem().getDisponible().equals("non"))
@@ -1702,7 +1684,7 @@ public class InterfacePrepose extends Application implements Serializable {
 					Alert Erreur = new Alert(AlertType.WARNING);
 					Erreur.setTitle("Erreur");
 					Erreur.setHeaderText(null);
-					Erreur.setContentText("Le document que vous avez sï¿½lectionner est dï¿½jï¿½ empruntï¿½");
+					Erreur.setContentText("Le document que vous avez sélectionner est déjà emprunté");
 					Erreur.showAndWait();
 				}
 				else{
@@ -1731,7 +1713,7 @@ public class InterfacePrepose extends Application implements Serializable {
 						Alert Erreur = new Alert(AlertType.ERROR);
 						Erreur.setTitle("Erreur");
 						Erreur.setHeaderText(null);
-						Erreur.setContentText("Vous devez sï¿½lectionner un adhï¿½rent pour l'emprunter");
+						Erreur.setContentText("Vous devez sélectionner un adhérent pour l'emprunter");
 						Erreur.showAndWait();
 					}
 						
@@ -1741,7 +1723,7 @@ public class InterfacePrepose extends Application implements Serializable {
 							Alert Erreur = new Alert(AlertType.ERROR);
 							Erreur.setTitle("Erreur");
 							Erreur.setHeaderText(null);
-							Erreur.setContentText("Cet adhï¿½rent possï¿½de un solde qui n'est pas payï¿½");
+							Erreur.setContentText("Cet adhérent possï¿½de un solde qui n'est pas payé");
 							Erreur.showAndWait();
 						}
 						else 
@@ -1899,14 +1881,18 @@ public class InterfacePrepose extends Application implements Serializable {
 							tableAdherent.refresh();
 							tableCatalogue.getSelectionModel().getSelectedItem().setDisponible("non");
 							tableCatalogue.refresh();
-							//voir comment je peux ajouter les documents ï¿½ des adhï¿½rents individuellement
+							//voir comment je peux ajouter les documents ï¿½ des adhérents individuellement
+							intCompteurNoPret++;
+							
+							
 							
 							Adherent adherentEmprunt = tableCatalogue.getSelectionModel().getSelectedItem().getEmprunteur();
 							Document documentEmprunt = tableCatalogue.getSelectionModel().getSelectedItem();
 							
+							adherentEmprunt.setNoPret(intCompteurNoPret);
+							//Pret pret = new Pret(0, tableAdherent.getSelectionModel().getSelectedItem().getDatePretDvd(), tableAdherent.getSelectionModel().getSelectedItem().getda, dateRetourEffectue, amende)
 							
-							
-						//	listeDocEmpruntes.emprunterPar(adherentEmprunt, documentEmprunt);//methode qui ajoute le document empruntï¿½ ï¿½ l'adhï¿½rent
+						//	listeDocEmpruntes.emprunterPar(adherentEmprunt, documentEmprunt);//methode qui ajoute le document emprunté ï¿½ l'adhérent
 							//pour voir quel document a ete choisi
 							if(documentEmprunt.getNoDoc().substring(0, 3).equals("Liv")) {
 								System.out.println("livre");
@@ -1946,7 +1932,7 @@ public class InterfacePrepose extends Application implements Serializable {
 							Alert Erreur = new Alert(AlertType.ERROR);
 							Erreur.setTitle("Erreur");
 							Erreur.setHeaderText(null);
-							Erreur.setContentText("L'adhï¿½rent que vous avez sï¿½lectionnï¿½ a atteint la limite de prï¿½ts pour ce document");
+							Erreur.setContentText("L'adhérent que vous avez sélectionné a atteint la limite de prêts pour ce document");
 							Erreur.showAndWait();
 						}
 						}
@@ -1972,14 +1958,14 @@ public class InterfacePrepose extends Application implements Serializable {
 					Alert Erreur = new Alert(AlertType.ERROR);
 					Erreur.setTitle("Erreur");
 					Erreur.setHeaderText(null);
-					Erreur.setContentText("Vous devez sï¿½lectionner un document pour le retourner");
+					Erreur.setContentText("Vous devez sélectionner un document pour le retourner");
 					Erreur.showAndWait();
 				}
 				else if(tableCatalogue.getSelectionModel().getSelectedItem().getDisponible().equals("oui")) {//non selectionnee
 					Alert Erreur = new Alert(AlertType.ERROR);
 					Erreur.setTitle("Erreur");
 					Erreur.setHeaderText(null);
-					Erreur.setContentText("Le document sï¿½lectionnï¿½ n'a pas ï¿½tï¿½ empruntï¿½");
+					Erreur.setContentText("Le document sélectionné n'a pas été emprunté");
 					Erreur.showAndWait();
 				}
 				else{
