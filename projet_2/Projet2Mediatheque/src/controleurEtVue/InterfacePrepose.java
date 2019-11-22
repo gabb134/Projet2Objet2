@@ -41,6 +41,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -637,7 +639,37 @@ public class InterfacePrepose extends Application implements Serializable {
 
 			tabPane.getTabs().addAll(tabCatalogue, tabLivres, tabDVD, tabPeriodique);
 			root.setCenter(tabPane);
+			
+			
+			/*txtFRechercherPar.setOnKeyTyped(new EventHandler<KeyEvent>() {
 
+				@Override
+				//public void handle(KeyEvent event) {
+					// TODO Auto-generated method stub
+					/// TableView<Document> tableCatalogue2 = tableCatalogue;
+				//if(tabCatalogue.isSelected())
+					//{
+						
+						
+						//for(int i=0; i<tableCatalogue.getItems().size();i++)
+						//{
+							//if(tableCatalogue.getItems().get(i).getTitre().contains(txtFRechercherPar.getCharacters())==false)
+						//	{
+								//tableCatalogue.getItems().remove(i);
+								//tableCatalogue.refresh();
+							//////}
+							//if(tableCatalogue2.getItems().get(i).getTitre().contains(txtFRechercherPar.getCharacters())==true)
+							//{
+							//	tableCatalogue.getItems().add(tableCatalogue.getItems().get(i));
+							//	tableCatalogue.refresh();
+							//}
+						//}
+						//tableCatalogue=tableCatalogue2;
+					//}
+				//}
+				
+			//});*/
+			
 			primaryStage.getIcons().add(new Image("booklibrary.png"));
 			primaryStage.setTitle("Médiathèque(préposé)");
 			primaryStage.sizeToScene();
@@ -1328,9 +1360,9 @@ public class InterfacePrepose extends Application implements Serializable {
 			// TODO Auto-generated method stub
 			if(e.getSource() == paneGestionCatalogue) {
 				System.out.println("catalogue");
-				
 				root.setCenter(tabPane);
 				root.setBottom(hboxEnBas);
+				
 				
 			}else if(e.getSource()==paneGestionAdherents) {
 				System.out.println("andherent");
