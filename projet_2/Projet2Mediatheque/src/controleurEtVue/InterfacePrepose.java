@@ -706,6 +706,7 @@ public class InterfacePrepose extends Application implements Serializable {
 			liste.getLstAdherents().get(i).getAmende().CoutAmende(liste.getLstAdherents().get(i).getDateRetourPer());
 			liste.getLstAdherents().get(i).setDblSolde(liste.getLstAdherents().get(i).getAmende().getMontant());
 			liste.getLstAdherents().get(i).getAmendePer().CoutAmende(liste.getLstAdherents().get(i).getDateRetourPer());
+			if(liste.getLstAdherents().get(i).getAmendePer().getDateduRetour()==null)
 			liste.getLstAdherents().get(i).getAmendePer().setDateduRetour(LocalDate.now());
 		}
 		
@@ -718,6 +719,9 @@ public class InterfacePrepose extends Application implements Serializable {
 			
 			liste.getLstAdherents().get(i).getAmende().CoutAmende(liste.getLstAdherents().get(i).getDateRetourDvd1());
 			liste.getLstAdherents().get(i).setDblSolde(liste.getLstAdherents().get(i).getAmende().getMontant());
+			liste.getLstAdherents().get(i).getAmendeDvd1().CoutAmende(liste.getLstAdherents().get(i).getDateRetourDvd1());
+			if(liste.getLstAdherents().get(i).getAmendeDvd1().getDateduRetour()==null)
+			liste.getLstAdherents().get(i).getAmendeDvd1().setDateduRetour(LocalDate.now());
 		}
 		
 		}
@@ -729,6 +733,9 @@ public class InterfacePrepose extends Application implements Serializable {
 			
 			liste.getLstAdherents().get(i).getAmende().CoutAmende(liste.getLstAdherents().get(i).getDateRetourDvd2());
 			liste.getLstAdherents().get(i).setDblSolde(liste.getLstAdherents().get(i).getAmende().getMontant());
+			liste.getLstAdherents().get(i).getAmendeDvd2().CoutAmende(liste.getLstAdherents().get(i).getDateRetourDvd2());
+			if(liste.getLstAdherents().get(i).getAmendeDvd2().getDateduRetour()==null)
+			liste.getLstAdherents().get(i).getAmendeDvd2().setDateduRetour(LocalDate.now());
 		}
 		
 		}
@@ -740,6 +747,10 @@ public class InterfacePrepose extends Application implements Serializable {
 			
 			liste.getLstAdherents().get(i).getAmende().CoutAmende(liste.getLstAdherents().get(i).getDateRetourLiv1());
 			liste.getLstAdherents().get(i).setDblSolde(liste.getLstAdherents().get(i).getAmende().getMontant());
+			liste.getLstAdherents().get(i).getAmendeLiv1().CoutAmende(liste.getLstAdherents().get(i).getDateRetourLiv1());
+			if(liste.getLstAdherents().get(i).getAmendeLiv1().getDateduRetour()==null)
+			liste.getLstAdherents().get(i).getAmendeLiv1().setDateduRetour(LocalDate.now());
+
 		}
 		
 		}
@@ -750,6 +761,9 @@ public class InterfacePrepose extends Application implements Serializable {
 			
 			liste.getLstAdherents().get(i).getAmende().CoutAmende(liste.getLstAdherents().get(i).getDateRetourLiv2());
 			liste.getLstAdherents().get(i).setDblSolde(liste.getLstAdherents().get(i).getAmende().getMontant());
+			liste.getLstAdherents().get(i).getAmendeLiv2().CoutAmende(liste.getLstAdherents().get(i).getDateRetourLiv2());
+			if(liste.getLstAdherents().get(i).getAmendeLiv2().getDateduRetour()==null)
+			liste.getLstAdherents().get(i).getAmendeLiv2().setDateduRetour(LocalDate.now());
 		}
 		
 		}
@@ -760,6 +774,9 @@ public class InterfacePrepose extends Application implements Serializable {
 			
 			liste.getLstAdherents().get(i).getAmende().CoutAmende(liste.getLstAdherents().get(i).getDateRetourLiv3());
 			liste.getLstAdherents().get(i).setDblSolde(liste.getLstAdherents().get(i).getAmende().getMontant());
+			liste.getLstAdherents().get(i).getAmendeLiv3().CoutAmende(liste.getLstAdherents().get(i).getDateRetourLiv3());
+			if(liste.getLstAdherents().get(i).getAmendeLiv3().getDateduRetour()==null)
+			liste.getLstAdherents().get(i).getAmendeLiv3().setDateduRetour(LocalDate.now());
 		}
 		
 		}
